@@ -7,20 +7,20 @@
 
 class Game
 {
-	public:
-		~Game(void);
-		void run(void);
-		SDL_Renderer* getRenderer(void);
+    public:
+        ~Game(void);
+        void run(void);
+        SDL_Renderer* getRenderer(void);
         State* getState(void);
-		static Game* getInstance(void);
-		static Game* getInstance(std::string title, int w, int h);
+        static Game* getInstance(void);
+        static Game* getInstance(std::string title, int w, int h);
 
-	private:
-		static Game *_instance;
-		SDL_Window *window;
-		SDL_Renderer *renderer;
-		State *state;
+    private:
+        static Game *_instance;
+        SDL_Window *window;
+        SDL_Renderer *renderer;
+        State *state;
 
-		Game(std::string title, int width, int height);
+        Game(std::string title, int width, int height);
 };
 

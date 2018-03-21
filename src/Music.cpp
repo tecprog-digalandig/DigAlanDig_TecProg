@@ -1,12 +1,12 @@
 #include "Music.h"
 
 Music::Music(void):
-   music(nullptr)
+    music(nullptr)
 {
 }
 
 Music::Music(std::string file):
-   music(nullptr)
+    music(nullptr)
 {
     Open(file);
 }

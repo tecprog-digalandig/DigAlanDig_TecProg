@@ -8,24 +8,24 @@ State::State(void)
     bg = new Sprite("assets/img/ocean.jpg");
     music = new Music("assets/audio/stageState.ogg");
     music->Play(2);
-	quitRequested = false;
+    quitRequested = false;
 }
 
 State::~State(void)
 {
-	delete bg;
+    delete bg;
 }
 
 
 bool State::QuitRequested(void)
 {
-	return quitRequested;
+    return quitRequested;
 }
 
 void State::Update(float dt)
 {
-	if (SDL_QuitRequested())
-		quitRequested = true;
+    if (SDL_QuitRequested())
+        quitRequested = true;
 }
 
 void State::Render(void)
