@@ -12,6 +12,7 @@ Game* Game::getInstance(void)
 Game::~Game(void)
 {
 	IMG_Quit();
+    Mix_CloseAudio();
     Mix_Quit();
 	SDL_DestroyRenderer(renderer);
 	SDL_DestroyWindow(window);
@@ -68,9 +69,14 @@ Game::Game(std::string title, int width, int height)
     init_flags = MIX_INIT_OGG | MIX_INIT_MP3;
     if (Mix_Init(init_flags) != init_flags)
 	{
-		std::cerr << "MIX_Init: " << SDL_GetError() << std::endl;
+        std::cerr << "Mix_Init: " << Mix_GetError() << std::endl;
 		exit(EXIT_SUCCESS);
 	}
+    if( Mix_OpenAudio( 22050, MIX_DEFAULT_FORMAT, 2, 4096 ) == -1 )
+    {
+        std::cerr << "Mix_OpenAudio: " << Mix_GetError() << std::endl;
+        exit(EXIT_SUCCESS);
+    }
 
 	window = SDL_CreateWindow(title.c_str(),
 			SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height, 0);

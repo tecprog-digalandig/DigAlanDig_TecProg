@@ -6,6 +6,8 @@
 State::State(void)
 {
     bg = new Sprite("assets/img/ocean.jpg");
+    music = new Music("assets/audio/stageState.ogg");
+    music->Play(2);
 	quitRequested = false;
 }
 

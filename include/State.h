@@ -1,5 +1,6 @@
 #pragma once
 #include "Sprite.h"
+#include "Music.h"
 #include <iostream>
 
 class State
@@ -14,7 +15,7 @@ class State
 
 	private:
 		Sprite *bg;
-      //  Music *music;
+        Music *music;
 		bool quitRequested;
 };
 
