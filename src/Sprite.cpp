@@ -1,12 +1,13 @@
 #include "Sprite.h"
 #include "Game.h"
 
-Sprite::Sprite(void)
+Sprite::Sprite(void):
+    texture(nullptr)
 {
-	Sprite::texture = nullptr;
 }
 
-Sprite::Sprite(std::string file)
+Sprite::Sprite(std::string file):
+    texture(nullptr)
 {
     Sprite::Open(file);
 }
@@ -50,7 +51,8 @@ void Sprite::Render(int x, int y)
     dstRect.x = x;
 	dstRect.y = y;
 	
-	SDL_RenderCopy(Game::getInstance()->getRenderer(), texture, &clipRect, &dstRect);
+    if(IsOpen())
+        SDL_RenderCopy(Game::getInstance()->getRenderer(), texture, &clipRect, &dstRect);
 }
 
 int Sprite::GetWidth(void)
@@ -65,8 +67,8 @@ int Sprite::GetHeight(void)
 
 bool Sprite::IsOpen(void)
 {
-	if (!Sprite::texture)
-		return false;
-	return true;
+    if (Sprite::texture)
+        return true;
+    return false;
 }
 
