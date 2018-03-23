@@ -10,7 +10,7 @@ RMDIR = rm -rdf
 RM = rm -f
 
 # "Flags" para geração automática de dependências
-DEP_FLAGS = -M -MT $@ -MT $(BIN_PATH)/$(*F).o -MP -MF $@
+DEP_FLAGS = -MM -MT $@ -MT $(BIN_PATH)/$(*F).o -MP -MF $@
 # Bibliotecas a serem linkadas
 LIBS = -lSDL2 -lSDL2_image -lSDL2_mixer -lSDL2_ttf -lm 
 # Caminho dos includes
@@ -22,6 +22,7 @@ FLAGS = -std=c++11 -Wall -pedantic -Wextra -Wno-unused-parameter -Werror=init-se
 DFLAGS = -ggdb -O0 -DDEBUG
 # Diretivas extras para release
 RFLAGS = -O3 -mtune=native
+RDFLAGS = -O3 -mtune=native -ggdb -DDEBUG
 
 INC_PATH = include
 SRC_PATH = src
@@ -83,6 +84,7 @@ endif
 .PHONY: release debug clean folders help
 
 # Regra geral
+all: FLAGS += $(RDFLAGS)
 all: $(EXEC)
 
 # Gera o executável
@@ -137,3 +139,4 @@ endif
 
 .SECONDEXPANSION:
 -include $$(DEP_FILES)
+
