@@ -1,5 +1,7 @@
 .gitattributes export-ignore
 .gitignore export-ignore
+.clang-format export-ignore
 assets export-ignore
 game.* export-ignore
 Makefile export-ignore
+LICENSE export-ignore
