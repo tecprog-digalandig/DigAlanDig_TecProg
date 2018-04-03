@@ -3,7 +3,7 @@
 #---------------------------------------------------------------------
 
 # O compilador
-COMPILER = clang++
+CC = clang++
 # Comando para remover pastas
 RMDIR = rm -rdf
 # Comando para remover arquivos
@@ -78,6 +78,23 @@ LIBS = -lm -framework SDL2 -framework SDL2_image -framework SDL2_mixer -framewor
 endif
 endif
 
+#---------------------------------------------------------------------
+# Cross-compile de Linux para Windows (estático)
+#---------------------------------------------------------------------
+ifeq ($(TARGET), WIN)
+
+CC = x86_64-w64-mingw32-g++
+BIN_PATH = binw
+
+PATH := /usr/local/cross-tools/x86_64-w64-mingw32/bin:$(PATH)
+INC_PATHS = -I$(INC_PATH) -I/usr/local/cross-tools/x86_64-w64-mingw32/include -Dmain=SDL_main
+#LINK_PATH =  $(shell sdl2-config --static-libs) -static-libstdc++ -lz -logg -lvorbis -lpng -ljpeg
+LINK_PATH =  -L/usr/local/cross-tools//x86_64-w64-mingw32/lib -lmingw32 -lSDL2main -lSDL2 -mwindows -Wl,--no-undefined -lm -ldinput8 -ldxguid -ldxerr8 -luser32 -lgdi32 -lwinmm -limm32 -lole32 -loleaut32 -lshell32 -lversion -luuid -static-libgcc -static-libstdc++ -lz -logg -lvorbis -lpng -ljpeg
+
+EXEC := $(EXEC).exe
+
+endif
+
 ##############################################################################################
 
 .PRECIOUS: $(DEP_FILES)
@@ -89,15 +106,15 @@ all: $(EXEC)
 
 # Gera o executável
 $(EXEC): $(OBJ_FILES)
-	$(COMPILER) -o $@ $^ $(LINK_PATH) $(LIBS) $(FLAGS)
+	$(CC) -o $@ $^ $(LINK_PATH) $(LIBS) $(FLAGS)
 
 # Gera os arquivos objetos
 $(BIN_PATH)/%.o: $(DEP_PATH)/%.d | folders
-	$(COMPILER) $(INC_PATHS) $(addprefix $(SRC_PATH)/,$(notdir $(<:.d=.cpp))) -c $(FLAGS) -o $@
+	$(CC) $(INC_PATHS) $(addprefix $(SRC_PATH)/,$(notdir $(<:.d=.cpp))) -c $(FLAGS) -o $@
 
 # Gera os arquivos de dependencia
 $(DEP_PATH)/%.d: $(SRC_PATH)/%.cpp | folders
-	$(COMPILER) $(INC_PATHS) $< $(DEP_FLAGS) $(FLAGS)
+	$(CC) $(INC_PATHS) $< $(DEP_FLAGS) $(FLAGS)
 
 clean:
 	-$(RMDIR) $(DEP_PATH)
