@@ -1,0 +1,13 @@
+src/Vec2.cpp
+Makefile
+include/Game.h
+include/Music.h
+include/SDL_include.h
+include/Sprite.h
+include/State.h
+include/Vec2.h
+src/Game.cpp
+src/Main.cpp
+src/Music.cpp
+src/Sprite.cpp
+src/State.cpp
