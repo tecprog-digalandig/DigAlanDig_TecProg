@@ -89,7 +89,7 @@ BIN_PATH = binw
 PATH := /usr/local/cross-tools/x86_64-w64-mingw32/bin:$(PATH)
 INC_PATHS = -I$(INC_PATH) -I/usr/local/cross-tools/x86_64-w64-mingw32/include -Dmain=SDL_main
 #LINK_PATH =  $(shell sdl2-config --static-libs) -static-libstdc++ -lz -logg -lvorbis -lpng -ljpeg
-LINK_PATH =  -L/usr/local/cross-tools//x86_64-w64-mingw32/lib -lmingw32 -lSDL2main -lSDL2 -mwindows -Wl,--no-undefined -lm -ldinput8 -ldxguid -ldxerr8 -luser32 -lgdi32 -lwinmm -limm32 -lole32 -loleaut32 -lshell32 -lversion -luuid -static-libgcc -static-libstdc++ -lz -logg -lvorbis -lpng -ljpeg
+LINK_PATH =  -L/usr/local/cross-tools//x86_64-w64-mingw32/lib  --static -lmingw32 -lSDL2main -lSDL2 -mwindows -Wl,--no-undefined -lm -ldinput8 -ldxguid -ldxerr8 -luser32 -lgdi32 -lwinmm -limm32 -lole32 -loleaut32 -lshell32 -lversion -luuid -static-libgcc -static-libstdc++ -lSDL2 -lSDL2_image -lSDL2_mixer -lSDL2_ttf -lm  -ljpeg -lpng -lz -lwinmm -lvorbisfile -lvorbis -logg
 
 EXEC := $(EXEC).exe
 
