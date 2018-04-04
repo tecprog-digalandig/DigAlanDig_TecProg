@@ -15,6 +15,8 @@
 *					SDL.h						*
 *************************************************/
 #ifdef INCLUDE_SDL 
+extern "C"
+{
 	#ifdef _WIN32
 		#include <SDL2/SDL.h>
 	#elif __APPLE__
@@ -26,6 +28,7 @@
 		#error "Unknown compiler"
 	#endif
 	#undef INCLUDE_SDL 
+}
 #endif // INCLUDE_SDL
 
 
@@ -33,6 +36,8 @@
 *				 SDL_image.h					*
 *************************************************/
 #ifdef INCLUDE_SDL_IMAGE 
+extern "C"
+{
 	#ifdef _WIN32
 		#include <SDL2/SDL_image.h>
 	#elif __APPLE__
@@ -44,6 +49,7 @@
 		#error "Unknown compiler"
 	#endif
 	#undef INCLUDE_SDL_IMAGE 
+}
 #endif // INCLUDE_SDL_IMAGE
 
 
@@ -51,6 +57,8 @@
 *				 SDL_mixer.h					*
 *************************************************/
 #ifdef INCLUDE_SDL_MIXER 
+extern "C"
+{
 	#ifdef _WIN32
 		#include <SDL2/SDL_mixer.h>
 	#elif __APPLE__
@@ -62,6 +70,7 @@
 		#error "Unknown compiler"
 	#endif
 	#undef INCLUDE_SDL_MIXER 
+}
 #endif // INCLUDE_SDL_MIXER
 
 
@@ -69,6 +78,8 @@
 *				  SDL_ttf.h						*
 *************************************************/
 #ifdef INCLUDE_SDL_TTF 
+extern "C"
+{
 	#ifdef _WIN32
 		#include <SDL2/SDL_ttf.h>
 	#elif __APPLE__
@@ -80,6 +91,7 @@
 		#error "Unknown compiler"
 	#endif
 	#undef INCLUDE_SDL_TTF 
+}
 #endif // INCLUDE_SDL_TTF
 
 
@@ -87,6 +99,8 @@
 *				  SDL_net.h						*
 *************************************************/
 #ifdef INCLUDE_SDL_NET 
+extern "C"
+{
 	#ifdef _WIN32
 		#include <SDL2/SDL_net.h>
 	#elif __APPLE__
@@ -98,4 +112,5 @@
 		#error "Unknown compiler"
 	#endif
 	#undef INCLUDE_SDL_NET 
+}
 #endif // INCLUDE_SDL_NET
