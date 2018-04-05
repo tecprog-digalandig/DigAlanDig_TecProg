@@ -30,6 +30,9 @@ class Vec2 {
     Vec2& operator*=(double d);
     Vec2& operator/=(double d);
 
+    bool operator<(const Vec2& v) const { return (x < v.x) && (y < v.y); }
+    bool operator>(const Vec2& v) const { return (x > v.x) && (y > v.y); }
+
     void set(double x, double y) { this->x = x, this->y = y; }
 
     void rotate(double degrees);
