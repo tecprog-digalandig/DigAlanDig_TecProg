@@ -1,26 +1,20 @@
 #include "Sprite.h"
 #include "Game.h"
 
-Sprite::Sprite(void) : texture(nullptr) {}
-
-Sprite::Sprite(std::string file) : texture(nullptr) { Sprite::Open(file); }
-
-Sprite::~Sprite(void) {
-    if (Sprite::texture) SDL_DestroyTexture(Sprite::texture);
-}
-
 void Sprite::Open(std::string file) {
-    if (Sprite::texture) SDL_DestroyTexture(texture);
+    if (texture) SDL_DestroyTexture(texture);
 
-    Sprite::texture =
+    texture =
         IMG_LoadTexture(Game::getInstance()->getRenderer(), file.c_str());
-    if (!Sprite::texture) {
+    if (!texture) {
         std::cerr << "IMG_LoadTexture: " << SDL_GetError() << std::endl;
         exit(EXIT_SUCCESS);
     }
 
     SDL_QueryTexture(texture, nullptr, nullptr, &width, &height);
     SetClip(0, 0, width, height);
+    associated.box.set(0, 0, width, height);
+
 }
 
 void Sprite::SetClip(int x, int y, int w, int h) {
@@ -30,11 +24,11 @@ void Sprite::SetClip(int x, int y, int w, int h) {
     clipRect.h = h;
 }
 
-void Sprite::Render(int x, int y) {
-    dstRect.w = clipRect.w;
-    dstRect.h = clipRect.h;
-    dstRect.x = x;
-    dstRect.y = y;
+void Sprite::Render() {
+    dstRect.x = associated.box.x;
+    dstRect.y = associated.box.y;
+    dstRect.w = associated.box.w;
+    dstRect.h = associated.box.h;
 
     if (IsOpen())
         SDL_RenderCopy(Game::getInstance()->getRenderer(), texture, &clipRect,

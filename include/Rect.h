@@ -26,10 +26,7 @@ class Rect {
         pos += v;
         return *this;
     }
-    Rect& operator-=(const Vec2& v) {
-        pos -= v;
-        return *this;
-    }
+    Rect& operator-=(const Vec2& v) { return pos -= v, *this; }
 
     void set(double x, double y, double w, double h) {
         this->x = x, this->y = y;
@@ -46,6 +43,8 @@ class Rect {
     bool isInsideX(const Vec2& v) const { return (v.x - pos.x) < size.x; }
     bool isInsideY(const Vec2& v) const { return (v.y - pos.y) < size.y; }
     bool isInside(const Vec2& v) const { return (v - pos) < size; }
+    bool isInside(double x, double y) const { return (Vec2(x, y) - pos) < size; }
+
 
     double dist(const Rect& r) const { return center().dist(r.center()); }
 

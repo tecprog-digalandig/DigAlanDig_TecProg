@@ -38,15 +38,17 @@ Vec2& Vec2::operator/=(double d) {
 
 double Vec2::length() const { return std::sqrt(x * x + y * y); }
 
-void Vec2::rotateRad(double rad) {
+Vec2 Vec2::rotateRad(double rad) {
     double co = cos(rad);
     double si = sin(rad);
     double tmpX = x * co - y * si;
     double tmpY = x * si + y * co;
     x = tmpX;
     y = tmpY;
+
+    return *this;
 }
-void Vec2::rotate(double degrees) { rotateRad((degrees / 180) * M_PI); }
+Vec2 Vec2::rotate(double degrees) { return rotateRad((degrees / 180) * M_PI); }
 
 Vec2& Vec2::normalize() { return *this = normal(); }
 
