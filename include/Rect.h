@@ -28,31 +28,26 @@ class Rect {
     }
     Rect& operator-=(const Vec2& v) { return pos -= v, *this; }
 
-    void set(double x, double y, double w, double h) {
+    void Set(double x, double y, double w, double h) {
         this->x = x, this->y = y;
         this->w = w, this->h = h;
     }
 
-    void set(const Vec2& pos, const Vec2& size) {
+    void Set(const Vec2& pos, const Vec2& size) {
         this->pos = pos;
         this->size = size;
     }
 
-    Vec2 center() const { return Vec2(pos + size / 2); }
+    Vec2 Center() const { return Vec2(pos + size / 2); }
 
-    bool isInsideX(const Vec2& v) const { return (v.x - pos.x) < size.x; }
-    bool isInsideY(const Vec2& v) const { return (v.y - pos.y) < size.y; }
-    bool isInside(const Vec2& v) const { return (v - pos) < size; }
-    bool isInside(double x, double y) const { return (Vec2(x, y) - pos) < size; }
-
-
-    double dist(const Rect& r) const { return center().dist(r.center()); }
-
-  private:
-    void bind() {
-        this->x = this->pos.x, this->y = this->pos.y;
-        this->w = this->size.x, this->h = this->size.y;
+    bool IsInsideX(double _x) const { return (_x >= x) && (_x < (x + w)); }
+    bool IsInsideY(double _y) const { return (_y >= y) && (_y < (y + h)); }
+    bool IsInside(const Vec2& v) const { return IsInside(v.x, v.y); }
+    bool IsInside(double _x, double _y) const {
+        return IsInsideX(_x) && IsInsideY(_y);
     }
+
+    double Dist(const Rect& r) const { return Center().dist(r.Center()); }
 };
 
 #endif  // Rect_H

@@ -13,7 +13,7 @@ void Sprite::Open(std::string file) {
 
     SDL_QueryTexture(texture, nullptr, nullptr, &width, &height);
     SetClip(0, 0, width, height);
-    associated.box.set(0, 0, width, height);
+    associated.box.Set(0, 0, width, height);
 
 }
 
