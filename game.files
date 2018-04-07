@@ -4,6 +4,7 @@ include/GameObject.h
 include/Music.h
 include/Rect.h
 include/SDL_include.h
+include/Sound.h
 include/Sprite.h
 include/State.h
 include/Vec2.h
@@ -14,6 +15,7 @@ src/GameObject.cpp
 src/Main.cpp
 src/Music.cpp
 src/Rect.cpp
+src/Sound.cpp
 src/Sprite.cpp
 src/State.cpp
 src/Vec2.cpp
