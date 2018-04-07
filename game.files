@@ -1,4 +1,5 @@
 include/Component.h
+include/Face.h
 include/Game.h
 include/GameObject.h
 include/Music.h
@@ -10,6 +11,7 @@ include/State.h
 include/Vec2.h
 
 src/Component.cpp
+src/Face.cpp
 src/Game.cpp
 src/GameObject.cpp
 src/Main.cpp
