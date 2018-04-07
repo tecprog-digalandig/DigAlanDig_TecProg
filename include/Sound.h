@@ -13,7 +13,7 @@ class Sound : public Component {
     Sound(GameObject& associated) : Component(associated), chunk(nullptr) {}
     Sound(GameObject& associated, std::string file)
         : Component(associated), chunk(nullptr) {
-        Sound::Open(file);
+        Open(file);
     }
 
     ~Sound();

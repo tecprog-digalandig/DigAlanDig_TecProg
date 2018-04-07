@@ -1,19 +1,12 @@
 #include "Music.h"
 
-Music::Music(void) : music(nullptr) {}
-
-Music::Music(std::string file) : music(nullptr) { Open(file); }
-
-Music::~Music(void) { Mix_FreeMusic(music); }
-
 void Music::Play(int times) {
-    if (IsOpen()) {
+    if (music) {
         if (Mix_PlayMusic(music, times) == -1)
             std::cerr << "Mix_PlayMusic: " << Mix_GetError() << std::endl;
     }
 }
 
-void Music::Stop(int msToStop) { Mix_FadeOutMusic(msToStop); }
 
 void Music::Open(std::string file) {
     if (IsOpen()) Mix_FreeMusic(music);
@@ -25,7 +18,3 @@ void Music::Open(std::string file) {
     }
 }
 
-bool Music::IsOpen(void) {
-    if (Music::music) return true;
-    return false;
-}
