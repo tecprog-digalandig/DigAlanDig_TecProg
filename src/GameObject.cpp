@@ -1,4 +1,11 @@
 #include "GameObject.h"
+#include "Sound.h"
+
+bool GameObject::CanEnd() {
+    if (Sound* sound = (Sound*)GetComponent("Sound"))
+        return sound->CanEnd();
+    return false;
+}
 
 GameObject::~GameObject() {
     for (Component* component : components) delete (component);

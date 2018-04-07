@@ -1,5 +1,8 @@
 #include "State.h"
+#include <stdio.h>
+#include "Face.h"
 #include "SDL2/SDL.h"
+#include "Sound.h"
 #include "Sprite.h"
 #include "Vec2.h"
 
@@ -9,8 +12,8 @@ State::State(void) : quitRequested(false) {
     GameObject* gm = new GameObject();
     objectArray.emplace_back(gm);
     gm->AddComponent(new Sprite(*gm, "assets/img/ocean.jpg"));
-    // music = new Music("assets/audio/stageState.ogg");
-    // music->Play(2);
+    music = new Music("assets/audio/stageState.ogg");
+    music->Play(2);
 }
 
 bool State::QuitRequested(void) { return quitRequested; }
@@ -20,8 +23,9 @@ void State::Update(float dt) {
     for (auto& obj : objectArray) obj->Update(dt);
 
     auto removeDead = [&](std::unique_ptr<GameObject> const& p) {
-        return p->IsDead();
+        return p->IsDead() && p->CanEnd();
     };
+
     objectArray.erase(
         std::remove_if(objectArray.begin(), objectArray.end(), removeDead),
         objectArray.end());
@@ -35,7 +39,10 @@ void State::AddObject(int mouseX, int mouseY) {
     GameObject* gm = new GameObject();
     objectArray.emplace_back(gm);
     gm->AddComponent(new Sprite(*gm, "assets/img/penguinface.png"));
+    gm->AddComponent(new Sound(*gm, "assets/audio/boom.wav"));
+    gm->AddComponent(new Face(*gm));
 
+    std::cout << "New Object" << std::endl;
     gm->box.pos.set(mouseX - gm->box.w / 2, mouseY - gm->box.h / 2);
 }
 
@@ -66,8 +73,8 @@ void State::Input() {
                 // é provisório. Futuramente, para chamar funções de
                 // GameObjects, use objectArray[i]->função() direto.
 
-                /*GameObject* go = (GameObject*)objectArray[i].get();
-                if (go->box.isInside((double)mouseX, (double)mouseY)) {
+                GameObject* go = (GameObject*)objectArray[i].get();
+                if (go->box.IsInside((double)mouseX, (double)mouseY)) {
                     Face* face = (Face*)go->GetComponent("Face");
                     if (nullptr != face) {
                         // Aplica dano
@@ -75,7 +82,7 @@ void State::Input() {
                         // Sai do loop (só queremos acertar um)
                         break;
                     }
-                }*/
+                }
             }
         }
         if (event.type == SDL_KEYDOWN) {

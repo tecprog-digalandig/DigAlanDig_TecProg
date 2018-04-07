@@ -4,15 +4,11 @@
 #define INCLUDE_SDL_MIXER
 #include "SDL_include.h"
 
-#include <iostream>
-#include <string>
-#include <typeinfo>
-
 class Sound : public Component {
   public:
-    Sound(GameObject& associated) : Component(associated), chunk(nullptr) {}
+    Sound(GameObject& associated) : Component(associated), chunk(nullptr), played(false) {}
     Sound(GameObject& associated, std::string file)
-        : Component(associated), chunk(nullptr) {
+        : Component(associated), chunk(nullptr), played(false) {
         Open(file);
     }
 
@@ -21,18 +17,16 @@ class Sound : public Component {
     void Stop();
     void Open(std::string file);
     bool IsOpen(void) { return (bool)chunk; }
+    bool CanEnd(void) { return played && !Mix_Playing(channel); }
 
-    void Update(float dt){}
-    void Render(){}
-    bool Is(std::string type) {
-        std::cout << type << std::endl;
-        std::cout << typeid(*this).name() << std::endl;
-        return !type.compare(typeid(*this).name());
-    }
+    void Update(float dt) {}
+    void Render() {}
+    bool Is(std::string type) { return !type.compare("Sound"); }
 
   private:
     Mix_Chunk* chunk;
     int channel;
+    bool played;
 };
 
 #endif  // SOUND_H

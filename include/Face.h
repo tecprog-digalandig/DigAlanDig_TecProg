@@ -9,10 +9,9 @@ class Face : public Component {
 
     void Damage(int damage);
 
-    void Update(float dt){}
-    void Render(){}
-    bool Is(std::string type);
-
+    void Update(float dt) {}
+    void Render() {}
+    bool Is(std::string type) { return !type.compare("Face"); }
 
   private:
     static const int hitpoints_max = 30;
