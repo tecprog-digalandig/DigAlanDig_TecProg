@@ -35,8 +35,8 @@ class Vec2 {
 
     void set(double x, double y) { this->x = x, this->y = y; }
 
-    void rotate(double degrees);
-    void rotateRad(double rad);
+    Vec2 rotate(double degrees);
+    Vec2 rotateRad(double rad);
 
     double length() const;
 
