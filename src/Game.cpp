@@ -58,6 +58,12 @@ Game::Game(std::string title, int width, int height) {
         exit(EXIT_SUCCESS);
     }
 
+    int nchannels = 32;
+    if (Mix_AllocateChannels(nchannels) != nchannels) {
+        std::cerr << "Mix_AllocateChannels: " << Mix_GetError() << std::endl;
+        exit(EXIT_SUCCESS);
+    }
+
     window = SDL_CreateWindow(title.c_str(), SDL_WINDOWPOS_CENTERED,
                               SDL_WINDOWPOS_CENTERED, width, height, 0);
     if (!window) {
