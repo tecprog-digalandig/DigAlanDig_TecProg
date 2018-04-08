@@ -14,6 +14,9 @@ class GameObject {
 
     void Update(float dt);
     void Render(void);
+    //REMOVE
+    bool CanEnd();
+
     bool IsDead(void) { return isDead; }
     void RequestDelete(void) { isDead = true; }
     void AddComponent(Component *cpt) { components.emplace_back(cpt); }

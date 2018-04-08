@@ -3,10 +3,6 @@
 #include "Component.h"
 #include "SDL_include.h"
 
-#include <iostream>
-#include <string>
-#include <typeinfo>
-
 class Sprite : public Component {
   public:
     Sprite(GameObject& associated) : Component(associated), texture(nullptr) {}
@@ -27,11 +23,7 @@ class Sprite : public Component {
     bool IsOpen();
 
     void Update(float dt) {}
-    bool Is(std::string type) {
-        std::cout << type << std::endl;
-        std::cout << typeid(*this).name() << std::endl;
-        return !type.compare(typeid(*this).name());
-    }
+    bool Is(std::string type){ return !type.compare("Sprite"); }
 
   private:
     SDL_Texture* texture = nullptr;
