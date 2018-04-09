@@ -8,6 +8,7 @@ include/SDL_include.h
 include/Sound.h
 include/Sprite.h
 include/State.h
+include/TileSet.h
 include/Vec2.h
 
 src/Component.cpp
@@ -20,6 +21,7 @@ src/Rect.cpp
 src/Sound.cpp
 src/Sprite.cpp
 src/State.cpp
+src/TileSet.cpp
 src/Vec2.cpp
 
 Makefile
