@@ -4,6 +4,7 @@
 #include <vector>
 #include "GameObject.h"
 #include "Music.h"
+#include "TileSet.h"
 
 class State {
   public:
@@ -18,8 +19,9 @@ class State {
     void Input();
     void AddObject(int mouseX, int mouseY);
 
-    //Sprite* bg;
+    // Sprite* bg;
     Music* music;
+    TileSet * tileSet;
     bool quitRequested;
     std::vector<std::unique_ptr<GameObject>> objectArray;
 };

@@ -5,6 +5,7 @@
 #include "Sound.h"
 #include "Sprite.h"
 #include "Vec2.h"
+#include "TileMap.h"
 
 #define UNUSED_VAR (void)
 
@@ -12,6 +13,8 @@ State::State(void) : quitRequested(false) {
     GameObject* gm = new GameObject();
     objectArray.emplace_back(gm);
     gm->AddComponent(new Sprite(*gm, "assets/img/ocean.jpg"));
+    tileSet = new TileSet(64, 64, "assets/img/tileset.png");
+    gm->AddComponent(new TileMap(*gm, "assets/map/tileMap.txt", tileSet));
     music = new Music("assets/audio/stageState.ogg");
     music->Play(2);
 }
