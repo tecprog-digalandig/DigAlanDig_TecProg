@@ -9,9 +9,9 @@ class Game {
   public:
     ~Game(void);
     void run(void);
-    SDL_Renderer* getRenderer(void);
-    State* getState(void);
-    static Game* getInstance(void);
+    SDL_Renderer* getRenderer(void) { return renderer; }
+    State* getState(void) { return state; }
+    static Game* getInstance(void) { return _instance; }
     static Game* getInstance(std::string title, int w, int h);
 
   private:

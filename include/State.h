@@ -10,7 +10,7 @@ class State {
   public:
     State();
     ~State() { objectArray.clear(); }
-    bool QuitRequested();
+    bool QuitRequested() { return quitRequested; }
     void LoadAssets();
     void Update(float dt);
     void Render();
@@ -21,7 +21,7 @@ class State {
 
     // Sprite* bg;
     Music* music;
-    TileSet * tileSet;
+    TileSet* tileSet;
     bool quitRequested;
     std::vector<std::unique_ptr<GameObject>> objectArray;
 };

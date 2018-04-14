@@ -14,7 +14,7 @@ class GameObject {
 
     void Update(float dt);
     void Render(void);
-    //REMOVE
+    // REMOVE
     bool CanEnd();
 
     bool IsDead(void) { return isDead; }

@@ -16,9 +16,9 @@ class TileMap : public Component {
     void SetTileSet(TileSet* tileSet) { this->tileSet = tileSet; }
     int At(int x, int y, int z = 0) { return tileMatrix[z][x][y]; }
 
-    void Update(float dt){}
+    void Update(float dt) {}
     void Render();
-    bool Is(std::string type){ return !type.compare("TileMap"); }
+    bool Is(std::string type) { return !type.compare("TileMap"); }
 
     void RenderLayer(int layer, int cameraX = 0, int cameraY = 0);
 

@@ -4,8 +4,8 @@
 #include "SDL2/SDL.h"
 #include "Sound.h"
 #include "Sprite.h"
-#include "Vec2.h"
 #include "TileMap.h"
+#include "Vec2.h"
 
 #define UNUSED_VAR (void)
 
@@ -18,8 +18,6 @@ State::State(void) : quitRequested(false) {
     music = new Music("assets/audio/stageState.ogg");
     music->Play(2);
 }
-
-bool State::QuitRequested(void) { return quitRequested; }
 
 void State::Update(float dt) {
     Input();
