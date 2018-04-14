@@ -1,20 +1,15 @@
 #include "Sprite.h"
 #include "Game.h"
+#include "Resources.h"
 
 void Sprite::Open(std::string file) {
     if (texture) SDL_DestroyTexture(texture);
 
-    texture =
-        IMG_LoadTexture(Game::getInstance()->getRenderer(), file.c_str());
-    if (!texture) {
-        std::cerr << "IMG_LoadTexture: " << SDL_GetError() << std::endl;
-        exit(EXIT_SUCCESS);
-    }
+    texture = Resources::GetImage(file);
 
     SDL_QueryTexture(texture, nullptr, nullptr, &width, &height);
     SetClip(0, 0, width, height);
     associated.box.Set(0, 0, width, height);
-
 }
 
 void Sprite::SetClip(int x, int y, int w, int h) {
@@ -33,13 +28,4 @@ void Sprite::Render() {
     if (IsOpen())
         SDL_RenderCopy(Game::getInstance()->getRenderer(), texture, &clipRect,
                        &dstRect);
-}
-
-int Sprite::GetWidth(void) { return width; }
-
-int Sprite::GetHeight(void) { return height; }
-
-bool Sprite::IsOpen(void) {
-    if (Sprite::texture) return true;
-    return false;
 }

@@ -11,19 +11,17 @@ class Sprite : public Component {
         : Component(associated), texture(nullptr) {
         Sprite::Open(file);
     }
-    ~Sprite() {
-        if (texture) SDL_DestroyTexture(texture);
-    }
+    ~Sprite() {}
 
     void Open(std::string file);
     void SetClip(int x, int y, int w, int h);
     void Render();
-    int GetWidth();
-    int GetHeight();
-    bool IsOpen();
+    int GetWidth() { return width; }
+    int GetHeight() { return height; }
+    bool IsOpen() { return (bool)Sprite::texture; }
 
     void Update(float dt) {}
-    bool Is(std::string type){ return !type.compare("Sprite"); }
+    bool Is(std::string type) { return !type.compare("Sprite"); }
 
   private:
     SDL_Texture* texture = nullptr;
