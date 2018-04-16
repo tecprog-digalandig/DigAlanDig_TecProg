@@ -10,10 +10,10 @@ class State {
   public:
     State();
     ~State() { objectArray.clear(); }
-    bool QuitRequested() { return quitRequested; }
+    bool QuitRequested() const { return quitRequested; }
     void LoadAssets();
     void Update(float dt);
-    void Render();
+    void Render() const;
 
   private:
     void Input();

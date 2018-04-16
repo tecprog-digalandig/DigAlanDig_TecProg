@@ -12,7 +12,7 @@ TileMap::~TileMap() {
     free(tileMatrix);
 }
 
-void TileMap::Load(std::string file) {
+void TileMap::Load(const std::string &file) {
     std::ifstream input("assets/map/tileMap.txt");
 
     if (!input.is_open()) {
@@ -37,7 +37,7 @@ void TileMap::Load(std::string file) {
     }
 }
 
-void TileMap::RenderLayer(int layer, int cameraX, int cameraY) {
+void TileMap::RenderLayer(int layer, int cameraX, int cameraY) const {
     int w = tileSet->GetTileWidth();
     int h = tileSet->GetTileHeight();
 
@@ -47,7 +47,7 @@ void TileMap::RenderLayer(int layer, int cameraX, int cameraY) {
                                 line * h - cameraY);
 }
 
-void TileMap::Render() {
+void TileMap::Render() const {
     for (int i = 0; i < depth; ++i)
         RenderLayer(i, associated.box.x, associated.box.y);
 }

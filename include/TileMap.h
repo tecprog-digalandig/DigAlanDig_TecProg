@@ -6,25 +6,25 @@
 
 class TileMap : public Component {
   public:
-    TileMap(GameObject& associated, std::string file, TileSet* tileSet)
+    TileMap(GameObject& associated, const std::string& file, TileSet* tileSet)
         : Component(associated), tileSet(tileSet) {
         Load(file);
     }
     ~TileMap();
 
-    void Load(std::string file);
+    void Load(const std::string& file);
     void SetTileSet(TileSet* tileSet) { this->tileSet = tileSet; }
-    int At(int x, int y, int z = 0) { return tileMatrix[z][x][y]; }
+    int At(int x, int y, int z = 0) const { return tileMatrix[z][x][y]; }
 
     void Update(float dt) {}
-    void Render();
-    bool Is(std::string type) { return !type.compare("TileMap"); }
+    void Render() const;
+    bool Is(const std::string& type) const { return !type.compare("TileMap"); }
 
-    void RenderLayer(int layer, int cameraX = 0, int cameraY = 0);
+    void RenderLayer(int layer, int cameraX = 0, int cameraY = 0) const;
 
-    int GetWidth() { return width; }
-    int GeHeight() { return height; }
-    int GetDepth() { return depth; }
+    int GetWidth() const { return width; }
+    int GeHeight() const { return height; }
+    int GetDepth() const { return depth; }
 
   private:
     int*** tileMatrix;

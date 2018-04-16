@@ -32,7 +32,7 @@ void State::Update(float dt) {
         objectArray.end());
 }
 
-void State::Render() {
+void State::Render() const {
     for (auto& obj : objectArray) obj->Render();
 }
 

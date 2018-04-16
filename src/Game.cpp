@@ -4,8 +4,6 @@
 
 Game* Game::_instance = nullptr;
 
-Game* Game::getInstance(void) { return _instance; }
-
 Game::~Game(void) {
     IMG_Quit();
     Mix_CloseAudio();
@@ -15,14 +13,10 @@ Game::~Game(void) {
     delete state;
 }
 
-Game* Game::getInstance(std::string title, int w, int h) {
+Game* Game::getInstance(const std::string &title, int w, int h) {
     if (!_instance) _instance = new Game(title, w, h);
     return _instance;
 }
-
-SDL_Renderer* Game::getRenderer(void) { return renderer; }
-
-State* Game::getState(void) { return state; }
 
 void Game::run(void) {
     state = new State();
@@ -36,7 +30,7 @@ void Game::run(void) {
 }
 
 /* Private */
-Game::Game(std::string title, int width, int height) {
+Game::Game(const std::string &title, int width, int height) {
     if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO | SDL_INIT_TIMER) < 0) {
         std::cerr << "SDL_Init: " << SDL_GetError() << std::endl;
         exit(EXIT_SUCCESS);

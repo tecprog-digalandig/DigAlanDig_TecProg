@@ -7,27 +7,26 @@ class Sprite : public Component {
   public:
     Sprite(GameObject& associated) : Component(associated), texture(nullptr) {}
 
-    Sprite(GameObject& associated, std::string file)
+    Sprite(GameObject& associated, const std::string& file)
         : Component(associated), texture(nullptr) {
         Sprite::Open(file);
     }
     ~Sprite() {}
 
-    void Open(std::string file);
+    void Open(const std::string& file);
     void SetClip(int x, int y, int w, int h);
-    void Render();
-    int GetWidth() { return width; }
-    int GetHeight() { return height; }
-    bool IsOpen() { return (bool)Sprite::texture; }
+    int GetWidth() const { return width; }
+    int GetHeight() const { return height; }
+    bool IsOpen() const { return (bool)Sprite::texture; }
 
     void Update(float dt) {}
-    bool Is(std::string type) { return !type.compare("Sprite"); }
+    void Render() const;
+    bool Is(const std::string& type) const { return !type.compare("Sprite"); }
 
   private:
     SDL_Texture* texture = nullptr;
     int width;
     int height;
-    SDL_Rect clipRect;
 
-    SDL_Rect dstRect;
+    SDL_Rect clipRect;
 };

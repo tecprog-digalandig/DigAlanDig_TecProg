@@ -9,10 +9,10 @@ class Game {
   public:
     ~Game(void);
     void run(void);
-    SDL_Renderer* getRenderer(void) { return renderer; }
-    State* getState(void) { return state; }
+    SDL_Renderer* getRenderer(void) const { return renderer; }
+    State* getState(void) const { return state; }
     static Game* getInstance(void) { return _instance; }
-    static Game* getInstance(std::string title, int w, int h);
+    static Game* getInstance(const std::string& title, int w, int h);
 
   private:
     static Game* _instance;
@@ -20,5 +20,5 @@ class Game {
     SDL_Renderer* renderer;
     State* state;
 
-    Game(std::string title, int width, int height);
+    Game(const std::string& title, int width, int height);
 };

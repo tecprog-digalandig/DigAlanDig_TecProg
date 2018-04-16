@@ -15,13 +15,13 @@ class GameObject {
     void Update(float dt);
     void Render(void);
     // REMOVE
-    bool CanEnd();
+    bool CanEnd() const;
 
-    bool IsDead(void) { return isDead; }
+    bool IsDead(void) const { return isDead; }
     void RequestDelete(void) { isDead = true; }
     void AddComponent(Component *cpt) { components.emplace_back(cpt); }
     void RemoveComponent(Component *cpt);
-    Component *GetComponent(std::string type);
+    Component *GetComponent(const std::string &type) const;
 
     Rect box;
 
