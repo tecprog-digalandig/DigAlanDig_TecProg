@@ -13,15 +13,26 @@ Game::~Game(void) {
     delete state;
 }
 
-Game* Game::getInstance(const std::string &title, int w, int h) {
+Game* Game::getInstance(const std::string& title, int w, int h) {
     if (!_instance) _instance = new Game(title, w, h);
     return _instance;
 }
 
+void Game::CalculateDeltaTime() {
+    int ticks = SDL_GetTicks();
+    dt = ticks - frameStart;
+    dt /= 1000;
+    frameStart = ticks;
+}
+
 void Game::run(void) {
     state = new State();
+    InputManager& input = InputManager::GetInstance();
+
     while (!state->QuitRequested()) {
-        state->Update(0.0);
+        CalculateDeltaTime();
+        input.Update();
+        state->Update(dt);
         state->Render();
         SDL_RenderPresent(renderer);
 
@@ -30,7 +41,7 @@ void Game::run(void) {
 }
 
 /* Private */
-Game::Game(const std::string &title, int width, int height) {
+Game::Game(const std::string& title, int width, int height) {
     if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO | SDL_INIT_TIMER) < 0) {
         std::cerr << "SDL_Init: " << SDL_GetError() << std::endl;
         exit(EXIT_SUCCESS);

@@ -13,12 +13,17 @@ class Game {
     State* getState(void) const { return state; }
     static Game* getInstance(void) { return _instance; }
     static Game* getInstance(const std::string& title, int w, int h);
+    float GetDeltaTime() const { return dt; }
 
   private:
     static Game* _instance;
     SDL_Window* window;
     SDL_Renderer* renderer;
     State* state;
+
+    int frameStart;
+    float dt;
+    void CalculateDeltaTime();
 
     Game(const std::string& title, int width, int height);
 };
