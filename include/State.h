@@ -3,6 +3,7 @@
 #include <memory>
 #include <vector>
 #include "GameObject.h"
+#include "InputManager.h"
 #include "Music.h"
 #include "TileSet.h"
 
@@ -16,7 +17,6 @@ class State {
     void Render() const;
 
   private:
-    void Input();
     void AddObject(int mouseX, int mouseY);
 
     // Sprite* bg;
@@ -24,4 +24,6 @@ class State {
     TileSet* tileSet;
     bool quitRequested;
     std::vector<std::unique_ptr<GameObject>> objectArray;
+
+    InputManager& input;
 };

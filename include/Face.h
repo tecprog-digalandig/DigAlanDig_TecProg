@@ -9,7 +9,7 @@ class Face : public Component {
 
     void Damage(int damage);
 
-    void Update(float dt) {}
+    void Update(float dt);
     void Render() const {}
     bool Is(const std::string& type) const { return !type.compare("Face"); }
 
