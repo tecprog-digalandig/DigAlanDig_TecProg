@@ -1,5 +1,6 @@
 #include "State.h"
 #include <stdio.h>
+#include "Camera.h"
 #include "Face.h"
 #include "SDL2/SDL.h"
 #include "Sound.h"
@@ -20,6 +21,7 @@ State::State(void) : quitRequested(false), input(InputManager::GetInstance()) {
 
 void State::Update(float dt) {
     for (auto& obj : objectArray) obj->Update(dt);
+    Camera::Update(dt);
 
     auto removeDead = [&](std::unique_ptr<GameObject> const& p) {
         return p->IsDead() && p->CanEnd();

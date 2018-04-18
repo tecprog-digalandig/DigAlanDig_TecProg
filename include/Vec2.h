@@ -1,5 +1,6 @@
 #ifndef Vec2_H
 #define Vec2_H
+#include <iostream>
 
 class Vec2 {
   public:
@@ -32,6 +33,11 @@ class Vec2 {
 
     bool operator<(const Vec2& v) const { return (x < v.x) && (y < v.y); }
     bool operator>(const Vec2& v) const { return (x > v.x) && (y > v.y); }
+
+    friend std::ostream& operator<<(std::ostream& os, const Vec2& v) {
+        os << "(" << v.x << " , " << v.y << ")";
+        return os;
+    }
 
     void set(double x, double y) { this->x = x, this->y = y; }
 

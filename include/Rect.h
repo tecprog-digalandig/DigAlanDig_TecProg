@@ -1,5 +1,6 @@
 #ifndef Rect_H
 #define Rect_H
+#include <iostream>
 #include "Vec2.h"
 
 class Rect {
@@ -27,6 +28,11 @@ class Rect {
         return *this;
     }
     Rect& operator-=(const Vec2& v) { return pos -= v, *this; }
+
+    friend std::ostream& operator<<(std::ostream& os, const Rect& r) {
+        os << "Pos: " << r.pos << std::endl << "Size: " << r.size << std::endl;
+        return os;
+    }
 
     void Set(double x, double y, double w, double h) {
         this->x = x, this->y = y;
