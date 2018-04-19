@@ -38,12 +38,27 @@ void TileMap::Load(const std::string &file) {
     }
 }
 
+inline int inRange(int value, int min, int max) {
+    return (value < min) ? min : ((value > max) ? max : value);
+}
+
 void TileMap::RenderLayer(int layer, int cameraX, int cameraY) const {
     int w = tileSet->GetTileWidth();
     int h = tileSet->GetTileHeight();
 
-    for (int line = 0; line < height; ++line)
-        for (int col = 0; col < width; ++col)
+    // Optimization, for only drawing what is on screen
+    int cinit = cameraX / w;
+    int cmax = cinit + ceil(Camera::screenSize.x / (double)w) + 1;
+    cinit = inRange(cinit, 0, width);
+    cmax = inRange(cmax, 0, width);
+
+    int linit = cameraY / h;
+    int lmax = linit + ceil(Camera::screenSize.y / (double)h) + 1;
+    linit = inRange(linit, 0, height);
+    lmax = inRange(lmax, 0, height);
+
+    for (int line = linit; line < lmax; ++line)
+        for (int col = cinit; col < cmax; ++col)
             tileSet->RenderTile(tileMatrix[layer][line][col], col * w - cameraX,
                                 line * h - cameraY);
 }

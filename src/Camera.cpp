@@ -2,7 +2,7 @@
 #include <iostream>
 #include "InputManager.h"
 
-Vec2 Camera::pos, Camera::speed(200, 200);
+Vec2 Camera::pos, Camera::speed(200, 200), Camera::screenSize;
 GameObject* Camera::focus;
 
 void Camera::Follow(GameObject* newFocus) { focus = newFocus; }

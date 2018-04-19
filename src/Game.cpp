@@ -1,6 +1,7 @@
 #include "Game.h"
 #include <iostream>
 #include <string>
+#include "Camera.h"
 
 Game* Game::_instance = nullptr;
 
@@ -75,6 +76,7 @@ Game::Game(const std::string& title, int width, int height) {
         std::cerr << "SDL_CreateWindow: " << SDL_GetError() << std::endl;
         exit(EXIT_SUCCESS);
     }
+    Camera::screenSize.set(width, height);
 
     renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
     if (!renderer) {

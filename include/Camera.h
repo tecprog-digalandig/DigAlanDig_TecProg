@@ -9,7 +9,7 @@ class Camera {
     static void Unfollow();
     static void Update(float dt);
 
-    static Vec2 pos, speed;
+    static Vec2 pos, speed, screenSize;
 
   private:
     static GameObject* focus;
