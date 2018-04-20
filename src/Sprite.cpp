@@ -1,4 +1,5 @@
 #include "Sprite.h"
+#include "Camera.h"
 #include "Game.h"
 #include "Resources.h"
 
@@ -19,7 +20,13 @@ void Sprite::SetClip(int x, int y, int w, int h) {
 
 void Sprite::Render() const {
     if (IsOpen()) {
-        SDL_Rect dstRect = {(int)associated.box.x, (int)associated.box.y,
+        int offsetX = 0, offsetY = 0;
+        if (associated.worldReference) {
+            offsetX = Camera::pos.x;
+            offsetY = Camera::pos.y;
+        }
+        SDL_Rect dstRect = {(int)associated.box.x - offsetX,
+                            (int)associated.box.y - offsetY,
                             (int)associated.box.w, (int)associated.box.h};
         SDL_RenderCopy(Game::getInstance()->getRenderer(), texture, &clipRect,
                        &dstRect);

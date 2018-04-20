@@ -10,6 +10,7 @@
 
 State::State(void) : quitRequested(false), input(InputManager::GetInstance()) {
     GameObject* gm = new GameObject();
+    gm->worldReference = false;
     objectArray.emplace_back(gm);
     gm->AddComponent(new Sprite(*gm, "assets/img/ocean.jpg"));
     tileSet = new TileSet(64, 64, "assets/img/tileset.png");
@@ -32,7 +33,7 @@ void State::Update(float dt) {
 
     if (input.KeyPress(SDL_SCANCODE_SPACE)) {
         Vec2 objPos = Vec2(200, 0).rotate(rand() % 361) +
-                      Vec2(input.GetMouseX(), input.GetMouseY());
+                      Vec2(input.GetWorldMouseX(), input.GetWorldMouseY());
         AddObject((int)objPos.x, (int)objPos.y);
     }
     if (input.KeyPress(SDL_SCANCODE_ESCAPE) || input.QuitRequested())

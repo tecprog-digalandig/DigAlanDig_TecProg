@@ -1,6 +1,7 @@
 #ifndef INPUTMANAGER_H
 #define INPUTMANAGER_H
 
+#include "Camera.h"
 #include "SDL2/SDL.h"
 
 class InputManager {
@@ -25,6 +26,8 @@ class InputManager {
 
     int GetMouseX() const { return mouseX; }
     int GetMouseY() const { return mouseY; }
+    int GetWorldMouseX() const { return mouseX + Camera::pos.x; }
+    int GetWorldMouseY() const { return mouseY + Camera::pos.y; }
 
     bool QuitRequested() const { return quitRequested; }
 

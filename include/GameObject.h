@@ -24,6 +24,7 @@ class GameObject {
     Component *GetComponent(const std::string &type) const;
 
     Rect box;
+    bool worldReference = true;
 
   private:
     std::vector<Component *> components;
