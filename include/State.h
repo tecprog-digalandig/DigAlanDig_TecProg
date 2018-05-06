@@ -15,6 +15,9 @@ class State {
     void LoadAssets();
     void Update(float dt);
     void Render() const;
+    void Start();
+    std::weak_ptr<GameObject> AddObject(GameObject* go);
+    std::weak_ptr<GameObject> GetObjectPrt(GameObject* go);
 
   private:
     void AddObject(int mouseX, int mouseY);
@@ -22,8 +25,9 @@ class State {
     // Sprite* bg;
     Music* music;
     TileSet* tileSet;
-    bool quitRequested;
-    std::vector<std::unique_ptr<GameObject>> objectArray;
+    bool quitRequested = false;
+    std::vector<std::shared_ptr<GameObject>> objectArray;
+    bool started = false;
 
     InputManager& input;
 };

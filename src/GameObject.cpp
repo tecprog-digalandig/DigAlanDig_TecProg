@@ -21,15 +21,27 @@ void GameObject::Render() {
     for (Component* component : components) component->Render();
 }
 
-void GameObject::RemoveComponent(Component *cpt) {
+void GameObject::RemoveComponent(Component* cpt) {
     // CHECK: delete cpt?
     components.erase(std::remove(components.begin(), components.end(), cpt),
                      components.end());
 }
 
-Component* GameObject::GetComponent(const std::string &type) const {
+Component* GameObject::GetComponent(const std::string& type) const {
     for (Component* component : components)
         if (component->Is(type)) return component;
 
     return nullptr;
+}
+
+void GameObject::AddComponent(Component* cpt) {
+    components.emplace_back(cpt);
+    cpt->Start();
+}
+
+void GameObject::Start() {
+    if (started) return;
+    for (auto& c : components) c->Start();
+
+    started = true;
 }

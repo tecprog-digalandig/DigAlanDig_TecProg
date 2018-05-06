@@ -34,5 +34,6 @@ void Camera::Update(float dt) {
         speed -= dt * 50;
     }
 
-    std::cout << "Pos: " << pos << std::endl << "Speed: " << speed << std::endl;
+    // std::cout << "Pos: " << pos << std::endl << "Speed: " << speed <<
+    // std::endl;
 }

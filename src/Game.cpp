@@ -28,6 +28,7 @@ void Game::CalculateDeltaTime() {
 
 void Game::run(void) {
     state = new State();
+    state->Start();
     InputManager& input = InputManager::GetInstance();
 
     while (!state->QuitRequested()) {
@@ -76,7 +77,7 @@ Game::Game(const std::string& title, int width, int height) {
         std::cerr << "SDL_CreateWindow: " << SDL_GetError() << std::endl;
         exit(EXIT_SUCCESS);
     }
-    Camera::screenSize.set(width, height);
+    Camera::screenSize.Set(width, height);
 
     renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
     if (!renderer) {

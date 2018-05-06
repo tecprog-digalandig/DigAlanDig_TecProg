@@ -24,10 +24,20 @@ class InputManager {
         return (frame == mouseUpdate[button]) && !mouseState[button];
     }
 
+    enum mouseKey {
+        LEFT = SDL_BUTTON_LEFT,
+        MIDDLE = SDL_BUTTON_MIDDLE,
+        RIGHT = SDL_BUTTON_RIGHT
+    };
+
     int GetMouseX() const { return mouseX; }
     int GetMouseY() const { return mouseY; }
+    Vec2 GetMouse() const { return Vec2(mouseX, mouseY); }
     int GetWorldMouseX() const { return mouseX + Camera::pos.x; }
     int GetWorldMouseY() const { return mouseY + Camera::pos.y; }
+    Vec2 GetWorldMouse() const {
+        return Vec2(mouseX + Camera::pos.x, mouseY + Camera::pos.y);
+    }
 
     bool QuitRequested() const { return quitRequested; }
 

@@ -39,35 +39,35 @@ class Vec2 {
         return os;
     }
 
-    void set(double x, double y) { this->x = x, this->y = y; }
+    void Set(double x, double y) { this->x = x, this->y = y; }
 
-    Vec2 rotate(double degrees);
-    Vec2 rotateRad(double rad);
+    Vec2 Rotate(double degrees);
+    Vec2 RotateRad(double rad);
 
-    double length() const;
+    double Length() const;
 
-    Vec2 normal() const {
-        double len = this->length();
+    Vec2 Normal() const {
+        double len = this->Length();
         return (len == 0) ? Vec2() : Vec2(*this / len);
     }
 
-    Vec2& normalize();
+    Vec2& Normalize();
 
-    double dist(const Vec2& v) const {
+    double Dist(const Vec2& v) const {
         Vec2 d(*this - v);
-        return d.length();
+        return d.Length();
     }
 
-    void truncate(double length);
+    void Truncate(double Length);
 
-    static double dot(const Vec2& v1, const Vec2& v2);
-    static double cross(const Vec2& v1, const Vec2& v2);
+    static double Dot(const Vec2& v1, const Vec2& v2);
+    static double Cross(const Vec2& v1, const Vec2& v2);
 
-    double cross(const Vec2& v2) const { return cross(*this, v2); }
-    double dot(const Vec2& v2) const { return dot(*this, v2); }
+    double Cross(const Vec2& v2) const { return Cross(*this, v2); }
+    double Dot(const Vec2& v2) const { return Dot(*this, v2); }
 
-    Vec2 projection(const Vec2& v2) const {
-        return v2 * (dot(*this, v2) / dot(v2, v2));
+    Vec2 Projection(const Vec2& v2) const {
+        return v2 * (Dot(*this, v2) / Dot(v2, v2));
     }
 };
 

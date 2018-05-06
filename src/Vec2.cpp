@@ -36,9 +36,9 @@ Vec2& Vec2::operator/=(double d) {
     return *this;
 }
 
-double Vec2::length() const { return std::sqrt(x * x + y * y); }
+double Vec2::Length() const { return std::sqrt(x * x + y * y); }
 
-Vec2 Vec2::rotateRad(double rad) {
+Vec2 Vec2::RotateRad(double rad) {
     double co = cos(rad);
     double si = sin(rad);
     double tmpX = x * co - y * si;
@@ -48,19 +48,19 @@ Vec2 Vec2::rotateRad(double rad) {
 
     return *this;
 }
-Vec2 Vec2::rotate(double degrees) { return rotateRad((degrees / 180) * M_PI); }
+Vec2 Vec2::Rotate(double degrees) { return RotateRad((degrees / 180) * M_PI); }
 
-Vec2& Vec2::normalize() { return *this = normal(); }
+Vec2& Vec2::Normalize() { return *this = Normal(); }
 
-void Vec2::truncate(double length) {
+void Vec2::Truncate(double length) {
     double angle = atan2f(y, x);
     x = length * cos(angle);
     y = length * sin(angle);
 }
 
-double Vec2::dot(const Vec2& v1, const Vec2& v2) {
+double Vec2::Dot(const Vec2& v1, const Vec2& v2) {
     return v1.x * v2.x + v1.y * v2.y;
 }
-double Vec2::cross(const Vec2& v1, const Vec2& v2) {
+double Vec2::Cross(const Vec2& v1, const Vec2& v2) {
     return (v1.x * v2.y) - (v1.y * v2.x);
 }

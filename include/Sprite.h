@@ -5,10 +5,10 @@
 
 class Sprite : public Component {
   public:
-    Sprite(GameObject& associated) : Component(associated), texture(nullptr) {}
+    Sprite(GameObject& associated) : Component(associated) {}
 
     Sprite(GameObject& associated, const std::string& file)
-        : Component(associated), texture(nullptr) {
+        : Component(associated) {
         Sprite::Open(file);
     }
     ~Sprite() {}

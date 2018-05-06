@@ -19,12 +19,14 @@ class GameObject {
 
     bool IsDead(void) const { return isDead; }
     void RequestDelete(void) { isDead = true; }
-    void AddComponent(Component *cpt) { components.emplace_back(cpt); }
+    void AddComponent(Component *cpt);
     void RemoveComponent(Component *cpt);
     Component *GetComponent(const std::string &type) const;
+    void Start();
 
     Rect box;
     bool worldReference = true;
+    bool started = false;
 
   private:
     std::vector<Component *> components;

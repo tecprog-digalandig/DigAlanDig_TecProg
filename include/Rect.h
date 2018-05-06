@@ -44,6 +44,13 @@ class Rect {
         this->size = size;
     }
 
+    void SetCenter(double x, double y) {
+        this->x = x - (w / 2);
+        this->y = y - (h / 2);
+    }
+
+    void SetCenter(const Vec2& c) { SetCenter(c.x, c.y); }
+
     Vec2 Center() const { return Vec2(pos + size / 2); }
 
     bool IsInsideX(double _x) const { return (_x >= x) && (_x < (x + w)); }
@@ -53,7 +60,7 @@ class Rect {
         return IsInsideX(_x) && IsInsideY(_y);
     }
 
-    double Dist(const Rect& r) const { return Center().dist(r.Center()); }
+    double Dist(const Rect& r) const { return Center().Dist(r.Center()); }
 };
 
 #endif  // Rect_H
