@@ -39,7 +39,8 @@ class Vec2 {
         return os;
     }
 
-    void Set(double x, double y) { this->x = x, this->y = y; }
+    void Set(double x = 0, double y = 0) { this->x = x, this->y = y; }
+    void Set(const Vec2& v) { x = v.x, y = v.y; }
 
     Vec2 Rotate(double degrees);
     Vec2 RotateRad(double rad);

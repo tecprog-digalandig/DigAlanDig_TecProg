@@ -34,10 +34,7 @@ Component* GameObject::GetComponent(const std::string& type) const {
     return nullptr;
 }
 
-void GameObject::AddComponent(Component* cpt) {
-    components.emplace_back(cpt);
-    cpt->Start();
-}
+void GameObject::AddComponent(Component* cpt) { components.emplace_back(cpt); }
 
 void GameObject::Start() {
     if (started) return;

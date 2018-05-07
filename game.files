@@ -5,6 +5,7 @@ include/Face.h
 include/Game.h
 include/GameObject.h
 include/InputManager.h
+include/Minion.h
 include/Music.h
 include/Rect.h
 include/Resources.h
@@ -24,6 +25,7 @@ src/Game.cpp
 src/GameObject.cpp
 src/InputManager.cpp
 src/Main.cpp
+src/Minion.cpp
 src/Music.cpp
 src/Rect.cpp
 src/Resources.cpp

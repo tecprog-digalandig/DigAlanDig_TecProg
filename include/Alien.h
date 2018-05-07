@@ -6,6 +6,7 @@
 #include "Component.h"
 #include "GameObject.h"
 #include "InputManager.h"
+#include "State.h"
 #include "Vec2.h"
 
 class Alien : public Component {
@@ -17,6 +18,8 @@ class Alien : public Component {
     void Update(float dt);
     void Render() const {}
     bool Is(const std::string& type) const { return !type.compare("Alien"); }
+
+    State* state;
 
   private:
     class Action {

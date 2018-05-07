@@ -1,9 +1,11 @@
 #include "Alien.h"
+#include "Game.h"
+#include "Minion.h"
 #include "Sprite.h"
+#include "State.h"
 
 Alien::Alien(GameObject& associated, int nMinions)
     : Component(associated),
-      speed(),
       minionArray(nMinions),
       input(InputManager::GetInstance()) {
     associated.AddComponent(
@@ -11,15 +13,22 @@ Alien::Alien(GameObject& associated, int nMinions)
 }
 
 Alien::~Alien() {
-    /*for (auto& minion : minionArray) {
-        delete minion;
-    }*/
-    // TODO delete weak_prt?
+    for (auto& minion : minionArray) {
+        if (auto m = minion.lock()) m->RequestDelete();
+    }
 }
 
 void Alien::Start() {
-    for (unsigned int i = 0; i < minionArray.size(); ++i) {
-        // TODO
+    int i = 0;
+    State* state = Game::getInstance()->getState();
+
+    for (auto& minion : minionArray) {
+        if (minion.expired()) {
+            GameObject* gm = new GameObject();
+            minion = state->AddObject(gm);
+            gm->AddComponent(new Minion(*gm, state->GetObjectPrt(&associated),
+                                        (2 * M_PI * i++) / minionArray.size()));
+        }
     }
 }
 
@@ -45,7 +54,7 @@ void Alien::Update(float dt) {
 
             if (move.Length() >= Vec2(task.pos - center).Length()) {
                 taskQueue.pop();
-                speed.Set(0, 0);
+                speed.Set();
                 associated.box.SetCenter(task.pos);
             }
         } else {
