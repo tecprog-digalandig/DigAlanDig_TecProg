@@ -5,10 +5,10 @@
 
 class Sprite : public Component {
   public:
-    Sprite(GameObject& associated) : Component(associated) {}
+    Sprite(GameObject& associated) : Component(associated), scale(1, 1) {}
 
     Sprite(GameObject& associated, const std::string& file)
-        : Component(associated) {
+        : Component(associated), scale(1, 1) {
         Sprite::Open(file);
     }
     ~Sprite() {}
@@ -23,10 +23,15 @@ class Sprite : public Component {
     void Render() const;
     bool Is(const std::string& type) const { return !type.compare("Sprite"); }
 
+    void setScaleX(float scaleX, float scaleY);
+    void setScaleX(const Vec2& v) { setScaleX(v.x, v.y); }
+    Vec2 getScale() const { return scale; }
+
   private:
     SDL_Texture* texture = nullptr;
     int width;
     int height;
 
     SDL_Rect clipRect;
+    Vec2 scale;
 };

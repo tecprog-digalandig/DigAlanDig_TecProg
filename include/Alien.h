@@ -35,9 +35,11 @@ class Alien : public Component {
     std::queue<Action> taskQueue;
     std::vector<std::weak_ptr<GameObject>> minionArray;
 
+    std::shared_ptr<GameObject> closestMinion(const Vec2& target);
     InputManager& input;
     static const int maxSpeed = 100;
     static const int maxHp = 100;
+    static constexpr float degPerS = 10;
 };
 
 #endif  // ALIEN_H

@@ -31,6 +31,22 @@ void Alien::Start() {
         }
     }
 }
+std::shared_ptr<GameObject> Alien::closestMinion(const Vec2& target) {
+    float minDist = 1e9;
+    std::shared_ptr<GameObject> ret;
+
+    for (auto& minion : minionArray) {
+        if (std::shared_ptr<GameObject> m = minion.lock()) {
+            float dist = Vec2(target - m->box.Center()).Length();
+            if (dist <= minDist) {
+                ret = m;
+                minDist = dist;
+            }
+        }
+    }
+
+    return ret;
+}
 
 void Alien::Update(float dt) {
     int x = input.GetWorldMouseX();
@@ -57,11 +73,14 @@ void Alien::Update(float dt) {
                 speed.Set();
                 associated.box.SetCenter(task.pos);
             }
-        } else {
-            // TODO
+        } else if (task.type == Action::SHOOT) {
+            std::shared_ptr<GameObject> minionGm = closestMinion(task.pos);
+            Minion* minion = (Minion*)minionGm->GetComponent("Minion");
+            minion->Shoot(task.pos);
             taskQueue.pop();
         }
     }
 
+    associated.angleDeg -= degPerS * dt;
     if (hp <= 0) associated.RequestDelete();
 }

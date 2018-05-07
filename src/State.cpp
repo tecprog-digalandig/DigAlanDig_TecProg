@@ -60,7 +60,11 @@ std::weak_ptr<GameObject> State::GetObjectPrt(GameObject* go) {
 }
 
 void State::Update(float dt) {
-    for (auto& obj : objectArray) obj->Update(dt);
+    //    for (std::shared_ptr<GameObject> obj : objectArray) {
+    //        if (obj.get() != nullptr) obj->Update(dt);
+    for (int i = 0; i < (int)objectArray.size(); i++) {
+        objectArray[i]->Update(dt);
+    }
     Camera::Update(dt);
 
     auto removeDead = [&](std::shared_ptr<GameObject> const& p) {

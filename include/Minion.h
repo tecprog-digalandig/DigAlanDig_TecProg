@@ -21,8 +21,11 @@ class Minion : public Component {
     std::weak_ptr<GameObject> alienCenter;
     float arc;
 
-    static constexpr float rotSpeed = M_PI_4;
+    static constexpr float rotSpeed = M_PI / 4;
+    static constexpr float bulletSpeed = 200;
+    static constexpr float maxDistance = 500;
     static const int minionDist = 150;
+    static const int damage = 50;
 };
 
 #endif  // MINION_H

@@ -1,6 +1,11 @@
 #ifndef Vec2_H
 #define Vec2_H
+#include <cmath>
 #include <iostream>
+#ifndef M_PI
+#define M_PI 3.14159265358979323846
+#define M_1_PI 0.31830988618379067154
+#endif
 
 class Vec2 {
   public:
@@ -53,6 +58,11 @@ class Vec2 {
     }
 
     Vec2& Normalize();
+
+    double Angle() const {
+        if (x == 0 && y == 0) return 0;
+        return atan2(y, x);
+    }
 
     double Dist(const Vec2& v) const {
         Vec2 d(*this - v);

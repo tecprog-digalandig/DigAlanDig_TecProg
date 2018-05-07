@@ -1,6 +1,7 @@
 #ifndef Rect_H
 #define Rect_H
 #include <iostream>
+#include "SDL2/SDL.h"
 #include "Vec2.h"
 
 class Rect {
@@ -29,6 +30,8 @@ class Rect {
     }
     Rect& operator-=(const Vec2& v) { return pos -= v, *this; }
 
+    operator SDL_Rect() const { return {(int)x, (int)y, (int)w, (int)h}; }
+
     friend std::ostream& operator<<(std::ostream& os, const Rect& r) {
         os << "Pos: " << r.pos << std::endl << "Size: " << r.size << std::endl;
         return os;
@@ -52,6 +55,12 @@ class Rect {
     void SetCenter(const Vec2& c) { SetCenter(c.x, c.y); }
 
     Vec2 Center() const { return Vec2(pos + size / 2); }
+
+    void Scale(const Vec2& v) {
+        Vec2 c = Center();
+        size *= v;
+        SetCenter(c);
+    }
 
     bool IsInsideX(double _x) const { return (_x >= x) && (_x < (x + w)); }
     bool IsInsideY(double _y) const { return (_y >= y) && (_y < (y + h)); }

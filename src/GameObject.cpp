@@ -2,8 +2,9 @@
 #include "Sound.h"
 
 bool GameObject::CanEnd() const {
-    if (Sound* sound = (Sound*)GetComponent("Sound")) return sound->CanEnd();
-    return false;
+    //    if (Sound* sound = (Sound*)GetComponent("Sound")) return
+    //    sound->CanEnd(); return false;
+    return true;
 }
 
 GameObject::~GameObject() {

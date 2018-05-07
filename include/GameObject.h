@@ -27,6 +27,7 @@ class GameObject {
     Rect box;
     bool worldReference = true;
     bool started = false;
+    double angleDeg = 0;
 
   private:
     std::vector<Component *> components;

@@ -18,17 +18,23 @@ void Sprite::SetClip(int x, int y, int w, int h) {
     clipRect.h = h;
 }
 
+void Sprite::setScaleX(float scaleX, float scaleY) {
+    scale.x = scaleX ? scaleX : scale.x;
+    scale.y = scaleY ? scaleY : scale.y;
+}
+
 void Sprite::Render() const {
     if (IsOpen()) {
-        int offsetX = 0, offsetY = 0;
-        if (associated.worldReference) {
-            offsetX = Camera::pos.x;
-            offsetY = Camera::pos.y;
-        }
-        SDL_Rect dstRect = {(int)associated.box.x - offsetX,
-                            (int)associated.box.y - offsetY,
-                            (int)associated.box.w, (int)associated.box.h};
-        SDL_RenderCopy(Game::getInstance()->getRenderer(), texture, &clipRect,
-                       &dstRect);
+        Vec2 offset;
+        if (associated.worldReference) offset = Camera::pos;
+        Rect dst(associated.box.pos - offset, associated.box.size);
+
+        if (scale.x != 1 || scale.y != 1) dst.Scale(scale);
+
+        SDL_Rect dstRect = dst;
+        //        SDL_RenderCopy(Game::getInstance()->getRenderer(), texture,
+        //        &clipRect, &dstRect);
+        SDL_RenderCopyEx(Game::getInstance()->getRenderer(), texture, &clipRect,
+                         &dstRect, associated.angleDeg, nullptr, SDL_FLIP_NONE);
     }
 }
