@@ -1,4 +1,5 @@
-#pragma once
+#ifndef GAME_H
+#define GAME_H
 #define INCLUDE_SDL
 #define INCLUDE_SDL_IMAGE
 #define INCLUDE_SDL_MIXER
@@ -27,3 +28,5 @@ class Game {
 
     Game(const std::string& title, int width, int height);
 };
+
+#endif

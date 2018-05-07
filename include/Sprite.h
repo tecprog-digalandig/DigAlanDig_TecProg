@@ -1,4 +1,5 @@
-#pragma once
+#ifndef SPRITE_H
+#define SPRITE_H
 #define INCLUDE_SDL
 #include "Component.h"
 #include "SDL_include.h"
@@ -35,3 +36,5 @@ class Sprite : public Component {
     SDL_Rect clipRect;
     Vec2 scale;
 };
+
+#endif

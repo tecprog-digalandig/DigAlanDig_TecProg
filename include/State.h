@@ -1,4 +1,5 @@
-#pragma once
+#ifndef STATE_H
+#define STATE_H
 #include <stdlib.h>
 #include <iostream>
 #include <memory>
@@ -32,3 +33,5 @@ class State {
 
     InputManager& input;
 };
+
+#endif

@@ -1,4 +1,5 @@
-#pragma once
+#ifndef MUSIC_H
+#define MUSIC_H
 #define INCLUDE_SDL
 #define INCLUDE_SDL_MIXER
 #include "Resources.h"
@@ -22,3 +23,5 @@ class Music {
   private:
     Mix_Music *music = nullptr;
 };
+
+#endif

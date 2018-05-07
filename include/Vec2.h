@@ -1,5 +1,5 @@
-#ifndef Vec2_H
-#define Vec2_H
+#ifndef VEC2_H
+#define VEC2_H
 #include <cmath>
 #include <iostream>
 #ifndef M_PI
