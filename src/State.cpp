@@ -30,7 +30,7 @@ void State::LoadAssets() {
     gm3->AddComponent(new PenguinBody(*gm3));
     gm3->box.pos.Set(704, 640);
 
-    //   Camera::Follow(gm3);
+    Camera::Follow(gm3);
 
     music = new Music("assets/audio/stageState.ogg");
     music->Play(2);

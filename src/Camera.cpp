@@ -11,7 +11,7 @@ void Camera::Unfollow() { focus = nullptr; }
 
 void Camera::Update(float dt) {
     if (focus) {
-        pos = focus->box.pos;
+        pos = focus->box.Center() - screenSize / 2;
         return;
     }
     if (InputManager::GetInstance().IsKeyDown(SDL_SCANCODE_RIGHT)) {
