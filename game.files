@@ -1,6 +1,7 @@
 include/Alien.h
 include/Bullet.h
 include/Camera.h
+include/Collision.h
 include/Component.h
 include/Face.h
 include/Game.h
