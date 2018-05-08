@@ -63,6 +63,7 @@ class Vec2 {
         if (x == 0 && y == 0) return 0;
         return atan2(y, x);
     }
+    double AngleDeg() const { return Angle() * 180 * M_1_PI; }
 
     double Dist(const Vec2& v) const {
         Vec2 d(*this - v);

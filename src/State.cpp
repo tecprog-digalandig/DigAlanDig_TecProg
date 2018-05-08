@@ -3,6 +3,7 @@
 #include "Alien.h"
 #include "Camera.h"
 #include "Face.h"
+#include "PenguinBody.h"
 #include "SDL2/SDL.h"
 #include "Sound.h"
 #include "Sprite.h"
@@ -24,6 +25,13 @@ void State::LoadAssets() {
     gm2->AddComponent(new Alien(*gm2, 6));
     gm2->box.SetCenter(512, 300);
 
+    GameObject* gm3 = new GameObject();
+    objectArray.emplace_back(gm3);
+    gm3->AddComponent(new PenguinBody(*gm3));
+    gm3->box.pos.Set(704, 640);
+
+    //   Camera::Follow(gm3);
+
     music = new Music("assets/audio/stageState.ogg");
     music->Play(2);
 }
@@ -32,7 +40,8 @@ void State::Start() {
     if (started) return;
 
     LoadAssets();
-    for (auto& obj : objectArray) obj->Start();
+    // for (auto& obj : objectArray) obj->Start();
+    for (int i = 0; i < (int)objectArray.size(); i++) objectArray[i]->Start();
 
     started = true;
 }
@@ -49,7 +58,6 @@ std::weak_ptr<GameObject> State::AddObject(GameObject* go) {
 std::weak_ptr<GameObject> State::GetObjectPrt(GameObject* go) {
     std::weak_ptr<GameObject> wp;
     for (std::shared_ptr<GameObject>& obj : objectArray) {
-        std::cout << "Get " << go << " got " << obj;
         if (obj.get() == go) {
             wp = obj;
             break;

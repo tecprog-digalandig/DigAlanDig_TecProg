@@ -8,6 +8,8 @@ include/GameObject.h
 include/InputManager.h
 include/Minion.h
 include/Music.h
+include/PenguinBody.h
+include/PenguinCannon.h
 include/Rect.h
 include/Resources.h
 include/SDL_include.h
@@ -29,6 +31,8 @@ src/InputManager.cpp
 src/Main.cpp
 src/Minion.cpp
 src/Music.cpp
+src/PenguinBody.cpp
+src/PenguinCannon.cpp
 src/Rect.cpp
 src/Resources.cpp
 src/Sound.cpp

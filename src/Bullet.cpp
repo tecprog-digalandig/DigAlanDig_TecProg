@@ -7,8 +7,9 @@ Bullet::Bullet(GameObject& associated, float angle, float speed, int damage,
     : Component(associated), damage(damage), distanceLeft(maxDistance) {
     associated.AddComponent(
         (Component*)new Sprite(associated, sprite, frameCount, frameTime));
-    associated.angleDeg = 180 * angle * M_1_PI;
-    this->speed = Vec2(speed, 0).RotateRad(angle);
+    associated.angleDeg = angle;
+    this->speed = Vec2(speed, 0).Rotate(angle);
+    associated.box.SetCenter(associated.box.pos);
 }
 
 void Bullet::Update(float dt) {

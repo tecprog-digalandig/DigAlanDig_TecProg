@@ -53,9 +53,7 @@ void Alien::Update(float dt) {
     int y = input.GetWorldMouseY();
     if (input.IsMouseDown(input.mouseKey::RIGHT))
         taskQueue.emplace(Action(Action::SHOOT, x, y));
-    if (input.MousePress(input.mouseKey::MIDDLE))
-        taskQueue.emplace(Action(Action::MOVE, x, y));
-    if (input.IsMouseDown(input.mouseKey::LEFT))
+    if (input.IsMouseDown(input.mouseKey::MIDDLE))
         taskQueue.emplace(Action(Action::MOVE, x, y));
 
     if (!taskQueue.empty()) {
