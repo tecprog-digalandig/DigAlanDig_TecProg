@@ -49,7 +49,7 @@ Game::Game(const std::string& title, int width, int height) {
         exit(EXIT_SUCCESS);
     }
 
-    int init_flags = IMG_INIT_JPG | IMG_INIT_PNG | IMG_INIT_TIF;
+    int init_flags = IMG_INIT_JPG | IMG_INIT_PNG;
     if (IMG_Init(init_flags) != init_flags) {
         std::cerr << "IMG_Init: " << SDL_GetError() << std::endl;
         exit(EXIT_SUCCESS);
@@ -58,7 +58,7 @@ Game::Game(const std::string& title, int width, int height) {
     init_flags = MIX_INIT_OGG | MIX_INIT_MP3;
     if (Mix_Init(init_flags) != init_flags) {
         std::cerr << "Mix_Init: " << Mix_GetError() << std::endl;
-        exit(EXIT_SUCCESS);
+        // exit(EXIT_SUCCESS);
     }
     if (Mix_OpenAudio(22050, MIX_DEFAULT_FORMAT, 2, 4096) == -1) {
         std::cerr << "Mix_OpenAudio: " << Mix_GetError() << std::endl;
