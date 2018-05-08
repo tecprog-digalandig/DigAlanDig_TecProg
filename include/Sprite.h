@@ -8,30 +8,42 @@ class Sprite : public Component {
   public:
     Sprite(GameObject& associated) : Component(associated), scale(1, 1) {}
 
-    Sprite(GameObject& associated, const std::string& file)
-        : Component(associated), scale(1, 1) {
+    Sprite(GameObject& associated, const std::string& file, int frameCount = 1,
+           float frameTime = 1)
+        : Component(associated),
+          frameCount(frameCount),
+          frameTime(frameTime),
+          scale(1, 1) {
         Sprite::Open(file);
     }
     ~Sprite() {}
 
     void Open(const std::string& file);
-    void SetClip(int x, int y, int w, int h);
+    void SetClip(int x, int y, int w, int h) { clipRect = {x, y, w, h}; }
     int GetWidth() const { return width; }
     int GetHeight() const { return height; }
     bool IsOpen() const { return (bool)Sprite::texture; }
 
-    void Update(float dt) {}
+    void Update(float dt);
     void Render() const;
     bool Is(const std::string& type) const { return !type.compare("Sprite"); }
 
-    void setScaleX(float scaleX, float scaleY);
-    void setScaleX(const Vec2& v) { setScaleX(v.x, v.y); }
-    Vec2 getScale() const { return scale; }
+    void SetScaleX(float scaleX, float scaleY);
+    void SetScaleX(const Vec2& v) { SetScaleX(v.x, v.y); }
+    Vec2 GetScale() const { return scale; }
+
+    void SetFrame(int frame);
+    void SetFrameCount(int frameCount) { this->frameCount = frameCount; }
+    void SetFrameTime(float frameTime) { this->frameTime = frameTime; }
 
   private:
     SDL_Texture* texture = nullptr;
     int width;
     int height;
+    int frameCount;
+    float frameTime;
+    int currentFrame = 0;
+    float timeElapsed = 0;
 
     SDL_Rect clipRect;
     Vec2 scale;

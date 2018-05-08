@@ -11,7 +11,7 @@ Minion::Minion(GameObject& associated, std::weak_ptr<GameObject> alienCenter,
 
     double scale = 1 + (rand() % 50) / (float)100;
     std::cout << std::endl << scale << std::endl;
-    sprite->setScaleX(Vec2(scale, scale));
+    sprite->SetScaleX(Vec2(scale, scale));
 }
 
 void Minion::Update(float dt) {
@@ -33,5 +33,6 @@ void Minion::Shoot(Vec2 target) {
     gm->box.pos = associated.box.Center();
     Vec2 move = target - gm->box.pos;
     gm->AddComponent(new Bullet(*gm, move.Angle(), bulletSpeed, damage,
-                                maxDistance, "assets/img/minionbullet1.png"));
+                                maxDistance, "assets/img/minionbullet2.png", 3,
+                                0.1));
 }
