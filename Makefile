@@ -38,6 +38,9 @@ OBJ_FILES = $(addprefix $(BIN_PATH)/,$(notdir $(CPP_FILES:.cpp=.o)))
 
 # Nome do executável
 EXEC = JOGO
+ifeq ($(NAME), GIT)
+EXEC = $(shell git describe --tags --dirty --long)
+endif
 
 #---------------------------------------------------------------------
 # Caso o sistema seja windows
