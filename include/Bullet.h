@@ -16,6 +16,7 @@ class Bullet : public Component {
 
   private:
     int damage;
+    float maxTime = 3;
     Vec2 speed;
     float distanceLeft;
 };

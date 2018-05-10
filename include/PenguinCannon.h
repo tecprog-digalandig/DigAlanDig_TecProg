@@ -25,8 +25,8 @@ class PenguinCannon : public Component {
     std::weak_ptr<GameObject> pbody;
     float angle = 0;
 
-    static constexpr float bulletSpeed = 200;
-    static constexpr float maxDistance = 600;
+    static constexpr float bulletSpeed = 310;
+    static constexpr float maxDistance = 1500;
     static const int minionDist = 150;
     static const int damage = 50;
     static const int distCannon = 53;

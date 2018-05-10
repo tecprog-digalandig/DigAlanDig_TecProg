@@ -72,9 +72,10 @@ void Alien::Update(float dt) {
                 associated.box.SetCenter(task.pos);
             }
         } else if (task.type == Action::SHOOT) {
-            std::shared_ptr<GameObject> minionGm = closestMinion(task.pos);
-            Minion* minion = (Minion*)minionGm->GetComponent("Minion");
-            minion->Shoot(task.pos);
+            if (std::shared_ptr<GameObject> minionGm = closestMinion(task.pos))
+                if (Minion* minion = (Minion*)minionGm->GetComponent("Minion"))
+                    minion->Shoot(task.pos);
+
             taskQueue.pop();
         }
     }

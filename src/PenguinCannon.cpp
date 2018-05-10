@@ -1,6 +1,7 @@
 #include "PenguinCannon.h"
 #include "Bullet.h"
 #include "Game.h"
+#include "PenguinBody.h"
 #include "Sprite.h"
 
 PenguinCannon::PenguinCannon(GameObject& associated,
@@ -31,6 +32,13 @@ void PenguinCannon::Shoot() {
 
     std::cout << associated.box.Center() << std::endl;
     gm->box.pos = associated.box.Center() + Vec2(distCannon, 0).Rotate(angle);
-    gm->AddComponent(new Bullet(*gm, angle, bulletSpeed, damage, maxDistance,
+
+    Vec2 bulletMove = Vec2(bulletSpeed, 0).Rotate(angle);
+    if (auto p = pbody.lock())
+        if (auto body = (PenguinBody*)p->GetComponent("PenguinBody"))
+            bulletMove += body->GetSpeed();
+
+    gm->AddComponent(new Bullet(*gm, 180 * M_1_PI * bulletMove.Angle(),
+                                bulletMove.Length(), damage, maxDistance,
                                 "assets/img/penguinbullet.png", 4, 0.7));
 }

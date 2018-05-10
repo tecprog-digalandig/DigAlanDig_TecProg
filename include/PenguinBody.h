@@ -19,6 +19,7 @@ class PenguinBody : public Component {
     bool Is(const std::string& type) const {
         return !type.compare("PenguinBody");
     }
+    Vec2 GetSpeed() const { return speed; }
 
     PenguinBody* player;
 
