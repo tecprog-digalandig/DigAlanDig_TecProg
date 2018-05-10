@@ -20,6 +20,8 @@ class PenguinBody : public Component {
         return !type.compare("PenguinBody");
     }
     Vec2 GetSpeed() const { return speed; }
+    void TakeDamage(int damage) { hp -= damage; }
+    void NotifyCollision(std::shared_ptr<GameObject> other);
 
     PenguinBody* player;
 

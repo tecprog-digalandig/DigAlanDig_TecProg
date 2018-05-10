@@ -10,7 +10,7 @@ SDL_Texture* Resources::GetImage(const std::string& file) {
 
     if (got == imageTable.end()) {
         SDL_Texture* tex =
-            IMG_LoadTexture(Game::getInstance()->getRenderer(), file.c_str());
+            IMG_LoadTexture(Game::GetInstance()->GetRenderer(), file.c_str());
         if (!tex) {
             std::cerr << "IMG_LoadTexture: " << SDL_GetError() << std::endl;
             exit(EXIT_SUCCESS);

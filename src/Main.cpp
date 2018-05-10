@@ -12,8 +12,8 @@ int main(int argc, char** argv) {
     std::cerr.rdbuf(err.rdbuf());
 #endif
 
-    Game* game = Game::getInstance("Pedro Henrique 100119191", 1024, 600);
-    game->run();
+    Game* game = Game::GetInstance("Pedro Henrique 100119191", 1024, 600);
+    game->Run();
 
 #ifdef _WIN32
     std::cout.rdbuf(coutbuf);

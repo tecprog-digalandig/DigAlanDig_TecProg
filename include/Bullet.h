@@ -14,6 +14,8 @@ class Bullet : public Component {
 
     int GetDamage() { return damage; }
 
+    void NotifyCollision(std::shared_ptr<GameObject> other);
+
   private:
     int damage;
     float maxTime = 3;

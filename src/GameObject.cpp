@@ -22,6 +22,10 @@ void GameObject::Render() {
     for (Component* component : components) component->Render();
 }
 
+void GameObject::NotifyCollision(std::shared_ptr<GameObject> other) {
+    for (Component* component : components) component->NotifyCollision(other);
+}
+
 void GameObject::RemoveComponent(Component* cpt) {
     // CHECK: delete cpt?
     components.erase(std::remove(components.begin(), components.end(), cpt),

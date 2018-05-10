@@ -3,7 +3,7 @@
 
 TileSet::TileSet(int tileWidth, int tileHeight, std::string file)
     : tileSet(nullptr), tileWidth(tileWidth), tileHeight(tileHeight) {
-    tileSet = IMG_LoadTexture(Game::getInstance()->getRenderer(), file.c_str());
+    tileSet = IMG_LoadTexture(Game::GetInstance()->GetRenderer(), file.c_str());
     if (!tileSet) {
         std::cerr << "IMG_LoadTexture: " << SDL_GetError() << std::endl;
         exit(EXIT_SUCCESS);
@@ -29,5 +29,5 @@ void TileSet::RenderTile(unsigned index, float x, float y) const {
                      tileHeight * ((int)index / columns), tileWidth,
                      tileHeight};
 
-    SDL_RenderCopy(Game::getInstance()->getRenderer(), tileSet, &clip, &pos);
+    SDL_RenderCopy(Game::GetInstance()->GetRenderer(), tileSet, &clip, &pos);
 }

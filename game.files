@@ -1,6 +1,7 @@
 include/Alien.h
 include/Bullet.h
 include/Camera.h
+include/Collider.h
 include/Collision.h
 include/Component.h
 include/Face.h
@@ -24,6 +25,7 @@ include/Vec2.h
 src/Alien.cpp
 src/Bullet.cpp
 src/Camera.cpp
+src/Collider.cpp
 src/Component.cpp
 src/Face.cpp
 src/Game.cpp

@@ -1,6 +1,7 @@
 #ifndef GAMEOBJECT_H
 #define GAMEOBJECT_H
 #include <algorithm>
+#include <memory>
 #include <vector>
 #include "Component.h"
 #include "Rect.h"
@@ -23,9 +24,13 @@ class GameObject {
     void RemoveComponent(Component *cpt);
     Component *GetComponent(const std::string &type) const;
     void Start();
+    void NotifyCollision(std::shared_ptr<GameObject> other);
+
+    double AngleRad() { return angleDeg * M_PI / 180; }
 
     Rect box;
     bool worldReference = true;
+    bool fromPlayer = false;
     bool started = false;
     double angleDeg = 0;
 

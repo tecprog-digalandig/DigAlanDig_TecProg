@@ -2,6 +2,8 @@
 #include <stdio.h>
 #include "Alien.h"
 #include "Camera.h"
+#include "Collider.h"
+#include "Collision.h"
 #include "Face.h"
 #include "PenguinBody.h"
 #include "SDL2/SDL.h"
@@ -21,14 +23,14 @@ void State::LoadAssets() {
     gm->AddComponent(new TileMap(*gm, "assets/map/tileMap.txt", tileSet));
 
     GameObject* gm2 = new GameObject();
+    gm2->box.SetCenter(512, 300);
     objectArray.emplace_back(gm2);
     gm2->AddComponent(new Alien(*gm2, 6));
-    gm2->box.SetCenter(512, 300);
 
     GameObject* gm3 = new GameObject();
+    gm3->box.pos.Set(704, 640);
     objectArray.emplace_back(gm3);
     gm3->AddComponent(new PenguinBody(*gm3));
-    gm3->box.pos.Set(704, 640);
 
     Camera::Follow(gm3);
 
@@ -68,13 +70,13 @@ std::weak_ptr<GameObject> State::GetObjectPrt(GameObject* go) {
 }
 
 void State::Update(float dt) {
-    //    for (std::shared_ptr<GameObject> obj : objectArray) {
-    //        if (obj.get() != nullptr) obj->Update(dt);
+    // Update
     for (int i = 0; i < (int)objectArray.size(); i++) {
         objectArray[i]->Update(dt);
     }
     Camera::Update(dt);
 
+    // Delete
     auto removeDead = [&](std::shared_ptr<GameObject> const& p) {
         return p->IsDead() && p->CanEnd();
     };
@@ -82,11 +84,27 @@ void State::Update(float dt) {
         std::remove_if(objectArray.begin(), objectArray.end(), removeDead),
         objectArray.end());
 
-    if (input.KeyPress(SDL_SCANCODE_SPACE)) {
-        Vec2 objPos = Vec2(200, 0).Rotate(rand() % 361) +
-                      Vec2(input.GetWorldMouseX(), input.GetWorldMouseY());
-        AddObject((int)objPos.x, (int)objPos.y);
+    // Collision
+    for (int i = 0; i < (int)objectArray.size(); i++) {
+        Collider* ci = (Collider*)objectArray[i]->GetComponent("Collider");
+        if (!ci) continue;
+
+        for (int j = i + 1; j < (int)objectArray.size(); j++) {
+            Collider* cj = (Collider*)objectArray[j]->GetComponent("Collider");
+            if (!cj) continue;
+
+            if ((objectArray[i]->fromPlayer != objectArray[j]->fromPlayer) &&
+                Collision::IsColliding(ci->box, cj->box,
+                                       objectArray[i]->AngleRad(),
+                                       objectArray[j]->AngleRad())) {
+                objectArray[i]->NotifyCollision(objectArray[j]);
+                objectArray[j]->NotifyCollision(objectArray[i]);
+                std::cout << std::endl;
+            }
+        }
     }
+
+    // KeyPress
     if (input.KeyPress(SDL_SCANCODE_ESCAPE) || input.QuitRequested())
         quitRequested = true;
 }

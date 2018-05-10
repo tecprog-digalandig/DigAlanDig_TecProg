@@ -1,4 +1,5 @@
 #include "Bullet.h"
+#include "Collider.h"
 #include "Sprite.h"
 
 Bullet::Bullet(GameObject& associated, float angle, float speed, int damage,
@@ -6,7 +7,9 @@ Bullet::Bullet(GameObject& associated, float angle, float speed, int damage,
                float frameTime)
     : Component(associated), damage(damage), distanceLeft(maxDistance) {
     associated.AddComponent(
-        (Component*)new Sprite(associated, sprite, frameCount, frameTime));
+        new Sprite(associated, sprite, frameCount, frameTime));
+    associated.AddComponent(new Collider(associated));
+
     associated.angleDeg = angle;
     this->speed = Vec2(speed).Rotate(angle);
     associated.box.SetCenter(associated.box.pos);
@@ -22,4 +25,13 @@ void Bullet::Update(float dt) {
     associated.box.pos += move;
 
     maxTime -= dt;
+}
+
+void Bullet::NotifyCollision(std::shared_ptr<GameObject> other) {
+    if (associated.fromPlayer == other->fromPlayer) return;
+
+    std::cout << "Collision Bullet" << std::endl;
+    if (other->GetComponent("Bullet")) return;
+
+    associated.RequestDelete();
 }

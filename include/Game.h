@@ -9,11 +9,11 @@
 class Game {
   public:
     ~Game(void);
-    void run(void);
-    SDL_Renderer* getRenderer(void) const { return renderer; }
-    State* getState(void) const { return state; }
-    static Game* getInstance(void) { return _instance; }
-    static Game* getInstance(const std::string& title, int w, int h);
+    void Run(void);
+    SDL_Renderer* GetRenderer(void) const { return renderer; }
+    State* GetState(void) const { return state; }
+    static Game* GetInstance(void) { return _instance; }
+    static Game* GetInstance(const std::string& title, int w, int h);
     float GetDeltaTime() const { return dt; }
 
   private:

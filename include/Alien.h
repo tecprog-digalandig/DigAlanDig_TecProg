@@ -19,6 +19,8 @@ class Alien : public Component {
     void Render() const {}
     bool Is(const std::string& type) const { return !type.compare("Alien"); }
 
+    void TakeDamage(int damage) { hp -= damage; }
+    void NotifyCollision(std::shared_ptr<GameObject> other);
     State* state;
 
   private:

@@ -35,7 +35,7 @@ void Sprite::Render() const {
         SDL_Rect dstRect = dst;
         //        SDL_RenderCopy(Game::getInstance()->getRenderer(), texture,
         //        &clipRect, &dstRect);
-        SDL_RenderCopyEx(Game::getInstance()->getRenderer(), texture, &clipRect,
+        SDL_RenderCopyEx(Game::GetInstance()->GetRenderer(), texture, &clipRect,
                          &dstRect, associated.angleDeg, nullptr, SDL_FLIP_NONE);
     }
 }

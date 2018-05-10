@@ -15,6 +15,7 @@ class Minion : public Component {
     void Render() const {}
     bool Is(const std::string& type) const { return !type.compare("Minion"); }
 
+    void NotifyCollision(std::shared_ptr<GameObject> other);
     void Shoot(Vec2 target);
 
   private:

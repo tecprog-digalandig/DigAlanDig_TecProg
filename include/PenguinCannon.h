@@ -20,6 +20,7 @@ class PenguinCannon : public Component {
 
     void Start() {}
     void Shoot();
+    void NotifyCollision(std::shared_ptr<GameObject> other);
 
   private:
     std::weak_ptr<GameObject> pbody;

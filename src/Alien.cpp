@@ -1,4 +1,6 @@
 #include "Alien.h"
+#include "Bullet.h"
+#include "Collider.h"
 #include "Game.h"
 #include "Minion.h"
 #include "Sprite.h"
@@ -8,8 +10,8 @@ Alien::Alien(GameObject& associated, int nMinions)
     : Component(associated),
       minionArray(nMinions),
       input(InputManager::GetInstance()) {
-    associated.AddComponent(
-        (Component*)new Sprite(associated, "assets/img/alien.png"));
+    associated.AddComponent(new Collider(associated));
+    associated.AddComponent(new Sprite(associated, "assets/img/alien.png"));
 }
 
 Alien::~Alien() {
@@ -20,7 +22,7 @@ Alien::~Alien() {
 
 void Alien::Start() {
     int i = 0;
-    State* state = Game::getInstance()->getState();
+    State* state = Game::GetInstance()->GetState();
 
     for (auto& minion : minionArray) {
         if (minion.expired()) {
@@ -51,9 +53,9 @@ std::shared_ptr<GameObject> Alien::closestMinion(const Vec2& target) {
 void Alien::Update(float dt) {
     int x = input.GetWorldMouseX();
     int y = input.GetWorldMouseY();
-    if (input.IsMouseDown(input.mouseKey::RIGHT))
+    if (input.MousePress(input.mouseKey::RIGHT))
         taskQueue.emplace(Action(Action::SHOOT, x, y));
-    if (input.IsMouseDown(input.mouseKey::MIDDLE))
+    if (input.MousePress(input.mouseKey::MIDDLE))
         taskQueue.emplace(Action(Action::MOVE, x, y));
 
     if (!taskQueue.empty()) {
@@ -82,4 +84,12 @@ void Alien::Update(float dt) {
 
     associated.angleDeg -= degPerS * dt;
     if (hp <= 0) associated.RequestDelete();
+}
+
+void Alien::NotifyCollision(std::shared_ptr<GameObject> other) {
+    if (associated.fromPlayer == other->fromPlayer) return;
+
+    std::cout << "Collision Alien" << std::endl;
+    if (auto bullet = (Bullet*)other->GetComponent("Bullet"))
+        TakeDamage(bullet->GetDamage());
 }

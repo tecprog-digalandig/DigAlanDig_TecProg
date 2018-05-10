@@ -1,3 +1,5 @@
+#ifndef COLLISION_H
+#define COLLISION_H
 #include "Rect.h"
 #include "Vec2.h"
 
@@ -79,3 +81,4 @@ class Collision {
 // Vec2 operator*(const float rhs) const {
 //    return Vec2(x * rhs, y * rhs);
 // }
+#endif  // COLLISION_H

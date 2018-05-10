@@ -14,7 +14,7 @@ Game::~Game(void) {
     delete state;
 }
 
-Game* Game::getInstance(const std::string& title, int w, int h) {
+Game* Game::GetInstance(const std::string& title, int w, int h) {
     if (!_instance) _instance = new Game(title, w, h);
     return _instance;
 }
@@ -26,7 +26,7 @@ void Game::CalculateDeltaTime() {
     frameStart = ticks;
 }
 
-void Game::run(void) {
+void Game::Run(void) {
     state = new State();
     state->Start();
     InputManager& input = InputManager::GetInstance();

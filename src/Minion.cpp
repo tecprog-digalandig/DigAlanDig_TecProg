@@ -1,5 +1,6 @@
 #include "Minion.h"
 #include "Bullet.h"
+#include "Collider.h"
 #include "Game.h"
 #include "Sprite.h"
 
@@ -7,10 +8,12 @@ Minion::Minion(GameObject& associated, std::weak_ptr<GameObject> alienCenter,
                float arcOffsetDeg)
     : Component(associated), alienCenter(alienCenter), arc(arcOffsetDeg) {
     Sprite* sprite = new Sprite(associated, "assets/img/minion.png");
-    associated.AddComponent((Component*)sprite);
-
+    associated.AddComponent(sprite);
     double scale = 1 + (rand() % 50) / (float)100;
     sprite->SetScaleX(Vec2(scale, scale));
+    Update(0);
+
+    associated.AddComponent(new Collider(associated));
 }
 
 void Minion::Update(float dt) {
@@ -25,7 +28,7 @@ void Minion::Update(float dt) {
 }
 
 void Minion::Shoot(Vec2 target) {
-    State* state = Game::getInstance()->getState();
+    State* state = Game::GetInstance()->GetState();
     GameObject* gm = new GameObject();
     state->AddObject(gm);
 
@@ -34,4 +37,14 @@ void Minion::Shoot(Vec2 target) {
     gm->AddComponent(new Bullet(*gm, move.AngleDeg(), bulletSpeed, damage,
                                 maxDistance, "assets/img/minionbullet2.png", 3,
                                 0.1));
+}
+
+void Minion::NotifyCollision(std::shared_ptr<GameObject> other) {
+    if (associated.fromPlayer == other->fromPlayer) return;
+    std::cout << "Collision Minion" << std::endl;
+
+    if (auto bullet = (Bullet*)other->GetComponent("Bullet"))
+        if (auto ap = alienCenter.lock())
+            if (auto alien = (Alien*)ap->GetComponent("Alien"))
+                alien->TakeDamage(bullet->GetDamage());
 }
