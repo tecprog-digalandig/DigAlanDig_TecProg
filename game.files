@@ -20,6 +20,7 @@ include/Sprite.h
 include/State.h
 include/TileMap.h
 include/TileSet.h
+include/Timer.h
 include/Vec2.h
 
 src/Alien.cpp
@@ -43,6 +44,7 @@ src/Sprite.cpp
 src/State.cpp
 src/TileMap.cpp
 src/TileSet.cpp
+src/Timer.cpp
 src/Vec2.cpp
 
 Makefile

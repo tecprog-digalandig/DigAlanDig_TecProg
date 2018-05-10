@@ -9,13 +9,15 @@ PenguinCannon::PenguinCannon(GameObject& associated,
                              std::weak_ptr<GameObject> penguinbody)
     : Component(associated),
       pbody(penguinbody),
-      input(InputManager::GetInstance()) {
+      input(InputManager::GetInstance()),
+      timer() {
     associated.fromPlayer = true;
     associated.AddComponent(new Collider(associated));
     associated.AddComponent(new Sprite(associated, "assets/img/cubngun.png"));
 }
 
 void PenguinCannon::Update(float dt) {
+    timer.Update(dt);
     if (auto p = pbody.lock())
         associated.box.SetCenter(p->box.Center());
     else
@@ -24,7 +26,11 @@ void PenguinCannon::Update(float dt) {
     angle = Vec2(input.GetWorldMouse() - associated.box.Center()).AngleDeg();
     associated.angleDeg = angle;
 
-    if (input.MousePress(input.mouseKey::LEFT)) Shoot();
+    if (input.MousePress(input.mouseKey::LEFT) &&
+        timer.Get() > bulletCooldown) {
+        timer.Restart();
+        Shoot();
+    }
 }
 
 void PenguinCannon::Shoot() {

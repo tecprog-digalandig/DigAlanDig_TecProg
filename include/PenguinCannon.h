@@ -5,6 +5,7 @@
 #include "GameObject.h"
 #include "InputManager.h"
 #include "State.h"
+#include "Timer.h"
 #include "Vec2.h"
 
 class PenguinCannon : public Component {
@@ -26,6 +27,7 @@ class PenguinCannon : public Component {
     std::weak_ptr<GameObject> pbody;
     float angle = 0;
 
+    static constexpr float bulletCooldown = 0.8;
     static constexpr float bulletSpeed = 310;
     static constexpr float maxDistance = 1500;
     static const int minionDist = 150;
@@ -34,6 +36,7 @@ class PenguinCannon : public Component {
 
     InputManager& input;
     Vec2 t;
+    Timer timer;
 };
 
 #endif  // PENGUINCANNON_H
