@@ -7,18 +7,22 @@
 #include "Sprite.h"
 #include "State.h"
 
+int Alien::alienCount = 0;
+
 Alien::Alien(GameObject& associated, int nMinions)
     : Component(associated),
       minionArray(nMinions),
       input(InputManager::GetInstance()) {
     associated.AddComponent(new Collider(associated));
     associated.AddComponent(new Sprite(associated, "assets/img/alien.png"));
+    alienCount++;
 }
 
 Alien::~Alien() {
     for (auto& minion : minionArray) {
         if (auto m = minion.lock()) m->RequestDelete();
     }
+    alienCount--;
 }
 
 void Alien::Start() {
@@ -52,38 +56,40 @@ std::shared_ptr<GameObject> Alien::closestMinion(const Vec2& target) {
 }
 
 void Alien::Update(float dt) {
-    int x = input.GetWorldMouseX();
-    int y = input.GetWorldMouseY();
-    if (input.MousePress(input.mouseKey::RIGHT))
-        taskQueue.emplace(Action(Action::SHOOT, x, y));
-    if (input.MousePress(input.mouseKey::MIDDLE))
-        taskQueue.emplace(Action(Action::MOVE, x, y));
-
-    if (!taskQueue.empty()) {
-        Action task = taskQueue.front();
-        if (task.type == Action::MOVE) {
+    switch (state) {
+        case MOVING: {
             Vec2 center = associated.box.Center();
 
-            Vec2 move = task.pos - center;
+            Vec2 move = destination - center;
             speed = move.Normal() * maxSpeed;
             move = speed * dt;
             associated.box.pos += move;
 
-            if (move.Length() >= Vec2(task.pos - center).Length()) {
-                taskQueue.pop();
+            if (move.Length() >= Vec2(destination - center).Length()) {
+                state = AlienState::RESTING;
+                restTimer.Restart();
                 speed.Set();
-                associated.box.SetCenter(task.pos);
+                associated.box.SetCenter(destination);
+                destination = Camera::Center();
+                if (std::shared_ptr<GameObject> minionGm =
+                        closestMinion(destination))
+                    if (Minion* minion =
+                            (Minion*)minionGm->GetComponent("Minion"))
+                        minion->Shoot(destination);
             }
-        } else if (task.type == Action::SHOOT) {
-            if (std::shared_ptr<GameObject> minionGm = closestMinion(task.pos))
-                if (Minion* minion = (Minion*)minionGm->GetComponent("Minion"))
-                    minion->Shoot(task.pos);
 
-            taskQueue.pop();
+            break;
         }
+        case RESTING:
+            restTimer.Update(dt);
+            if (restTimer.Get() > restDuration) {
+                state = AlienState::MOVING;
+                destination = Camera::Center();
+            }
+            break;
     }
-
     associated.angleDeg -= degPerS * dt;
+
     if (hp <= 0) {
         associated.RequestDelete();
         GameObject* gm = new GameObject();

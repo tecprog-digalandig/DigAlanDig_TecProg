@@ -9,6 +9,8 @@ void Camera::Follow(GameObject* newFocus) { focus = newFocus; }
 
 void Camera::Unfollow() { focus = nullptr; }
 
+Vec2 Camera::Center() { return pos + screenSize / 2; }
+
 void Camera::Update(float dt) {
     if (focus) {
         pos = focus->box.Center() - screenSize / 2;

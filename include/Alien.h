@@ -7,6 +7,7 @@
 #include "GameObject.h"
 #include "InputManager.h"
 #include "State.h"
+#include "Timer.h"
 #include "Vec2.h"
 
 class Alien : public Component {
@@ -21,26 +22,24 @@ class Alien : public Component {
 
     void TakeDamage(int damage) { hp -= damage; }
     void NotifyCollision(std::shared_ptr<GameObject> other);
-    State* state;
+
+    static int alienCount;
 
   private:
-    class Action {
-      public:
-        enum ActionType { MOVE, SHOOT };
-        Action(ActionType type, float x, float y) : type(type), pos(x, y) {}
-        ActionType type;
-        Vec2 pos;
-    };
-
     Vec2 speed;
     int hp = maxHp;
-    std::queue<Action> taskQueue;
     std::vector<std::weak_ptr<GameObject>> minionArray;
+
+    enum AlienState { MOVING, RESTING };
+    AlienState state = RESTING;
+    Timer restTimer;
+    Vec2 destination;
 
     std::shared_ptr<GameObject> closestMinion(const Vec2& target);
     InputManager& input;
     static const int maxSpeed = 100;
     static const int maxHp = 100;
+    static constexpr float restDuration = 3;
     static constexpr float degPerS = 10;
 };
 
