@@ -41,6 +41,13 @@ Component* GameObject::GetComponent(const std::string& type) const {
 
 void GameObject::AddComponent(Component* cpt) { components.emplace_back(cpt); }
 
+void GameObject::CopyPosition(const GameObject& go) {
+    box = go.box;
+    worldReference = go.worldReference;
+    fromPlayer = go.fromPlayer;
+    angleDeg = go.angleDeg;
+}
+
 void GameObject::Start() {
     if (started) return;
     for (auto& c : components) c->Start();

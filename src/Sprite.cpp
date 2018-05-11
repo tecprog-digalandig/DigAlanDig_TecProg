@@ -33,8 +33,6 @@ void Sprite::Render() const {
         if (scale.x != 1 || scale.y != 1) dst.Scale(scale);
 
         SDL_Rect dstRect = dst;
-        //        SDL_RenderCopy(Game::getInstance()->getRenderer(), texture,
-        //        &clipRect, &dstRect);
         SDL_RenderCopyEx(Game::GetInstance()->GetRenderer(), texture, &clipRect,
                          &dstRect, associated.angleDeg, nullptr, SDL_FLIP_NONE);
     }
@@ -42,6 +40,14 @@ void Sprite::Render() const {
 
 void Sprite::Update(float dt) {
     timeElapsed += dt;
+
+    selfDestructCount.Update(dt);
+    if (secondsToSelfDestruct > 0 &&
+        selfDestructCount.Get() > secondsToSelfDestruct) {
+        associated.RequestDelete();
+        return;
+    }
+
     if ((currentFrame + 1) * frameTime <= timeElapsed) {
         SetFrame(floor(timeElapsed / frameTime));
     }

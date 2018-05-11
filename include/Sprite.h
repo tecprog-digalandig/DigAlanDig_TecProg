@@ -3,16 +3,18 @@
 #define INCLUDE_SDL
 #include "Component.h"
 #include "SDL_include.h"
+#include "Timer.h"
 
 class Sprite : public Component {
   public:
     Sprite(GameObject& associated) : Component(associated), scale(1, 1) {}
 
     Sprite(GameObject& associated, const std::string& file, int frameCount = 1,
-           float frameTime = 1)
+           float frameTime = 1, float secondsToSelfDestruct = 0)
         : Component(associated),
           frameCount(frameCount),
           frameTime(frameTime),
+          secondsToSelfDestruct(secondsToSelfDestruct),
           scale(1, 1) {
         Sprite::Open(file);
     }
@@ -44,6 +46,8 @@ class Sprite : public Component {
     float frameTime;
     int currentFrame = 0;
     float timeElapsed = 0;
+    float secondsToSelfDestruct;
+    Timer selfDestructCount;
 
     SDL_Rect clipRect;
     Vec2 scale;

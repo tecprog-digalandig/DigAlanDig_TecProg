@@ -3,6 +3,7 @@
 #include "Collider.h"
 #include "Game.h"
 #include "Minion.h"
+#include "Sound.h"
 #include "Sprite.h"
 #include "State.h"
 
@@ -83,7 +84,16 @@ void Alien::Update(float dt) {
     }
 
     associated.angleDeg -= degPerS * dt;
-    if (hp <= 0) associated.RequestDelete();
+    if (hp <= 0) {
+        associated.RequestDelete();
+        GameObject* gm = new GameObject();
+        gm->CopyPosition(associated);
+        gm->AddComponent(
+            new Sprite(*gm, "assets/img/aliendeath.png", 4, 0.4, 1.6));
+        gm->AddComponent(new Sound(*gm, "assets/audio/boom.wav", true));
+        gm->Start();
+        Game::GetInstance()->GetState()->AddObject(gm);
+    }
 }
 
 void Alien::NotifyCollision(std::shared_ptr<GameObject> other) {

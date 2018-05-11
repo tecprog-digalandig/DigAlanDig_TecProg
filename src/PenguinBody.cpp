@@ -3,6 +3,7 @@
 #include "Camera.h"
 #include "Collider.h"
 #include "Game.h"
+#include "Sound.h"
 #include "Sprite.h"
 
 PenguinBody::PenguinBody(GameObject& associated)
@@ -41,6 +42,14 @@ void PenguinBody::Update(float dt) {
         if (auto p = pcannon.lock()) p->RequestDelete();
         associated.RequestDelete();
         Camera::Unfollow();
+
+        GameObject* gm = new GameObject();
+        gm->CopyPosition(associated);
+        gm->AddComponent(
+            new Sprite(*gm, "assets/img/penguindeath.png", 5, 0.4, 2));
+        gm->AddComponent(new Sound(*gm, "assets/audio/boom.wav", true));
+        gm->Start();
+        Game::GetInstance()->GetState()->AddObject(gm);
     }
 }
 
