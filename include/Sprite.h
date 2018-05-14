@@ -7,7 +7,8 @@
 
 class Sprite : public Component {
   public:
-    Sprite(GameObject& associated) : Component(associated), scale(1, 1) {}
+    explicit Sprite(GameObject& associated)
+        : Component(associated), scale(1, 1) {}
 
     Sprite(GameObject& associated, const std::string& file, int frameCount = 1,
            float frameTime = 1, float secondsToSelfDestruct = 0)

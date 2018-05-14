@@ -7,7 +7,7 @@ class GameObject;
 
 class Component {
   public:
-    Component(GameObject& associated) : associated(associated) {}
+    explicit Component(GameObject& associated) : associated(associated) {}
     virtual ~Component() {}
 
     virtual void Update(float dt) = 0;

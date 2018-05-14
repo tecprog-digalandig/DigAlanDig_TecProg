@@ -11,7 +11,7 @@
 class Music {
   public:
     Music(void) : music(nullptr) {}
-    Music(const std::string &file) : music(nullptr) { Open(file); }
+    explicit Music(const std::string &file) : music(nullptr) { Open(file); }
     ~Music(void) {}
 
     void Play(int times = -1) const;

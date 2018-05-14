@@ -7,7 +7,7 @@
 
 class Sound : public Component {
   public:
-    Sound(GameObject& associated)
+    explicit Sound(GameObject& associated)
         : Component(associated), chunk(nullptr), played(false) {}
     Sound(GameObject& associated, const std::string& file, bool play = false)
         : Component(associated), chunk(nullptr), played(false) {

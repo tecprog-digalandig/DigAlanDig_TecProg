@@ -10,7 +10,7 @@
 
 class PenguinBody : public Component {
   public:
-    PenguinBody(GameObject& associated);
+    explicit PenguinBody(GameObject& associated);
     ~PenguinBody() { player = nullptr; }
 
     void Start();

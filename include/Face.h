@@ -4,7 +4,7 @@
 
 class Face : public Component {
   public:
-    Face(GameObject& associated)
+    explicit Face(GameObject& associated)
         : Component(associated), hitpoints(hitpoints_max) {}
 
     void Damage(int damage);
