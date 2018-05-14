@@ -73,8 +73,8 @@ void Alien::Update(float dt) {
                 destination = Camera::Center();
                 if (std::shared_ptr<GameObject> minionGm =
                         closestMinion(destination))
-                    if (Minion* minion =
-                            (Minion*)minionGm->GetComponent("Minion"))
+                    if (Minion* minion = dynamic_cast<Minion*>(
+                            minionGm->GetComponent("Minion")))
                         minion->Shoot(destination);
             }
 
@@ -106,6 +106,6 @@ void Alien::NotifyCollision(std::shared_ptr<GameObject> other) {
     if (associated.fromPlayer == other->fromPlayer) return;
 
     std::cout << "Collision Alien" << std::endl;
-    if (auto bullet = (Bullet*)other->GetComponent("Bullet"))
+    if (auto bullet = dynamic_cast<Bullet*>(other->GetComponent("Bullet")))
         TakeDamage(bullet->GetDamage());
 }

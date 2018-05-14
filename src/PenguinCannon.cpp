@@ -42,7 +42,8 @@ void PenguinCannon::Shoot() {
 
     Vec2 bulletMove = Vec2(bulletSpeed, 0).Rotate(angle);
     if (auto p = pbody.lock())
-        if (auto body = (PenguinBody*)p->GetComponent("PenguinBody"))
+        if (auto body =
+                dynamic_cast<PenguinBody*>(p->GetComponent("PenguinBody")))
             bulletMove += body->GetSpeed();
 
     gm->fromPlayer = true;
@@ -55,8 +56,9 @@ void PenguinCannon::NotifyCollision(std::shared_ptr<GameObject> other) {
     if (associated.fromPlayer == other->fromPlayer) return;
     std::cout << "Collision Cannon" << std::endl;
 
-    if (auto bullet = (Bullet*)other->GetComponent("Bullet"))
+    if (auto bullet = dynamic_cast<Bullet*>(other->GetComponent("Bullet")))
         if (auto pb = pbody.lock())
-            if (auto body = (PenguinBody*)pb->GetComponent("PenguinBody"))
+            if (auto body =
+                    dynamic_cast<PenguinBody*>(pb->GetComponent("PenguinBody")))
                 body->TakeDamage(bullet->GetDamage());
 }

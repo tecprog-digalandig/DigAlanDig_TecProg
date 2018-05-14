@@ -57,6 +57,6 @@ void PenguinBody::NotifyCollision(std::shared_ptr<GameObject> other) {
     if (associated.fromPlayer == other->fromPlayer) return;
     std::cout << "Collision Body" << std::endl;
 
-    if (auto bullet = (Bullet*)other->GetComponent("Bullet"))
+    if (auto bullet = dynamic_cast<Bullet*>(other->GetComponent("Bullet")))
         TakeDamage(bullet->GetDamage());
 }
