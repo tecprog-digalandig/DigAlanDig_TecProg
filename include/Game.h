@@ -20,7 +20,7 @@ class Game {
     static Game* _instance;
     SDL_Window* window;
     SDL_Renderer* renderer;
-    State* state;
+    State* state = nullptr;
 
     int frameStart;
     float dt;

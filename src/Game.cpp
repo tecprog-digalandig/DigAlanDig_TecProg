@@ -27,6 +27,7 @@ void Game::CalculateDeltaTime() {
 }
 
 void Game::Run(void) {
+    if (state) delete state;
     state = new State();
     state->Start();
     InputManager& input = InputManager::GetInstance();

@@ -40,13 +40,13 @@ class Sprite : public Component {
 
   private:
     SDL_Texture* texture = nullptr;
-    int width;
-    int height;
-    int frameCount;
-    float frameTime;
+    int width = 0;
+    int height = 0;
+    int frameCount = 0;
+    float frameTime = 0;
     int currentFrame = 0;
     float timeElapsed = 0;
-    float secondsToSelfDestruct;
+    float secondsToSelfDestruct = 1;
     Timer selfDestructCount;
 
     SDL_Rect clipRect;

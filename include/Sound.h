@@ -31,7 +31,7 @@ class Sound : public Component {
 
   private:
     Mix_Chunk* chunk;
-    int channel;
+    int channel = 0;
     mutable bool played;
 };
 

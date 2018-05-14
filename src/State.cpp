@@ -112,5 +112,3 @@ void State::Update(float dt) {
 void State::Render() const {
     for (auto& obj : objectArray) obj->Render();
 }
-
-void State::AddObject(int mouseX, int mouseY) {}
