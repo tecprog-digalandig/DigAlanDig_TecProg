@@ -1,7 +1,7 @@
 #include <fstream>
 #include <iostream>
 #include "Game.h"
-#include "StageState.h"
+#include "TitleState.h"
 
 int main(int argc, char** argv) {
 #ifdef _WIN32
@@ -14,7 +14,7 @@ int main(int argc, char** argv) {
 #endif
 
     Game* game = Game::GetInstance("Pedro Henrique 100119191", 1024, 600);
-    game->Push(new StageState());
+    game->Push(new TitleState());
     game->Run();
 
 #ifdef _WIN32
