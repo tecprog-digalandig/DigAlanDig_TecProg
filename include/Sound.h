@@ -30,7 +30,7 @@ class Sound : public Component {
     bool Is(const std::string& type) const { return !type.compare("Sound"); }
 
   private:
-    Mix_Chunk* chunk;
+    std::shared_ptr<Mix_Chunk> chunk;
     int channel = 0;
     mutable bool played;
 };

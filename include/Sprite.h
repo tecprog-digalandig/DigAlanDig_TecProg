@@ -40,7 +40,7 @@ class Sprite : public Component {
     void SetFrameTime(float frameTime) { this->frameTime = frameTime; }
 
   private:
-    SDL_Texture* texture = nullptr;
+    std::shared_ptr<SDL_Texture> texture = nullptr;
     int width = 0;
     int height = 0;
     int frameCount = 0;

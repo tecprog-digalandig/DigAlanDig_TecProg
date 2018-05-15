@@ -21,7 +21,7 @@ class Music {
     bool IsOpen() const { return (bool)music; }
 
   private:
-    Mix_Music *music = nullptr;
+    std::shared_ptr<Mix_Music> music = nullptr;
 };
 
 #endif

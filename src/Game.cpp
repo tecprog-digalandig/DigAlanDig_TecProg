@@ -43,6 +43,7 @@ void Game::Run() {
         if (stateStack.top()->PopRequested() ||
             stateStack.top()->QuitRequested()) {
             stateStack.pop();
+            Resources::ClearAll();
             if (!stateStack.empty()) stateStack.top()->Resume();
         }
 

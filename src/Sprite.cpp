@@ -6,7 +6,7 @@
 void Sprite::Open(const std::string &file) {
     texture = Resources::GetImage(file);
 
-    SDL_QueryTexture(texture, nullptr, nullptr, &width, &height);
+    SDL_QueryTexture(texture.get(), nullptr, nullptr, &width, &height);
     width /= frameCount;
     SetFrame(0);
     associated.box.size.Set(width, height);
@@ -33,8 +33,9 @@ void Sprite::Render() const {
         if (scale.x != 1 || scale.y != 1) dst.Scale(scale);
 
         SDL_Rect dstRect = dst;
-        SDL_RenderCopyEx(Game::GetInstance()->GetRenderer(), texture, &clipRect,
-                         &dstRect, associated.angleDeg, nullptr, SDL_FLIP_NONE);
+        SDL_RenderCopyEx(Game::GetInstance()->GetRenderer(), texture.get(),
+                         &clipRect, &dstRect, associated.angleDeg, nullptr,
+                         SDL_FLIP_NONE);
     }
 }
 
