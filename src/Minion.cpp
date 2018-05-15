@@ -9,7 +9,7 @@ Minion::Minion(GameObject& associated, std::weak_ptr<GameObject> alienCenter,
     : Component(associated), alienCenter(alienCenter), arc(arcOffsetDeg) {
     Sprite* sprite = new Sprite(associated, "assets/img/minion.png");
     associated.AddComponent(sprite);
-    double scale = 1 + (rand() % 50) / (float)100;
+    double scale = 1 + (rand() % 50) / 100.0;
     sprite->SetScaleX(Vec2(scale, scale));
     Update(0);
 

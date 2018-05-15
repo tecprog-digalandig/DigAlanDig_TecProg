@@ -3,36 +3,44 @@
 #include <cmath>
 
 Vec2& Vec2::operator+=(const Vec2& v) {
-    x += v.x, y += v.y;
+    x += v.x;
+    y += v.y;
     return *this;
 }
 Vec2& Vec2::operator-=(const Vec2& v) {
-    x -= v.x, y -= v.y;
+    x -= v.x;
+    y -= v.y;
     return *this;
 }
 Vec2& Vec2::operator*=(const Vec2& v) {
-    x *= v.x, y *= v.y;
+    x *= v.x;
+    y *= v.y;
     return *this;
 }
 Vec2& Vec2::operator/=(const Vec2& v) {
-    x /= v.x, y /= v.y;
+    x /= v.x;
+    y /= v.y;
     return *this;
 }
 
 Vec2& Vec2::operator+=(double d) {
-    x += d, y += d;
+    x += d;
+    y += d;
     return *this;
 }
 Vec2& Vec2::operator-=(double d) {
-    x -= d, y -= d;
+    x -= d;
+    y -= d;
     return *this;
 }
 Vec2& Vec2::operator*=(double d) {
-    x *= d, y *= d;
+    x *= d;
+    y *= d;
     return *this;
 }
 Vec2& Vec2::operator/=(double d) {
-    x /= d, y /= d;
+    x /= d;
+    y /= d;
     return *this;
 }
 
@@ -53,7 +61,7 @@ Vec2 Vec2::Rotate(double degrees) { return RotateRad((degrees / 180) * M_PI); }
 Vec2& Vec2::Normalize() { return *this = Normal(); }
 
 void Vec2::Truncate(double length) {
-    double angle = atan2f(y, x);
+    double angle = atan2(y, x);
     x = length * cos(angle);
     y = length * sin(angle);
 }

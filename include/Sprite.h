@@ -25,13 +25,13 @@ class Sprite : public Component {
     void SetClip(int x, int y, int w, int h) { clipRect = {x, y, w, h}; }
     int GetWidth() const { return width; }
     int GetHeight() const { return height; }
-    bool IsOpen() const { return (bool)Sprite::texture; }
+    bool IsOpen() const { return static_cast<bool>(Sprite::texture); }
 
     void Update(float dt);
     void Render() const;
     bool Is(const std::string& type) const { return !type.compare("Sprite"); }
 
-    void SetScaleX(float scaleX, float scaleY);
+    void SetScaleX(double scaleX, double scaleY);
     void SetScaleX(const Vec2& v) { SetScaleX(v.x, v.y); }
     Vec2 GetScale() const { return scale; }
 

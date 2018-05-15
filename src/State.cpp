@@ -38,17 +38,16 @@ std::weak_ptr<GameObject> State::GetObjectPrt(GameObject* go) {
 void State::StartArray() {
     if (started) return;
 
-    // for (auto& obj : objectArray) obj->Start();
-    for (int i = 0; i < (int)objectArray.size(); i++) objectArray[i]->Start();
+    //    for (auto obj : objectArray) obj->Start();
+    for (size_t i = 0; i < objectArray.size(); i++) objectArray[i]->Start();
 
     started = true;
 }
 
 void State::UpdateArray(float dt) {
     // Update
-    for (int i = 0; i < (int)objectArray.size(); i++) {
-        objectArray[i]->Update(dt);
-    }
+    //    for (auto obj : objectArray) obj->Update(dt);
+    for (size_t i = 0; i < objectArray.size(); i++) objectArray[i]->Update(dt);
 
     // Delete
     auto removeDead = [&](std::shared_ptr<GameObject> const& p) {
@@ -59,11 +58,11 @@ void State::UpdateArray(float dt) {
         objectArray.end());
 
     // Collision
-    for (int i = 0; i < (int)objectArray.size(); i++) {
+    for (size_t i = 0; i < objectArray.size(); i++) {
         auto ci = objectArray[i]->GetComponent<Collider*>();
         if (!ci) continue;
 
-        for (int j = i + 1; j < (int)objectArray.size(); j++) {
+        for (size_t j = i + 1; j < objectArray.size(); j++) {
             auto cj = objectArray[j]->GetComponent<Collider*>();
             if (!cj) continue;
 
@@ -84,5 +83,5 @@ void State::UpdateArray(float dt) {
 }
 
 void State::RenderArray() const {
-    for (auto& obj : objectArray) obj->Render();
+    for (auto obj : objectArray) obj->Render();
 }

@@ -12,7 +12,7 @@ void Sprite::Open(const std::string &file) {
     associated.box.size.Set(width, height);
 }
 
-void Sprite::SetScaleX(float scaleX, float scaleY) {
+void Sprite::SetScaleX(double scaleX, double scaleY) {
     scale.x = scaleX ? scaleX : scale.x;
     scale.y = scaleY ? scaleY : scale.y;
 }

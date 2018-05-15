@@ -20,7 +20,7 @@ Game* Game::GetInstance(const std::string& title, int w, int h) {
 }
 
 void Game::CalculateDeltaTime() {
-    int ticks = SDL_GetTicks();
+    int ticks = static_cast<int>(SDL_GetTicks());
     dt = ticks - frameStart;
     dt /= 1000;
     frameStart = ticks;
