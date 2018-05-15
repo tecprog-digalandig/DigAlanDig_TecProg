@@ -3,7 +3,7 @@
 #---------------------------------------------------------------------
 
 # O compilador
-CC = clang++
+CC = g++
 # Comando para remover pastas
 RMDIR = rm -rdf
 # Comando para remover arquivos
@@ -22,7 +22,10 @@ FLAGS = -std=c++11 -Wall -pedantic -Wextra -Wno-unused-parameter -Werror=init-se
 DFLAGS = -ggdb -O0 -DDEBUG
 # Diretivas extras para release
 RFLAGS = -O3 -mtune=native
+# Diretivas extras para release com simbolos de debug
 RDFLAGS = -O3 -mtune=native -ggdb -DDEBUG
+# Diretivas extras para release com otimizacoes mais agressivas
+RFFLAGS = -Ofast -flto -mtune=native
 
 INC_PATH = include
 SRC_PATH = src
@@ -126,6 +129,10 @@ clean:
 
 release: FLAGS += $(RFLAGS)
 release: $(EXEC)
+
+#clang++ anterior a 3.9 possui um bug na hora da linkagem com -flto, usar 3.9+
+releasefast: FLAGS += $(RFFLAGS)
+releasefast: $(EXEC)
 
 debug: FLAGS += $(DFLAGS)
 debug: $(EXEC)
