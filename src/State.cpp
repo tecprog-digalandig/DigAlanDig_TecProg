@@ -86,13 +86,11 @@ void State::Update(float dt) {
 
     // Collision
     for (int i = 0; i < (int)objectArray.size(); i++) {
-        Collider* ci =
-            dynamic_cast<Collider*>(objectArray[i]->GetComponent("Collider"));
+        auto ci = objectArray[i]->GetComponent<Collider*>();
         if (!ci) continue;
 
         for (int j = i + 1; j < (int)objectArray.size(); j++) {
-            Collider* cj = dynamic_cast<Collider*>(
-                objectArray[j]->GetComponent("Collider"));
+            auto cj = objectArray[j]->GetComponent<Collider*>();
             if (!cj) continue;
 
             if ((objectArray[i]->fromPlayer != objectArray[j]->fromPlayer) &&

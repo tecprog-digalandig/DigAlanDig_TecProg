@@ -22,12 +22,21 @@ class GameObject {
     void RequestDelete(void) { isDead = true; }
     void AddComponent(Component *cpt);
     void RemoveComponent(Component *cpt);
+
     Component *GetComponent(const std::string &type) const;
     void Start();
     void NotifyCollision(std::shared_ptr<GameObject> other);
     void CopyPosition(const GameObject &go);
 
     double AngleRad() { return angleDeg * M_PI / 180; }
+
+    template <class T>
+    T GetComponent() const {
+        for (Component *component : components)
+            if (T t = dynamic_cast<T>(component)) return t;
+
+        return nullptr;
+    }
 
     Rect box;
     bool worldReference = true;

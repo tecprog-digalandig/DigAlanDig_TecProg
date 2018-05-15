@@ -6,8 +6,7 @@
 void Face::Damage(int damage) {
     if ((hitpoints -= damage) > 0) return;
 
-    if (Sound* sound = dynamic_cast<Sound*>(associated.GetComponent("Sound")))
-        sound->Play();
+    if (auto sound = associated.GetComponent<Sound*>()) sound->Play();
 
     associated.RequestDelete();
 }

@@ -31,7 +31,7 @@ void Bullet::NotifyCollision(std::shared_ptr<GameObject> other) {
     if (associated.fromPlayer == other->fromPlayer) return;
 
     std::cout << "Collision Bullet" << std::endl;
-    if (other->GetComponent("Bullet")) return;
+    if (other->GetComponent<Bullet*>()) return;
 
     associated.RequestDelete();
 }

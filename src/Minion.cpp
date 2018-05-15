@@ -43,8 +43,8 @@ void Minion::NotifyCollision(std::shared_ptr<GameObject> other) {
     if (associated.fromPlayer == other->fromPlayer) return;
     std::cout << "Collision Minion" << std::endl;
 
-    if (auto bullet = dynamic_cast<Bullet*>(other->GetComponent("Bullet")))
+    if (auto bullet = other->GetComponent<Bullet*>())
         if (auto ap = alienCenter.lock())
-            if (auto alien = dynamic_cast<Alien*>(ap->GetComponent("Alien")))
+            if (auto alien = ap->GetComponent<Alien*>())
                 alien->TakeDamage(bullet->GetDamage());
 }
