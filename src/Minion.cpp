@@ -28,9 +28,8 @@ void Minion::Update(float dt) {
 }
 
 void Minion::Shoot(Vec2 target) {
-    State* state = Game::GetInstance()->GetState();
     GameObject* gm = new GameObject();
-    state->AddObject(gm);
+    Game::GetInstance()->GetCurrentState().AddObject(gm);
 
     gm->box.pos = associated.box.Center();
     Vec2 move = target - gm->box.pos;

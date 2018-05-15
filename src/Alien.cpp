@@ -27,13 +27,13 @@ Alien::~Alien() {
 
 void Alien::Start() {
     int i = 0;
-    State* state = Game::GetInstance()->GetState();
+    State& state = Game::GetInstance()->GetCurrentState();
 
     for (auto& minion : minionArray) {
         if (minion.expired()) {
             GameObject* gm = new GameObject();
-            minion = state->AddObject(gm);
-            gm->AddComponent(new Minion(*gm, state->GetObjectPrt(&associated),
+            minion = state.AddObject(gm);
+            gm->AddComponent(new Minion(*gm, state.GetObjectPrt(&associated),
                                         (2 * M_PI * i++) / minionArray.size()));
         }
     }
@@ -97,7 +97,7 @@ void Alien::Update(float dt) {
             new Sprite(*gm, "assets/img/aliendeath.png", 4, 0.4, 1.6));
         gm->AddComponent(new Sound(*gm, "assets/audio/boom.wav", true));
         gm->Start();
-        Game::GetInstance()->GetState()->AddObject(gm);
+        Game::GetInstance()->GetCurrentState().AddObject(gm);
     }
 }
 

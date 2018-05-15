@@ -14,11 +14,11 @@ PenguinBody::PenguinBody(GameObject& associated)
 }
 
 void PenguinBody::Start() {
-    State* state = Game::GetInstance()->GetState();
+    State& state = Game::GetInstance()->GetCurrentState();
     GameObject* gm = new GameObject();
-    pcannon = state->AddObject(gm);
+    pcannon = state.AddObject(gm);
     gm->box.SetCenter(associated.box.Center());
-    gm->AddComponent(new PenguinCannon(*gm, state->GetObjectPrt(&associated)));
+    gm->AddComponent(new PenguinCannon(*gm, state.GetObjectPrt(&associated)));
 }
 
 inline int inRange(float value, float min, float max) {
@@ -49,7 +49,7 @@ void PenguinBody::Update(float dt) {
             new Sprite(*gm, "assets/img/penguindeath.png", 5, 0.4, 2));
         gm->AddComponent(new Sound(*gm, "assets/audio/boom.wav", true));
         gm->Start();
-        Game::GetInstance()->GetState()->AddObject(gm);
+        Game::GetInstance()->GetCurrentState().AddObject(gm);
     }
 }
 

@@ -11,7 +11,7 @@ Game::~Game(void) {
     Mix_Quit();
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);
-    delete state;
+    delete storedState;
 }
 
 Game* Game::GetInstance(const std::string& title, int w, int h) {
@@ -27,24 +27,37 @@ void Game::CalculateDeltaTime() {
 }
 
 void Game::Run(void) {
-    if (state) delete state;
-    state = new State();
-    state->Start();
-    InputManager& input = InputManager::GetInstance();
+    if (storedState) {
+        stateStack.emplace(storedState);
+        stateStack.top()->Start();
+        storedState = nullptr;
+    }
 
-    while (!state->QuitRequested()) {
+    while (!stateStack.empty()) {
         CalculateDeltaTime();
         input.Update();
-        state->Update(dt);
-        state->Render();
+        stateStack.top()->Update(dt);
+        stateStack.top()->Render();
         SDL_RenderPresent(renderer);
 
+        if (stateStack.top()->PopRequested() ||
+            stateStack.top()->QuitRequested()) {
+            stateStack.pop();
+            if (!stateStack.empty()) stateStack.top()->Resume();
+        }
+
+        if (storedState) {
+            stateStack.emplace(storedState);
+            stateStack.top()->Start();
+            storedState = nullptr;
+        }
         SDL_Delay(33);
     }
 }
 
 /* Private */
-Game::Game(const std::string& title, int width, int height) {
+Game::Game(const std::string& title, int width, int height)
+    : input(InputManager::GetInstance()) {
     if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO | SDL_INIT_TIMER) < 0) {
         std::cerr << "SDL_Init: " << SDL_GetError() << std::endl;
         exit(EXIT_SUCCESS);
@@ -85,6 +98,4 @@ Game::Game(const std::string& title, int width, int height) {
         std::cerr << "SDL_CreateRenderer: " << SDL_GetError() << std::endl;
         exit(EXIT_SUCCESS);
     }
-
-    state = nullptr;
 }

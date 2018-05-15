@@ -34,9 +34,8 @@ void PenguinCannon::Update(float dt) {
 }
 
 void PenguinCannon::Shoot() {
-    State* state = Game::GetInstance()->GetState();
     GameObject* gm = new GameObject();
-    state->AddObject(gm);
+    Game::GetInstance()->GetCurrentState().AddObject(gm);
 
     gm->box.pos = associated.box.Center() + Vec2(distCannon, 0).Rotate(angle);
 

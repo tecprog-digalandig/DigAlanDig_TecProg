@@ -17,6 +17,7 @@ include/Resources.h
 include/SDL_include.h
 include/Sound.h
 include/Sprite.h
+include/StageState.h
 include/State.h
 include/TileMap.h
 include/TileSet.h
@@ -41,6 +42,7 @@ src/Rect.cpp
 src/Resources.cpp
 src/Sound.cpp
 src/Sprite.cpp
+src/StageState.cpp
 src/State.cpp
 src/TileMap.cpp
 src/TileSet.cpp

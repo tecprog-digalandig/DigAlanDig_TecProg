@@ -50,7 +50,7 @@ void GameObject::CopyPosition(const GameObject& go) {
 
 void GameObject::Start() {
     if (started) return;
-    for (auto& c : components) c->Start();
+    for (auto c : components) c->Start();
 
     started = true;
 }
