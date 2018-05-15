@@ -10,15 +10,15 @@
 
 class Music {
   public:
-    Music(void) : music(nullptr) {}
+    Music() : music(nullptr) {}
     explicit Music(const std::string &file) : music(nullptr) { Open(file); }
-    ~Music(void) {}
+    ~Music() {}
 
     void Play(int times = -1) const;
     void Stop(int msToStop = 1500) const { Mix_FadeOutMusic(msToStop); }
     void Open(const std::string &file) { music = Resources::GetMusic(file); }
 
-    bool IsOpen(void) const { return (bool)music; }
+    bool IsOpen() const { return (bool)music; }
 
   private:
     Mix_Music *music = nullptr;

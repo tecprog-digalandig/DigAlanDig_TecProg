@@ -12,7 +12,7 @@
 #include "TileMap.h"
 #include "Vec2.h"
 
-StageState::StageState(void) {}
+StageState::StageState() {}
 
 void StageState::LoadAssets() {
     GameObject* gm = new GameObject();

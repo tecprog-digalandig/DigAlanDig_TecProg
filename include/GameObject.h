@@ -14,12 +14,12 @@ class GameObject {
     ~GameObject();
 
     void Update(float dt);
-    void Render(void);
+    void Render();
     // REMOVE
     bool CanEnd() const;
 
-    bool IsDead(void) const { return isDead; }
-    void RequestDelete(void) { isDead = true; }
+    bool IsDead() const { return isDead; }
+    void RequestDelete() { isDead = true; }
     void AddComponent(Component *cpt);
     void RemoveComponent(Component *cpt);
 

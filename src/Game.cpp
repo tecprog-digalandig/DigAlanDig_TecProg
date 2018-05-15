@@ -5,7 +5,7 @@
 
 Game* Game::_instance = nullptr;
 
-Game::~Game(void) {
+Game::~Game() {
     IMG_Quit();
     Mix_CloseAudio();
     Mix_Quit();
@@ -26,7 +26,7 @@ void Game::CalculateDeltaTime() {
     frameStart = ticks;
 }
 
-void Game::Run(void) {
+void Game::Run() {
     if (storedState) {
         stateStack.emplace(storedState);
         stateStack.top()->Start();

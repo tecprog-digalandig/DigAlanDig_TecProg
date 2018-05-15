@@ -10,11 +10,11 @@
 
 class Game {
   public:
-    ~Game(void);
-    void Run(void);
+    ~Game();
+    void Run();
     SDL_Renderer* GetRenderer() const { return renderer; }
     State& GetCurrentState() const { return *stateStack.top(); }
-    static Game* GetInstance(void) { return _instance; }
+    static Game* GetInstance() { return _instance; }
     static Game* GetInstance(const std::string& title, int w, int h);
     float GetDeltaTime() const { return dt; }
 

@@ -13,7 +13,7 @@
 #include "TileMap.h"
 #include "Vec2.h"
 
-TitleState::TitleState(void) {}
+TitleState::TitleState() {}
 
 void TitleState::LoadAssets() {
     GameObject* gm = new GameObject();
