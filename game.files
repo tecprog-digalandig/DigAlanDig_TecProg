@@ -19,6 +19,7 @@ include/Sound.h
 include/Sprite.h
 include/StageState.h
 include/State.h
+include/Text.h
 include/TileMap.h
 include/TileSet.h
 include/Timer.h
@@ -45,6 +46,7 @@ src/Sound.cpp
 src/Sprite.cpp
 src/StageState.cpp
 src/State.cpp
+src/Text.cpp
 src/TileMap.cpp
 src/TileSet.cpp
 src/Timer.cpp

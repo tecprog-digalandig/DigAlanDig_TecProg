@@ -1,7 +1,9 @@
 #ifndef RESOURCES_H
 #define RESOURCES_H
 #define INCLUDE_SDL
+#define INCLUDE_SDL_IMAGE
 #define INCLUDE_SDL_MIXER
+#define INCLUDE_SDL_TTF
 #include <memory>
 #include <string>
 #include <unordered_map>
@@ -18,6 +20,10 @@ class Resources {
     static std::shared_ptr<Mix_Chunk> GetSound(const std::string& file);
     static void ClearSounds();
 
+    static std::shared_ptr<TTF_Font> GetFont(const std::string& file,
+                                             int ptsize);
+    static void ClearFonts();
+
     static void ClearAll();
 
   private:
@@ -27,6 +33,7 @@ class Resources {
         musicTable;
     static std::unordered_map<std::string, std::shared_ptr<Mix_Chunk>>
         soundTable;
+    static std::unordered_map<std::string, std::shared_ptr<TTF_Font>> fontTable;
 };
 
 #endif  // RESOURCES_H

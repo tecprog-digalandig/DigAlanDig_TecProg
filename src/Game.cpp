@@ -9,6 +9,7 @@ Game::~Game() {
     IMG_Quit();
     Mix_CloseAudio();
     Mix_Quit();
+    TTF_Quit();
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);
     delete storedState;
@@ -83,6 +84,11 @@ Game::Game(const std::string& title, int width, int height)
     int nchannels = 32;
     if (Mix_AllocateChannels(nchannels) != nchannels) {
         std::cerr << "Mix_AllocateChannels: " << Mix_GetError() << std::endl;
+        exit(EXIT_SUCCESS);
+    }
+
+    if (TTF_Init()) {
+        std::cerr << "TTF_Init: " << TTF_GetError() << std::endl;
         exit(EXIT_SUCCESS);
     }
 

@@ -3,6 +3,7 @@
 #define INCLUDE_SDL
 #define INCLUDE_SDL_IMAGE
 #define INCLUDE_SDL_MIXER
+#define INCLUDE_SDL_TTF
 #include <stack>
 #include "InputManager.h"
 #include "SDL_include.h"
