@@ -21,6 +21,10 @@ class Game {
 
     void Push(State* state) { storedState = state; }
 
+    // static std::unordered_map<std::string, int> idata;
+    // static std::unordered_map<std::string, std::string> data;
+    bool playerVictory = false;
+
   private:
     static Game* _instance;
     SDL_Window* window;

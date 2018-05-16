@@ -13,7 +13,7 @@
 class StageState : public State {
   public:
     StageState();
-    ~StageState() {}
+    ~StageState() { delete music; }
     void LoadAssets();
     void Update(float dt);
     void Render() const;

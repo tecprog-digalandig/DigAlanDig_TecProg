@@ -4,7 +4,9 @@
 #include "Camera.h"
 #include "Collider.h"
 #include "Collision.h"
+#include "Endstate.h"
 #include "Face.h"
+#include "Game.h"
 #include "PenguinBody.h"
 #include "SDL2/SDL.h"
 #include "Sound.h"
@@ -47,6 +49,21 @@ void StageState::Start() {
 void StageState::Update(float dt) {
     Camera::Update(dt);
     UpdateArray(dt);
+
+    bool hasAlien = false;
+    bool hasPenguin = false;
+    for (auto obj : objectArray) {
+        if (obj->GetComponent<Alien*>())
+            hasAlien = true;
+        else if (obj->GetComponent<PenguinBody*>())
+            hasPenguin = true;
+    }
+
+    if (!hasPenguin || !hasAlien) {
+        Game::GetInstance()->playerVictory = hasPenguin;
+        popRequested = true;
+        Game::GetInstance()->Push(new EndState());
+    }
 }
 
 void StageState::Render() const { RenderArray(); }
