@@ -1,6 +1,7 @@
 #include "InputManager.h"
 
-inline void InputManager::UpdateKey(int &update, bool &state, bool newValue) {
+inline void InputManager::UpdateKey(int &update, bool &state,
+                                    bool newValue) const {
     if (state != newValue) {
         update = frame;
         state = newValue;

@@ -12,7 +12,7 @@ class Bullet : public Component {
     void Render() const {}
     bool Is(const std::string& type) const { return !type.compare("Bullet"); }
 
-    int GetDamage() { return damage; }
+    int GetDamage() const { return damage; }
 
     void NotifyCollision(std::shared_ptr<GameObject> other);
 

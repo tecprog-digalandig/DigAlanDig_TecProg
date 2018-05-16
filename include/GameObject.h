@@ -28,7 +28,7 @@ class GameObject {
     void NotifyCollision(std::shared_ptr<GameObject> other);
     void CopyPosition(const GameObject &go);
 
-    double AngleRad() { return angleDeg * M_PI / 180; }
+    double AngleRad() const { return angleDeg * M_PI / 180; }
 
     template <class T>
     T GetComponent() const {

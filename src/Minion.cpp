@@ -27,7 +27,7 @@ void Minion::Update(float dt) {
         associated.RequestDelete();
 }
 
-void Minion::Shoot(Vec2 target) {
+void Minion::Shoot(Vec2 target) const {
     GameObject* gm = new GameObject();
     Game::GetInstance()->GetCurrentState().AddObject(gm);
 
