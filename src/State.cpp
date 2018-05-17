@@ -1,11 +1,6 @@
 #include "State.h"
 #include <stdio.h>
-#include "Alien.h"
 #include "Camera.h"
-#include "Collider.h"
-#include "Collision.h"
-#include "Face.h"
-#include "PenguinBody.h"
 #include "SDL2/SDL.h"
 #include "Sound.h"
 #include "Sprite.h"
@@ -58,24 +53,6 @@ void State::UpdateArray(float dt) {
         objectArray.end());
 
     // Collision
-    for (size_t i = 0; i < objectArray.size(); i++) {
-        auto ci = objectArray[i]->GetComponent<Collider*>();
-        if (!ci) continue;
-
-        for (size_t j = i + 1; j < objectArray.size(); j++) {
-            auto cj = objectArray[j]->GetComponent<Collider*>();
-            if (!cj) continue;
-
-            if ((objectArray[i]->fromPlayer != objectArray[j]->fromPlayer) &&
-                Collision::IsColliding(ci->box, cj->box,
-                                       objectArray[i]->AngleRad(),
-                                       objectArray[j]->AngleRad())) {
-                objectArray[i]->NotifyCollision(objectArray[j]);
-                objectArray[j]->NotifyCollision(objectArray[i]);
-                std::cout << std::endl;
-            }
-        }
-    }
 
     // KeyPress
     if (input.KeyPress(SDL_SCANCODE_ESCAPE) || input.QuitRequested())

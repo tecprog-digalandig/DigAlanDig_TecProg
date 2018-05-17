@@ -1,7 +1,6 @@
 #include <fstream>
 #include <iostream>
 #include "Game.h"
-#include "TitleState.h"
 
 int main(int argc, char** argv) {
 #ifdef _WIN32
@@ -13,8 +12,8 @@ int main(int argc, char** argv) {
     std::cerr.rdbuf(err.rdbuf());
 #endif
 
-    Game* game = Game::GetInstance("Pedro Henrique 100119191", 1024, 600);
-    game->Push(new TitleState());
+    Game* game = Game::GetInstance("Marmota", 1024, 768);
+    // game->Push(new State());
     game->Run();
 
 #ifdef _WIN32
