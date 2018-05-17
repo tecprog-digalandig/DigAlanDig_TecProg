@@ -9,9 +9,10 @@
 
 int Alien::alienCount = 0;
 
-Alien::Alien(GameObject& associated, int nMinions)
+Alien::Alien(GameObject& associated, int nMinions, double restDuration)
     : Component(associated),
       minionArray(nMinions),
+      restDuration(restDuration),
       input(InputManager::GetInstance()) {
     associated.AddComponent(new Collider(associated));
     associated.AddComponent(new Sprite(associated, "assets/img/alien.png"));

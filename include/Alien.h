@@ -12,7 +12,7 @@
 
 class Alien : public Component {
   public:
-    Alien(GameObject& associated, int nMinions);
+    Alien(GameObject& associated, int nMinions, double restDuration = 3);
     ~Alien();
 
     void Start();
@@ -36,11 +36,12 @@ class Alien : public Component {
     Vec2 destination;
 
     std::shared_ptr<GameObject> closestMinion(const Vec2& target);
-    InputManager& input;
     static const int maxSpeed = 100;
     static const int maxHp = 100;
-    static constexpr float restDuration = 3;
+    double restDuration = 3;
     static constexpr float degPerS = 10;
+
+    InputManager& input;
 };
 
 #endif  // ALIEN_H

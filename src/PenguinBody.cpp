@@ -21,7 +21,7 @@ void PenguinBody::Start() {
     gm->AddComponent(new PenguinCannon(*gm, state.GetObjectPrt(&associated)));
 }
 
-inline int inRange(float value, float min, float max) {
+inline float inRange(float value, float min, float max) {
     return (value < min) ? min : ((value > max) ? max : value);
 }
 
@@ -37,6 +37,9 @@ void PenguinBody::Update(float dt) {
 
     speed = Vec2(linearSpeed, 0).Rotate(angle);
     associated.box.pos += speed * dt;
+
+    associated.box.x = inRange(associated.box.x, 0, 1320);
+    associated.box.y = inRange(associated.box.y, 0, 1200);
 
     if (hp <= 0) {
         if (auto p = pcannon.lock()) p->RequestDelete();

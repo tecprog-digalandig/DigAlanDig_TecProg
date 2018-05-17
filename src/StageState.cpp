@@ -24,15 +24,18 @@ void StageState::LoadAssets() {
     tileSet = new TileSet(64, 64, "assets/img/tileset.png");
     gm->AddComponent(new TileMap(*gm, "assets/map/tileMap.txt", tileSet));
 
-    GameObject* gm2 = new GameObject();
-    gm2->box.SetCenter(512, 300);
-    objectArray.emplace_back(gm2);
-    gm2->AddComponent(new Alien(*gm2, 6));
-
     GameObject* gm3 = new GameObject();
     gm3->box.pos.Set(704, 640);
     objectArray.emplace_back(gm3);
     gm3->AddComponent(new PenguinBody(*gm3));
+
+    for (int i = 0; i < 6; i++) {
+        GameObject* gm2 = new GameObject();
+        gm2->box.SetCenter(Vec2(500, 0).Rotate(i * (360 / 6)) +
+                           gm3->box.Center());
+        objectArray.emplace_back(gm2);
+        gm2->AddComponent(new Alien(*gm2, 6, 3 + 0.5 * i));
+    }
 
     Camera::Follow(gm3);
 

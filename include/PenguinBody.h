@@ -31,7 +31,7 @@ class PenguinBody : public Component {
     float linearSpeed = 0;
     float angle = -90;
     int hp = maxHp;
-    static const int maxHp = 100;
+    static const int maxHp = 500;
     static constexpr float accel = 150;
     static constexpr float minSpeed = -200;
     static constexpr float maxSpeed = 300;
