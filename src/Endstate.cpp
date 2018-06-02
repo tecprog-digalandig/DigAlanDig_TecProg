@@ -13,13 +13,13 @@ void EndState::LoadAssets() {
     objectArray.emplace_back(gm);
     if (Game::GetInstance()->playerVictory) {
         gm->AddComponent(new Sprite(*gm, "assets/img/win.jpg"));
-        music = new Music("assets/audio/endStateWin.ogg");
+        music = Music("assets/audio/endStateWin.ogg");
     } else {
         gm->AddComponent(new Sprite(*gm, "assets/img/lose.jpg"));
-        music = new Music("assets/audio/endStateLose.ogg");
+        music = Music("assets/audio/endStateLose.ogg");
     }
 
-    music->Play(2);
+    music.Play(2);
 }
 
 void EndState::Start() {

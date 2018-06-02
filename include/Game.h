@@ -37,7 +37,7 @@ class Game {
     void CalculateDeltaTime();
 
     // TODO move to a configuration file
-    static constexpr float bpm = 100;
+    static constexpr float bpm = 120;
     static const int adjust = 300;
 
     static const int beatTime = (60 * 1000) / bpm;

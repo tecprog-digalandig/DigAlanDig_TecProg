@@ -1,5 +1,6 @@
 include/Alan.h
 include/Alien.h
+include/BigAlan.h
 include/Bullet.h
 include/Camera.h
 include/Collider.h
@@ -31,6 +32,7 @@ include/Vec2.h
 
 src/Alan.cpp
 src/Alien.cpp
+src/BigAlan.cpp
 src/Bullet.cpp
 src/Camera.cpp
 src/Collider.cpp

@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include "Alan.h"
 #include "Alien.h"
+#include "BigAlan.h"
 #include "Camera.h"
 #include "Collider.h"
 #include "Collision.h"
@@ -46,6 +47,13 @@ void StageState::LoadAssets() {
     MiniMapTile->AddComponent(miniTilemap);
     objectArray.emplace_back(MiniMapTile);
 
+    GameObject *bigAlan = new GameObject();
+    objectArray.emplace_back(bigAlan);
+    bigAlan->AddComponent(new Sprite(*bigAlan, "assets/img/alan.png"));
+    bigAlan->AddComponent(new BigAlan(*bigAlan));
+    bigAlan->worldReference = false;
+    bigAlan->box.pos = {-5, 510};
+
     music.Open("assets/audio/marmota.ogg");
     music.Play();
 }
@@ -59,7 +67,6 @@ void StageState::Start() {
 void StageState::Update(float dt) {
     Camera::Update(dt);
     UpdateArray(dt);
-    RhythmUpdate();
 }
 
 void StageState::Render() const { RenderArray(); }
