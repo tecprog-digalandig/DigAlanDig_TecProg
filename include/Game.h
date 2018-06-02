@@ -38,7 +38,7 @@ class Game {
 
     // TODO move to a configuration file
     static constexpr float bpm = 120;
-    static const int adjust = 300;
+    int adjust = 200;
 
     static const int beatTime = (60 * 1000) / bpm;
     int beatCounter = 0;
@@ -47,6 +47,7 @@ class Game {
     Game(const std::string& title, int width, int height);
 
     InputManager& input;
+    bool musicPlaying = false;
 };
 
 #endif

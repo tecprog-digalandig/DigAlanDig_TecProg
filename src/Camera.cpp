@@ -32,13 +32,6 @@ void Camera::Update(float dt) {
         pos.y += speed.y * dt;
     }
 
-    if (InputManager::GetInstance().IsKeyDown(SDL_SCANCODE_EQUALS)) {
-        speed += dt * 50;
-    }
-    if (InputManager::GetInstance().IsKeyDown(SDL_SCANCODE_MINUS)) {
-        speed -= dt * 50;
-    }
-
     // std::cout << "Pos: " << pos << std::endl << "Speed: " << speed <<
     // std::endl;
 }

@@ -49,6 +49,7 @@ class State {
 
     InputManager& input;
     Music music;
+    bool musicPlaying = false;
     TileSet* tileSet = nullptr;
 };
 

@@ -26,6 +26,15 @@ void Game::CalculateDeltaTime() {
     dt /= 1000;
     frameStart = ticks;
 
+    if (input.KeyPress(SDL_SCANCODE_EQUALS)) {
+        adjust += 10;
+        std::cout << "Adjust = " << adjust << "ms\n";
+    }
+    if (input.KeyPress(SDL_SCANCODE_MINUS)) {
+        adjust -= 10;
+        std::cout << "Adjust = " << adjust << "ms\n";
+    }
+
     int newBeatCounter = (ticks - adjust) / beatTime;
     if (newBeatCounter != beatCounter) {
         beatCounter = newBeatCounter;

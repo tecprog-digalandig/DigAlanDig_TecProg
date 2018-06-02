@@ -55,7 +55,6 @@ void StageState::LoadAssets() {
     bigAlan->box.pos = {-5, 510};
 
     music.Open("assets/audio/marmota.ogg");
-    music.Play();
 }
 
 void StageState::Start() {
@@ -67,6 +66,14 @@ void StageState::Start() {
 void StageState::Update(float dt) {
     Camera::Update(dt);
     UpdateArray(dt);
+}
+
+void StageState::RhythmUpdate() {
+    if (!musicPlaying) {
+        music.Play();
+        musicPlaying = true;
+    }
+    RhythmUpdateArray();
 }
 
 void StageState::Render() const { RenderArray(); }

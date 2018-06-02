@@ -13,7 +13,7 @@ class StageState : public State {
     StageState();
     void LoadAssets();
     void Update(float dt);
-    void RhythmUpdate() { RhythmUpdateArray(); }
+    void RhythmUpdate();
     void Render() const;
     void Start();
     void Pause() {}
