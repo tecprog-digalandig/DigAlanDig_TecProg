@@ -12,6 +12,7 @@ class Component {
 
     virtual void Update(float dt) = 0;
     virtual void RhythmUpdate() = 0;
+    virtual void RhythmReset() {}
     virtual void Render() const = 0;
     virtual bool Is(const std::string& type) const = 0;
     virtual void Start() {}

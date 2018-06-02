@@ -42,7 +42,9 @@ class Game {
     int keyAdjust = 0;
 
     static const int beatTime = (60 * 1000) / bpm;
-    int beatCounter = 0;
+    static const int halfBeatTime = beatTime / 2;
+    int halfBeatCounter = 0;
+    bool offBeat = false;
     bool shouldRhythmUpdate = false;
 
     Game(const std::string& title, int width, int height);

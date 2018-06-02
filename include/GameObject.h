@@ -15,6 +15,7 @@ class GameObject {
 
     void Update(float dt);
     void RhythmUpdate();
+    void RhythmReset();
     void Render();
     // REMOVE
     bool CanEnd() const;

@@ -21,6 +21,7 @@ class State {
     virtual void LoadAssets() = 0;
     virtual void Update(float dt) = 0;
     virtual void RhythmUpdate() = 0;
+    virtual void RhythmReset() {}
     virtual void Render() const = 0;
 
     virtual void Start() = 0;
@@ -29,6 +30,7 @@ class State {
 
     void UpdateArray(float dt);
     void RhythmUpdateArray();
+    void RhythmResetArray();
     void StartArray();
     void RenderArray() const;
 

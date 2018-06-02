@@ -76,4 +76,6 @@ void StageState::RhythmUpdate() {
     RhythmUpdateArray();
 }
 
+void StageState::RhythmReset() { RhythmResetArray(); }
+
 void StageState::Render() const { RenderArray(); }

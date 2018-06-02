@@ -45,17 +45,19 @@ void Game::CalculateDeltaTime() {
     }
 
     int fixedTicks = ticks + adjust;
-    int newBeatCounter = fixedTicks / beatTime;
-    if (newBeatCounter > beatCounter) {
-        beatCounter = newBeatCounter;
+    int newHalfBeatCounter = fixedTicks / halfBeatTime;
+    if (newHalfBeatCounter > halfBeatCounter) {
+        halfBeatCounter = newHalfBeatCounter;
         shouldRhythmUpdate = true;
+        offBeat = halfBeatCounter % 2;
+
     } else {
         shouldRhythmUpdate = false;
     }
 
     fixedTicks += keyAdjust;
-    int a = fixedTicks - beatCounter * beatTime;
-    int b = (beatCounter + 1) * beatTime - fixedTicks;
+    int a = fixedTicks - (halfBeatCounter / 2) * beatTime;
+    int b = ((halfBeatCounter / 2) + 1) * beatTime - fixedTicks;
     int deltaRhythmMs = std::min(a, b);
     deltaRhythm = deltaRhythmMs / (beatTime / 2.0);
 }
@@ -72,8 +74,11 @@ void Game::Run() {
         input.Update(deltaRhythm);
         stateStack.top()->Update(dt);
         if (shouldRhythmUpdate) {
-            stateStack.top()->RhythmUpdate();
-            std::cout << "." << std::endl;
+            if (!offBeat)
+                stateStack.top()->RhythmUpdate();
+            else
+                stateStack.top()->RhythmReset();
+            std::cout << "." << offBeat << "." << std::endl;
         }
 
         stateStack.top()->Render();

@@ -63,6 +63,10 @@ void State::RhythmUpdateArray() {
     for (auto obj : objectArray) obj->RhythmUpdate();
 }
 
+void State::RhythmResetArray() {
+    for (auto obj : objectArray) obj->RhythmReset();
+}
+
 void State::RenderArray() const {
     for (auto obj : objectArray) obj->Render();
 }

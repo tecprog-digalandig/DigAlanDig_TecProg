@@ -22,6 +22,10 @@ void GameObject::RhythmUpdate() {
     for (Component* component : components) component->RhythmUpdate();
 }
 
+void GameObject::RhythmReset() {
+    for (Component* component : components) component->RhythmReset();
+}
+
 void GameObject::Render() {
     for (Component* component : components) component->Render();
 }
