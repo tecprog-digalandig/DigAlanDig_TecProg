@@ -39,6 +39,7 @@ class Game {
     // TODO move to a configuration file
     static constexpr float bpm = 120;
     int adjust = 200;
+    int keyAdjust = 0;
 
     static const int beatTime = (60 * 1000) / bpm;
     int beatCounter = 0;
@@ -48,6 +49,9 @@ class Game {
 
     InputManager& input;
     bool musicPlaying = false;
+    // normalized variable for getting how close a press was to the rhythm
+    // 0 = perfect, 1 = worst
+    float deltaRhythm = 0;
 };
 
 #endif

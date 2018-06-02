@@ -6,7 +6,7 @@
 
 class InputManager {
   public:
-    void Update();
+    void Update(float deltaRhythm);
 
     bool IsKeyDown(int key) const { return keyState[key]; }
     bool KeyPress(int key) const {
@@ -47,6 +47,8 @@ class InputManager {
         return input;
     }
 
+    float GetDeltaRhythm() { return deltaRhythm; }
+
   private:
     // Disallow compiler generated ctor, dtor and copy
     InputManager() {}
@@ -68,6 +70,8 @@ class InputManager {
 
     void UpdateKey(int& update, bool& state, bool newValue) const;
     int frame = 0;
+
+    float deltaRhythm = 0;
 };
 
 #endif  // INPUTMANAGER_H

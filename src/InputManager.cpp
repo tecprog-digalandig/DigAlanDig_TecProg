@@ -8,9 +8,11 @@ inline void InputManager::UpdateKey(int &update, bool &state,
     }
 }
 
-void InputManager::Update() {
+void InputManager::Update(float deltaRhythm) {
     frame++;
     quitRequested = false;
+    this->deltaRhythm = deltaRhythm;
+    std::cout << deltaRhythm << ' ';
 
     SDL_GetMouseState(&mouseX, &mouseY);
     SDL_Event event;

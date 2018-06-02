@@ -1,4 +1,5 @@
 #include "Game.h"
+#include <algorithm>
 #include <iostream>
 #include <string>
 #include "Camera.h"
@@ -34,14 +35,29 @@ void Game::CalculateDeltaTime() {
         adjust -= 10;
         std::cout << "Adjust = " << adjust << "ms\n";
     }
+    if (input.KeyPress(SDL_SCANCODE_0)) {
+        keyAdjust += 10;
+        std::cout << "Key Adjust = " << keyAdjust << "ms\n";
+    }
+    if (input.KeyPress(SDL_SCANCODE_9)) {
+        keyAdjust -= 10;
+        std::cout << "Key Adjust = " << keyAdjust << "ms\n";
+    }
 
-    int newBeatCounter = (ticks - adjust) / beatTime;
-    if (newBeatCounter != beatCounter) {
+    int fixedTicks = ticks + adjust;
+    int newBeatCounter = fixedTicks / beatTime;
+    if (newBeatCounter > beatCounter) {
         beatCounter = newBeatCounter;
         shouldRhythmUpdate = true;
     } else {
         shouldRhythmUpdate = false;
     }
+
+    fixedTicks += keyAdjust;
+    int a = fixedTicks - beatCounter * beatTime;
+    int b = (beatCounter + 1) * beatTime - fixedTicks;
+    int deltaRhythmMs = std::min(a, b);
+    deltaRhythm = deltaRhythmMs / (beatTime / 2.0);
 }
 
 void Game::Run() {
@@ -53,7 +69,7 @@ void Game::Run() {
 
     while (!stateStack.empty()) {
         CalculateDeltaTime();
-        input.Update();
+        input.Update(deltaRhythm);
         stateStack.top()->Update(dt);
         if (shouldRhythmUpdate) {
             stateStack.top()->RhythmUpdate();
