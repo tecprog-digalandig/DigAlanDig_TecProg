@@ -12,17 +12,30 @@ Alan::Alan(GameObject &associated, Vec2 gridPosition, int gridSizeHeight,
 
 // Direção do movimento
 void Alan::GetMovement() {
+    if (moved) return;
+
     if (input.KeyPress(SDL_SCANCODE_UP)) {
-        movementDirection.push(Alan::UP);
+        movementDirection = Direction::UP;
     }
     if (input.KeyPress(SDL_SCANCODE_DOWN)) {
-        movementDirection.push(Alan::DOWN);
+        movementDirection = Direction::DOWN;
+        moved = true;
     }
     if (input.KeyPress(SDL_SCANCODE_LEFT)) {
-        movementDirection.push(Alan::LEFT);
+        movementDirection = Direction::LEFT;
+        moved = true;
     }
     if (input.KeyPress(SDL_SCANCODE_RIGHT)) {
-        movementDirection.push(Alan::RIGHT);
+        movementDirection = Direction::RIGHT;
+        moved = true;
+    }
+
+    if (movementDirection) {
+        if (input.GetDeltaRhythm() > 0.5) {
+            movementDirection = Direction::NONE;
+            std::cout << "\n\nMiss: " << input.GetDeltaRhythm() << "\n\n";
+        } else
+            std::cout << "\n\nHit: " << input.GetDeltaRhythm() << "\n\n";
     }
 }
 
@@ -38,15 +51,15 @@ void Alan::Update(float dt) {
 
     Sprite *sprite = associated.GetComponent<Sprite *>();
 
-    if (movementDirection.empty()) {
+    if (movementDirection == Direction::NONE) {
         return;
     }
 
     // Up não faz nada
-    if (movementDirection.front() == Alan::UP) {
-        movementDirection.pop();
+    if (movementDirection == Direction::UP) {
+        movementDirection = Direction::NONE;
         // Down bate na pedra embaixo dele
-    } else if (movementDirection.front() == Alan::DOWN) {
+    } else if (movementDirection == Direction::DOWN) {
         if (frameNumber == 0) {
             frameNumber = 5;
             sprite->SetFrame(frameNumber);
@@ -54,10 +67,10 @@ void Alan::Update(float dt) {
             frameNumber = 0;
             Vec2 damage = {gridPosition.x, gridPosition.y + 1};
             tileMap->GetDamageGround(1, damage);
-            movementDirection.pop();
+            movementDirection = Direction::NONE;
             sprite->SetFrame(frameNumber);
         }
-    } else if (movementDirection.front() == Alan::LEFT) {
+    } else if (movementDirection == Direction::LEFT) {
         // Testa se o valor do grid a esquerda é uma pedra
         if (tileMap->At(gridPosition.x - 1, gridPosition.y) != 2) {
             // Se for, da hit na pedra
@@ -71,7 +84,7 @@ void Alan::Update(float dt) {
                     Vec2 damage = {gridPosition.x - 1, gridPosition.y};
                     tileMap->GetDamageGround(1, damage);
                 }
-                movementDirection.pop();
+                movementDirection = Direction::NONE;
                 sprite->SetFrame(frameNumber);
             }
             return;
@@ -86,7 +99,7 @@ void Alan::Update(float dt) {
             associated.box.x -= gridSizeWidth / 2;
             frameNumber = 0;
             sprite->SetFrame(0);
-            movementDirection.pop();
+            movementDirection = Direction::NONE;
             gridPosition.x--;
         }
     } else {
@@ -101,7 +114,7 @@ void Alan::Update(float dt) {
                     Vec2 damage = {gridPosition.x + 1, gridPosition.y};
                     tileMap->GetDamageGround(1, damage);
                 }
-                movementDirection.pop();
+                movementDirection = Direction::NONE;
                 sprite->SetFrame(frameNumber);
             }
             return;
@@ -115,7 +128,7 @@ void Alan::Update(float dt) {
             associated.box.x += gridSizeWidth / 2;
             frameNumber = 0;
             sprite->SetFrame(0);
-            movementDirection.pop();
+            movementDirection = Direction::NONE;
             gridPosition.x++;
         }
     }

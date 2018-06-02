@@ -8,6 +8,16 @@ inline void InputManager::UpdateKey(int &update, bool &state,
     }
 }
 
+float fixRange(float value, float fix) {
+    float ret = value + fix;
+    if (ret > 1.0)
+        ret -= 2;
+    else if (ret < -1.0)
+        ret += 2;
+
+    return ret;
+}
+
 void InputManager::Update(float deltaRhythm) {
     frame++;
     quitRequested = false;
@@ -37,5 +47,14 @@ void InputManager::Update(float deltaRhythm) {
                           event.type == SDL_MOUSEBUTTONDOWN);
                 break;
         }
+    }
+
+    if (KeyPress(SDL_SCANCODE_0)) {
+        keyAdjust += 0.05;
+        std::cout << "\nKey Adjust = " << keyAdjust << "ms\n";
+    }
+    if (KeyPress(SDL_SCANCODE_9)) {
+        keyAdjust -= 0.05;
+        std::cout << "\nKey Adjust = " << keyAdjust << "ms\n";
     }
 }

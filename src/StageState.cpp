@@ -72,6 +72,7 @@ void StageState::RhythmUpdate() {
     if (!musicPlaying) {
         music.Play();
         musicPlaying = true;
+        Game::GetInstance()->fixTiming();
     }
     RhythmUpdateArray();
 }

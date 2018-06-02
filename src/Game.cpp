@@ -35,14 +35,6 @@ void Game::CalculateDeltaTime() {
         adjust -= 10;
         std::cout << "Adjust = " << adjust << "ms\n";
     }
-    if (input.KeyPress(SDL_SCANCODE_0)) {
-        keyAdjust += 10;
-        std::cout << "Key Adjust = " << keyAdjust << "ms\n";
-    }
-    if (input.KeyPress(SDL_SCANCODE_9)) {
-        keyAdjust -= 10;
-        std::cout << "Key Adjust = " << keyAdjust << "ms\n";
-    }
 
     int fixedTicks = ticks + adjust;
     int newHalfBeatCounter = fixedTicks / halfBeatTime;
@@ -55,10 +47,10 @@ void Game::CalculateDeltaTime() {
         shouldRhythmUpdate = false;
     }
 
-    fixedTicks += keyAdjust;
     int a = fixedTicks - (halfBeatCounter / 2) * beatTime;
-    int b = ((halfBeatCounter / 2) + 1) * beatTime - fixedTicks;
-    int deltaRhythmMs = std::min(a, b);
+    int b = fixedTicks - ((halfBeatCounter / 2) + 1) * beatTime;
+
+    int deltaRhythmMs = (a < -b) ? a : b;
     deltaRhythm = deltaRhythmMs / (beatTime / 2.0);
 }
 

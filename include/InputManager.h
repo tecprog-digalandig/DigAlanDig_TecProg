@@ -72,6 +72,7 @@ class InputManager {
     int frame = 0;
 
     float deltaRhythm = 0;
+    float keyAdjust = 0;
 };
 
 #endif  // INPUTMANAGER_H

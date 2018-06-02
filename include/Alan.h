@@ -24,6 +24,7 @@ class Alan : public Component {
 
     void Update(float dt);
     void RhythmUpdate() {}
+    void RhythmReset() { moved = false; }
     void Render() const {}
     bool Is(const std::string& type) const {
         return !type.compare("PenguinBody");
@@ -32,16 +33,17 @@ class Alan : public Component {
     Vec2 GetGridPosition() { return gridPosition; }
 
   private:
-    enum Direction { UP, DOWN, LEFT, RIGHT };
+    enum Direction { NONE = 0, UP, DOWN, LEFT, RIGHT };
     int gridSizeWidth;
     int gridSizeHeight;
-    std::queue<Direction> movementDirection;
+    Direction movementDirection;
 
     Vec2 gridPosition;
     int frameNumber = 0;
 
     InputManager& input;
-    TileMap* tileMap = nullptr;
+
+    bool moved = false;
 };
 
 #endif  // ALAN_H
