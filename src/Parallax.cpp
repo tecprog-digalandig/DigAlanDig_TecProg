@@ -11,12 +11,14 @@ void bgCircularY::Open(const std::string &file) {
 
 void bgCircularY::Render(Common::Layer layer) const {
     if (bgCircularY::texture) {
-        int linit = (Camera::pos.y + associated.box.y) / associated.box.h;
+        int linit = -associated.box.y / associated.box.h;
         int lmax = linit + Camera::screenSize.y / associated.box.h;
-        if (Camera::screenSize.y + Camera::pos.y + associated.box.y >
+        if (Camera::screenSize.y - associated.box.y >
             (lmax + 1) * associated.box.h)
             lmax++;
 
+        std::cout << linit << " " << lmax << " "
+                  << Camera::screenSize.y / associated.box.h << std::endl;
         for (int i = linit; i <= lmax; i++) {
             Rect dst(associated.box.pos.x, associated.box.pos.y + i * height,
                      (double)width, (double)height);
