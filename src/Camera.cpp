@@ -7,7 +7,7 @@
 
 Vec2 Camera::pos, Camera::shake, Camera::speed(40, 40), Camera::screenSize;
 Vec2 Camera::offset;
-Camera::Movement Camera::currentMove = Camera::CONSTSCROLL;
+Camera::Movement Camera::currentMove = Camera::FRIENDLYSCROLL;
 
 GameObject *Camera::focus = nullptr;
 int Camera::shakeIntensity = 0;
@@ -58,17 +58,14 @@ void Camera::Update(float dt) {
                     focus->RequestDelete();
                     Unfollow();
                 }
+                if (offset.y + screenSize.y - 200 < focus->box.y) {
+                    offset.y += 3 * speed.y * dt * scrollFactor;
+                }
             }
             break;
         }
 
         case Camera::NONE:
-            if (InputManager::GetInstance().KeyDown(SDL_SCANCODE_RIGHT)) {
-                offset.x += speed.x * dt * 10;
-            }
-            if (InputManager::GetInstance().KeyDown(SDL_SCANCODE_LEFT)) {
-                offset.x -= speed.x * dt * 10;
-            }
             if (InputManager::GetInstance().KeyDown(SDL_SCANCODE_UP)) {
                 offset.y -= speed.y * dt * 10;
             }
