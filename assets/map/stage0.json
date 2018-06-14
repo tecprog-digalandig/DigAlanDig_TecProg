@@ -1,0 +1,62 @@
+{ "height":6,
+ "infinite":false,
+ "layers":[
+        {
+         "data":[2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2],
+         "height":6,
+         "name":"base",
+         "opacity":1,
+         "type":"tilelayer",
+         "visible":true,
+         "width":6,
+         "x":0,
+         "y":0
+        }, 
+        {
+         "data":[2, 2, 2, 2, 2, 2, 2, 4, 4, 4, 4, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3],
+         "height":6,
+         "name":"blocos",
+         "opacity":1,
+         "type":"tilelayer",
+         "visible":true,
+         "width":6,
+         "x":0,
+         "y":0
+        }, 
+        {
+         "data":[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 2, 2, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+         "height":6,
+         "name":"itens",
+         "opacity":1,
+         "type":"tilelayer",
+         "visible":true,
+         "width":6,
+         "x":0,
+         "y":0
+        }, 
+        {
+         "data":[4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+         "height":6,
+         "name":"inimigos",
+         "opacity":1,
+         "type":"tilelayer",
+         "visible":false,
+         "width":6,
+         "x":0,
+         "y":0
+        }],
+ "nextobjectid":1,
+ "orientation":"orthogonal",
+ "renderorder":"right-down",
+ "tiledversion":"1.1.4",
+ "tileheight":100,
+ "tilesets":[
+        {
+         "firstgid":1,
+         "source":"ground.json"
+        }],
+ "tilewidth":100,
+ "type":"map",
+ "version":1,
+ "width":6
+}

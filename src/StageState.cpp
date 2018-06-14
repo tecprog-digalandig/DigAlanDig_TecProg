@@ -38,7 +38,7 @@ void StageState::LoadAssets() {
     GameObject *gm =
         new GameObject(Common::Layer::DEFAULT | Common::Layer::LIGHT);
     objectArray.emplace_back(gm);
-    tileMap = new TileMap(*gm, "assets/map/stage1.json");
+    tileMap = new TileMap(*gm, "assets/map/manager.json", true);
     gm->AddComponent(tileMap);
 
     GameObject *alan = new GameObject();

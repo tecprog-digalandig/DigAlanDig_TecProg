@@ -7,22 +7,51 @@
 
 using json = nlohmann::json;
 
+TileMap::TileMap(GameObject& associated, const std::string& file, bool infinity)
+    : Component(associated), infinity(infinity) {
+    layerIndex["base"] = 0;
+    layerIndex["blocos"] = 1;
+    layerIndex["itens"] = 2;
+    layerIndex["inimigos"] = 3;
+    tileMat.resize(layerIndex.size());
+
+    if (infinity)
+        LoadList(file);
+    else
+        Load(file);
+}
 TileMap::~TileMap() {}
 
-void TileMap::Load(const std::string &file) {
+void TileMap::LoadList(const std::string& file) {
+    json j;
+    Common::read_Json(j, file);
+    for (auto it = j["files"].begin(); it != j["files"].end(); ++it) {
+        TileMapsFiles.push_back("assets/map/" +
+                                it.value().at("name").get<std::string>());
+    }
+
+    Load(TileMapsFiles[GetNextFile()]);
+}
+
+void TileMap::Load(const std::string& file) {
     json j;
     Common::read_Json(j, file);
 
     std::string tileSetFile = j.at("tilesets").at(0).at("source");
-    tileSetFile.replace(tileSetFile.end() - 3, tileSetFile.end(), "json");
+    // tileSetFile.replace(tileSetFile.end() - 3, tileSetFile.end(), "json");
     tileSet = new TileSet("assets/map/" + tileSetFile);
 
     width = j.at("width");
-    height = j.at("height");
+    height += (int)j.at("height");
+    std::cout << "height: " << height << std::endl;
     depth = j.at("layers").size();
 
-    for (int i = 0; i < depth; i++)
-        tileMat.push_back(j.at("layers").at(i).at("data"));
+    for (int i = 0; i < depth; i++) {
+        int layer = layerIndex.at(j.at("layers").at(i).at("name"));
+        std::vector<int> newdata = j.at("layers").at(i).at("data");
+        tileMat[layer].insert(tileMat[layer].end(), newdata.begin(),
+                              newdata.end());
+    }
 }
 
 inline int inRange(int value, int min, int max) {
@@ -50,10 +79,22 @@ void TileMap::RenderLayer(int layer, int cameraX, int cameraY) const {
                                 col * w - cameraX, line * h - cameraY);
 }
 
-int TileMap::At(int x, int y, int z) const {
-    bool valid = (x >= 0) && (x < width) && (y >= 0) && (y < height) &&
-                 (z >= 0) && (z < depth);
-    return (valid) ? tileMat[z][y * width + x] : 1;
+int TileMap::GetNextFile() {
+    static int a = -1;
+    a++;
+    return a % TileMapsFiles.size();
+}
+
+int TileMap::At(int x, int y, int z) {
+    bool valid = (x >= 0) && (x < width) && (y >= 0) && (z >= 0) && (z < depth);
+    if (!valid) return 1;
+
+    while (infinity &&
+           ((y >= height) ||
+            ((Camera::pos.y + Camera::screenSize.y) / 100) >= height)) {
+        Load(TileMapsFiles[GetNextFile()]);
+    }
+    return tileMat[z][y * width + x];
 }
 
 void TileMap::Render(Common::Layer layer) const {
@@ -62,7 +103,7 @@ void TileMap::Render(Common::Layer layer) const {
     else
         tileSet->setTileSetLight();
 
-    for (int i = 0; i < depth; ++i)
+    for (int i = 0; i < depth - 1; ++i)
         RenderLayer(i, Camera::pos.x, Camera::pos.y);
 }
 

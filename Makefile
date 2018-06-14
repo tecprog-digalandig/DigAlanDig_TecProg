@@ -19,7 +19,7 @@ INC_PATHS = -I$(INC_PATH) -I$(EXT_PATH) $(addprefix -I,$(SDL_INC_PATH))
 # Diretivas de compilacao
 FLAGS = -std=c++11 -Wall -pedantic -Wextra -Wno-unused-parameter -Werror=init-self -I/usr/include/SDL2
 # Diretivas extras para debug
-DFLAGS = -ggdb -O0 -DDEBUG
+DFLAGS = -ggdb -O0 -DDEBUG -D_GLIBCXX_DEBUG -D_GLIBCXX_DEBUG_PEDANTIC 
 # Diretivas extras para release
 RFLAGS = -O3 -mtune=native
 # Diretivas extras para release com simbolos de debug

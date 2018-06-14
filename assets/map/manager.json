@@ -1,0 +1,11 @@
+{ "files":[
+        {
+         "name":"stage0.json",
+         "level":1
+        },
+		{
+         "name":"stage1.json",
+         "level":1
+        }],
+ "mode":"random"
+}
