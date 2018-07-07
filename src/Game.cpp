@@ -171,6 +171,12 @@ Game::Game(const std::string& title, int width, int height)
     }
     Camera::screenSize.Set(width, height);
 
+    SDL_Surface* icon = IMG_Load("assets/icon/icon128.png");
+    if (icon) {
+        SDL_SetWindowIcon(window, icon);
+        SDL_FreeSurface(icon);
+    }
+
     renderer = SDL_CreateRenderer(
         window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_TARGETTEXTURE);
     if (!renderer) {

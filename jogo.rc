@@ -1,0 +1,19 @@
+AppIcon ICON "assets/icon.ico"
+1 VERSIONINFO
+FILEVERSION     1,0,0,0
+PRODUCTVERSION  1,0,0,0
+BEGIN
+  BLOCK "StringFileInfo"
+  BEGIN
+    BLOCK "041604E4"
+    BEGIN
+      VALUE "CompanyName", "Marmocompany"
+      VALUE "FileDescription", "Marmota do batidao"
+      VALUE "FileVersion", "1.0"
+      VALUE "InternalName", "marmota_game"
+      VALUE "OriginalFilename", "dig_allan.exe"
+      VALUE "ProductName", "Dig Allan"
+      VALUE "ProductVersion", "1.0"
+    END
+  END
+END

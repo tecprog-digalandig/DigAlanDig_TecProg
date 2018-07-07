@@ -7,6 +7,9 @@
 *.o
 *.obj
 
+# Compiled Res File
+*.res
+
 # Compiled Dynamic libraries
 *.so
 *.dylib
