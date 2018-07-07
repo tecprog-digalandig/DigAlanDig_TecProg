@@ -98,6 +98,10 @@ INC_PATHS = -I$(INC_PATH) -I$(EXT_PATH) -I/usr/local/cross-tools/x86_64-w64-ming
 #LINK_PATH =  $(shell sdl2-config --static-libs) -static-libstdc++ -lz -logg -lvorbis -lpng -ljpeg
 LINK_PATH =  -L/usr/local/cross-tools//x86_64-w64-mingw32/lib  --static -lmingw32 -lSDL2main -lSDL2 -mwindows -Wl,--no-undefined -lm -ldinput8 -ldxguid -ldxerr8 -luser32 -lgdi32 -lwinmm -limm32 -lole32 -loleaut32 -lshell32 -lversion -luuid -static-libgcc -static-libstdc++ -lSDL2 -lSDL2_image -lSDL2_mixer -lSDL2_ttf -lfreetype -lm  -ljpeg -lpng -lz -lwinmm -lvorbisfile -lvorbis -logg
 
+RC_FILE = jogo.rc
+RES_FILE = jogo.res
+OBJ_FILES += $(BIN_PATH)/$(RES_FILE)
+
 EXEC := $(EXEC).exe
 
 endif
@@ -122,6 +126,10 @@ $(BIN_PATH)/%.o: $(DEP_PATH)/%.d | folders
 # Gera os arquivos de dependencia
 $(DEP_PATH)/%.d: $(SRC_PATH)/%.cpp | folders
 	$(CC) $(INC_PATHS) $< $(DEP_FLAGS) $(FLAGS)
+
+# Gera o arquivo res
+$(BIN_PATH)/%.res: $(RC_FILE)
+	x86_64-w64-mingw32-windres $^ -O coff -o $@
 
 clean:
 	-$(RMDIR) $(DEP_PATH)
