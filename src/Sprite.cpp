@@ -71,7 +71,7 @@ void Sprite::Update(float dt) {
         AlanUpdate(dt);
         return;
     } else {
-        if ((currentFrame + 1) * frameTime <= timeElapsed) {
+        if (frameTime > 0 && ((currentFrame + 1) * frameTime <= timeElapsed)) {
             int newFrame = floor(timeElapsed / frameTime);
             SetFrame(newFrame % frameCount);
         }
