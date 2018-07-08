@@ -8,7 +8,7 @@ HudTimer::HudTimer(GameObject& associated)
     associated.box.SetCenter(center);
     boxbg = associated.box;
 
-    meter = new Sprite(associated, "assets/hud/coracao.png", 3, 1e9);
+    meter = new Sprite(associated, "assets/hud/raio.png", 3, 1e9);
     associated.box.SetCenter(center);
     boxmeter = associated.box;
 
