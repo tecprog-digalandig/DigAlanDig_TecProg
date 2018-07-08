@@ -12,6 +12,7 @@
 #include "Game.h"
 #include "HudCounter.h"
 #include "HudMeter.h"
+#include "HudTimer.h"
 #include "Interpol.h"
 #include "Light.h"
 #include "MiniTileMap.h"
@@ -144,6 +145,12 @@ void StageState::LoadAssets() {
     bigAlan->box.pos = {0, 460};
 
     // HUD
+    GameObject *timerHud = new GameObject(Common::Layer::HUD);
+    objectArray.emplace_back(timerHud);
+    timerHud->worldReference = false;
+    timerHud->box.pos = {304 + 600 / 2, Camera::screenSize.y - 50};
+    timerHud->AddComponent(new HudTimer(*timerHud));
+
     GameObject *meterHeart = new GameObject(Common::Layer::HUD);
     objectArray.emplace_back(meterHeart);
     meterHeart->worldReference = false;

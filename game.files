@@ -15,6 +15,7 @@ include/GameObject.h
 include/GridControl.h
 include/HudCounter.h
 include/HudMeter.h
+include/HudTimer.h
 include/InputManager.h
 include/Interpol.h
 include/Light.h
@@ -48,6 +49,7 @@ src/GameObject.cpp
 src/GridControl.cpp
 src/HudCounter.cpp
 src/HudMeter.cpp
+src/HudTimer.cpp
 src/InputManager.cpp
 src/Interpol.cpp
 src/Light.cpp
