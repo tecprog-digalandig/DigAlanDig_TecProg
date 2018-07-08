@@ -21,7 +21,7 @@ class HudMeter : public Component {
     void setLevel(int level);
 
   private:
-    bool isHeart;
+    bool isHeart = false;
     std::weak_ptr<GameObject> alan;
     Sprite *bg, *meter;
     Rect boxbg;

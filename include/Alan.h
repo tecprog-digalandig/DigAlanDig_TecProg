@@ -19,7 +19,7 @@
 
 class Alan : public Component {
   public:
-    Alan(GameObject& associated);
+    explicit Alan(GameObject& associated);
 
     ~Alan() {}
 
