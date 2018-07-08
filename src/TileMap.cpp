@@ -112,7 +112,7 @@ void TileMap::Render(Common::Layer layer) const {
 
 void SpawnDust(Vec2 pos) {
     GameObject* go = new GameObject();
-    go->AddComponent(new Sprite(*go, "assets/img/dust.png", 3, 0.2, 3 * 0.2));
+    go->AddComponent(new Sprite(*go, "assets/img/dust.png", 3, 0.1, 3 * 0.1));
     go->box.SetCenter((pos * 100) + Vec2(50, 50));
     Game::GetInstance()->GetCurrentState().AddObject(go);
 }

@@ -41,8 +41,6 @@ void Alan::GetMovement() {
             std::cout << "\n\nHit: " << input.GetDeltaRhythm() << "\n\n";
             Game::GetInstance()->combo++;
         } else {
-            associated.GetComponent<AlanActionControl *>()
-                ->SetMovementDirection(AlanActionControl::Direction::NONE);
             Camera::Shake();
             Game::GetInstance()->combo = 0;
             std::cout << "\n\nMiss: " << input.GetDeltaRhythm() << "\n\n";
