@@ -135,7 +135,7 @@ clean:
 	-$(RMDIR) $(DEP_PATH)
 	-$(RMDIR) $(BIN_PATH)
 	-$(RM) $(EXEC)
-	-$(RM) cout.txt cerr.txt
+	-$(RM) cout.txt cerr.txt jogo.res
 
 release: FLAGS += $(RFLAGS)
 release: $(EXEC)
