@@ -1,9 +1,8 @@
 Makefile
-extern/SdlScanCodeHelper.hpp
-extern/androidbuf.h
-extern/json.hpp
 include/Alan.h
+include/AlanActionControl.h
 include/AlanAnimation.h
+include/AlanEnemyCollision.h
 include/BigAlan.h
 include/Camera.h
 include/Common.h
@@ -36,13 +35,13 @@ include/Timer.h
 include/TitleState.h
 include/Vec2.h
 src/Alan.cpp
+src/AlanActionControl.cpp
 src/AlanAnimation.cpp
 src/BigAlan.cpp
 src/Camera.cpp
 src/Common.cpp
 src/Component.cpp
 src/Enemy.cpp
-src/EnemyDeath.cpp
 src/EnemySpawn.cpp
 src/Game.cpp
 src/GameObject.cpp

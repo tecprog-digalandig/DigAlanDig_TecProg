@@ -70,6 +70,11 @@ void Sprite::Update(float dt) {
     if (associated.GetComponent<Alan *>() != nullptr) {
         AlanUpdate(dt);
         return;
+    } else {
+        if ((currentFrame + 1) * frameTime <= timeElapsed) {
+            int newFrame = floor(timeElapsed / frameTime);
+            SetFrame(newFrame % frameCount);
+        }
     }
 }
 
