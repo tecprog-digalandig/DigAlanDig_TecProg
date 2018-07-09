@@ -1,34 +1,12 @@
-{ "columns":4,
- "image":"..\/img\/GroundhogAlanBackgroundSample.png",
- "imageheight":100,
- "imagewidth":400,
+{ "columns":6,
+ "image":"..\/img\/ground.png",
+ "imageheight":500,
+ "imagewidth":600,
  "margin":0,
  "name":"ground",
  "spacing":0,
- "tilecount":4,
+ "tilecount":30,
  "tileheight":100,
- "tileproperties":
-    {
-     "2":
-        {
-         "hp":1
-        },
-     "3":
-        {
-         "hp":2
-        }
-    },
- "tilepropertytypes":
-    {
-     "2":
-        {
-         "hp":"int"
-        },
-     "3":
-        {
-         "hp":"int"
-        }
-    },
  "tilewidth":100,
  "type":"tileset"
 }
