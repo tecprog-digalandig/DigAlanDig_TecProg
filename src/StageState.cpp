@@ -204,7 +204,7 @@ void StageState::LoadAssets() {
     lilAlan->SetItemCount(itemCount);
 
     // Music
-    music.Open("assets/audio/marmota.ogg");
+    music.Open("assets/audio/funk.ogg");
     count = 0;
     halfBeatCounter = 0;
     Mix_SetPostMix(noEffect, NULL);
