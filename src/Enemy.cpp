@@ -44,7 +44,7 @@ Enemy::Enemy(GameObject &associated, int enemy_type)
     associated.AddComponent(interpol);
     sprite->Open(EState[state], Enemy::Direction::LEFT);
 
-    hp = 3;
+    life_enemy = 3;
     range = enemy_type;
 
     tileMapPos.x = associated.box.x;
@@ -53,8 +53,8 @@ Enemy::Enemy(GameObject &associated, int enemy_type)
 
 bool Enemy::VerifyDeath(Alan *alan) {
     // Inimigo morre se:
-    // 1. HP <= 0
-    if (hp <= 0) {
+    // 1. life_enemy <= 0
+    if (life_enemy <= 0) {
         return true;
     }
     // 2. Alan cai em cima dele

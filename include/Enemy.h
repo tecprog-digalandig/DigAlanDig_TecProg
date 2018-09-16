@@ -69,7 +69,7 @@ class Enemy : public Component {
 
     void TakeDamage(int damage)
     { 
-        hp -= damage;
+        life_enemy -= damage;
     }
     
     void ShouldTakeDamage(Alan* alan);
@@ -87,7 +87,7 @@ class Enemy : public Component {
 
     int num_beats = 0;
 
-    int hp;
+    int life_enemy;
 
     Vec2 tileMapPos;
 
