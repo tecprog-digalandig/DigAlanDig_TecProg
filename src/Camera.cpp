@@ -14,13 +14,23 @@ GameObject *Camera::focus = nullptr;
 int Camera::shake_intensity = 0;
 float Camera::shake_duration = 0;
 
-void Camera::Follow(GameObject *new_focus) { focus = new_focus; }
+void Camera::Follow(GameObject *new_focus) 
+{ 
+    focus = new_focus;
+}
 
-void Camera::Unfollow() { focus = nullptr; }
+void Camera::Unfollow()
+{ 
+    focus = nullptr;
+}
 
-Vec2 Camera::Center() { return pos + screenSize / 2; }
+Vec2 Camera::Center()
+{ 
+    return pos + screenSize / 2;
+}
 
-void Camera::RhythmUpdate() {
+void Camera::RhythmUpdate()
+{
     if (focus) {
         if (offset.y > (focus->box.y +
                         Game::GetInstance()->GetCurrentState().GetGridSize()) &&
@@ -30,7 +40,8 @@ void Camera::RhythmUpdate() {
     }
 }
 
-void Camera::Update(float dt) {
+void Camera::Update(float dt)
+{
     if (shake_duration > 0) {
         shake_duration -= dt;
         shake = {sin((rand() % (int)(2000 * M_PI)) / 1000.0) * shake_intensity,
@@ -96,12 +107,12 @@ void Camera::Update(float dt) {
     }
     pos = shake + offset;
 
-    static int acc = 30;
+    static int acceleration = 30;
     if (InputManager::GetInstance().KeyDown(SDL_SCANCODE_COMMA)) {
-        speed.y -= acc * dt;
+        speed.y -= acceleration * dt;
     }
     if (InputManager::GetInstance().KeyDown(SDL_SCANCODE_PERIOD)) {
-        speed.y += acc * dt;
+        speed.y += acceleration * dt;
     }
     if (InputManager::GetInstance().KeyPress(SDL_SCANCODE_C)) {
         current_move = (Movement)(current_move + 1);
@@ -109,7 +120,8 @@ void Camera::Update(float dt) {
     }
 }
 
-void Camera::Shake(int intensity, float duration) {
+void Camera::Shake(int intensity, float duration)
+{
     shake_intensity = intensity;
     shake_duration = duration;
 }

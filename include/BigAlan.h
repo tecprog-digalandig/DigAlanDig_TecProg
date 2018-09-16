@@ -16,10 +16,12 @@ class BigAlan : public Component {
     }
 
     void Update(float dt);
+
     void RhythmUpdate() {
         associated.box.y += offset;
         offset = -offset;
     }
+    
     void Render(Common::Layer layer) const {}
 
 

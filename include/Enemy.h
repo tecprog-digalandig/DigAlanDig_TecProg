@@ -28,7 +28,8 @@ class Enemy : public Component {
     ~Enemy() {}
 
     void Update(float dt);
-    void RhythmUpdate() {
+    void RhythmUpdate()
+    {
         num_beats++;
 
         if (!movement_allowed && num_beats > 1) {
@@ -39,21 +40,38 @@ class Enemy : public Component {
     void RhythmReset() {}
     void Render(Common::Layer layer) const {}
 
-    Vec2 GetGridPosition() { return associated.GetGridPosition(); }
+    Vec2 GetGridPosition()
+    { 
+        return associated.GetGridPosition();
+    }
 
-    void MovementDenied() { movement_allowed = false; }
+    void MovementDenied()
+    { 
+        movement_allowed = false;
+    }
 
-    Direction GetMovementDirection() { return movement_direction; }
-    State GetState() { return state; }
+    Direction GetMovementDirection()
+    {
+        return movement_direction;
+    }
+    State GetState()
+    { 
+        return state;
+    }
 
-    void SetAsHit() {
+    void SetAsHit()
+    {
         associated.GetComponent<Interpol*>()->isHit = true;
         movement_allowed = false;
     }
 
     bool VerifyDeath(Alan* alan);
 
-    void TakeDamage(int damage) { hp -= damage; }
+    void TakeDamage(int damage)
+    { 
+        hp -= damage;
+    }
+    
     void ShouldTakeDamage(Alan* alan);
 
     void IsSurrounded();
