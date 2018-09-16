@@ -6,23 +6,23 @@
 #include "Game.h"
 #include "StageState.h"
 
-Enemy::Enemy(GameObject &associated, int enemyType)
+Enemy::Enemy(GameObject &associated, int enemy_type)
     : Component(associated), input(InputManager::GetInstance()) {
-    if (enemyType == 1) {
+    if (enemy_type == 1) {
         EState[State::IDLE_S] = {"assets/img/enemies/enemy1/idle.png", 2, 2,
                                  -1};
         EState[State::WALKIN_S] = {"assets/img/enemies/enemy1/walkin.png", 2, 4,
                                    0.2};
         EState[State::DIE_S] = {"assets/img/enemies/enemy1/idle.png", 2, 2,
                                 0.2};
-    } else if (enemyType == 2) {
+    } else if (enemy_type == 2) {
         EState[State::IDLE_S] = {"assets/img/enemies/enemy2/idle.png", 2, 2,
                                  -1};
         EState[State::WALKIN_S] = {"assets/img/enemies/enemy2/walkin.png", 2, 4,
                                    0.2};
         EState[State::DIE_S] = {"assets/img/enemies/enemy2/idle.png", 2, 2,
                                 0.2};
-    } else if (enemyType == 3) {
+    } else if (enemy_type == 3) {
         EState[State::IDLE_S] = {"assets/img/enemies/enemy3/idle.png", 2, 2,
                                  -1};
         EState[State::WALKIN_S] = {"assets/img/enemies/enemy3/walkin.png", 2, 4,
@@ -45,7 +45,7 @@ Enemy::Enemy(GameObject &associated, int enemyType)
     sprite->Open(EState[state], Enemy::Direction::LEFT);
 
     hp = 3;
-    range = enemyType;
+    range = enemy_type;
 
     tileMapPos.x = associated.box.x;
     tileMapPos.y = associated.box.y;
@@ -86,9 +86,9 @@ void Enemy::ShouldTakeDamage(Alan *alan) {
             Vec2(associated.gridPosition.x - 1, associated.gridPosition.y),
             false) == GridControl::WhatsThere::ALAN &&
         alan->GetMovementDirection() == AlanActionControl::Direction::RIGHT) {
-        if (!damageTaken) {
+        if (!damage_taken) {
             TakeDamage(alan->GetDamage());
-            damageTaken = true;
+            damage_taken = true;
         }
     } else if (Game::GetInstance()->GetGridControl()->TestPath(
                    Vec2(associated.gridPosition.x + 1,
@@ -96,12 +96,12 @@ void Enemy::ShouldTakeDamage(Alan *alan) {
                    false) == GridControl::WhatsThere::ALAN &&
                alan->GetMovementDirection() ==
                    AlanActionControl::Direction::LEFT) {
-        if (!damageTaken) {
+        if (!damage_taken) {
             TakeDamage(alan->GetDamage());
-            damageTaken = true;
+            damage_taken = true;
         }
     } else {
-        damageTaken = false;
+        damage_taken = false;
     }
 }
 
@@ -112,7 +112,7 @@ void Enemy::IsSurrounded() {
         Game::GetInstance()->GetGridControl()->TestPath(
             Vec2(associated.gridPosition.x + 1, associated.gridPosition.y),
             false) != GridControl::WhatsThere::FREE)
-        movementAllowed = false;
+        movement_allowed = false;
 }
 
 void Enemy::Update(float dt) {
@@ -146,7 +146,7 @@ void Enemy::Update(float dt) {
 
     IsSurrounded();
 
-    if (movementDirection == Enemy::Direction::LEFT) {
+    if (movement_direction == Enemy::Direction::LEFT) {
         if (Game::GetInstance()->GetGridControl()->TestPath(
                 Vec2(associated.gridPosition.x - 1, associated.gridPosition.y),
                 false) != GridControl::WhatsThere::FREE ||
@@ -154,8 +154,8 @@ void Enemy::Update(float dt) {
                 Vec2(associated.gridPosition.x - 1,
                      associated.gridPosition.y + 1),
                 false) != GridControl::WhatsThere::ROCK) {
-            movementAllowed = false;
-            movementDirection = Enemy::Direction::RIGHT;
+            movement_allowed = false;
+            movement_direction = Enemy::Direction::RIGHT;
             steps = 0;
         }
     } else {
@@ -166,34 +166,34 @@ void Enemy::Update(float dt) {
                 Vec2(associated.gridPosition.x + 1,
                      associated.gridPosition.y + 1),
                 false) != GridControl::WhatsThere::ROCK) {
-            movementAllowed = false;
-            movementDirection = Enemy::Direction::LEFT;
+            movement_allowed = false;
+            movement_direction = Enemy::Direction::LEFT;
             steps = 0;
         }
     }
 
-    if (movementAllowed) {
+    if (movement_allowed) {
         if (state != Enemy::State::WALKIN_S) {
             state = Enemy::State::WALKIN_S;
-            sprite->Open(EState[state], movementDirection);
+            sprite->Open(EState[state], movement_direction);
         }
         if (steps < range) {
-            if (movementDirection == Enemy::Direction::LEFT) {
-                movementAllowed = false;
+            if (movement_direction == Enemy::Direction::LEFT) {
+                movement_allowed = false;
                 steps++;
                 associated.gridPosition.x--;
 
             } else {
-                movementAllowed = false;
+                movement_allowed = false;
                 steps++;
                 associated.gridPosition.x++;
             }
 
         } else {
-            if (movementDirection == Enemy::Direction::LEFT) {
-                movementDirection = Enemy::Direction::RIGHT;
+            if (movement_direction == Enemy::Direction::LEFT) {
+                movement_direction = Enemy::Direction::RIGHT;
             } else {
-                movementDirection = Enemy::Direction::LEFT;
+                movement_direction = Enemy::Direction::LEFT;
             }
             steps = 0;
         }
