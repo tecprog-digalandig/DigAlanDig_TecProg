@@ -6,8 +6,8 @@
 
 class HudMeter : public Component {
   public:
-    HudMeter(GameObject& associated, const std::string& bgFile,
-             const std::string& meterFile);
+    HudMeter(GameObject& associated, const std::string& bg_file,
+             const std::string& meter_file);
     ~HudMeter();
 
     void Update(float dt) {}
@@ -40,17 +40,17 @@ class HudMeter : public Component {
 class HeartMeter : public HudMeter 
 {
   public:
-    HeartMeter(GameObject& associated, const std::string& bgFile,
-               const std::string& meterFile)
-        : HudMeter(associated, bgFile, meterFile){};
+    HeartMeter(GameObject& associated, const std::string& bg_file,
+               const std::string& meter_file)
+        : HudMeter(associated, bg_file, meter_file){};
 };
 
 class LightMeter : public HudMeter 
 {
   public:
-    LightMeter(GameObject& associated, const std::string& bgFile,
-               const std::string& meterFile)
-        : HudMeter(associated, bgFile, meterFile){};
+    LightMeter(GameObject& associated, const std::string& bg_file,
+               const std::string& meter_file)
+        : HudMeter(associated, bg_file, meter_file){};
 };
 
 #endif  // HUDMETER_H
