@@ -8,13 +8,13 @@
 
 Vec2 Camera::pos, Camera::shake, Camera::speed(60, 60), Camera::screenSize;
 Vec2 Camera::offset;
-Camera::Movement Camera::currentMove = Camera::FRIENDLYSCROLL;
+Camera::Movement Camera::current_move = Camera::FRIENDLYSCROLL;
 
 GameObject *Camera::focus = nullptr;
-int Camera::shakeIntensity = 0;
-float Camera::shakeDuration = 0;
+int Camera::shake_intensity = 0;
+float Camera::shake_duration = 0;
 
-void Camera::Follow(GameObject *newFocus) { focus = newFocus; }
+void Camera::Follow(GameObject *new_focus) { focus = new_focus; }
 
 void Camera::Unfollow() { focus = nullptr; }
 
@@ -31,19 +31,19 @@ void Camera::RhythmUpdate() {
 }
 
 void Camera::Update(float dt) {
-    if (shakeDuration > 0) {
-        shakeDuration -= dt;
-        shake = {sin((rand() % (int)(2000 * M_PI)) / 1000.0) * shakeIntensity,
-                 sin((rand() % (int)(2000 * M_PI)) / 1000.0) * shakeIntensity};
+    if (shake_duration > 0) {
+        shake_duration -= dt;
+        shake = {sin((rand() % (int)(2000 * M_PI)) / 1000.0) * shake_intensity,
+                 sin((rand() % (int)(2000 * M_PI)) / 1000.0) * shake_intensity};
     } else {
         shake = {0, 0};
     }
 
-    if (!focus) currentMove = Camera::NONE;
+    if (!focus) current_move = Camera::NONE;
 
-    float scrollFactor = 1;
+    float scroll_factor = 1;
 
-    switch (Camera::currentMove) {
+    switch (Camera::current_move) {
         case ATTACHED:
             if (focus->box.y >= screenSize.y / 2) {
                 offset.y = -(screenSize.y / 2) + focus->box.y;
@@ -53,7 +53,7 @@ void Camera::Update(float dt) {
         case Camera::FRIENDLYSCROLL:
             // half the speed when close to the top
             // double the speed when close to the bottom
-            scrollFactor = (1.5 * (focus->box.y - pos.y) / screenSize.y + 0.5);
+            scroll_factor = (1.5 * (focus->box.y - pos.y) / screenSize.y + 0.5);
 
         case Camera::CONSTSCROLL: {
             Vec2 focusGridPos = focus->GetGridPosition();
@@ -76,10 +76,10 @@ void Camera::Update(float dt) {
                     (tileMap->GetHeight() *
                          Game::GetInstance()->GetCurrentState().GetGridSize() -
                      screenSize.y)) {
-                offset.y += speed.y * dt * scrollFactor;
+                offset.y += speed.y * dt * scroll_factor;
 
                 if (offset.y + screenSize.y - 300 < focus->box.y) {
-                    offset.y += 3 * speed.y * dt * scrollFactor;
+                    offset.y += 3 * speed.y * dt * scroll_factor;
                 }
             }
             break;
@@ -104,12 +104,12 @@ void Camera::Update(float dt) {
         speed.y += acc * dt;
     }
     if (InputManager::GetInstance().KeyPress(SDL_SCANCODE_C)) {
-        currentMove = (Movement)(currentMove + 1);
-        if (currentMove > Camera::NONE) currentMove = Camera::ATTACHED;
+        current_move = (Movement)(current_move + 1);
+        if (current_move > Camera::NONE) current_move = Camera::ATTACHED;
     }
 }
 
 void Camera::Shake(int intensity, float duration) {
-    shakeIntensity = intensity;
-    shakeDuration = duration;
+    shake_intensity = intensity;
+    shake_duration = duration;
 }
