@@ -51,7 +51,8 @@ Enemy::Enemy(GameObject &associated, int enemy_type)
     tileMapPos.y = associated.box.y;
 }
 
-bool Enemy::VerifyDeath(Alan *alan) {
+bool Enemy::VerifyDeath(Alan *alan)
+{
     // Inimigo morre se:
     // 1. life_enemy <= 0
     if (life_enemy <= 0) {
@@ -79,7 +80,8 @@ bool Enemy::VerifyDeath(Alan *alan) {
     return false;
 }
 
-void Enemy::ShouldTakeDamage(Alan *alan) {
+void Enemy::ShouldTakeDamage(Alan *alan)
+{
     if (state != State::IDLE_S) return;
 
     if (Game::GetInstance()->GetGridControl()->TestPath(
@@ -105,7 +107,8 @@ void Enemy::ShouldTakeDamage(Alan *alan) {
     }
 }
 
-void Enemy::IsSurrounded() {
+void Enemy::IsSurrounded()
+{
     if (Game::GetInstance()->GetGridControl()->TestPath(
             Vec2(associated.gridPosition.x - 1, associated.gridPosition.y),
             false) != GridControl::WhatsThere::FREE &&
@@ -115,7 +118,8 @@ void Enemy::IsSurrounded() {
         movement_allowed = false;
 }
 
-void Enemy::Update(float dt) {
+void Enemy::Update(float dt)
+{
     if (!Game::GetInstance()->GetGridControl()->GetAlan().lock() ||
         !associated.GetComponent<Interpol *>()->IsMovementDone())
         return;

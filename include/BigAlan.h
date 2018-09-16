@@ -17,7 +17,8 @@ class BigAlan : public Component {
 
     void Update(float dt);
 
-    void RhythmUpdate() {
+    void RhythmUpdate()
+    {
         associated.box.y += offset;
         offset = -offset;
     }
