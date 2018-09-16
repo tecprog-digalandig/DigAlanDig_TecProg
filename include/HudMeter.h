@@ -15,8 +15,14 @@ class HudMeter : public Component {
     void RhythmUpdate() {}
     void Render(Common::Layer layer) const;
 
-    void SetAlan(std::weak_ptr<GameObject> alan) { this->alan = alan; }
-    void setIsHeart(bool isHeart) { this->isHeart = isHeart; }
+    void SetAlan(std::weak_ptr<GameObject> alan) 
+    { 
+      this->alan = alan;
+    }
+    void setIsHeart(bool isHeart) 
+    { 
+      this->isHeart = isHeart;
+    }
 
     void setLevel(int level);
 
@@ -31,14 +37,16 @@ class HudMeter : public Component {
     void setMeter(int i) const;
 };
 
-class HeartMeter : public HudMeter {
+class HeartMeter : public HudMeter 
+{
   public:
     HeartMeter(GameObject& associated, const std::string& bgFile,
                const std::string& meterFile)
         : HudMeter(associated, bgFile, meterFile){};
 };
 
-class LightMeter : public HudMeter {
+class LightMeter : public HudMeter 
+{
   public:
     LightMeter(GameObject& associated, const std::string& bgFile,
                const std::string& meterFile)
