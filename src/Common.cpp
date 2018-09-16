@@ -1,7 +1,7 @@
 #include "Common.h"
 
-char *Common::file_read(const char *filename) {
-    SDL_RWops *rw = SDL_RWFromFile(filename, "rb");
+char *Common::file_read(const char *file_name) {
+    SDL_RWops *rw = SDL_RWFromFile(file_name, "rb");
     if (rw == nullptr) return nullptr;
 
     Sint64 res_size = SDL_RWsize(rw);
@@ -24,7 +24,7 @@ char *Common::file_read(const char *filename) {
     return res;
 }
 
-void Common::read_Json(json &j, const std::string &file) {
+void Common::readJson(json &j, const std::string &file) {
     char *data = Common::file_read(file.c_str());
     if (data == nullptr) exit(0);
 

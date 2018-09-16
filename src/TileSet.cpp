@@ -4,7 +4,7 @@
 
 TileSet::TileSet(const std::string& file) {
     json j;
-    Common::read_Json(j, file);
+    Common::readJson(j, file);
 
     std::string imgFile = j.at("image");
     imgFile.replace(imgFile.begin(), imgFile.begin() + 3, "assets/");
