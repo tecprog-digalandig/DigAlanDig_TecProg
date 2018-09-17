@@ -14,43 +14,43 @@ class Sound : public Component
     Sound(GameObject& associated, const std::string& file, bool play = false)
         : Component(associated), chunk(nullptr), played(false) 
         {
-        Open(file);
-        if (play) Play();
+        open(file);
+        if (play) play();
     }
 
-    ~Sound() { Stop(); 
+    ~Sound() { stop(); 
     }
 
-    void Open(const std::string& file) 
+    void open(const std::string& file) 
     { 
-        chunk = Resources::GetSound(file); 
+        chunk = Resources::getSound(file); 
     }
 
-    bool IsOpen() const 
+    bool isOpen() const 
     { 
         return (bool)chunk; 
     }
 
-    bool CanEnd() const 
+    bool canEnd() const 
     { 
-        return played && !Mix_Playing(channel); 
+        return played && !mixPlaying(channel); 
     }
 
-    void Play(int times = 1);
+    void play(int times = 1);
 
-    void Stop() const 
+    void stop() const 
     {
-        if (chunk) Mix_HaltChannel(channel);
+        if (chunk) mixHaltChannel(channel);
     }
 
-    void SetVolume(int v) 
+    void setVolume(int v) 
     {
         if (chunk) chunk->volume = v;
     }
 
-    void Update(float dt) {}
-    void RhythmUpdate() {}
-    void Render(Common::Layer layer) const {}
+    void update(float dt) {}
+    void rhythmUpdate() {}
+    void render(Common::Layer layer) const {}
 
   private:
     std::shared_ptr<Mix_Chunk> chunk;
