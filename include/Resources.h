@@ -9,7 +9,8 @@
 #include <string>
 #include <unordered_map>
 
-class Resources {
+class Resources 
+{
   public:
     static std::shared_ptr<SDL_Texture> GetImage(const std::string& file);
     static void ClearImages();

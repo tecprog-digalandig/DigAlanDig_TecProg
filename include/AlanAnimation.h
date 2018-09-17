@@ -16,9 +16,11 @@
 #include "TileMap.h"
 #include "Vec2.h"
 
-class AlanAnimation : public Component {
+class AlanAnimation : public Component 
+{
   public:
-    enum Transition {
+    enum Transition 
+    {
         NONE_T,
         WALK,
         HIT_T,
@@ -31,9 +33,13 @@ class AlanAnimation : public Component {
         DIE
     };
 
-    enum Direction { LEFT = 0, RIGHT, UP, DOWN };
+    enum Direction 
+    { 
+        LEFT = 0, RIGHT, UP, DOWN 
+    };
 
-    enum State {
+    enum State 
+    {
         NONE_S = 0,
         IDLE,
         WALKIN,
@@ -53,7 +59,8 @@ class AlanAnimation : public Component {
     void Update(float dt);
     void RhythmUpdate() {}
     void Render(Common::Layer layer) const {}
-    void Start() {
+    void Start() 
+    {
         currentState = State::IDLE;
         oldState = currentState;
         currentDirection = LEFT;
@@ -62,11 +69,25 @@ class AlanAnimation : public Component {
 
     void SetAction(Transition trans, Direction dir);
 
-    Direction GetCurrentDirection() { return currentDirection; }
-    Direction GetOldDirection() { return oldDirection; }
+    Direction GetCurrentDirection() 
+    { 
+        return currentDirection; 
+    }
 
-    State GetCurrentState() { return currentState; }
-    State GetOldState() { return oldState; }
+    Direction GetOldDirection() 
+    { 
+        return oldDirection; 
+    }
+
+    State GetCurrentState() 
+    { 
+        return currentState; 
+    }
+
+    State GetOldState() 
+    { 
+        return oldState; 
+    }
 
   private:
     State oldState = NONE_S, currentState = NONE_S;

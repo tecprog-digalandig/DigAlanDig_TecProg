@@ -1,7 +1,8 @@
 #include "Sound.h"
 #include <iostream>
 
-void Sound::Play(int times) {
+void Sound::Play(int times) 
+{
     times -= (times > 0) ? 1 : times;
 
     if (chunk) {

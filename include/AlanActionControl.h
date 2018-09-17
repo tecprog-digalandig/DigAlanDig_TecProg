@@ -12,10 +12,18 @@
 
 #include "AlanAnimation.h"
 
-class AlanActionControl : public Component {
+class AlanActionControl : public Component 
+{
   public:
-    enum Direction { NONE = 0, UP, DOWN, LEFT, RIGHT };
-    enum Action { STANDIN = 0, WALKIN, CLIMBING, FALLIN };
+    enum Direction 
+    {
+         NONE = 0, UP, DOWN, LEFT, RIGHT 
+    };
+
+    enum Action 
+    { 
+        STANDIN = 0, WALKIN, CLIMBING, FALLIN 
+    };
 
     AlanActionControl(GameObject& associated, int gridSize)
         : Component(associated),
@@ -42,16 +50,30 @@ class AlanActionControl : public Component {
     void RhythmReset() {}
     void Render(Common::Layer layer) const {}
 
-    bool IsMovementDone() { return !animationOnGoing; }
+    bool IsMovementDone() 
+    { 
+        return !animationOnGoing; 
+    }
 
-    AlanActionControl::Direction GetMovementDirection() {
+    AlanActionControl::Direction GetMovementDirection() 
+    {
         return movementDirection;
     }
-    void SetMovementDirection(Direction movementDirection) {
+
+    void SetMovementDirection(Direction movementDirection) 
+    {
         this->movementDirection = movementDirection;
     }
-    void SetAction(Action action) { this->action = action; }
-    Action GetAction() { return action; }
+
+    void SetAction(Action action) 
+    { 
+        this->action = action; 
+    }
+
+    Action GetAction() 
+    { 
+        return action; 
+    }
 
   private:
     Direction movementDirection = Direction::NONE;
