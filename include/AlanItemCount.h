@@ -16,61 +16,70 @@
 
 class Item : public Component 
 {
-  public:
-    Item(GameObject& associated, Vec2 newCenter, Vec2 newNumberCenter)
+    public:
+        Item(GameObject& associated, Vec2 newCenter, Vec2 newNumberCenter)
         : Component(associated),
           center(newCenter),
           numberCenter(newNumberCenter) 
-          {
-        bg = new Sprite(associated, "assets/hud/ovocinza.png");
-    }
+        {
+            bg = new Sprite(associated, "assets/hud/ovocinza.png");
+        }
 
-    ~Item() 
-    { 
-        delete bg; 
-    }
+        ~Item() 
+        { 
+            delete bg; 
+        }
 
-    void Update(float dt) {}
-    void RhythmUpdate() {}
-    void RhythmReset() {}
-    void Render(Common::Layer layer) const {}
+        void Update(float dt) {}
 
-    Sprite* bg;
-    Vec2 center, numberCenter;
-    int spriteCount = 1;
+        void RhythmUpdate() {}
+
+        void RhythmReset() {}
+
+        void Render(Common::Layer layer) const {}
+
+        Sprite* bg;
+        Vec2 center, numberCenter;
+        int spriteCount = 1;
 };
 
 class AlanItemCount : public Component 
 {
-  public:
-    AlanItemCount(GameObject& associated);
+    public:
+        AlanItemCount(GameObject& associated);
 
-    ~AlanItemCount() {
-        itemCount.clear();
-        itemCountItem.clear();
-    }
+        ~AlanItemCount() 
+        {
+            itemCount.clear();
+            itemCountItem.clear();
+        }
 
-    void Update(float dt) {}
-    void RhythmUpdate() {}
-    void RhythmReset() {}
-    void Render(Common::Layer layer) const;
-    void ItemCollected(int itemType) 
-    {
-        if (itemCount[itemType] > 0)
+        void Update(float dt) {}
+
+        void RhythmUpdate() {}
+
+        void RhythmReset() {}
+
+        void Render(Common::Layer layer) const;
+
+        void ItemCollected(int itemType) 
+        {
+            if (itemCount[itemType] > 0)
             itemCountItem[itemType]->GetComponent<Sprite*>()->SetFrame(
                 --itemCount[itemType]);
-    }
-    bool CollectedAllItens() 
-    {
-        if (itemCount[Common::ItemType::DIAMOND] == 0 &&
-            itemCount[Common::ItemType::PETROLEUM] == 0 &&
-            itemCount[Common::ItemType::GOLD] == 0)
+        }
+
+        bool CollectedAllItens() 
+        {
+            if (itemCount[Common::ItemType::DIAMOND] == 0 &&
+                itemCount[Common::ItemType::PETROLEUM] == 0 &&
+                itemCount[Common::ItemType::GOLD] == 0)
             return true;
 
-        return false;
-    }
+            return false;
+        }
 
-  private:
+    private:
     std::unordered_map<int, GameObject*> itemCountItem;
     std::unordered_map<int, int> itemCount;
 };

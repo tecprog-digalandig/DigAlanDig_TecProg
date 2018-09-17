@@ -37,17 +37,23 @@ class AlanActionControl : public Component
     bool ShouldFall();
 
     bool CanClimb();
+
     bool InClimbPosition(AlanAnimation* animation);
+
     bool ClimbPathFree();
 
     bool IsBlock();
+
     bool IsFree();
 
     bool IsClimbDirectionLeft(AlanAnimation* animation);
 
     void Update(float dt);
+
     void RhythmUpdate() {}
+
     void RhythmReset() {}
+    
     void Render(Common::Layer layer) const {}
 
     bool IsMovementDone() 
