@@ -71,26 +71,26 @@ class Alan : public Component
 
     int getDamage() 
     { 
-        return damage; 
+        return DAMAGE; 
     }
 
     void takeDamage() 
     {
         if (!damage_taken) 
         {
-            hp--;
+            HP--;
             damage_taken = true;
         }
     }
 
-    void setDamage(int damage) 
+    void setDamage(int DAMAGE) 
     { 
-        this->damage = damage; 
+        this->damage = DAMAGE; 
     }
 
     int getHP() 
     { 
-        return hp; 
+        return HP; 
     }
 
     void setItemCount(GameObject* go) 
@@ -105,14 +105,14 @@ class Alan : public Component
 
   private:
     GameObject* item_count;
-    int hp = 6;
+    const int HP = 6;
 
     int max_position = 0;
     int grids_left = 0;
 
     InputManager& input;
 
-    int damage = 1;
+    const int DAMAGE = 1;
 
     bool moved = false;
     bool damage_taken = false;
