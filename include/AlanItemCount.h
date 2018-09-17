@@ -39,8 +39,8 @@ class Item : public Component
         void render(Common::Layer layer) const {}
 
         Sprite* bg;
-        Vec2 center, numberCenter;
-        int spriteCount = 1;
+        Vec2 center, number_center;
+        int sprite_count = 1;
 };
 
 class AlanItemCount : public Component 
@@ -50,8 +50,8 @@ class AlanItemCount : public Component
 
         ~AlanItemCount() 
         {
-            itemCount.clear();
-            itemCountItem.clear();
+            item_count.clear();
+            item_count_item.clear();
         }
 
         void update(float dt) {}
@@ -62,26 +62,26 @@ class AlanItemCount : public Component
 
         void render(Common::Layer layer) const;
 
-        void itemCollected(int itemType) 
+        void itemCollected(int item_type) 
         {
-            if (itemCount[itemType] > 0)
-            itemCountItem[itemType]->getComponent<Sprite*>()->setFrame(
-                --itemCount[itemType]);
+            if (itemCount[item_type] > 0)
+            itemCountItem[item_type]->getComponent<Sprite*>()->setFrame(
+                --itemCount[item_type]);
         }
 
         bool collectedAllItens() 
         {
-            if (itemCount[Common::ItemType::DIAMOND] == 0 &&
-                itemCount[Common::ItemType::PETROLEUM] == 0 &&
-                itemCount[Common::ItemType::GOLD] == 0)
+            if (itemCount[Common::ItemType::diamond] == 0 &&
+                itemCount[Common::ItemType::petroleum] == 0 &&
+                itemCount[Common::ItemType::gold] == 0)
             return true;
 
             return false;
         }
 
     private:
-    std::unordered_map<int, GameObject*> itemCountItem;
-    std::unordered_map<int, int> itemCount;
+    std::unordered_map<int, GameObject*> item_count_item;
+    std::unordered_map<int, int> item_count;
 };
 
 #endif  // ALANITEMCOUNT_H

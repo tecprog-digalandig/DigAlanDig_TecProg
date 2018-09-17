@@ -40,29 +40,29 @@ void AlanAnimation::playSound(Transition trans)
 
 void AlanAnimation::update(float dt) 
 {
-    if (currentState == State::DANCIN || currentState == State::DEAD) return;
+    if (current_state == State::dancin || current_state == State::dead) return;
 
     Sprite *sprite = associated.getComponent<Sprite *>();
     Alan *alan = associated.getComponent<Alan *>();
 
     if (sprite->frameTimePassed() &&
-        alan->getMovementDirection() == AlanActionControl::Direction::NONE &&
-        currentState != State::FALLIN) 
+        alan->getMovementDirection() == AlanActionControl::Direction::none &&
+        current_state != State::fallin) 
         {
-        if ((oldState == State::CLIMBIN || currentState == State::CLIMBIN) &&
-            currentState != State::IDLE) 
+        if ((old_state == State::climbin || current_state == State::climbin) &&
+            current_state != State::idle) 
             {
-            oldState = currentState;
-            currentState = State::CLIMBIN;
-            if (currentDirection != Direction::LEFT &&
-                currentDirection != Direction::RIGHT)
-                currentDirection = oldDirection;
-            sprite->open(AState[currentState], currentDirection);
+            old_state = current_state;
+            current_state = State::climbin;
+            if (current_direction != Direction::left &&
+                current_direction != Direction::right)
+                current_direction = old_direction;
+            sprite->open(AState[current_state], current_direction);
         } else 
         {
-            oldState = currentState;
-            currentState = State::IDLE;
-            sprite->open(AState[currentState], Direction::LEFT);
+            old_state = current_state;
+            current_state = State::idle;
+            sprite->open(AState[current_state], Direction::left);
         }
     }
 }
@@ -71,73 +71,44 @@ void AlanAnimation::setAction(Transition trans, Direction dir)
 {
     switch (currentState) 
     {
-        case NONE_S:
-            oldState = currentState;
+        case none_s:
+            old_state = current_state;
             std::cout << "STATE NONE!" << std::endl;
 
-            currentState = State::IDLE;
+            current_state = State::idle;
             break;
 
         case IDLE:
             switch (trans) 
             {
-                case FALL:
-                    oldState = currentState;
-                    currentState = State::FALLIN;
+                case fall:
+                    old_state = current_state;
+                    current_state = State::fallin;
                     break;
 
-                case WALK:
-                    oldState = currentState;
-                    currentState = State::WALKIN;
+                case walk:
+                    old_state = current_state;
+                    current_state = State::walkin;
                     break;
 
-                case CLIMB:
-                    oldState = currentState;
-                    currentState = State::CLIMBIN;
+                case climb:
+                    old_state = current_state;
+                    current_state = State::climbin;
                     break;
 
-                case DIG_T:
-                    oldState = currentState;
-                    currentState = State::DIG;
+                case dig_t:
+                    old_state = current_state;
+                    current_state = State::dig;
                     break;
 
-                case DANCE:
-                    oldState = currentState;
-                    currentState = State::DANCIN;
-                    break;
-
-                case DIE:
-                    oldState = currentState;
-                    currentState = State::DEAD;
-                    break;
-
-                default:
-                    return;
-                    break;
-            }
-            break;
-
-        case WALKIN:
-            switch (trans) 
-            {
-                case FALL:
-                    oldState = currentState;
-                    currentState = State::FALLIN;
-                    break;
-
-                case NONE_T:
-                    oldState = currentState;
-                    currentState = State::IDLE;
-                    break;
-
-                case DANCE:
-                    oldState = currentState;
-                    currentState = State::DANCIN;
+                case dance:
+                    old_state = current_state;
+                    current_state = State::dancin;
                     break;
 
                 case DIE:
-                    oldState = currentState;
-                    currentState = State::DEAD;
+                    old_state = current_state;
+                    current_state = State::dead;
                     break;
 
                 default:
@@ -146,27 +117,27 @@ void AlanAnimation::setAction(Transition trans, Direction dir)
             }
             break;
 
-        case FALLIN:
+        case walkin:
             switch (trans) 
             {
-                case FLOOR:
-                    oldState = currentState;
-                    currentState = State::IDLE;
+                case fall:
+                    old_state = current_state;
+                    current_state = State::fallin;
                     break;
 
-                case NONE_T:
-                    oldState = currentState;
-                    currentState = State::IDLE;
+                case none_t:
+                    old_state = current_state;
+                    current_state = State::idle;
                     break;
 
-                case DANCE:
-                    oldState = currentState;
-                    currentState = State::DANCIN;
+                case dance:
+                    old_state = current_state;
+                    current_state = State::dancin;
                     break;
 
-                case DIE:
-                    oldState = currentState;
-                    currentState = State::DEAD;
+                case die:
+                    old_state = current_state;
+                    current_state = State::dead;
                     break;
 
                 default:
@@ -175,27 +146,27 @@ void AlanAnimation::setAction(Transition trans, Direction dir)
             }
             break;
 
-        case DIG:
+        case fallin:
             switch (trans) 
             {
-                case FALL:
-                    oldState = currentState;
-                    currentState = State::FALLIN;
+                case floor:
+                    old_state = current_state;
+                    current_state = State::idle;
                     break;
 
-                case NONE_T:
-                    oldState = currentState;
-                    currentState = State::IDLE;
+                case none_t:
+                    old_state = current_state;
+                    current_state = State::idle;
                     break;
 
-                case DANCE:
-                    oldState = currentState;
-                    currentState = State::DANCIN;
+                case dance:
+                    old_state = current_state;
+                    current_state = State::dancin;
                     break;
 
-                case DIE:
-                    oldState = currentState;
-                    currentState = State::DEAD;
+                case die:
+                    old_state = current_state;
+                    current_state = State::dead;
                     break;
 
                 default:
@@ -204,26 +175,27 @@ void AlanAnimation::setAction(Transition trans, Direction dir)
             }
             break;
 
-        case CLIMBIN:
+        case dig:
             switch (trans) 
             {
-                case NONE_T:
-                    oldState = currentState;
-                    currentState = State::IDLE;
-                    break;
-                case WALK:
-                    oldState = currentState;
-                    currentState = State::WALKIN;
+                case fall:
+                    old_state = current_state;
+                    current_state = State::fallin;
                     break;
 
-                case STOP_CLIMB:
-                    oldState = currentState;
-                    currentState = State::FALLIN;
+                case none_t:
+                    old_state = current_state;
+                    current_state = State::idle;
                     break;
 
-                case DIG_T:
-                    oldState = currentState;
-                    currentState = State::DIG_CLIMB;
+                case dance:
+                    old_state = current_state;
+                    current_state = State::dancin;
+                    break;
+
+                case die:
+                    old_state = current_state;
+                    current_state = State::dead;
                     break;
 
                 default:
@@ -232,15 +204,43 @@ void AlanAnimation::setAction(Transition trans, Direction dir)
             }
             break;
 
-        case DIG_CLIMB:
+        case climbin:
+            switch (trans) 
+            {
+                case none_t:
+                    old_state = current_state;
+                    current_state = State::idle;
+                    break;
+                case walk:
+                    old_state = current_state;
+                    current_state = State::walkin;
+                    break;
+
+                case stop_climb:
+                    old_state = current_state;
+                    current_state = State::fallin;
+                    break;
+
+                case dig_t:
+                    old_state = current_state;
+                    current_state = State::dig_climb;
+                    break;
+
+                default:
+                    return;
+                    break;
+            }
+            break;
+
+        case dig_climb:
 
             break;
 
-        case DANCIN:
+        case dancin:
 
             break;
 
-        case DEAD:
+        case dead:
 
             break;
 
@@ -250,8 +250,8 @@ void AlanAnimation::setAction(Transition trans, Direction dir)
     }
     playSound(trans);
 
-    oldDirection = currentDirection;
-    currentDirection = dir;
+    old_direction = current_direction;
+    current_direction = dir;
 
     Sprite *sprite = associated.getComponent<Sprite *>();
     sprite->open(AState[currentState], dir);
