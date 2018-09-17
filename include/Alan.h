@@ -27,7 +27,9 @@ class Alan : public Component
     void GetMovement();
 
     void Update(float dt);
+
     void RhythmUpdate() {}
+
     void RhythmReset() 
     {
         static int missCounter = 0;

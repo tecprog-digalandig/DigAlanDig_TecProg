@@ -57,8 +57,11 @@ class AlanAnimation : public Component
     ~AlanAnimation();
 
     void Update(float dt);
+
     void RhythmUpdate() {}
+
     void Render(Common::Layer layer) const {}
+    
     void Start() 
     {
         currentState = State::IDLE;
