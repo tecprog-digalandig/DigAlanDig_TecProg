@@ -3,7 +3,8 @@
 #include "AlanActionControl.h"
 #include "Sound.h"
 
-AlanAnimation::AlanAnimation(GameObject &associated) : Component(associated) {
+AlanAnimation::AlanAnimation(GameObject &associated) : Component(associated) 
+{
     AState[State::IDLE] = {"assets/img/alan/idle.png", 2, 2, -1};
     AState[State::WALKIN] = {"assets/img/alan/walkin.png", 2, 4, 0.1};
     AState[State::FALLIN] = {"assets/img/alan/fallin.png", 2, 2, 0.1};
@@ -16,7 +17,8 @@ AlanAnimation::AlanAnimation(GameObject &associated) : Component(associated) {
 
 AlanAnimation::~AlanAnimation() {}
 
-void AlanAnimation::PlaySound(Transition trans) {
+void AlanAnimation::PlaySound(Transition trans) 
+{
     Sound *s = associated.GetComponent<Sound *>();
     switch (trans) {
         case Transition::WALK:
@@ -36,7 +38,8 @@ void AlanAnimation::PlaySound(Transition trans) {
     s->Play();
 }
 
-void AlanAnimation::Update(float dt) {
+void AlanAnimation::Update(float dt) 
+{
     if (currentState == State::DANCIN || currentState == State::DEAD) return;
 
     Sprite *sprite = associated.GetComponent<Sprite *>();
@@ -44,16 +47,19 @@ void AlanAnimation::Update(float dt) {
 
     if (sprite->FrameTimePassed() &&
         alan->GetMovementDirection() == AlanActionControl::Direction::NONE &&
-        currentState != State::FALLIN) {
+        currentState != State::FALLIN) 
+        {
         if ((oldState == State::CLIMBIN || currentState == State::CLIMBIN) &&
-            currentState != State::IDLE) {
+            currentState != State::IDLE) 
+            {
             oldState = currentState;
             currentState = State::CLIMBIN;
             if (currentDirection != Direction::LEFT &&
                 currentDirection != Direction::RIGHT)
                 currentDirection = oldDirection;
             sprite->Open(AState[currentState], currentDirection);
-        } else {
+        } else 
+        {
             oldState = currentState;
             currentState = State::IDLE;
             sprite->Open(AState[currentState], Direction::LEFT);
@@ -61,8 +67,10 @@ void AlanAnimation::Update(float dt) {
     }
 }
 
-void AlanAnimation::SetAction(Transition trans, Direction dir) {
-    switch (currentState) {
+void AlanAnimation::SetAction(Transition trans, Direction dir) 
+{
+    switch (currentState) 
+    {
         case NONE_S:
             oldState = currentState;
             std::cout << "STATE NONE!" << std::endl;
@@ -71,7 +79,8 @@ void AlanAnimation::SetAction(Transition trans, Direction dir) {
             break;
 
         case IDLE:
-            switch (trans) {
+            switch (trans) 
+            {
                 case FALL:
                     oldState = currentState;
                     currentState = State::FALLIN;
@@ -109,7 +118,8 @@ void AlanAnimation::SetAction(Transition trans, Direction dir) {
             break;
 
         case WALKIN:
-            switch (trans) {
+            switch (trans) 
+            {
                 case FALL:
                     oldState = currentState;
                     currentState = State::FALLIN;
@@ -137,7 +147,8 @@ void AlanAnimation::SetAction(Transition trans, Direction dir) {
             break;
 
         case FALLIN:
-            switch (trans) {
+            switch (trans) 
+            {
                 case FLOOR:
                     oldState = currentState;
                     currentState = State::IDLE;
@@ -165,7 +176,8 @@ void AlanAnimation::SetAction(Transition trans, Direction dir) {
             break;
 
         case DIG:
-            switch (trans) {
+            switch (trans) 
+            {
                 case FALL:
                     oldState = currentState;
                     currentState = State::FALLIN;
@@ -193,7 +205,8 @@ void AlanAnimation::SetAction(Transition trans, Direction dir) {
             break;
 
         case CLIMBIN:
-            switch (trans) {
+            switch (trans) 
+            {
                 case NONE_T:
                     oldState = currentState;
                     currentState = State::IDLE;

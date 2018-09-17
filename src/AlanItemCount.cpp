@@ -1,7 +1,8 @@
 #include "AlanItemCount.h"
 #include "Common.h"
 
-AlanItemCount::AlanItemCount(GameObject& associated) : Component(associated) {
+AlanItemCount::AlanItemCount(GameObject& associated) : Component(associated) 
+{
     itemCount.emplace(Common::ItemType::GOLD, rand() % 5);
     itemCountItem.emplace(Common::ItemType::GOLD,
                           new GameObject(Common::Layer::HUD));
@@ -53,11 +54,14 @@ AlanItemCount::AlanItemCount(GameObject& associated) : Component(associated) {
     sprite->SetFrame(itemCount[Common::ItemType::PETROLEUM]);
 }
 
-void AlanItemCount::Render(Common::Layer layer) const {
-    for (auto item : itemCountItem) {
+void AlanItemCount::Render(Common::Layer layer) const 
+{
+    for (auto item : itemCountItem) 
+    {
         item.second->box.SetCenter(item.second->GetComponent<Item*>()->center);
 
-        if (!itemCount.at(item.first)) {
+        if (!itemCount.at(item.first)) 
+        {
             item.second->GetComponent<Item*>()->bg->SetColor(0, 255, 0);
         }
 
