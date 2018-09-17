@@ -34,23 +34,23 @@ class Alan : public Component
     {
         static int missCounter = 0;
         if (!moved)
-            missCounter++;
+            miss_counter++;
         else
-            missCounter = 0;
+            miss_counter = 0;
 
-        if (missCounter > 1) 
+        if (miss_counter > 1) 
         {
             Game::getInstance()->combo /= 2;
         }
 
         moved = false;
-        damageTaken = false;
+        damage_taken = false;
     }
     void render(Common::Layer layer) const {}
 
     int getMaxPosition() const 
     { 
-        return maxPosition; 
+        return max_position; 
     }
 
     Vec2 getGridPosition() 
@@ -76,10 +76,10 @@ class Alan : public Component
 
     void takeDamage() 
     {
-        if (!damageTaken) 
+        if (!damage_taken) 
         {
             hp--;
-            damageTaken = true;
+            damage_taken = true;
         }
     }
 
@@ -95,28 +95,28 @@ class Alan : public Component
 
     void setItemCount(GameObject* go) 
     { 
-        itemCount = go; 
+        item_count = go; 
     }
 
     GameObject* getItemCount() 
     { 
-        return itemCount; 
+        return item_count; 
     }
 
   private:
-    GameObject* itemCount;
+    GameObject* item_count;
     int hp = 6;
 
-    int maxPosition = 0;
-    int gridsLeft = 0;
+    int max_position = 0;
+    int grids_left = 0;
 
     InputManager& input;
 
     int damage = 1;
 
     bool moved = false;
-    bool damageTaken = false;
-    bool animationOnGoing = false;
+    bool damage_taken = false;
+    bool animation_on_going = false;
 };
 
 #endif  // ALAN_H

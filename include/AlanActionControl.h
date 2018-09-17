@@ -17,18 +17,18 @@ class AlanActionControl : public Component
   public:
     enum Direction 
     {
-         NONE = 0, UP, DOWN, LEFT, RIGHT 
+         none = 0, up, down, left, right 
     };
 
     enum Action 
     { 
-        STANDIN = 0, WALKIN, CLIMBING, FALLIN 
+        standin = 0, walkin, climbing, fallin 
     };
 
-    AlanActionControl(GameObject& associated, int gridSize)
+    AlanActionControl(GameObject& associated, int grid_size)
         : Component(associated),
           input(InputManager::GetInstance()),
-          gridSize(gridSize) {}
+          gridSize(grid_size) {}
 
     ~AlanActionControl() {}
 
@@ -58,17 +58,17 @@ class AlanActionControl : public Component
 
     bool isMovementDone() 
     { 
-        return !animationOnGoing; 
+        return !animation_on_gGoing; 
     }
 
     AlanActionControl::Direction getMovementDirection() 
     {
-        return movementDirection;
+        return movement_direction;
     }
 
     void setMovementDirection(Direction movementDirection) 
     {
-        this->movementDirection = movementDirection;
+        this->movementDirection = movement_direction;
     }
 
     void setAction(Action action) 
@@ -82,16 +82,16 @@ class AlanActionControl : public Component
     }
 
   private:
-    Direction movementDirection = Direction::NONE;
-    Action action = Action::STANDIN;
-    int gridsLeft = 0;
+    Direction movement_direction = Direction::none;
+    Action action = Action::standin;
+    int grids_left = 0;
 
     InputManager& input;
 
-    int gridSize;
+    int grid_size;
 
     bool moved = false;
-    bool animationOnGoing = false;
+    bool animation_on_going = false;
 };
 
 #endif  // ALANACTIONCONTROL_H

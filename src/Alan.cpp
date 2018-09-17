@@ -18,25 +18,25 @@ void Alan::getMovement()
     if (input.actionPress(input.DIG_UP)) 
     {
         associated.getComponent<AlanActionControl *>()->setMovementDirection(
-            AlanActionControl::Direction::UP);
+            AlanActionControl::Direction::up);
         moved = true;
     }
     if (input.actionPress(input.DIG_DOWN)) 
     {
         associated.getComponent<AlanActionControl *>()->setMovementDirection(
-            AlanActionControl::Direction::DOWN);
+            AlanActionControl::Direction::down);
         moved = true;
     }
     if (input.actionPress(input.DIG_LEFT)) 
     {
         associated.getComponent<AlanActionControl *>()->setMovementDirection(
-            AlanActionControl::Direction::LEFT);
+            AlanActionControl::Direction::left);
         moved = true;
     }
     if (input.actionPress(input.DIG_RIGHT)) 
     {
         associated.getComponent<AlanActionControl *>()->setMovementDirection(
-            AlanActionControl::Direction::RIGHT);
+            AlanActionControl::Direction::right);
         moved = true;
     }
 
@@ -62,9 +62,9 @@ void Alan::getMovement()
 
 void Alan::update(float dt) 
 {
-    if (maxPosition < std::max(associated.gridPosition.y + 4, 7.0)) 
+    if (max_position < std::max(associated.gridPosition.y + 4, 7.0)) 
     {
-        maxPosition = std::max(associated.gridPosition.y + 4, 7.0);
+        max_position = std::max(associated.gridPosition.y + 4, 7.0);
     }
 
     getMovement();
