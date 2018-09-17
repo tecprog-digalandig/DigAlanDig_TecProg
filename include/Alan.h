@@ -17,7 +17,8 @@
 #include "TileMap.h"
 #include "Vec2.h"
 
-class Alan : public Component {
+class Alan : public Component 
+{
   public:
     explicit Alan(GameObject& associated);
 
@@ -27,14 +28,16 @@ class Alan : public Component {
 
     void Update(float dt);
     void RhythmUpdate() {}
-    void RhythmReset() {
+    void RhythmReset() 
+    {
         static int missCounter = 0;
         if (!moved)
             missCounter++;
         else
             missCounter = 0;
 
-        if (missCounter > 1) {
+        if (missCounter > 1) 
+        {
             Game::GetInstance()->combo /= 2;
         }
 
@@ -43,30 +46,60 @@ class Alan : public Component {
     }
     void Render(Common::Layer layer) const {}
 
-    int GetMaxPosition() const { return maxPosition; }
+    int GetMaxPosition() const 
+    { 
+        return maxPosition; 
+    }
 
-    Vec2 GetGridPosition() { return associated.GetGridPosition(); }
+    Vec2 GetGridPosition() 
+    { 
+        return associated.GetGridPosition(); 
+    }
 
-    AlanActionControl::Direction GetMovementDirection() {
+    AlanActionControl::Direction GetMovementDirection() 
+    {
         return associated.GetComponent<AlanActionControl*>()
             ->GetMovementDirection();
     }
-    AlanActionControl::Action GetAction() {
+
+    AlanActionControl::Action GetAction() 
+    {
         return associated.GetComponent<AlanActionControl*>()->GetAction();
     }
 
-    int GetDamage() { return damage; }
-    void TakeDamage() {
-        if (!damageTaken) {
+    int GetDamage() 
+    { 
+        return damage; 
+    }
+
+    void TakeDamage() 
+    {
+        if (!damageTaken) 
+        {
             hp--;
             damageTaken = true;
         }
     }
-    void SetDamage(int damage) { this->damage = damage; }
-    int GetHP() { return hp; }
 
-    void SetItemCount(GameObject* go) { itemCount = go; }
-    GameObject* GetItemCount() { return itemCount; }
+    void SetDamage(int damage) 
+    { 
+        this->damage = damage; 
+    }
+
+    int GetHP() 
+    { 
+        return hp; 
+    }
+
+    void SetItemCount(GameObject* go) 
+    { 
+        itemCount = go; 
+    }
+
+    GameObject* GetItemCount() 
+    { 
+        return itemCount; 
+    }
 
   private:
     GameObject* itemCount;

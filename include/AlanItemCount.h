@@ -14,16 +14,22 @@
 #include "InputManager.h"
 #include "Sprite.h"
 
-class Item : public Component {
+class Item : public Component 
+{
   public:
     Item(GameObject& associated, Vec2 newCenter, Vec2 newNumberCenter)
         : Component(associated),
           center(newCenter),
-          numberCenter(newNumberCenter) {
+          numberCenter(newNumberCenter) 
+          {
         bg = new Sprite(associated, "assets/hud/ovocinza.png");
     }
 
-    ~Item() { delete bg; }
+    ~Item() 
+    { 
+        delete bg; 
+    }
+
     void Update(float dt) {}
     void RhythmUpdate() {}
     void RhythmReset() {}
@@ -34,7 +40,8 @@ class Item : public Component {
     int spriteCount = 1;
 };
 
-class AlanItemCount : public Component {
+class AlanItemCount : public Component 
+{
   public:
     AlanItemCount(GameObject& associated);
 
@@ -47,12 +54,14 @@ class AlanItemCount : public Component {
     void RhythmUpdate() {}
     void RhythmReset() {}
     void Render(Common::Layer layer) const;
-    void ItemCollected(int itemType) {
+    void ItemCollected(int itemType) 
+    {
         if (itemCount[itemType] > 0)
             itemCountItem[itemType]->GetComponent<Sprite*>()->SetFrame(
                 --itemCount[itemType]);
     }
-    bool CollectedAllItens() {
+    bool CollectedAllItens() 
+    {
         if (itemCount[Common::ItemType::DIAMOND] == 0 &&
             itemCount[Common::ItemType::PETROLEUM] == 0 &&
             itemCount[Common::ItemType::GOLD] == 0)
