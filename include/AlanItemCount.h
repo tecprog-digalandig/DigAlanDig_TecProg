@@ -22,7 +22,7 @@ class Item : public Component
           center(newCenter),
           numberCenter(newNumberCenter) 
         {
-            bg = new Sprite(associated, "assets/hud/ovocinza.png");
+            bg = new sprite(associated, "assets/hud/ovocinza.png");
         }
 
         ~Item() 
@@ -30,13 +30,13 @@ class Item : public Component
             delete bg; 
         }
 
-        void Update(float dt) {}
+        void update(float dt) {}
 
-        void RhythmUpdate() {}
+        void rhythmUpdate() {}
 
-        void RhythmReset() {}
+        void rhythmReset() {}
 
-        void Render(Common::Layer layer) const {}
+        void render(Common::Layer layer) const {}
 
         Sprite* bg;
         Vec2 center, numberCenter;
@@ -54,22 +54,22 @@ class AlanItemCount : public Component
             itemCountItem.clear();
         }
 
-        void Update(float dt) {}
+        void update(float dt) {}
 
-        void RhythmUpdate() {}
+        void rhythmUpdate() {}
 
-        void RhythmReset() {}
+        void rhythmReset() {}
 
-        void Render(Common::Layer layer) const;
+        void render(Common::Layer layer) const;
 
-        void ItemCollected(int itemType) 
+        void itemCollected(int itemType) 
         {
             if (itemCount[itemType] > 0)
-            itemCountItem[itemType]->GetComponent<Sprite*>()->SetFrame(
+            itemCountItem[itemType]->getComponent<Sprite*>()->setFrame(
                 --itemCount[itemType]);
         }
 
-        bool CollectedAllItens() 
+        bool collectedAllItens() 
         {
             if (itemCount[Common::ItemType::DIAMOND] == 0 &&
                 itemCount[Common::ItemType::PETROLEUM] == 0 &&
