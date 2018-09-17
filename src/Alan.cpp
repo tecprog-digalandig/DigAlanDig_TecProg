@@ -4,68 +4,68 @@
 #include "Interpol.h"
 #include "Sprite.h"
 
-Alan::Alan(GameObject &associated)
+Alan::alan(GameObject &associated)
     : Component(associated), input(InputManager::GetInstance()) 
     {}
 
 // Direção do movimento
-void Alan::GetMovement() 
+void Alan::getMovement() 
 {
     if (moved ||
-        associated.GetComponent<AlanActionControl *>()->GetMovementDirection())
+        associated.getComponent<AlanActionControl *>()->getMovementDirection())
         return;
     //
-    if (input.ActionPress(input.DIG_UP)) 
+    if (input.actionPress(input.DIG_UP)) 
     {
-        associated.GetComponent<AlanActionControl *>()->SetMovementDirection(
+        associated.getComponent<AlanActionControl *>()->setMovementDirection(
             AlanActionControl::Direction::UP);
         moved = true;
     }
-    if (input.ActionPress(input.DIG_DOWN)) 
+    if (input.actionPress(input.DIG_DOWN)) 
     {
-        associated.GetComponent<AlanActionControl *>()->SetMovementDirection(
+        associated.getComponent<AlanActionControl *>()->setMovementDirection(
             AlanActionControl::Direction::DOWN);
         moved = true;
     }
-    if (input.ActionPress(input.DIG_LEFT)) 
+    if (input.actionPress(input.DIG_LEFT)) 
     {
-        associated.GetComponent<AlanActionControl *>()->SetMovementDirection(
+        associated.getComponent<AlanActionControl *>()->setMovementDirection(
             AlanActionControl::Direction::LEFT);
         moved = true;
     }
-    if (input.ActionPress(input.DIG_RIGHT)) 
+    if (input.actionPress(input.DIG_RIGHT)) 
     {
-        associated.GetComponent<AlanActionControl *>()->SetMovementDirection(
+        associated.getComponent<AlanActionControl *>()->setMovementDirection(
             AlanActionControl::Direction::RIGHT);
         moved = true;
     }
 
-    if (associated.GetComponent<AlanActionControl *>()
-            ->GetMovementDirection()) 
+    if (associated.getComponent<AlanActionControl *>()
+            ->getMovementDirection()) 
             {
         float duty = 0.6;
-        input.Move();
-        if (std::abs(input.GetDeltaRhythm()) < duty) 
+        input.move();
+        if (std::abs(input.getDeltaRhythm()) < duty) 
         {
-            std::cout << "\n\nHit: " << input.GetDeltaRhythm() << "\n\n";
-            Game::GetInstance()->combo++;
+            std::cout << "\n\nHit: " << input.getDeltaRhythm() << "\n\n";
+            Game::getInstance()->combo++;
         } else 
         {
-            Camera::Shake();
-            Game::GetInstance()->combo = 0;
-            std::cout << "\n\nMiss: " << input.GetDeltaRhythm() << "\n\n";
+            Camera::shake();
+            Game::getInstance()->combo = 0;
+            std::cout << "\n\nMiss: " << input.getDeltaRhythm() << "\n\n";
         }
     }
 
-    Game::GetInstance()->GetGridControl()->CheckEnemyAlanCollision(true);
+    Game::getInstance()->getGridControl()->checkEnemyAlanCollision(true);
 }
 
-void Alan::Update(float dt) 
+void Alan::update(float dt) 
 {
     if (maxPosition < std::max(associated.gridPosition.y + 4, 7.0)) 
     {
         maxPosition = std::max(associated.gridPosition.y + 4, 7.0);
     }
 
-    GetMovement();
+    getMovement();
 }

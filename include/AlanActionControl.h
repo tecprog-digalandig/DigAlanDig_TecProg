@@ -32,51 +32,51 @@ class AlanActionControl : public Component
 
     ~AlanActionControl() {}
 
-    void Fallin(float dt);
+    void fallin(float dt);
 
-    bool ShouldFall();
+    bool shouldFall();
 
-    bool CanClimb();
+    bool canClimb();
 
-    bool InClimbPosition(AlanAnimation* animation);
+    bool inClimbPosition(AlanAnimation* animation);
 
-    bool ClimbPathFree();
+    bool climbPathFree();
 
-    bool IsBlock();
+    bool isBlock();
 
-    bool IsFree();
+    bool isFree();
 
-    bool IsClimbDirectionLeft(AlanAnimation* animation);
+    bool isClimbDirectionLeft(AlanAnimation* animation);
 
-    void Update(float dt);
+    void update(float dt);
 
-    void RhythmUpdate() {}
+    void rhythmUpdate() {}
 
-    void RhythmReset() {}
-    
-    void Render(Common::Layer layer) const {}
+    void rhythmReset() {}
 
-    bool IsMovementDone() 
+    void render(Common::Layer layer) const {}
+
+    bool isMovementDone() 
     { 
         return !animationOnGoing; 
     }
 
-    AlanActionControl::Direction GetMovementDirection() 
+    AlanActionControl::Direction getMovementDirection() 
     {
         return movementDirection;
     }
 
-    void SetMovementDirection(Direction movementDirection) 
+    void setMovementDirection(Direction movementDirection) 
     {
         this->movementDirection = movementDirection;
     }
 
-    void SetAction(Action action) 
+    void setAction(Action action) 
     { 
         this->action = action; 
     }
 
-    Action GetAction() 
+    Action getAction() 
     { 
         return action; 
     }

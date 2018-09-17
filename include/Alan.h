@@ -24,13 +24,13 @@ class Alan : public Component
 
     ~Alan() {}
 
-    void GetMovement();
+    void getMovement();
 
-    void Update(float dt);
+    void update(float dt);
 
-    void RhythmUpdate() {}
+    void rhythmUpdate() {}
 
-    void RhythmReset() 
+    void rhythmReset() 
     {
         static int missCounter = 0;
         if (!moved)
@@ -40,41 +40,41 @@ class Alan : public Component
 
         if (missCounter > 1) 
         {
-            Game::GetInstance()->combo /= 2;
+            Game::getInstance()->combo /= 2;
         }
 
         moved = false;
         damageTaken = false;
     }
-    void Render(Common::Layer layer) const {}
+    void render(Common::Layer layer) const {}
 
-    int GetMaxPosition() const 
+    int getMaxPosition() const 
     { 
         return maxPosition; 
     }
 
-    Vec2 GetGridPosition() 
+    Vec2 getGridPosition() 
     { 
-        return associated.GetGridPosition(); 
+        return associated.getGridPosition(); 
     }
 
-    AlanActionControl::Direction GetMovementDirection() 
+    AlanActionControl::Direction getMovementDirection() 
     {
-        return associated.GetComponent<AlanActionControl*>()
-            ->GetMovementDirection();
+        return associated.getComponent<AlanActionControl*>()
+            ->getMovementDirection();
     }
 
-    AlanActionControl::Action GetAction() 
+    AlanActionControl::Action getAction() 
     {
-        return associated.GetComponent<AlanActionControl*>()->GetAction();
+        return associated.getComponent<AlanActionControl*>()->getAction();
     }
 
-    int GetDamage() 
+    int getDamage() 
     { 
         return damage; 
     }
 
-    void TakeDamage() 
+    void takeDamage() 
     {
         if (!damageTaken) 
         {
@@ -83,22 +83,22 @@ class Alan : public Component
         }
     }
 
-    void SetDamage(int damage) 
+    void setDamage(int damage) 
     { 
         this->damage = damage; 
     }
 
-    int GetHP() 
+    int getHP() 
     { 
         return hp; 
     }
 
-    void SetItemCount(GameObject* go) 
+    void setItemCount(GameObject* go) 
     { 
         itemCount = go; 
     }
 
-    GameObject* GetItemCount() 
+    GameObject* getItemCount() 
     { 
         return itemCount; 
     }

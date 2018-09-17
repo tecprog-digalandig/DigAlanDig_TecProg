@@ -56,13 +56,13 @@ class AlanAnimation : public Component
 
     ~AlanAnimation();
 
-    void Update(float dt);
+    void update(float dt);
 
-    void RhythmUpdate() {}
+    void rhythmUpdate() {}
 
-    void Render(Common::Layer layer) const {}
-    
-    void Start() 
+    void render(Common::Layer layer) const {}
+
+    void start() 
     {
         currentState = State::IDLE;
         oldState = currentState;
@@ -70,24 +70,24 @@ class AlanAnimation : public Component
         oldDirection = currentDirection;
     }
 
-    void SetAction(Transition trans, Direction dir);
+    void setAction(Transition trans, Direction dir);
 
-    Direction GetCurrentDirection() 
+    Direction getCurrentDirection() 
     { 
         return currentDirection; 
     }
 
-    Direction GetOldDirection() 
+    Direction getOldDirection() 
     { 
         return oldDirection; 
     }
 
-    State GetCurrentState() 
+    State getCurrentState() 
     { 
         return currentState; 
     }
 
-    State GetOldState() 
+    State getOldState() 
     { 
         return oldState; 
     }
@@ -97,7 +97,7 @@ class AlanAnimation : public Component
     Direction oldDirection = LEFT, currentDirection = LEFT;
     Sprite::SpriteState AState[State::STATE_MAX];
 
-    void PlaySound(Transition trans);
+    void playSound(Transition trans);
 };
 
 #endif  // ALANANIMATION_H
