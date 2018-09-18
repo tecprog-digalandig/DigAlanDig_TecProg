@@ -6,6 +6,7 @@
 #include "Component.h"
 #include "Resources.h"
 
+// Sound Class characteristics and heritages.
 class Sound : public Component 
 {
   public:

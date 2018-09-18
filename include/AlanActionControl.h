@@ -12,6 +12,7 @@
 
 #include "AlanAnimation.h"
 
+// Class characteristics and heritages.
 class AlanActionControl : public Component 
 {
   public:
@@ -19,7 +20,6 @@ class AlanActionControl : public Component
     {
          none = 0, up, down, left, right 
     };
-
     enum Action 
     { 
         standin = 0, walkin, climbing, fallin 
@@ -29,9 +29,10 @@ class AlanActionControl : public Component
         : Component(associated),
           input(InputManager::GetInstance()),
           gridSize(grid_size) {}
-
+    //Destructor.
     ~AlanActionControl() {}
 
+    //Declaration of Methods. 
     void fallin(float dt);
 
     bool shouldFall();

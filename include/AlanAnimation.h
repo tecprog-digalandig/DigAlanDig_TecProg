@@ -16,6 +16,7 @@
 #include "TileMap.h"
 #include "Vec2.h"
 
+// Class characteristics and heritages.
 class AlanAnimation : public Component 
 {
   public:
@@ -54,8 +55,11 @@ class AlanAnimation : public Component
 
     explicit AlanAnimation(GameObject &associated);
 
+    //Destructor.
     ~AlanAnimation();
 
+    //Update according to dt.
+	//@param dt: Delta time. Time elapsed between one frame and the other.
     void update(float dt);
 
     void rhythmUpdate() {}

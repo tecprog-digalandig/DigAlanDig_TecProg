@@ -4,17 +4,17 @@
 #include "Interpol.h"
 #include "Sprite.h"
 
-Alan::alan(GameObject &associated)
+// Constructor of Alan's class.
+Alan::Alan(GameObject &associated)
     : Component(associated), input(InputManager::GetInstance()) 
     {}
 
-// Direção do movimento
+// Method that gets movement direction.
 void Alan::getMovement() 
 {
     if (moved ||
         associated.getComponent<AlanActionControl *>()->getMovementDirection())
         return;
-    //
     if (input.actionPress(input.DIG_UP)) 
     {
         associated.getComponent<AlanActionControl *>()->setMovementDirection(
@@ -60,6 +60,7 @@ void Alan::getMovement()
     Game::getInstance()->getGridControl()->checkEnemyAlanCollision(true);
 }
 
+// Method that updates Alan on grid.
 void Alan::update(float dt) 
 {
     if (max_position < std::max(associated.gridPosition.y + 4, 7.0)) 

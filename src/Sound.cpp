@@ -1,6 +1,7 @@
 #include "Sound.h"
 #include <iostream>
 
+// Method that plays sounds according to the parameter "times".
 void Sound::play(int times) 
 {
     times -= (times > 0) ? 1 : times;

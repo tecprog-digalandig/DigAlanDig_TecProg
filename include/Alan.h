@@ -17,15 +17,20 @@
 #include "TileMap.h"
 #include "Vec2.h"
 
+// Alan characteristics.
 class Alan : public Component 
 {
   public:
     explicit Alan(GameObject& associated);
 
+    //Destructor.
     ~Alan() {}
 
     void getMovement();
 
+    
+	//Update according to dt.
+	//@param dt: Delta time. Time elapsed between one frame and the other.
     void update(float dt);
 
     void rhythmUpdate() {}
@@ -46,8 +51,10 @@ class Alan : public Component
         moved = false;
         damage_taken = false;
     }
+	//Render according to the layer.
     void render(Common::Layer layer) const {}
 
+    //Getters & Setters Methods.
     int getMaxPosition() const 
     { 
         return max_position; 

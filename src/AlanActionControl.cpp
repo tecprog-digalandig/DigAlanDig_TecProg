@@ -5,6 +5,7 @@
 #include "Interpol.h"
 #include "Sprite.h"
 
+// Check if Alan should fall or not.
 bool AlanActionControl::shouldFall() 
 {
     return grids_left ||
@@ -16,6 +17,7 @@ bool AlanActionControl::shouldFall()
                  true) == GridControl::WhatsThere::ENEMY));
 }
 
+// Method to control fallin.
 void AlanActionControl::fallin(float dt) 
 {
     if (grids_left > 0) grids_left--;
@@ -23,6 +25,7 @@ void AlanActionControl::fallin(float dt)
     associated.getComponent<Sprite *>()->timeElapsedReset();
 }
 
+// Check if movement direction is free.
 bool AlanActionControl::isFree() 
 {
     if (movement_direction == Direction::left &&
@@ -44,6 +47,7 @@ bool AlanActionControl::isFree()
     return false;
 }
 
+// Check if movement direction is blocked.
 bool AlanActionControl::isBlock() 
 {
     if (movement_direction == Direction::left &&
@@ -64,11 +68,13 @@ bool AlanActionControl::isBlock()
     return false;
 }
 
+// Check if the player is able to climb.
 bool AlanActionControl::canClimb() 
 {
     return input.keyDown(sdl_scancode_a) && action != Action::walkin;
 }
 
+//Check player climb position.
 bool AlanActionControl::inClimbPosition(AlanAnimation *animation) 
 {
     return (animation->getCurrentState() == AlanAnimation::State::climbin ||
@@ -105,6 +111,7 @@ bool AlanActionControl::isClimbDirectionLeft(AlanAnimation *animation)
            animation->getCurrentDirection() != AlanAnimation::Direction::right;
 }
 
+// Updates player position.
 void AlanActionControl::update(float dt) 
 {
     if (!associated.getComponent<Interpol *>()->isMovementDone()) return;
@@ -141,7 +148,7 @@ void AlanActionControl::update(float dt)
         return;
     }
 
-    // Testa se a marmota deve "cair" ou ficar na posição atual
+    // Checks if the player must fall or not.
     if (shouldFall()) 
     {
         if (grids_left == 0) 
@@ -187,7 +194,7 @@ void AlanActionControl::update(float dt)
     {
         action = Action::walkin;
     }
-    // Up bate na pedra acima dele se houver
+    // Hits the rock above him.
     if (movement_direction == Direction::up) 
     {
         if (Game::getInstance()->getGridControl()->testPath(
@@ -225,7 +232,7 @@ void AlanActionControl::update(float dt)
         {
             movement_direction = Direction::none;
         }
-        // Down bate na pedra embaixo dele
+        // Hits the rock below him.
     } else if (movement_direction == Direction::down) 
     {
         if (int item_type = Game::getInstance()->getGridControl()->isItem(vec2(
@@ -265,8 +272,7 @@ void AlanActionControl::update(float dt)
         }
     } else if (movement_direction == Direction::left) 
     {
-        // Testa se o valor do grid a esquerda é uma
-        // pedra
+        // Checks if left grid value is a rock.
         if (!isFree()) 
         {
             if (int item_type = Game::getInstance()->getGridControl()->isItem(
@@ -309,7 +315,7 @@ void AlanActionControl::update(float dt)
         }
     } else 
     {
-        // Mesmo processo anterior para a direita
+        // Checks if right grid value is a rock.
         if (!isFree()) 
         {
             if (int itemType = Game::GetInstance()->getGridControl()->isItem(

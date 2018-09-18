@@ -14,6 +14,7 @@
 #include "InputManager.h"
 #include "Sprite.h"
 
+// Item Class characteristics and heritages.
 class Item : public Component 
 {
     public:
@@ -53,7 +54,8 @@ class AlanItemCount : public Component
             item_count.clear();
             item_count_item.clear();
         }
-
+        //Update according to dt.
+	    //@param dt: Delta time. Time elapsed between one frame and the other.
         void update(float dt) {}
 
         void rhythmUpdate() {}
