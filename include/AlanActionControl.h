@@ -58,7 +58,7 @@ class AlanActionControl : public Component
 
     bool isMovementDone() 
     { 
-        return !animation_on_gGoing; 
+        return !animation_on_going; 
     }
 
     AlanActionControl::Direction getMovementDirection() 

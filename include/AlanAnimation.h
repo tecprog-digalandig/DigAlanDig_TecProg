@@ -64,10 +64,10 @@ class AlanAnimation : public Component
 
     void start() 
     {
-        currentState = State::idle;
-        oldState = current_state;
-        currentDirection = left;
-        oldDirection = current_direction;
+        current_state = State::idle;
+        old_state = current_state;
+        current_direction = left;
+        old_direction = current_direction;
     }
 
     void setAction(Transition trans, Direction dir);

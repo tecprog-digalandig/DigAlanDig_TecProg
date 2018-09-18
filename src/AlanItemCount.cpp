@@ -1,7 +1,7 @@
 #include "AlanItemCount.h"
 #include "Common.h"
 
-AlanItemCount::alanItemCount(GameObject& associated) : Component(associated) 
+AlanItemCount::AlanItemCount(GameObject& associated) : Component(associated) 
 {
     itemCount.emplace(Common::ItemType::gold, rand() % 5);
     itemCountItem.emplace(Common::ItemType::gold,

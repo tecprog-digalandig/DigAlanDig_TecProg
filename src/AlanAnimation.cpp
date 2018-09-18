@@ -3,16 +3,16 @@
 #include "AlanActionControl.h"
 #include "Sound.h"
 
-AlanAnimation::alanAnimation(GameObject &associated) : Component(associated) 
+AlanAnimation::AlanAnimation(GameObject &associated) : Component(associated) 
 {
-    AState[State::IDLE] = {"assets/img/alan/idle.png", 2, 2, -1};
-    AState[State::WALKIN] = {"assets/img/alan/walkin.png", 2, 4, 0.1};
-    AState[State::FALLIN] = {"assets/img/alan/fallin.png", 2, 2, 0.1};
-    AState[State::DIG] = {"assets/img/alan/dig.png", 2, 8, 0.1};
-    AState[State::CLIMBIN] = {"assets/img/alan/climb.png", 2, 4, 0.2};
-    AState[State::DIG_CLIMB] = {"assets/img/alan/idle.png", 2, 2, 0.2};
-    AState[State::DANCIN] = {"assets/img/alan/dance.png", 10, 10, -1};
-    AState[State::DEAD] = {"assets/img/alan/die.png", 3, 3, -0.5};
+    AState[State::idle] = {"assets/img/alan/idle.png", 2, 2, -1};
+    AState[State::walkin] = {"assets/img/alan/walkin.png", 2, 4, 0.1};
+    AState[State::fallin] = {"assets/img/alan/fallin.png", 2, 2, 0.1};
+    AState[State::dig] = {"assets/img/alan/dig.png", 2, 8, 0.1};
+    AState[State::climbin] = {"assets/img/alan/climb.png", 2, 4, 0.2};
+    AState[State::dig_climb] = {"assets/img/alan/idle.png", 2, 2, 0.2};
+    AState[State::dancin] = {"assets/img/alan/dance.png", 10, 10, -1};
+    AState[State::dead] = {"assets/img/alan/die.png", 3, 3, -0.5};     
 }
 
 AlanAnimation::~AlanAnimation() {}
@@ -21,13 +21,13 @@ void AlanAnimation::playSound(Transition trans)
 {
     Sound *s = associated.getComponent<Sound *>();
     switch (trans) {
-        case Transition::WALK:
+        case Transition::walk:
             s->open("assets/audio/andando.wav");
             break;
-        case Transition::DIG_T:
+        case Transition::dig_t:
             s->open("assets/audio/cavando.wav");
             break;
-        case Transition::HIT_T:
+        case Transition::hit_t
             s->open("assets/audio/dor.wav");
             break;
         default:
@@ -69,7 +69,7 @@ void AlanAnimation::update(float dt)
 
 void AlanAnimation::setAction(Transition trans, Direction dir) 
 {
-    switch (currentState) 
+    switch (current_state) 
     {
         case none_s:
             old_state = current_state;
@@ -78,7 +78,7 @@ void AlanAnimation::setAction(Transition trans, Direction dir)
             current_state = State::idle;
             break;
 
-        case IDLE:
+        case idle:
             switch (trans) 
             {
                 case fall:
@@ -254,5 +254,5 @@ void AlanAnimation::setAction(Transition trans, Direction dir)
     current_direction = dir;
 
     Sprite *sprite = associated.getComponent<Sprite *>();
-    sprite->open(AState[currentState], dir);
+    sprite->open(AState[current_state], dir);
 }

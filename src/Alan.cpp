@@ -4,7 +4,7 @@
 #include "Interpol.h"
 #include "Sprite.h"
 
-Alan::alan(GameObject &associated)
+Alan::Alan(GameObject &associated)
     : Component(associated), input(InputManager::GetInstance()) 
     {}
 
@@ -15,25 +15,25 @@ void Alan::getMovement()
         associated.getComponent<AlanActionControl *>()->getMovementDirection())
         return;
     //
-    if (input.actionPress(input.DIG_UP)) 
+    if (input.actionPress(input.dig_up)) 
     {
         associated.getComponent<AlanActionControl *>()->setMovementDirection(
             AlanActionControl::Direction::up);
         moved = true;
     }
-    if (input.actionPress(input.DIG_DOWN)) 
+    if (input.actionPress(input.dig_down)) 
     {
         associated.getComponent<AlanActionControl *>()->setMovementDirection(
             AlanActionControl::Direction::down);
         moved = true;
     }
-    if (input.actionPress(input.DIG_LEFT)) 
+    if (input.actionPress(input.dig_left)) 
     {
         associated.getComponent<AlanActionControl *>()->setMovementDirection(
             AlanActionControl::Direction::left);
         moved = true;
     }
-    if (input.actionPress(input.DIG_RIGHT)) 
+    if (input.actionPress(input.dig_right)) 
     {
         associated.getComponent<AlanActionControl *>()->setMovementDirection(
             AlanActionControl::Direction::right);
