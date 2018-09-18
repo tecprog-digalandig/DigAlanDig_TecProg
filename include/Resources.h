@@ -9,6 +9,7 @@
 #include <string>
 #include <unordered_map>
 
+// Resources Class characteristics and heritages.
 class Resources 
 {
   public:

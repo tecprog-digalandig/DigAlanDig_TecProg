@@ -1,7 +1,8 @@
 #include "AlanItemCount.h"
 #include "Common.h"
 
-AlanItemCount::alanItemCount(GameObject& associated) : Component(associated) 
+// Constructor of AlanItemCount class to create item count and heritage component.
+AlanItemCount::AlanItemCount(GameObject& associated) : Component(associated) 
 {
     itemCount.emplace(Common::ItemType::gold, rand() % 5);
     itemCountItem.emplace(Common::ItemType::gold,
@@ -54,6 +55,7 @@ AlanItemCount::alanItemCount(GameObject& associated) : Component(associated)
     sprite->setFrame(itemCount[Common::ItemType::petroleum]);
 }
 
+// Render AlanItemCount.
 void AlanItemCount::render(Common::Layer layer) const 
 {
     for (auto item : itemCountItem) 

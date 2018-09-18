@@ -3,7 +3,8 @@
 #include "AlanActionControl.h"
 #include "Sound.h"
 
-AlanAnimation::alanAnimation(GameObject &associated) : Component(associated) 
+// Constructor with GameObject as parameter. Also heritage Component.
+AlanAnimation::AlanAnimation(GameObject &associated) : Component(associated) 
 {
     AState[State::IDLE] = {"assets/img/alan/idle.png", 2, 2, -1};
     AState[State::WALKIN] = {"assets/img/alan/walkin.png", 2, 4, 0.1};
@@ -15,8 +16,10 @@ AlanAnimation::alanAnimation(GameObject &associated) : Component(associated)
     AState[State::DEAD] = {"assets/img/alan/die.png", 3, 3, -0.5};
 }
 
+// Destructor method, runs when the class is deallocated.
 AlanAnimation::~AlanAnimation() {}
 
+// Method to play game sounds in specific player transitions. 
 void AlanAnimation::playSound(Transition trans) 
 {
     Sound *s = associated.getComponent<Sound *>();
@@ -38,6 +41,7 @@ void AlanAnimation::playSound(Transition trans)
     s->play();
 }
 
+// Function to update game during its different conditional states.
 void AlanAnimation::update(float dt) 
 {
     if (current_state == State::dancin || current_state == State::dead) return;
@@ -67,6 +71,7 @@ void AlanAnimation::update(float dt)
     }
 }
 
+// Method to setup different actions depending on transition and directions.
 void AlanAnimation::setAction(Transition trans, Direction dir) 
 {
     switch (currentState) 
