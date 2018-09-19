@@ -3,29 +3,29 @@
 #include "Enemy.h"
 #include "Game.h"
 
-void EnemySpawn::Update(float dt) {
-    while (currentY <
-           ((int)(((Camera::pos.y + Camera::screenSize.y) /
-                   Game::GetInstance()->GetCurrentState().GetGridSize()) +
-                  4))) {
-        for (int x = 0; x < tileMap->GetWidth(); x++) {
-            if (int enemy =
-                    tileMap->At(x, currentY, TileMap::Layers::INIMIGOS)) {
+void EnemySpawn::update(float dt)
+{
+    while ( current_y < ( (int)( ( (Camera::pos.y + Camera::screenSize.y) /
+            Game::getInstance()->getCurrentState().GetGridSize() ) + 4) ) )
+    {
+        for (int x = 0; x < tileMap->GetWidth(); ++x)
+        {
+            if (int enemy = tileMap->At(x, current_y, TileMap::Layers::INIMIGOS) )
+            {
                 GameObject* go = new GameObject();
                 go->box.x =
-                    x * Game::GetInstance()->GetCurrentState().GetGridSize() -
-                    Game::GetInstance()->GetCurrentState().GetGridSize() / 2;
+                    x * Game::getInstance()->getCurrentState().GetGridSize() -
+                    Game::getInstance()->getCurrentState().GetGridSize() / 2;
                 go->box.y =
-                    currentY *
-                        Game::GetInstance()->GetCurrentState().GetGridSize() -
-                    Game::GetInstance()->GetCurrentState().GetGridSize() / 2;
+                    current_y * Game::getInstance()->getCurrentState().GetGridSize() -
+                    Game::getInstance()->getCurrentState().GetGridSize() / 2;
                 go->gridPosition.x = x;
-                go->gridPosition.y = currentY;
-                go->AddComponent(new Enemy(*go, enemy));
-                Game::GetInstance()->GetGridControl()->AddEnemy(go);
-                Game::GetInstance()->GetCurrentState().AddObject(go);
+                go->gridPosition.y = current_y;
+                go->addComponent(new Enemy(*go, enemy));
+                Game::getInstance()->getGridControl()->AddEnemy(go);
+                Game::getInstance()->getCurrentState().AddObject(go);
             }
         }
-        currentY++;
+        ++current_y;
     }
 }

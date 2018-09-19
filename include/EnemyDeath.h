@@ -12,21 +12,21 @@
 #include "TileMap.h"
 #include "Vec2.h"
 
-class EnemyDeath : public Component {
-  public:
-    EnemyDeath(GameObject &associated)
-        : Component(associated) {}
+class EnemyDeath : public Component
+{
+    public:
+        EnemyDeath(GameObject &associated) : Component(associated) {}
 
-    ~EnemyDeath() {}
+        ~EnemyDeath() {}
 
-    void Update(float dt);
-    void RhythmUpdate() {}
-    void RhythmReset() {}
-    void Render(Common::Layer layer) const {}
+        void update(float dt);
+        void rhythmUpdate() {}
+        void rhythmReset() {}
+        void render(Common::Layer layer) const {}
 
-  private:
-    // Cada enemy tera sua própria morte, diferente do EnemySpawn que é um geral
-    std::weak_ptr<GameObject> enemy;
+    private:
+        // Cada enemy tera sua própria morte, diferente do EnemySpawn que é um geral
+        std::weak_ptr <GameObject> enemy;
 };
 
-#endif  // ENEMYDEATH_H
+#endif
