@@ -2,6 +2,12 @@
 #include "Game.h"
 #include "Resources.h"
 
+
+/**
+ * @brief Puts texture image on background (multiplatforms way)
+ * 
+ * @param file 
+ */
 void bgCircularY::Open(const std::string &file) {
     texture = Resources::GetImage(file);
 
@@ -9,6 +15,13 @@ void bgCircularY::Open(const std::string &file) {
     associated.box.size.Set(width, height);
 }
 
+
+/**
+ * @brief Describe posision limits of background,
+ * on axis Y,according to camera (multiplatform)
+ * 
+ * @param layer 
+ */
 void bgCircularY::Render(Common::Layer layer) const {
     if (bgCircularY::texture) {
         int linit = -associated.box.y / associated.box.h;
@@ -28,6 +41,12 @@ void bgCircularY::Render(Common::Layer layer) const {
     }
 }
 
+
+/**
+ * @brief Puts texture image on background (multiplatforms way)
+ * 
+ * @param file 
+ */
 void bgCircularX::Open(const std::string &file) {
     texture = Resources::GetImage(file);
 
@@ -35,6 +54,12 @@ void bgCircularX::Open(const std::string &file) {
     associated.box.size.Set(width, height);
 }
 
+/**
+ * escribe posision limits of background,
+ * on axis X,according to camera (multiplatform)
+ * 
+ * @param layer 
+ */
 void bgCircularX::Render(Common::Layer layer) const {
     if (bgCircularX::texture) {
         int linit = -associated.box.x / associated.box.w;

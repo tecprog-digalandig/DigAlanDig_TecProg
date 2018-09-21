@@ -3,6 +3,10 @@
 #include "Camera.h"
 #include "Component.h"
 
+/**
+ * @brief Describe methods and atribute of class ParalaxY.
+ * 
+ */
 class ParallaxY : public Component {
   public:
     ParallaxY(GameObject& associated, float factor = 1)
@@ -16,6 +20,11 @@ class ParallaxY : public Component {
     float factor;
 };
 
+
+/**
+ * @brief Describe methods and atribute of class bgCircularY.
+ * 
+ */
 class bgCircularY : public Component {
   public:
     bgCircularY(GameObject& associated, const std::string& file)
@@ -33,6 +42,11 @@ class bgCircularY : public Component {
     int width = 0, height = 0;
 };
 
+
+/**
+ * @brief Describe methods and atribute of class bgCircularX. 
+ * 
+ */
 class bgCircularX : public Component {
   public:
     bgCircularX(GameObject& associated, const std::string& file)
@@ -51,6 +65,11 @@ class bgCircularX : public Component {
     int width = 0, height = 0;
 };
 
+
+/**
+ * @brief Describe methods and atribute of class ParalaxX.
+ * 
+ */
 class ParallaxX : public Component {
   public:
     ParallaxX(GameObject& associated, float factor = 1)
