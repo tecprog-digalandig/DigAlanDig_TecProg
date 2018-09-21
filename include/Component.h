@@ -11,14 +11,14 @@ class Component {
     explicit Component(GameObject& associated) : associated(associated) {}
     virtual ~Component() {}
 
-    virtual void Update(float dt) = 0;
-    virtual void RhythmUpdate() = 0;
-    virtual void RhythmReset() {}
-    virtual void Render(Common::Layer layer) const = 0;
-    virtual void Start() {}
+    virtual void update(float dt) = 0;
+    virtual void rhythm_update() = 0;
+    virtual void rhythm_reset() {}
+    virtual void render(Common::Layer layer) const = 0;
+    virtual void start() {}
 
   protected:
     GameObject& associated;
 };
 
-#endif  // COMPONENT_H
+#endif

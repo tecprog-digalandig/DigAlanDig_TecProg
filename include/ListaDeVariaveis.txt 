@@ -1,0 +1,120 @@
+TIPOS DE VARIÁVEIS
+
+>> Sprite.h
+- Sprite : Component
+- SpriteState
+
+>> StageState.h
+- StageState : State
+
+>> State.h
+- State
+
+VARIÁVEIS
+
+>> Sprite.h
+- file -> std::string (const)(param)
+- frame_count -> int
+- total_frame_count -> int
+- frame_time -> float 
+- associated -> GameObject (param)(pointer)
+- seconds_to_self_destruct  -> float
+- sstate -> SpriteState (param)
+- dir -> int (param)
+- x -> int (param)
+- y -> int (param)
+- w -> int (param)
+- h -> int (param)
+- clip_rect -> SDL_Rect 
+- width -> int
+- height -> int
+- dt -> float (param)
+- current_frame -> int
+- init_frame -> int
+- layer -> Common::Layer (param) 
+- scale_x -> double (param)
+- scale_y -> double (param)
+- s -> double (param)
+- v -> Vec2 (const)
+- scale -> Vec2
+- frame -> int
+- texture -> std::shared_ptr<SDL_Texture>
+- frame_time_total -> float
+- time_elapsed -> float
+- mode -> SDL_BlendMode (param)
+- self_destruct_count -> Timer
+
+>> StageState.h
+- dt -> float
+- udata -> void (pointer)(param)
+- stream -> Uint8 (param)
+- len -> int (param)
+- count -> int (static)
+- beat -> bool (static)
+- time_rhythm -> int (static)
+- half_beat_counter -> int
+
+>> State.h 
+- music -> Music
+- object_array -> std::vector<std::shared_ptr<GameObject>>
+- dt -> float (param)
+- go -> GameObject (pointer)(param)
+- tile_map -> TileMap (pointer)
+- music_playing -> bool
+- grid_size -> int (const)
+- pop_requested -> bool 
+- quit_requested -> bool
+- started -> bool
+- object_array -> std::vector<std::shared_ptr<GameObject>>
+
+FUNÇÕES
+
+>> Sprite.h
+- open -> void
+- set_clip -> void
+- get_width -> int (const)
+- get_height -> int (const)
+- is_open -> bool (const)
+- update -> void
+- alan_update -> void
+- rhythm_update -> void
+- set_frame -> void
+- rhythm_reset -> void
+- render -> void (const)
+- set_scale_x -> void
+- get_scale -> Vec2 (const)
+- set_frame -> void
+- set_frame_count -> void
+- set_frame_time -> void
+- frame_time_passed -> bool
+- set_blend_mode -> bool
+- set_color -> bool
+- SDL_SetTextureBlendMode*
+- SDL_SetTextureColorMod*
+- get_frame_count -> int
+- time_elapsed_reset -> void
+
+>> StageState.h
+- load_assets -> void
+- update -> void
+- rhythm_update -> void
+- rhythm_reset -> void
+- render -> void (const)
+- start -> void
+- pause -> void
+- resume -> void
+- no_effect -> void (static)
+
+>> State.h
+- stop -> void (const)
+- clear -> void
+- load_assets -> void (virtual)
+- rhythm_update -> void (virtual)
+- rhythm_reset -> void (virtual)
+- render -> void (virtual)
+- start -> void (virtual)
+- pause -> void (virtual)
+- resume -> void (virtual)
+- update_array -> void
+- rhythm_update_array -> void
+- rhythm_update_array -> void

@@ -11,21 +11,21 @@
 class StageState : public State {
   public:
     StageState();
-    void LoadAssets();
-    void Update(float dt);
-    void RhythmUpdate();
-    void RhythmReset();
-    void Render() const;
-    void Start();
-    void Pause() {}
-    void Resume() {}
+    void load_assets(); 
+    void update(float dt); 
+    void rhythm_update(); 
+    void rhythm_reset(); 
+    void render() const; 
+    void start(); 
+    void pause() {} 
+    void resume() {} 
 
   private:
-    static void noEffect(void *udata, Uint8 *stream, int len);
+    static void no_effect(void *udata, Uint8 *stream, int len); 
     static int count;
     static bool beat;
-    static int timeRhythm;
-    int halfBeatCounter = 0;
+    static int time_rhythm; 
+    int half_beat_counter = 0; 
 };
 
 #endif

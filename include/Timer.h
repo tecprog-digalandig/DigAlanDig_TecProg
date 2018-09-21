@@ -4,12 +4,12 @@
 class Timer {
   public:
     Timer() {}
-    void Update(float dt) { time += dt; }
-    void Restart() { time = 0; }
-    float Get() const { return time; }
+    void update(float dt) { time += dt; } 
+    void restart() { time = 0; } 
+    float get() const { return time; } 
 
   private:
     float time = 0;
 };
 
-#endif  // TIMER_H
+#endif 
