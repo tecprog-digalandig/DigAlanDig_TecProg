@@ -10,6 +10,10 @@
 #include "TileMap.h"
 #include "TileSet.h"
 
+/**
+ * @brief  Describe methods and atributes of class MinitileMap 
+ * 
+ */
 class MiniTileMap : public Component {
   public:
     MiniTileMap(GameObject &associated, TileSet *tileSet, TileMap *tileMap,

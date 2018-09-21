@@ -6,6 +6,10 @@
 #include "Component.h"
 #include "Vec2.h"
 
+/**
+ * @brief Describe methods and atribute of Interpol class.
+ * 
+ */
 class Interpol : public Component {
   public:
     explicit Interpol(GameObject &associated);

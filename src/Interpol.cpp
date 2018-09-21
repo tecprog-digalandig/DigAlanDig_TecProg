@@ -3,8 +3,19 @@
 #include "Game.h"
 #include "Sprite.h"
 
+/**
+ * @brief Construct a new Interpol:: Interpol object
+ * 
+ * @param associated 
+ */
 Interpol::Interpol(GameObject &associated) : Component(associated) {}
 
+
+/**
+ * @brief Update position and status of grids
+ * 
+ * @param dt 
+ */
 void Interpol::Update(float dt) {
     Sprite *sprite = associated.GetComponent<Sprite *>();
 

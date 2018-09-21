@@ -5,15 +5,31 @@
 #include "Common.h"
 #include "Game.h"
 
+/**
+ * @brief Construct a new Mini Tile Map:: Mini Tile Map object
+ * 
+ * @param associated 
+ * @param tileSet 
+ * @param tileMap 
+ * @param alan 
+ */
 MiniTileMap::MiniTileMap(GameObject &associated, TileSet *tileSet,
                          TileMap *tileMap, std::weak_ptr<GameObject> alan)
     : Component(associated), tileMap(tileMap), tileSet(tileSet), alan(alan) {}
 
+
+/**
+ * @brief Destroy the Mini Tile Map:: Mini Tile Map object
+ * 
+ */
 MiniTileMap::~MiniTileMap() {}
 
-/*
-    Renderiza as camadas do mapa.
-*/
+
+/**
+ * @brief Render map layers
+ * 
+ * @param layer 
+ */
 void MiniTileMap::Render(Common::Layer layer) const {
     if (!alan.lock()) return;
 
@@ -26,17 +42,14 @@ void MiniTileMap::Render(Common::Layer layer) const {
 
     yMin = alanPos.y - 5;
 
-    // Camera::pos.y / Game::GetInstance()->GetCurrentState().GetGridSize();
-
     for (int posY = yMin; posY < tileMap->GetHeight(); posY++) {
         for (int posX = 0; posX < tileMap->GetWidth(); posX++) {
-            // Coloca a marmota no minimapa
-            // valPos = tileMap->At(posX, posY, TileMap::Layers::BLOCOS);
+            // Puts Alan inside mini tile map
             if (posY < 0) {
                 valPos = 1;
             } else if (alanPos.x == posX && alanPos.y == posY) {
                 valPos = 5;
-                // Faz a borda o minimapa
+                // Make border of  mini tile map
             } else if (tileMap->At(posX, posY, TileMap::Layers::ITENS)) {
                 valPos = 4;
             } else if (posY >
