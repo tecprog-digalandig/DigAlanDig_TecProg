@@ -1,3 +1,5 @@
+//Class that create, move, update and render objects on the screen.
+
 #include "GameObject.h"
 #include "Sound.h"
 

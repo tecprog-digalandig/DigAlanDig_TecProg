@@ -1,3 +1,6 @@
+//Header file for the class EnemySpawn, contains the headers for all the
+//methods of the class.
+
 #ifndef ENEMYSPAWN_H
 #define ENEMYSPAWN_H
 #define INCLUDE_SDL
@@ -16,24 +19,14 @@ class EnemySpawn : public Component
 {
     public:
         EnemySpawn(GameObject &associated, TileMap *tileMap)
-        : Component(associated), tileMap(tileMap)
-        {
-        }
+        : Component(associated), tileMap(tileMap) {}
 
-        ~EnemySpawn()
-        {
-        }
+        ~EnemySpawn(){}
 
         void update(float dt);
-        void rhythmUpdate()
-        {
-        }
-        void rhythmReset()
-        {
-        }
-        void render(Common::Layer layer) const
-        {
-        }
+        void rhythmUpdate() {}
+        void rhythmReset() {}
+        void render(Common::Layer layer) const {}
 
     private:
         TileMap *tileMap;

@@ -1,3 +1,5 @@
+//Class that implements methods that checks path, enemy and collision.
+
 #include "GridControl.h"
 #include "Alan.h"
 #include "AlanActionControl.h"

@@ -1,3 +1,6 @@
+//Header file for the class EnemyDeath, contains the headers for all the
+//methods of the class.
+
 #ifndef ENEMYDEATH_H
 #define ENEMYDEATH_H
 #define INCLUDE_SDL
@@ -25,8 +28,7 @@ class EnemyDeath : public Component
         void render(Common::Layer layer) const {}
 
     private:
-        // Cada enemy tera sua própria morte, diferente do EnemySpawn que é um geral
-        std::weak_ptr <GameObject> enemy;
+        std::weak_ptr <GameObject> enemy;//Each enemy will have their own death
 };
 
 #endif

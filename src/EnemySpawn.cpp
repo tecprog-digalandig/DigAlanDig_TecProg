@@ -1,3 +1,6 @@
+//This class controls where and when the enemy will spawn, using as parameters
+//the camera and players position on the screen.
+
 #include "EnemySpawn.h"
 #include "Camera.h"
 #include "Enemy.h"
@@ -13,11 +16,9 @@ void EnemySpawn::update(float dt)
             if (int enemy = tileMap->At(x, current_y, TileMap::Layers::INIMIGOS) )
             {
                 GameObject* go = new GameObject();
-                go->box.x =
-                    x * Game::getInstance()->getCurrentState().GetGridSize() -
+                go->box.x = x * Game::getInstance()->getCurrentState().GetGridSize() -
                     Game::getInstance()->getCurrentState().GetGridSize() / 2;
-                go->box.y =
-                    current_y * Game::getInstance()->getCurrentState().GetGridSize() -
+                go->box.y = current_y * Game::getInstance()->getCurrentState().GetGridSize() -
                     Game::getInstance()->getCurrentState().GetGridSize() / 2;
                 go->gridPosition.x = x;
                 go->gridPosition.y = current_y;

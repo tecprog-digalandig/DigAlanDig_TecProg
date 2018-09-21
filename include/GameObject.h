@@ -1,4 +1,6 @@
-copyPosition#ifndef GAMEOBJECT_H
+//Header file for the class GameObject, containing all its methods labels.
+
+#ifndef GAMEOBJECT_H
 #define GAMEOBJECT_H
 #include <algorithm>
 #include <memory>

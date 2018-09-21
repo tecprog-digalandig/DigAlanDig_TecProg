@@ -1,3 +1,6 @@
+//Header file for the class Game, contains the headers for all the methods of
+//the class.
+
 #ifndef GAME_H
 #define GAME_H
 #define INCLUDE_SDL
@@ -23,9 +26,6 @@ class Game
         float getDeltaTime() const { return dt; }
 
         void push(State* state) { stored_state = state; }
-
-        // static std::unordered_map<std::string, int> idata;
-        // static std::unordered_map<std::string, std::string> data;
         bool player_victory = false;
         void fixTiming() { adjust = inicial_adjust; }
         void updateBeatTime(int time_rhythm);
@@ -51,7 +51,6 @@ class Game
         void calculateDeltaTime();
         void toggleFullScreen();
 
-        // TODO move to a configuration file
         static constexpr float bpm = 120;
         static constexpr float bit_rate = 44100;
         int adjust = 0;
@@ -67,9 +66,11 @@ class Game
         Game(const std::string& title, int width, int height);
 
         InputManager& input;
-        // normalized variable for getting how close a press was to the rhythm
-        // 0 = perfect, 1 = worst
         float delta_rhythm = 0;
+        /*
+        //delta_rhythm is a normalized variable for getting how close a press
+        //was to the rhythm, 0 = perfect, 1 = worst.
+        */
 };
 
 #endif

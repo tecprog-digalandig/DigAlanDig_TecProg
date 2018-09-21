@@ -1,3 +1,6 @@
+//Header file for the Music class, containing all its methods and also
+//inicializating some parameters.
+
 #ifndef MUSIC_H
 #define MUSIC_H
 #define INCLUDE_SDL

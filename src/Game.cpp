@@ -1,3 +1,7 @@
+//Class that starts new game, calculate input time over the movement of the
+//caracter on screen (delta time), keep the game running and free resources
+//when the game is ended.
+
 #include "Game.h"
 #include <algorithm>
 #include <iostream>

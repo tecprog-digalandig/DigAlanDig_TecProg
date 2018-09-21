@@ -1,3 +1,5 @@
+//Class responsible for playing the game song for each state of the game.
+
 #include "Music.h"
 
 void Music::Play(int times) const

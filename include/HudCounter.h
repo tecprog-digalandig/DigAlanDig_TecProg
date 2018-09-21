@@ -1,3 +1,5 @@
+//Header file for HudCounter class, containing all its methods labels.
+
 #ifndef HUDCOUNTER_H
 #define HUDCOUNTER_H
 #include "Component.h"
