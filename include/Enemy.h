@@ -27,8 +27,8 @@ class Enemy : public Component {
 
     ~Enemy() {}
 
-    void Update(float dt);
-    void RhythmUpdate()
+    void update(float dt);
+    void rhythmUpdate()
     {
         num_beats++;
 
@@ -38,7 +38,7 @@ class Enemy : public Component {
         }
     }
     void RhythmReset() {}
-    void Render(Common::Layer layer) const {}
+    void render(Common::Layer layer) const {}
 
     Vec2 GetGridPosition()
     { 

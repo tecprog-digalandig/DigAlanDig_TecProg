@@ -22,23 +22,17 @@ class Light : public Component {
         delete sprite;
     }
 
-    void Update(float dt) 
-    {
-        if (auto ptr = follow.lock()) 
-        {
+    void update(float dt) {
+        if (auto ptr = follow.lock()) {
             associated.box.SetCenter(ptr->box.Center());
-            sprite->Update(dt);
-        } else 
-            {
+            sprite->update(dt);
+        } else {
             associated.RequestDelete();
             }
     }
 
-    void RhythmUpdate() {}
-    void Render(Common::Layer layer) const 
-    { 
-        sprite->Render(layer);
-    }
+    void rhythmUpdate() {}
+    void render(Common::Layer layer) const { sprite->render(layer); }
 
     void SetSize(int size) 
     {

@@ -19,10 +19,10 @@ class EnemySpawn : public Component {
 
     ~EnemySpawn() {}
 
-    void Update(float dt);
-    void RhythmUpdate() {}
+    void update(float dt);
+    void rhythmUpdate() {}
     void RhythmReset() {}
-    void Render(Common::Layer layer) const {}
+    void render(Common::Layer layer) const {}
 
   private:
     TileMap *tileMap;

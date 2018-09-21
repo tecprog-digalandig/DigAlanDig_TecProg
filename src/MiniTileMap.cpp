@@ -14,7 +14,7 @@ MiniTileMap::~MiniTileMap() {}
 /*
     Renderiza as camadas do mapa.
 */
-void MiniTileMap::Render(Common::Layer layer) const {
+void MiniTileMap::render(Common::Layer layer) const {
     if (!alan.lock()) return;
 
     int yMin;

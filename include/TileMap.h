@@ -5,20 +5,22 @@
 #include "Component.h"
 #include "TileSet.h"
 
+using namespace std;
+
 class TileMap : public Component {
   public:
-    TileMap(GameObject& associated, const std::string& file,
+    TileMap(GameObject& associated, const string& file,
             bool infinity = false);
     ~TileMap();
 
-    void Load(const std::string& file);
-    void LoadList(const std::string& file);
+    void Load(const string& file);
+    void LoadList(const string& file);
     void SetTileSet(TileSet* tileSet) { this->tileSet = tileSet; }
     int At(int x, int y, int z = 1);
 
-    void Update(float dt) {}
-    void RhythmUpdate() {}
-    void Render(Common::Layer layer) const;
+    void update(float dt) {}
+    void rhythmUpdate() {}
+    void render(Common::Layer layer) const;
 
     void RenderLayer(int layer, int cameraX = 0, int cameraY = 0) const;
 
@@ -36,9 +38,9 @@ class TileMap : public Component {
     enum Layers { BASE = 0, BLOCOS, ITENS, INIMIGOS };
 
   private:
-    std::vector<std::vector<int>> tileMat;
-    std::vector<std::string> TileMapsFiles;
-    std::unordered_map<std::string, int> layerIndex;
+    vector<vector<int>> tileMat;
+    vector<string> TileMapsFiles;
+    unordered_map<string, int> layerIndex;
     TileSet* tileSet;
     int width = 0, height = 0, depth = 0;
     const int groundLayer = 1;

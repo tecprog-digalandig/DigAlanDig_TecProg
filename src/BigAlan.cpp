@@ -5,7 +5,7 @@
 #include "GridControl.h"
 
 
-void BigAlan::Update(float dt) 
+void BigAlan::update(float dt) 
 {
     int combo = Game::GetInstance()->combo;
     int diff_combo = std::abs(combo - old_combo);

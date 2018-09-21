@@ -8,6 +8,7 @@
 
 Enemy::Enemy(GameObject &associated, int enemy_type)
     : Component(associated), input(InputManager::GetInstance()) {
+    enemy_type = 0;    
     if (enemy_type == 1) {
         EState[State::IDLE_S] = {"assets/img/enemies/enemy1/idle.png", 2, 2,
                                  -1};
@@ -118,7 +119,7 @@ void Enemy::IsSurrounded()
         movement_allowed = false;
 }
 
-void Enemy::Update(float dt)
+void Enemy::update(float dt)
 {
     if (!Game::GetInstance()->GetGridControl()->GetAlan().lock() ||
         !associated.GetComponent<Interpol *>()->IsMovementDone())

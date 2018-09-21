@@ -42,10 +42,10 @@ void Sprite::SetFrame(int frame) {
     clipRect = Rect(pos, size);
 }
 
-void Sprite::Render(Common::Layer layer) const {
+void Sprite::render(Common::Layer layer) const {
     if (IsOpen()) {
         Vec2 offset;
-        if (associated.worldReference) offset = Camera::pos;
+        if (associated.world_reference) offset = Camera::pos;
         Rect dst(associated.box.pos - offset, {(double)width, (double)height});
 
         if (scale.x != 1 || scale.y != 1) dst.Scale(scale);
@@ -57,10 +57,10 @@ void Sprite::Render(Common::Layer layer) const {
     }
 }
 
-void Sprite::Update(float dt) {
+void Sprite::update(float dt) {
     timeElapsed += dt;
 
-    selfDestructCount.Update(dt);
+    selfDestructCount.update(dt);
     if (secondsToSelfDestruct > 0 &&
         selfDestructCount.Get() > secondsToSelfDestruct) {
         associated.RequestDelete();

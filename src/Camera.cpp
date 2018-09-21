@@ -29,7 +29,7 @@ Vec2 Camera::Center()
     return pos + screenSize / 2;
 }
 
-void Camera::RhythmUpdate()
+void Camera::rhythmUpdate()
 {
     if (focus) {
         if (offset.y > (focus->box.y +
@@ -40,7 +40,7 @@ void Camera::RhythmUpdate()
     }
 }
 
-void Camera::Update(float dt)
+void Camera::update(float dt)
 {
     if (shake_duration > 0) {
         shake_duration -= dt;

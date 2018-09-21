@@ -10,10 +10,10 @@ class HudMeter : public Component {
              const std::string& meter_file);
     ~HudMeter();
 
-    void Update(float dt) {}
+    void update(float dt) {}
 
-    void RhythmUpdate() {}
-    void Render(Common::Layer layer) const;
+    void rhythmUpdate() {}
+    void render(Common::Layer layer) const;
 
     void SetAlan(std::weak_ptr<GameObject> alan) 
     { 

@@ -24,17 +24,17 @@ HudMeter::~HudMeter()
     delete meter;
 }
 
-void HudMeter::Render(Common::Layer layer) const 
-{
+void HudMeter::render(Common::Layer layer) const {
     associated.box = boxbg;
-    bg->Render(layer);
+    bg->render(layer);
+
     associated.box += offset1;
     float s = InputManager::GetInstance().scaleFactor();
     for (int i = 0; i < 3; i++) 
     {
         setMeter(i);
         meter->SetScaleX(s);
-        meter->Render(layer);
+        meter->render(layer);
         associated.box += offset2;
     }
 }

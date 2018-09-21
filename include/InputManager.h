@@ -20,7 +20,7 @@ class InputManager {
         ACTION_MAX
     };
 
-    void Update(float deltaRhythm);
+    void update(float deltaRhythm);
 
     bool KeyDown(int key) const { return keyState[key]; }
     bool KeyPress(int key) const {
