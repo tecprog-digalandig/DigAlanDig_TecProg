@@ -2,8 +2,8 @@
 #include "Alan.h"
 #include "InputManager.h"
 
-HudMeter::HudMeter(GameObject& associated, const std::string& bgFile,
-                   const std::string& meterFile)
+HudMeter::HudMeter(GameObject& associated, const string& bgFile,
+                   const string& meterFile)
     : Component(associated) {
     bg = new Sprite(associated, bgFile);
     boxbg = associated.box;

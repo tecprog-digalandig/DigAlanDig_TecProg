@@ -1,3 +1,7 @@
+/*
+* File: TitleState.cpp
+* Purpose: Create the initial layout to show the game title
+*/
 #define INCLUDE_SDL
 #include <stdio.h>
 #include "TitleState.h"
@@ -45,12 +49,14 @@ TitleState::TitleState() {}
 
 void TitleState::loadAssets() 
 {   
+    // Add background to layout
     GameObject* initial_layout = new GameObject(Common::Layer::BG);  
     initial_layout->world_reference = false;    
     objectArray.emplace_back(initial_layout);
     initial_layout->AddComponent(
         new Sprite(*initial_layout, MENU_SCREEN));  
 
+    // Add moving space to layout
     initial_layout = new GameObject(Common::Layer::BG);
     initial_layout->box.x = POSITION_X_SPACE;      
     initial_layout->box.y = POSITION_Y_SPACE;      
@@ -60,6 +66,7 @@ void TitleState::loadAssets()
     initial_layout->AddComponent(new bgCircularX(
         *initial_layout, SPACE_SCREEN));    
 
+    // Add the first moving cloud to the layout
     initial_layout = new GameObject(Common::Layer::BG);
     initial_layout->box.x = POSITION_X_CLOUD;   
     initial_layout->box.y = POSITION_Y_CLOUD;   
@@ -69,6 +76,7 @@ void TitleState::loadAssets()
     initial_layout->AddComponent(new bgCircularX(
         *initial_layout, CLOUD_1)); 
 
+    // Add the second moving cloud to the layout
     initial_layout = new GameObject(Common::Layer::BG);
     initial_layout->box.x = POSITION_X_CLOUD_2; 
     initial_layout->box.y = POSITION_Y_CLOUD_2; 
@@ -77,6 +85,7 @@ void TitleState::loadAssets()
     initial_layout->AddComponent(new ParallaxX(*initial_layout, CLOUD_2_VELOCITY)); 
     initial_layout->AddComponent(new bgCircularX(*initial_layout, CLOUD_2));    
 
+    // Add the third moving cloud to the layout
     initial_layout = new GameObject(Common::Layer::BG);
     initial_layout->box.x = POSITION_X_CLOUD_3; 
     initial_layout->box.y = POSITION_Y_CLOUD_3; 
@@ -85,6 +94,7 @@ void TitleState::loadAssets()
     initial_layout->AddComponent(new ParallaxX(*initial_layout, CLOUD_3_VELOCITY)); 
     initial_layout->AddComponent(new bgCircularX(*initial_layout, CLOUD_3));    
 
+    // Add title to the layout
     initial_layout = new GameObject(Common::Layer::HUD);
     Sprite* sprite = new Sprite(*initial_layout, TITLE_MENU);   
     sprite->SetScaleX(SCALE_X_TITLE);   
@@ -93,6 +103,7 @@ void TitleState::loadAssets()
     objectArray.emplace_back(initial_layout);
     initial_layout->AddComponent(sprite);
 
+    // add image "Press Space" to the layout
     initial_layout = new GameObject(Common::Layer::HUD);
     sprite = new Sprite(*initial_layout, TITLE_PRESS_SPACE);    
     sprite->SetScaleX(SCALE_X_PRESS_SPACE); 
@@ -102,6 +113,7 @@ void TitleState::loadAssets()
     objectArray.emplace_back(initial_layout);
     initial_layout->AddComponent(sprite);
     
+    // add spaceship to the layout
     initial_layout = new GameObject(Common::Layer::HUD);
     sprite = new Sprite(*initial_layout, SPACESHIP_MENU, 2, -1);    
     sprite->SetScaleX(SCALE_X_SPACESHIP);   
