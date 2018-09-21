@@ -8,6 +8,10 @@
 #include "TileMap.h"
 #include "Vec2.h"
 
+/**
+ * @brief Describe methods and atribute of class GridControl.
+ * 
+ */
 class GridControl {
   public:
     static GridControl *GetInstance();

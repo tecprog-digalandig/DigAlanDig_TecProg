@@ -6,6 +6,10 @@
 #include <iostream>
 #include "Vec2.h"
 
+/**
+ * @brief Describe methods and atribute of class React.
+ * 
+ */
 class Rect {
   public:
     Vec2 pos, size;

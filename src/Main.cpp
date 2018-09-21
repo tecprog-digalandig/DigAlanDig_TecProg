@@ -7,6 +7,13 @@
 #include "androidbuf.h"
 #endif
 
+/**
+ * @brief Method Main
+ * 
+ * @param argc 
+ * @param argv 
+ * @return int 
+ */
 int main(int argc, char** argv) {
 #ifdef _WIN32
     std::ofstream out("cout.txt");
