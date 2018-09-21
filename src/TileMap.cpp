@@ -26,7 +26,7 @@ TileMap::~TileMap() {}
 
 void TileMap::LoadList(const std::string& file) {
     json j;
-    Common::read_Json(j, file);
+    Common::readJson(j, file);
     for (auto it = j["files"].begin(); it != j["files"].end(); ++it) {
         TileMapsFiles.push_back("assets/map/" +
                                 it.value().at("name").get<std::string>());
@@ -37,7 +37,7 @@ void TileMap::LoadList(const std::string& file) {
 
 void TileMap::Load(const std::string& file) {
     json j;
-    Common::read_Json(j, file);
+    Common::readJson(j, file);
 
     std::string tileSetFile = j.at("tilesets").at(0).at("source");
     // tileSetFile.replace(tileSetFile.end() - 3, tileSetFile.end(), "json");

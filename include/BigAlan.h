@@ -16,25 +16,28 @@ class BigAlan : public Component {
     }
 
     void Update(float dt);
-    void RhythmUpdate() {
+
+    void RhythmUpdate()
+    {
         associated.box.y += offset;
         offset = -offset;
     }
+    
     void Render(Common::Layer layer) const {}
 
 
   private:
     Sprite::SpriteState state[BAState::MAXSTATE];
-    BAState currentState = BAState::STARTER;
-    int offset = 0, oldCombo = 0;
+    BAState current_state = BAState::STARTER;
+    int offset = 0, old_combo = 0;
     Sprite *sprite;
 };
 
 class SpriteState {
   public:
     std::string file;
-    int frameCount;
-    int totalFrameCount;
-    float frameTime;
+    int frame_count;
+    int total_frame_count;
+    float frame_time;
 };
 #endif  // BIGALAN_H

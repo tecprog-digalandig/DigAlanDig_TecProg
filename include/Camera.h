@@ -17,13 +17,13 @@ class Camera {
     static Vec2 pos, speed, screenSize, offset;
 
     enum Movement { ATTACHED = 1, CONSTSCROLL, FRIENDLYSCROLL, NONE };
-    static Movement currentMove;
+    static Movement current_move;
 
   private:
     static GameObject* focus;
     static Vec2 shake;
-    static int shakeIntensity;
-    static float shakeDuration;
+    static int shake_intensity;
+    static float shake_duration;
 };
 
 #endif  // CAMERA_H
