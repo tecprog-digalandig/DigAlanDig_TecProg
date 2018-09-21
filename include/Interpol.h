@@ -6,7 +6,8 @@
 #include "Component.h"
 #include "Vec2.h"
 
-class Interpol : public Component {
+class Interpol : public Component
+{
   public:
     explicit Interpol(GameObject &associated);
 
@@ -16,14 +17,14 @@ class Interpol : public Component {
     void Render(Common::Layer layer) const {}
     void Start() {}
 
-    bool IsMovementDone() { return movementDone; }
+    bool isMovementDone() { return movementDone; }
 
     Vec2 target;
-    bool isHit = false;
+    bool is_hit = false;
 
   private:
-    Vec2 alanPos;
-    bool movementDone = true;
+    Vec2 alan_pos;
+    bool movement_done = true;
     Vec2 speed;
 };
 
