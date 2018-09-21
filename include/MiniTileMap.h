@@ -10,7 +10,8 @@
 #include "TileMap.h"
 #include "TileSet.h"
 
-class MiniTileMap : public Component {
+class MiniTileMap : public Component
+{
   public:
     MiniTileMap(GameObject &associated, TileSet *tileSet, TileMap *tileMap,
                 std::weak_ptr<GameObject> alan);
@@ -22,8 +23,8 @@ class MiniTileMap : public Component {
     void Render(Common::Layer layer) const;
 
   private:
-    TileMap *tileMap;
-    TileSet *tileSet;
+    TileMap *tile_map;
+    TileSet *tile_set;
     std::weak_ptr<GameObject> alan;
 };
 
