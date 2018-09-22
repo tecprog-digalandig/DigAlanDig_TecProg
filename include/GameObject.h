@@ -1,4 +1,4 @@
-copyPosition#ifndef GAMEOBJECT_H
+#ifndef GAMEOBJECT_H
 #define GAMEOBJECT_H
 #include <algorithm>
 #include <memory>
