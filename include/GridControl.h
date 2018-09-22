@@ -1,3 +1,8 @@
+/**
+ * @brief 
+ * 
+ * @file GridControl.h
+ */
 #ifndef GRIDCONTROL_H
 #define GRIDCONTROL_H
 

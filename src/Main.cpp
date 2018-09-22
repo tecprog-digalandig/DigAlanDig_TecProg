@@ -1,3 +1,8 @@
+/**
+ * @brief 
+ * 
+ * @file Main.cpp
+ */
 #include <fstream>
 #include <iostream>
 #include "Game.h"

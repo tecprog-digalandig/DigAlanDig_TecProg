@@ -1,3 +1,9 @@
+/**
+ * @brief 
+ * 
+ * @file MiniTileMap.cpp
+ *
+ */
 #include "MiniTileMap.h"
 #include <algorithm>
 #include "Alan.h"

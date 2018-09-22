@@ -1,3 +1,8 @@
+/**
+ * @brief 
+ * 
+ * @file Rect.h
+ */
 #ifndef RECT_H
 #define RECT_H
 #define INCLUDE_SDL
