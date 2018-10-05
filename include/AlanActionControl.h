@@ -22,13 +22,13 @@ class AlanActionControl : public Component
 
     enum Action 
     { 
-        standin = 0, walkin, climbing, fallin 
+        standin = 0, walkin, climbing, falling
     };
 
     AlanActionControl(GameObject& associated, int grid_size)
         : Component(associated),
           input(InputManager::GetInstance()),
-          gridSize(grid_size) {}
+          grid_size(grid_size) {}
 
     ~AlanActionControl() {}
 
@@ -68,7 +68,7 @@ class AlanActionControl : public Component
 
     void setMovementDirection(Direction movementDirection) 
     {
-        this->movementDirection = movement_direction;
+        this->movement_direction = movement_direction;
     }
 
     void setAction(Action action) 

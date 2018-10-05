@@ -32,7 +32,7 @@ class Alan : public Component
 
     void rhythmReset() 
     {
-        static int missCounter = 0;
+        static int miss_counter = 0;
         if (!moved)
             miss_counter++;
         else
@@ -71,21 +71,21 @@ class Alan : public Component
 
     int getDamage() 
     { 
-        return DAMAGE; 
+        return damage; 
     }
 
     void takeDamage() 
     {
         if (!damage_taken) 
         {
-            HP--;
+            life_enemy--;
             damage_taken = true;
         }
     }
 
-    void setDamage(int DAMAGE) 
+    void setDamage(int damage) 
     { 
-        this->damage = DAMAGE; 
+        this->damage = damage; 
     }
 
     int getHP() 
@@ -105,14 +105,14 @@ class Alan : public Component
 
   private:
     GameObject* item_count;
-    const int HP = 6;
+    const int life_enemy = 6;
 
     int max_position = 0;
     int grids_left = 0;
 
     InputManager& input;
 
-    const int DAMAGE = 1;
+    const int damage = 1;
 
     bool moved = false;
     bool damage_taken = false;
