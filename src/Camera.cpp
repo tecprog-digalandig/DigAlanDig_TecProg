@@ -1,3 +1,9 @@
+/**
+ * @brief file that will perform the movement of the player's screen
+ * 
+ * @file Camera.cpp
+ * 
+ */
 #include "Camera.h"
 #include <iostream>
 #include "Alan.h"
@@ -14,34 +20,44 @@ GameObject *Camera::focus = nullptr;
 int Camera::shake_intensity = 0;
 float Camera::shake_duration = 0;
 
+// the focus of the camera is updated as the 
+// character descends into the scene
 void Camera::Follow(GameObject *new_focus) 
 { 
     focus = new_focus;
 }
 
+// calls the function that will not focus on 
+// the center of the screen
 void Camera::Unfollow()
 { 
     focus = nullptr;
 }
-
+// function that will calculate the center of the screen
 Vec2 Camera::Center()
 { 
     return pos + screenSize / 2;
 }
 
+// The screen is updated according to the movement of the character
 void Camera::RhythmUpdate()
 {
+    // if the focus is updated with the new focus
     if (focus) {
+        // the screen is focused as the boxes below the character are broken
         if (offset.y > (focus->box.y +
                         Game::GetInstance()->GetCurrentState().GetGridSize()) &&
             focus->GetComponent<Alan *>()->GetHP() > 0) {
             focus->GetComponent<Alan *>()->TakeDamage();
         }
-    }
+    } // if -- focus update has been verified
 }
 
+// calculates the intensity and duration of the shake screen
 void Camera::Update(float dt)
 {
+    // calculates the intensity in which it will shake the 
+    // screen according to the path traveled
     if (shake_duration > 0) {
         shake_duration -= dt;
         shake = {sin((rand() % (int)(2000 * M_PI)) / 1000.0) * shake_intensity,
@@ -54,6 +70,7 @@ void Camera::Update(float dt)
 
     float scroll_factor = 1;
 
+    // calculates the different speeds of the screen movement
     switch (Camera::current_move) {
         case ATTACHED:
             if (focus->box.y >= screenSize.y / 2) {
@@ -69,7 +86,7 @@ void Camera::Update(float dt)
         case Camera::CONSTSCROLL: {
             Vec2 focusGridPos = focus->GetGridPosition();
             TileMap *tileMap = Game::GetInstance()->GetCurrentState().tileMap;
-
+            // structure that will choose the animation of the character
             if (focus->GetComponent<AlanAnimation *>()->GetCurrentState() ==
                     AlanAnimation::State::DEAD ||
                 focus->GetComponent<AlanAnimation *>()->GetCurrentState() ==
@@ -81,21 +98,22 @@ void Camera::Update(float dt)
                 }
                 break;
             }
-
+            // structure to calculate the size of the screen that will be shown
             if (focusGridPos.y != 0 &&
                 offset.y <=
                     (tileMap->GetHeight() *
                          Game::GetInstance()->GetCurrentState().GetGridSize() -
                      screenSize.y)) {
                 offset.y += speed.y * dt * scroll_factor;
-
+                // the screen updates according to the speed of the character's movement down
                 if (offset.y + screenSize.y - 300 < focus->box.y) {
                     offset.y += 3 * speed.y * dt * scroll_factor;
                 }
             }
             break;
         }
-
+        // the camera movement will start from the moment the player 
+        // selects the key top or down
         case Camera::NONE:
             if (InputManager::GetInstance().KeyDown(SDL_SCANCODE_UP)) {
                 offset.y -= speed.y * dt * 10;
@@ -107,6 +125,7 @@ void Camera::Update(float dt)
     }
     pos = shake + offset;
 
+    // calculating the speed of movement or character
     static int acceleration = 30;
     if (InputManager::GetInstance().KeyDown(SDL_SCANCODE_COMMA)) {
         speed.y -= acceleration * dt;

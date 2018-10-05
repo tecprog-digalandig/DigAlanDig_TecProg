@@ -1,3 +1,9 @@
+/**
+ * @brief initiates the methods and constants of the different types of screen movement
+ * 
+ * @file Camera.h
+ * 
+ */
 #ifndef CAMERA_H
 #define CAMERA_H
 #include "GameObject.h"
@@ -15,7 +21,7 @@ class Camera {
     static void RhythmUpdate();
 
     static Vec2 pos, speed, screenSize, offset;
-
+    
     enum Movement { ATTACHED = 1, CONSTSCROLL, FRIENDLYSCROLL, NONE };
     static Movement current_move;
 
