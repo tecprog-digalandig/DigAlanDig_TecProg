@@ -56,7 +56,7 @@ class InputManager {
 
     int finger2action(const Vec2& v) const;
 
-    enum mouse_key {
+    enum MouseKey {
         LEFT = SDL_BUTTON_LEFT,
         MIDDLE = SDL_BUTTON_MIDDLE,
         RIGHT = SDL_BUTTON_RIGHT

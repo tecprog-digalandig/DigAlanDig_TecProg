@@ -2,7 +2,6 @@
 #define SPRITE_H
 #define INCLUDE_SDL
 #include "SDL_include.h"
-
 #include "Component.h"
 #include "Timer.h"
 

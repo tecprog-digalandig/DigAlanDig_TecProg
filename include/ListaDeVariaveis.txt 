@@ -1,4 +1,4 @@
-TIPOS DE VARIÁVEIS
+CLASSES
 
 >> Sprite.h
 - Sprite : Component
@@ -7,71 +7,125 @@ TIPOS DE VARIÁVEIS
 >> StageState.h
 - StageState : State
 
->> State.h
+>> State.h 
 - State
 
-VARIÁVEIS
+>> Timer.h
+- Timer
+
+>> Component.h 
+- Component
+
+>> InputManager.h
+- InputManager
+- Action (enum)
+
+OBJETOS
 
 >> Sprite.h
-- file -> std::string (const)(param)
+- file -> std::string
 - frame_count -> int
 - total_frame_count -> int
-- frame_time -> float 
-- associated -> GameObject (param)(pointer)
-- seconds_to_self_destruct  -> float
+- frame_time -> float
+- associated -> GameObject (pointer)(param)
+- scale -> Vec2
+- seconds_to_self_destruct -> float
 - sstate -> SpriteState (param)
 - dir -> int (param)
 - x -> int (param)
 - y -> int (param)
 - w -> int (param)
 - h -> int (param)
-- clip_rect -> SDL_Rect 
+- clip_rect -> SDL_Rect
 - width -> int
 - height -> int
 - dt -> float (param)
 - current_frame -> int
 - init_frame -> int
-- layer -> Common::Layer (param) 
+- layer -> Common::Layer
 - scale_x -> double (param)
 - scale_y -> double (param)
 - s -> double (param)
-- v -> Vec2 (const)
-- scale -> Vec2
-- frame -> int
-- texture -> std::shared_ptr<SDL_Texture>
+- v -> Vec2 (const)(pointer)(param)
+- frame -> int (param)
 - frame_time_total -> float
 - time_elapsed -> float
 - mode -> SDL_BlendMode (param)
+- r -> int (param)
+- g -> int (param) 
+- b -> int (param)
+- texture -> std::shared_ptr<SDL_Texture> (pointer) 
 - self_destruct_count -> Timer
 
 >> StageState.h
-- dt -> float
+- dt -> float (param)
 - udata -> void (pointer)(param)
-- stream -> Uint8 (param)
+- stream -> Uint8 (pointer)(param)
 - len -> int (param)
 - count -> int (static)
 - beat -> bool (static)
 - time_rhythm -> int (static)
 - half_beat_counter -> int
 
->> State.h 
-- music -> Music
-- object_array -> std::vector<std::shared_ptr<GameObject>>
+>> State.h
 - dt -> float (param)
 - go -> GameObject (pointer)(param)
+- pop_requested -> bool
+- quit_requested -> bool
 - tile_map -> TileMap (pointer)
+- music -> Music 
 - music_playing -> bool
 - grid_size -> int (const)
-- pop_requested -> bool 
-- quit_requested -> bool
 - started -> bool
-- object_array -> std::vector<std::shared_ptr<GameObject>>
+- object_array -> std::vector<std::shared_ptr<GameObject>> (pointer)(vector)
+- input -> InputManager (pointer)
+- tile_set -> TileSet (pointer)
 
-FUNÇÕES
+>> Timer.h
+- dt -> float (param)
+- time -> float
+
+>> Component.h
+- associated -> GameObject (pointer)
+- dt -> float (param)
+- layer -> Common::Layer (param)
+
+>> InputManager.h
+- Action -> enum
+- delta_rhythm -> float
+- key -> int  (param)
+- key_state -> bool (vector)
+- frame -> int
+- key_update -> int (vector)
+- button -> int  (param)
+- finger_state -> int (vector)
+- finger_update -> int (vector)
+- gamepad_state -> bool (vector)
+- gamepad_update -> int (vector)
+- button -> Action  (param)
+- action_state -> bool (vector)
+- action_update -> int (vector)
+- v -> Vec2 (pointer)(const)(param)
+- MouseKey -> enum
+- mouse_x -> int 
+- mouse_y -> int 
+- quit_requested -> bool
+- input -> InputManager (static)
+- title -> bool 
+- should_show -> bool 
+- id -> int (param)
+- game_controller -> SDL_GameController (pointer)
+- update_counter -> int 
+- key_adjust -> float
+- score -> float
+- gamepad2action -> std::unordered_map<int, Action>
+- key2action -> std::unordered_map<int, Action> 
+
+MÉTODOS
 
 >> Sprite.h
-- open -> void
-- set_clip -> void
+- open -> void (overload)
+- set_clip -> void 
 - get_width -> int (const)
 - get_height -> int (const)
 - is_open -> bool (const)
@@ -81,16 +135,16 @@ FUNÇÕES
 - set_frame -> void
 - rhythm_reset -> void
 - render -> void (const)
-- set_scale_x -> void
+- set_scale_x -> void (overload)
 - get_scale -> Vec2 (const)
 - set_frame -> void
 - set_frame_count -> void
 - set_frame_time -> void
 - frame_time_passed -> bool
-- set_blend_mode -> bool
-- set_color -> bool
-- SDL_SetTextureBlendMode*
-- SDL_SetTextureColorMod*
+- set_blend_mode -> void 
+- SLD_SetTextureColorMod -> int
+- set_color -> void
+- SDL_SetTextureColorMod -> int
 - get_frame_count -> int
 - time_elapsed_reset -> void
 
@@ -105,16 +159,68 @@ FUNÇÕES
 - resume -> void
 - no_effect -> void (static)
 
->> State.h
-- stop -> void (const)
-- clear -> void
+>> State.h 
 - load_assets -> void (virtual)
+- update -> void (virtual)
 - rhythm_update -> void (virtual)
 - rhythm_reset -> void (virtual)
-- render -> void (virtual)
+- render -> void (virtual)(const)
 - start -> void (virtual)
 - pause -> void (virtual)
 - resume -> void (virtual)
 - update_array -> void
 - rhythm_update_array -> void
-- rhythm_update_array -> void
+- rhythm_reset_array -> void
+- start_array -> void
+- render_array -> void (const)
+- add_object -> std::weak_ptr<GameObject> (virtual)(pointer)
+- get_object_ptr -> std::weak_ptr<GameObject> (virtual)(pointer)
+- pop_requested -> bool (const)
+- quit_requested -> bool (const)
+- get_music -> Music (pointer)
+- stop_music -> void
+- get_grid_size -> int (const)
+- render_light -> void (const)
+
+>> Timer.h
+- update -> void
+- restart -> void
+- get -> float (const)
+
+>> Component.h
+- update -> void (virtual)
+- rhythm_update -> void (virtual)
+- rhythm_reset -> void (virtual)
+- render -> void (virtual)
+- start -> void (virtual)
+
+>> InputManager.h 
+- update -> void
+- key_down -> bool (const)
+- key_press -> bool (const)
+- key_release -> bool (const)
+- mouse_down -> bool (const)
+- mouse_press -> bool (const)
+- mouse_release -> bool (const)
+- gamepad_down -> bool (const)
+- gamepad_press -> bool (const)
+- gamepad_release -> bool (const)
+- action_down -> bool (const)
+- action_press -> bool (const)
+- action_release -> bool (const)
+- finger2action -> int (const)
+- get_mouse_x -> int  (const)
+- get_mouse_y -> int  (const)
+- get_mouse  -> Vec2 (const)
+- get_world_mouse_x -> int  (const)
+- get_world_mouse_y -> int  (const)
+- get_world_mouse -> Vec2 (const)
+- quit_requested -> bool (const)
+- get_instance -> InputManager (pointer)(static)
+- scale_factor -> float (const)
+- get_delta_rhythm -> float (const) 
+- move -> void
+- moved -> float
+- add_controller -> bool 
+- remove_controller -> void 
+- update_key -> void (const)
