@@ -15,15 +15,15 @@ class BigAlan : public Component {
         state[BAState::TRASH] = {"assets/img/mood3.png", 1, 1, 1};
     }
 
-    void update(float dt);
+    void Update(float dt);
 
-    void rhythmUpdate()
+    void RhythmUpdate()
     {
         associated.box.y += offset;
         offset = -offset;
     }
-    
-    void render(Common::Layer layer) const {}
+
+    void Render(Common::Layer layer) const {}
 
   private:
     Sprite::SpriteState state[BAState::MAXSTATE];

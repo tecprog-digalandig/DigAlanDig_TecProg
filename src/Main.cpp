@@ -24,7 +24,7 @@ int main(int argc, char** argv) {
     srand(time(0));
 
     Game* game = Game::GetInstance("Groundhog Dig", 1024, 768);
-    game->Push(new TitleState());
+    game->push(new TitleState());
     game->Run();
 
 #ifdef _WIN32

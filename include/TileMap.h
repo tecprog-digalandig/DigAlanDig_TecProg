@@ -18,9 +18,9 @@ class TileMap : public Component {
     void SetTileSet(TileSet* tileSet) { this->tileSet = tileSet; }
     int At(int x, int y, int z = 1);
 
-    void update(float dt) {}
-    void rhythmUpdate() {}
-    void render(Common::Layer layer) const;
+    void Update(float dt) {}
+    void RhythmUpdate() {}
+    void Render(Common::Layer layer) const;
 
     void RenderLayer(int layer, int cameraX = 0, int cameraY = 0) const;
 

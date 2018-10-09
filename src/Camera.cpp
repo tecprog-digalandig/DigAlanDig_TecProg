@@ -14,22 +14,22 @@ GameObject *Camera::focus = nullptr;
 int Camera::shake_intensity = 0;
 float Camera::shake_duration = 0;
 
-void Camera::Follow(GameObject *new_focus) 
-{ 
+void Camera::Follow(GameObject *new_focus)
+{
     focus = new_focus;
 }
 
 void Camera::Unfollow()
-{ 
+{
     focus = nullptr;
 }
 
 Vec2 Camera::Center()
-{ 
+{
     return pos + screenSize / 2;
 }
 
-void Camera::rhythmUpdate()
+void Camera::RhythmUpdate()
 {
     if (focus) {
         if (offset.y > (focus->box.y +
@@ -40,7 +40,7 @@ void Camera::rhythmUpdate()
     }
 }
 
-void Camera::update(float dt)
+void Camera::Update(float dt)
 {
     if (shake_duration > 0) {
         shake_duration -= dt;

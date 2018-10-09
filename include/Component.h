@@ -11,10 +11,10 @@ class Component {
     explicit Component(GameObject& associated) : associated(associated) {}
     virtual ~Component() {}
 
-    virtual void update(float dt) = 0;
-    virtual void rhythmUpdate() = 0;
+    virtual void Update(float dt) = 0;
+    virtual void RhythmUpdate() = 0;
     virtual void RhythmReset() {}
-    virtual void render(Common::Layer layer) const = 0;
+    virtual void Render(Common::Layer layer) const = 0;
     virtual void start() {}
 
   protected:

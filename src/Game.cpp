@@ -18,13 +18,13 @@ Game::~Game()
     delete grid_control;
 }
 
-Game* Game::getInstance(const std::string& title, int w, int h)
+Game* Game::GetInstance(const std::string& title, int w, int h)
 {
     if (!_instance) _instance = new Game(title, w, h);
     return _instance;
 }
 
-void Game::updateBeatTime(int time_rhythm)
+void Game::UpdateBeatTime(int time_rhythm)
 {
     std::cout << tick_counter << " ; " << time_rhythm << std::endl;
     tick_counter = (tick_counter * 9 + time_rhythm) / 10;
@@ -76,7 +76,7 @@ void Game::calculateDeltaTime()
     delta_rhythm = delta_rhythm_ms / (beat_time / 2.0);
 }
 
-void Game::run()
+void Game::Run()
 {
     if (stored_state)
     {
@@ -89,7 +89,7 @@ void Game::run()
     while (!stateStack.empty())
     {
         calculateDeltaTime();
-        input.update(delta_rhythm);
+        input.Update(delta_rhythm);
 
         ++fpb;
         if (should_rhythm_update)
@@ -97,26 +97,26 @@ void Game::run()
             should_rhythm_update = false;
             if (!off_beat)
             {
-                stateStack.top()->rhythmUpdate();
-                Camera::rhythmUpdate();
+                stateStack.top()->RhythmUpdate();
+                Camera::RhythmUpdate();
             }
             else
             {
-                stateStack.top()->rhythmReset();
+                stateStack.top()->RhythmReset();
                 std::cout << "." << off_beat << "." << fpb << std::endl;
                 fpb = 0;
             }
         }
 
-        stateStack.top()->update(dt);
-        stateStack.top()->render();
+        stateStack.top()->Update(dt);
+        stateStack.top()->Render();
         SDL_RenderPresent(renderer);
 
         if (stateStack.top()->PopRequested() ||
             stateStack.top()->QuitRequested())
         {
             Camera::Follow(nullptr);
-            Game::getInstance()->getGridControl()->ClearEnemyVector();
+            Game::GetInstance()->GetGridControl()->ClearEnemyVector();
             stateStack.pop();
             Resources::ClearAll();
             if (!stateStack.empty()) stateStack.top()->Resume();
@@ -151,7 +151,7 @@ void Game::toggleFullScreen()
 }
 
 Game::Game(const std::string& title, int width, int height)
-    : input(InputManager::getInstance())
+    : input(InputManager::GetInstance())
 {
     if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO | SDL_INIT_TIMER |
                  SDL_INIT_JOYSTICK | SDL_INIT_GAMECONTROLLER |
@@ -217,5 +217,5 @@ Game::Game(const std::string& title, int width, int height)
     SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "linear");
     SDL_RenderSetLogicalSize(renderer, width, height);
 
-    grid_control = GridControl::getInstance();
+    grid_control = GridControl::GetInstance();
 }

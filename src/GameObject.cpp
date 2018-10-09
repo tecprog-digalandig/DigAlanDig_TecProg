@@ -11,32 +11,32 @@ GameObject::~GameObject()
     tmp = box;
 }
 
-void GameObject::update(float dt)
+void GameObject::Update(float dt)
 {
     static float sum;
     sum += dt;
-    for (Component* component : components) component->update(dt);
+    for (Component* component : components) component->Update(dt);
     if (move)
     {
         box.pos = tmp.pos + Vec2(0, 1) * sin(sum) * 30;
     }
 }
 
-void GameObject::rhythmUpdate()
+void GameObject::RhythmUpdate()
 {
-    for (Component* component : components) component->rhythmUpdate();
+    for (Component* component : components) component->RhythmUpdate();
 }
 
-void GameObject::rhythmReset()
+void GameObject::RhythmReset()
 {
-    for (Component* component : components) component->rhythmReset();
+    for (Component* component : components) component->RhythmReset();
 }
 
-void GameObject::renderOrder(Common::Layer layer) const
+void GameObject::RenderOrder(Common::Layer layer) const
 {
     if (!(this->layer & layer)) return;
 
-    for (Component* component : components) component->render(layer);
+    for (Component* component : components) component->Render(layer);
 }
 
 void GameObject::removeComponent(Component* cpt)
@@ -45,7 +45,7 @@ void GameObject::removeComponent(Component* cpt)
     components.end());
 }
 
-void GameObject::addComponent(Component* cpt) { components.emplace_back(cpt); }
+void GameObject::AddComponent(Component* cpt) { components.emplace_back(cpt); }
 
 void GameObject::copyPosition(const GameObject& go)
 {

@@ -10,7 +10,7 @@ class Light : public Component {
     Light(GameObject& associated, std::weak_ptr<GameObject> follow)
         : Component(associated),
           follow(follow),
-          sprite(new Sprite(associated, "assets/img/light.png")) 
+          sprite(new Sprite(associated, "assets/img/light.png"))
     {
         sprite->SetBlendMode(SDL_BLENDMODE_ADD);
         sprite->SetColor(255, 255, 255 * 0.8);
@@ -18,29 +18,29 @@ class Light : public Component {
     }
 
     ~Light()
-    { 
+    {
         delete sprite;
     }
 
-    void update(float dt) {
+    void Update(float dt) {
         if (auto ptr = follow.lock()) {
             associated.box.SetCenter(ptr->box.Center());
-            sprite->update(dt);
+            sprite->Update(dt);
         } else {
             associated.RequestDelete();
             }
     }
 
-    void rhythmUpdate() {}
-    void render(Common::Layer layer) const { sprite->render(layer); }
+    void RhythmUpdate() {}
+    void Render(Common::Layer layer) const { sprite->Render(layer); }
 
-    void SetSize(int size) 
+    void SetSize(int size)
     {
         sprite->SetScaleX((double)size / sprite->GetHeight());
     }
 
-    int GetSize() const 
-    { 
+    int GetSize() const
+    {
         return sprite->GetScale().x * sprite->GetHeight();
     }
 

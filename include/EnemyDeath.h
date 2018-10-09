@@ -19,10 +19,10 @@ class EnemyDeath : public Component
 
         ~EnemyDeath() {}
 
-        void update(float dt);
-        void rhythmUpdate() {}
-        void rhythmReset() {}
-        void render(Common::Layer layer) const {}
+        void Update(float dt);
+        void RhythmUpdate() {}
+        void RhythmReset() {}
+        void Render(Common::Layer layer) const {}
 
     private:
         // Cada enemy tera sua própria morte, diferente do EnemySpawn que é um geral

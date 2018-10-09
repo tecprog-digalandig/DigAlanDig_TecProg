@@ -42,7 +42,7 @@ void Sprite::SetFrame(int frame) {
     clipRect = Rect(pos, size);
 }
 
-void Sprite::render(Common::Layer layer) const {
+void Sprite::Render(Common::Layer layer) const {
     if (IsOpen()) {
         Vec2 offset;
         if (associated.world_reference) offset = Camera::pos;
@@ -52,15 +52,15 @@ void Sprite::render(Common::Layer layer) const {
 
         SDL_Rect dstRect = dst;
         SDL_RenderCopyEx(Game::GetInstance()->GetRenderer(), texture.get(),
-                         &clipRect, &dstRect, associated.angleDeg, nullptr,
+                         &clipRect, &dstRect, associated.angle_deg, nullptr,
                          SDL_FLIP_NONE);
     }
 }
 
-void Sprite::update(float dt) {
+void Sprite::Update(float dt) {
     timeElapsed += dt;
 
-    selfDestructCount.update(dt);
+    selfDestructCount.Update(dt);
     if (secondsToSelfDestruct > 0 &&
         selfDestructCount.Get() > secondsToSelfDestruct) {
         associated.RequestDelete();

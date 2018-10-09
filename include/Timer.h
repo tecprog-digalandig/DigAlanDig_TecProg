@@ -4,7 +4,7 @@
 class Timer {
   public:
     Timer() {}
-    void update(float dt) { time += dt; }
+    void Update(float dt) { time += dt; }
     void Restart() { time = 0; }
     float Get() const { return time; }
 

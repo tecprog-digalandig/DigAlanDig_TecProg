@@ -16,17 +16,17 @@ class GameObject
             : layer(layer), isDead(false) {}
         ~GameObject();
 
-        void update(float dt);
-        void rhythmUpdate();
-        void rhythmReset();
+        void Update(float dt);
+        void RhythmUpdate();
+        void RhythmReset();
 
-        void renderOrder(Common::Layer layer) const;
+        void RenderOrder(Common::Layer layer) const;
 
         bool canEnd() const;
 
-        bool isDead() const { return isDead; }
-        void requestDelete() { isDead = true; }
-        void addComponent(Component *cpt);
+        bool IsDead() const { return isDead; }
+        void RequestDelete() { isDead = true; }
+        void AddComponent(Component *cpt);
         void removeComponent(Component *cpt);
 
         void start();
@@ -35,7 +35,7 @@ class GameObject
         double angleRad() const { return angle_deg * M_PI / 180; }
 
         template <class T>
-        T getComponent() const
+        T GetComponent() const
         {
             for (Component *component : components)
             {
@@ -47,7 +47,7 @@ class GameObject
             return nullptr;
         }
 
-        Vec2 getGridPosition() const { return gridPosition; }
+        Vec2 GetGridPosition() const { return gridPosition; }
         Vec2 gridPosition;
 
         Rect box;

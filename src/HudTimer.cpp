@@ -22,23 +22,23 @@ HudTimer::HudTimer(GameObject& associated)
     maxM = boxmeter.x + moveLenght * 0.5;
 }
 
-void HudTimer::render(Common::Layer layer) const {
+void HudTimer::Render(Common::Layer layer) const {
     associated.box = boxbg;
-    bg->render(layer);
+    bg->Render(layer);
 
     associated.box = boxmeter;
     associated.box.x += moveLenght * -input.GetDeltaRhythm();
     SetMeterFrame();
-    meter->render(layer);
+    meter->Render(layer);
 
     for (auto rise : risers) {
         associated.box.pos = rise;
         SetMeterFrame();
-        meter->render(layer);
+        meter->Render(layer);
     }
 
     associated.box = boxfg;
-    fg->render(layer);
+    fg->Render(layer);
 }
 
 void HudTimer::SetMeterFrame() const {
@@ -51,7 +51,7 @@ void HudTimer::SetMeterFrame() const {
     }
 }
 
-void HudTimer::update(float dt) {
+void HudTimer::Update(float dt) {
     if (std::abs(input.GetDeltaRhythm()) < 0.5) {
         meter->SetFrame(2);
         meter->SetScaleX(1.5);

@@ -25,8 +25,8 @@ class Alan : public Component {
 
     void GetMovement();
 
-    void update(float dt);
-    void rhythmUpdate() {}
+    void Update(float dt);
+    void RhythmUpdate() {}
     void RhythmReset() {
         static int missCounter = 0;
         if (!moved)
@@ -41,7 +41,7 @@ class Alan : public Component {
         moved = false;
         damageTaken = false;
     }
-    void render(Common::Layer layer) const {}
+    void Render(Common::Layer layer) const {}
 
     int GetMaxPosition() const { return maxPosition; }
 

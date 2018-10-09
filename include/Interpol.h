@@ -10,10 +10,10 @@ class Interpol : public Component {
   public:
     explicit Interpol(GameObject &associated);
 
-    void update(float dt);
-    void rhythmUpdate() {}
+    void Update(float dt);
+    void RhythmUpdate() {}
     void RhythmReset() {}
-    void render(Common::Layer layer) const {}
+    void Render(Common::Layer layer) const {}
     void start() {}
 
     bool IsMovementDone() { return movementDone; }

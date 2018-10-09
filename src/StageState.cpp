@@ -216,8 +216,8 @@ void StageState::start() {
     StartArray();
 }
 
-void StageState::update(float dt) {
-    Camera::update(dt);
+void StageState::Update(float dt) {
+    Camera::Update(dt);
 
     if (beat) {
         beat = false;
@@ -233,7 +233,7 @@ void StageState::update(float dt) {
     UpdateArray(dt);
 }
 
-void StageState::rhythmUpdate() {
+void StageState::RhythmUpdate() {
     if (!musicPlaying) {
         music.Play();
         musicPlaying = true;
@@ -243,4 +243,4 @@ void StageState::rhythmUpdate() {
 
 void StageState::RhythmReset() { RhythmResetArray(); }
 
-void StageState::render() const { RenderArray(); }
+void StageState::Render() const { RenderArray(); }

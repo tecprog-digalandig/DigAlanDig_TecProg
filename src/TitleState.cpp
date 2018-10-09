@@ -39,73 +39,73 @@
 #define SCALE_X_SPACESHIP 1.4
 #define POSITION_X_SPACESHIP Camera::Center().x + 200
 #define POSITION_Y_SPACESHIP Camera::Center().y
-    
+
 
 TitleState::TitleState() {}
 
-void TitleState::loadAssets() 
-{   
-    GameObject* initial_layout = new GameObject(Common::Layer::BG);  
-    initial_layout->world_reference = false;    
-    objectArray.emplace_back(initial_layout);
-    initial_layout->AddComponent(
-        new Sprite(*initial_layout, MENU_SCREEN));  
-
-    initial_layout = new GameObject(Common::Layer::BG);
-    initial_layout->box.x = POSITION_X_SPACE;      
-    initial_layout->box.y = POSITION_Y_SPACE;      
+void TitleState::loadAssets()
+{
+    GameObject* initial_layout = new GameObject(Common::Layer::BG);
     initial_layout->world_reference = false;
     objectArray.emplace_back(initial_layout);
-    initial_layout->AddComponent(new ParallaxX(*initial_layout, SPACE_VELOCITY));   
-    initial_layout->AddComponent(new bgCircularX(
-        *initial_layout, SPACE_SCREEN));    
+    initial_layout->AddComponent(
+        new Sprite(*initial_layout, MENU_SCREEN));
 
     initial_layout = new GameObject(Common::Layer::BG);
-    initial_layout->box.x = POSITION_X_CLOUD;   
-    initial_layout->box.y = POSITION_Y_CLOUD;   
+    initial_layout->box.x = POSITION_X_SPACE;
+    initial_layout->box.y = POSITION_Y_SPACE;
+    initial_layout->world_reference = false;
+    objectArray.emplace_back(initial_layout);
+    initial_layout->AddComponent(new ParallaxX(*initial_layout, SPACE_VELOCITY));
+    initial_layout->AddComponent(new bgCircularX(
+        *initial_layout, SPACE_SCREEN));
+
+    initial_layout = new GameObject(Common::Layer::BG);
+    initial_layout->box.x = POSITION_X_CLOUD;
+    initial_layout->box.y = POSITION_Y_CLOUD;
     initial_layout->world_reference = false;
     objectArray.emplace_back(initial_layout);
     initial_layout->AddComponent(new ParallaxX(*initial_layout));
     initial_layout->AddComponent(new bgCircularX(
-        *initial_layout, CLOUD_1)); 
+        *initial_layout, CLOUD_1));
 
     initial_layout = new GameObject(Common::Layer::BG);
-    initial_layout->box.x = POSITION_X_CLOUD_2; 
-    initial_layout->box.y = POSITION_Y_CLOUD_2; 
+    initial_layout->box.x = POSITION_X_CLOUD_2;
+    initial_layout->box.y = POSITION_Y_CLOUD_2;
     initial_layout->world_reference = false;
     objectArray.emplace_back(initial_layout);
-    initial_layout->AddComponent(new ParallaxX(*initial_layout, CLOUD_2_VELOCITY)); 
-    initial_layout->AddComponent(new bgCircularX(*initial_layout, CLOUD_2));    
+    initial_layout->AddComponent(new ParallaxX(*initial_layout, CLOUD_2_VELOCITY));
+    initial_layout->AddComponent(new bgCircularX(*initial_layout, CLOUD_2));
 
     initial_layout = new GameObject(Common::Layer::BG);
-    initial_layout->box.x = POSITION_X_CLOUD_3; 
-    initial_layout->box.y = POSITION_Y_CLOUD_3; 
+    initial_layout->box.x = POSITION_X_CLOUD_3;
+    initial_layout->box.y = POSITION_Y_CLOUD_3;
     initial_layout->world_reference = false;
     objectArray.emplace_back(initial_layout);
-    initial_layout->AddComponent(new ParallaxX(*initial_layout, CLOUD_3_VELOCITY)); 
-    initial_layout->AddComponent(new bgCircularX(*initial_layout, CLOUD_3));    
+    initial_layout->AddComponent(new ParallaxX(*initial_layout, CLOUD_3_VELOCITY));
+    initial_layout->AddComponent(new bgCircularX(*initial_layout, CLOUD_3));
 
     initial_layout = new GameObject(Common::Layer::HUD);
-    Sprite* sprite = new Sprite(*initial_layout, TITLE_MENU);   
-    sprite->SetScaleX(SCALE_X_TITLE);   
-    initial_layout->box.SetCenter(POSITION_X_TITLE, POSITION_Y_TITLE);  
+    Sprite* sprite = new Sprite(*initial_layout, TITLE_MENU);
+    sprite->SetScaleX(SCALE_X_TITLE);
+    initial_layout->box.SetCenter(POSITION_X_TITLE, POSITION_Y_TITLE);
     initial_layout->world_reference = false;
     objectArray.emplace_back(initial_layout);
     initial_layout->AddComponent(sprite);
 
     initial_layout = new GameObject(Common::Layer::HUD);
-    sprite = new Sprite(*initial_layout, TITLE_PRESS_SPACE);    
-    sprite->SetScaleX(SCALE_X_PRESS_SPACE); 
-    initial_layout->box.SetCenter(POSITION_X_PRESS_SPACE, POSITION_Y_PRESS_SPACE);  
+    sprite = new Sprite(*initial_layout, TITLE_PRESS_SPACE);
+    sprite->SetScaleX(SCALE_X_PRESS_SPACE);
+    initial_layout->box.SetCenter(POSITION_X_PRESS_SPACE, POSITION_Y_PRESS_SPACE);
     initial_layout->world_reference = false;
     initial_layout->blink = true;
     objectArray.emplace_back(initial_layout);
     initial_layout->AddComponent(sprite);
-    
+
     initial_layout = new GameObject(Common::Layer::HUD);
-    sprite = new Sprite(*initial_layout, SPACESHIP_MENU, 2, -1);    
-    sprite->SetScaleX(SCALE_X_SPACESHIP);   
-    initial_layout->box.SetCenter(POSITION_X_SPACESHIP, POSITION_Y_SPACESHIP);  
+    sprite = new Sprite(*initial_layout, SPACESHIP_MENU, 2, -1);
+    sprite->SetScaleX(SCALE_X_SPACESHIP);
+    initial_layout->box.SetCenter(POSITION_X_SPACESHIP, POSITION_Y_SPACESHIP);
     initial_layout->setRect(initial_layout->box);
     initial_layout->world_reference = false;
     initial_layout->move = true;
@@ -113,30 +113,30 @@ void TitleState::loadAssets()
     initial_layout->AddComponent(sprite);
 
     Game::GetInstance()->StartBeatTime();
-    music.Open(AUDIO_MENU); 
+    music.Open(AUDIO_MENU);
 
 }
 
 
-void TitleState::start() 
+void TitleState::start()
 {
-    if (!started) loadAssets(); 
+    if (!started) loadAssets();
     StartArray();
 }
 
-void TitleState::update(float delta_time)  
+void TitleState::Update(float delta_time)
 {
     input.title = true;
     if (input.ActionPress(input.ENTER))
-        Game::GetInstance()->Push(new StageState());
+        Game::GetInstance()->push(new StageState());
     UpdateArray(delta_time);
 }
 
-void TitleState::render() const { RenderArray(); }
+void TitleState::Render() const { RenderArray(); }
 
-void TitleState::rhythmUpdate() 
+void TitleState::RhythmUpdate()
 {
-    if (!musicPlaying) 
+    if (!musicPlaying)
     {
         music.Play();
         musicPlaying = true;

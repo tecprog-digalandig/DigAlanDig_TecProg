@@ -44,12 +44,12 @@ void State::StartArray() {
 
 void State::UpdateArray(float dt) {
     // Update
-    //    for (auto obj : objectArray) obj->update(dt);
-    for (size_t i = 0; i < objectArray.size(); i++) objectArray[i]->update(dt);
+    //    for (auto obj : objectArray) obj->Update(dt);
+    for (size_t i = 0; i < objectArray.size(); i++) objectArray[i]->Update(dt);
 
     // Delete
     auto removeDead = [&](std::shared_ptr<GameObject> const& p) {
-        return p->IsDead() && p->CanEnd();
+        return p->IsDead() && p->canEnd();
     };
     objectArray.erase(
         std::remove_if(objectArray.begin(), objectArray.end(), removeDead),
@@ -61,7 +61,7 @@ void State::UpdateArray(float dt) {
 }
 
 void State::RhythmUpdateArray() {
-    for (auto obj : objectArray) obj->rhythmUpdate();
+    for (auto obj : objectArray) obj->RhythmUpdate();
 }
 
 void State::RhythmResetArray() {

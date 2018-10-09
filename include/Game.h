@@ -14,13 +14,13 @@ class Game
 {
     public:
         ~Game();
-        void run();
-        SDL_Renderer* getRenderer() const { return renderer; }
-        State& getCurrentState() const { return *stateStack.top(); }
-        GridControl* getGridControl() const { return grid_control; }
-        static Game* getInstance() { return _instance; }
-        static Game* getInstance(const std::string& title, int w, int h);
-        float getDeltaTime() const { return dt; }
+        void Run();
+        SDL_Renderer* GetRenderer() const { return renderer; }
+        State& GetCurrentState() const { return *stateStack.top(); }
+        GridControl* GetGridControl() const { return grid_control; }
+        static Game* GetInstance() { return _instance; }
+        static Game* GetInstance(const std::string& title, int w, int h);
+        float GetDeltaTime() const { return dt; }
 
         void push(State* state) { stored_state = state; }
 
@@ -28,8 +28,8 @@ class Game
         // static std::unordered_map<std::string, std::string> data;
         bool player_victory = false;
         void fixTiming() { adjust = inicial_adjust; }
-        void updateBeatTime(int time_rhythm);
-        void startBeatTime()
+        void UpdateBeatTime(int time_rhythm);
+        void StartBeatTime()
         {
             half_beat_counter = 0;
             tick_counter = 0;

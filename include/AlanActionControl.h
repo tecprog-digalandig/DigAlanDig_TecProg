@@ -37,10 +37,10 @@ class AlanActionControl : public Component {
 
     bool IsClimbDirectionLeft(AlanAnimation* animation);
 
-    void update(float dt);
-    void rhythmUpdate() {}
+    void Update(float dt);
+    void RhythmUpdate() {}
     void RhythmReset() {}
-    void render(Common::Layer layer) const {}
+    void Render(Common::Layer layer) const {}
 
     bool IsMovementDone() { return !animationOnGoing; }
 

@@ -4,7 +4,7 @@
 
 HudMeter::HudMeter(GameObject& associated, const std::string& bg_file,
                    const std::string& meter_file)
-    : Component(associated) 
+    : Component(associated)
 {
     bg = new Sprite(associated, bg_file);
     boxbg = associated.box;
@@ -24,17 +24,17 @@ HudMeter::~HudMeter()
     delete meter;
 }
 
-void HudMeter::render(Common::Layer layer) const {
+void HudMeter::Render(Common::Layer layer) const {
     associated.box = boxbg;
-    bg->render(layer);
+    bg->Render(layer);
 
     associated.box += offset1;
     float s = InputManager::GetInstance().scaleFactor();
-    for (int i = 0; i < 3; i++) 
+    for (int i = 0; i < 3; i++)
     {
         setMeter(i);
         meter->SetScaleX(s);
-        meter->render(layer);
+        meter->Render(layer);
         associated.box += offset2;
     }
 }
@@ -45,7 +45,7 @@ void HudMeter::setMeter(int i) const {
     {
         tmp = alan.lock()->GetComponent<Alan*>()->GetHP() - i * 2;
     }
-    else 
+    else
     {
         if (!Game::GetInstance()->combo)
         {
@@ -56,7 +56,7 @@ void HudMeter::setMeter(int i) const {
             tmp =
                 (int)floor(Game::GetInstance()->combo / (5 * (i + 1))) - i + 1;
         }
-        
+
     }
 
     if (tmp >= 2)

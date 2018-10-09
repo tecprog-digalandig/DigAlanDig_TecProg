@@ -53,7 +53,7 @@ AlanItemCount::AlanItemCount(GameObject& associated) : Component(associated) {
     sprite->SetFrame(itemCount[Common::ItemType::PETROLEUM]);
 }
 
-void AlanItemCount::render(Common::Layer layer) const {
+void AlanItemCount::Render(Common::Layer layer) const {
     for (auto item : itemCountItem) {
         item.second->box.SetCenter(item.second->GetComponent<Item*>()->center);
 
@@ -61,7 +61,7 @@ void AlanItemCount::render(Common::Layer layer) const {
             item.second->GetComponent<Item*>()->bg->SetColor(0, 255, 0);
         }
 
-        item.second->GetComponent<Item*>()->bg->render(layer);
+        item.second->GetComponent<Item*>()->bg->Render(layer);
 
         item.second->GetComponent<Item*>()->bg->SetColor(255, 255, 255);
 

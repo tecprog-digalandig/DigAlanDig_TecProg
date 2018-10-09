@@ -36,7 +36,7 @@ void AlanAnimation::PlaySound(Transition trans) {
     s->Play();
 }
 
-void AlanAnimation::update(float dt) {
+void AlanAnimation::Update(float dt) {
     if (currentState == State::DANCIN || currentState == State::DEAD) return;
 
     Sprite *sprite = associated.GetComponent<Sprite *>();
