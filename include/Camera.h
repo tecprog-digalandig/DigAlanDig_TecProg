@@ -7,23 +7,23 @@ class Camera {
   public:
     static void Follow(GameObject* newFocus);
     static void Unfollow();
-    static void Update(float dt);
+    static void update(float dt);
     static Vec2 Center();
     static void Shake(int intensity = 4, float duration = 0.1);
     /* static void SetNewCameraPos(Vec2 newPos) { pos = newPos; } */
 
-    static void RhythmUpdate();
+    static void rhythmUpdate();
 
     static Vec2 pos, speed, screenSize, offset;
 
     enum Movement { ATTACHED = 1, CONSTSCROLL, FRIENDLYSCROLL, NONE };
-    static Movement currentMove;
+    static Movement current_move;
 
   private:
     static GameObject* focus;
     static Vec2 shake;
-    static int shakeIntensity;
-    static float shakeDuration;
+    static int shake_intensity;
+    static float shake_duration;
 };
 
 #endif  // CAMERA_H

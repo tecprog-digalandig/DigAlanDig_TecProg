@@ -5,7 +5,7 @@
 
 Interpol::Interpol(GameObject &associated) : Component(associated) {}
 
-void Interpol::Update(float dt) {
+void Interpol::update(float dt) {
     Sprite *sprite = associated.GetComponent<Sprite *>();
 
     speed.x = 10 * dt * Game::GetInstance()->GetCurrentState().GetGridSize() /

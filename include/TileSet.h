@@ -6,16 +6,18 @@
 #define INCLUDE_SDL
 #include "SDL_include.h"
 
+using namespace std;
+
 class TileSet {
   public:
-    explicit TileSet(const std::string& file);
+    explicit TileSet(const string& file);
 
     void RenderTile(unsigned index, float x, float y) const;
-    int GetTileWidth() const { return tileWidth; }
-    int GetTileHeight() const { return tileHeight; }
+    int GetTileWidth() const { return tile_width; }
+    int GetTileHeight() const { return tile_height; }
 
-    void setTileSetDefault() { tileSet = tileSet_d.get(); }
-    void setTileSetLight() { tileSet = tileSet_l.get(); }
+    void setTileSetDefault() { tile_set = tile_set_d.get(); }
+    void setTileSetLight() { tile_set = tile_set_l.get(); }
 
     int GetItemType(int i) {
         i--;
@@ -26,13 +28,13 @@ class TileSet {
     }
 
   private:
-    SDL_Texture* tileSet = nullptr;
-    std::shared_ptr<SDL_Texture> tileSet_d = nullptr;
-    std::shared_ptr<SDL_Texture> tileSet_l = nullptr;
+    SDL_Texture* tile_set = nullptr;
+    shared_ptr<SDL_Texture> tile_set_d = nullptr;
+    shared_ptr<SDL_Texture> tile_set_l = nullptr;
 
-    std::unordered_map<int, int> item2type;
+    unordered_map<int, int> item2type;
     int rows = 0, columns = 0;
-    int tileWidth = 100, tileHeight = 100;
+    int tile_width = 100, tile_height = 100;
 };
 
 #endif  // TILESET_H

@@ -9,7 +9,7 @@
 
 using json = nlohmann::json;
 
-TileMap::TileMap(GameObject& associated, const std::string& file, bool infinity)
+TileMap::TileMap(GameObject& associated, const string& file, bool infinity)
     : Component(associated), infinity(infinity) {
     layerIndex["base"] = Layers::BASE;
     layerIndex["blocos"] = Layers::BLOCOS;
@@ -24,33 +24,33 @@ TileMap::TileMap(GameObject& associated, const std::string& file, bool infinity)
 }
 TileMap::~TileMap() {}
 
-void TileMap::LoadList(const std::string& file) {
-    json j;
-    Common::read_Json(j, file);
-    for (auto it = j["files"].begin(); it != j["files"].end(); ++it) {
+void TileMap::LoadList(const string& file) {
+    json jsonFile;
+    Common::readJson(jsonFile, file);
+    for (auto it = jsonFile["files"].begin(); it != jsonFile["files"].end(); ++it) {
         TileMapsFiles.push_back("assets/map/" +
-                                it.value().at("name").get<std::string>());
+                                it.value().at("name").get<string>());
     }
 
     Load(TileMapsFiles[0]);
 }
 
-void TileMap::Load(const std::string& file) {
-    json j;
-    Common::read_Json(j, file);
+void TileMap::Load(const string& file) {
+    json jsonFile;
+    Common::readJson(jsonFile, file);
 
-    std::string tileSetFile = j.at("tilesets").at(0).at("source");
+    string tileSetFile = jsonFile.at("tilesets").at(0).at("source");
     // tileSetFile.replace(tileSetFile.end() - 3, tileSetFile.end(), "json");
     tileSet = new TileSet("assets/map/" + tileSetFile);
 
-    width = j.at("width");
-    height += (int)j.at("height");
-    std::cout << "height: " << height << std::endl;
-    depth = j.at("layers").size();
+    width = jsonFile.at("width");
+    height += (int)jsonFile.at("height");
+    cout << "height: " << height << endl;
+    depth = jsonFile.at("layers").size();
 
     for (int i = 0; i < depth; i++) {
-        int layer = layerIndex.at(j.at("layers").at(i).at("name"));
-        std::vector<int> newdata = j.at("layers").at(i).at("data");
+        int layer = layerIndex.at(jsonFile.at("layers").at(i).at("name"));
+        vector<int> newdata = jsonFile.at("layers").at(i).at("data");
         tileMat[layer].insert(tileMat[layer].end(), newdata.begin(),
                               newdata.end());
     }
@@ -103,7 +103,7 @@ int TileMap::At(int x, int y, int z) {
     return tileMat[z][y * width + x];
 }
 
-void TileMap::Render(Common::Layer layer) const {
+void TileMap::render(Common::Layer layer) const {
     if (layer == Common::Layer::DEFAULT)
         tileSet->setTileSetDefault();
     else

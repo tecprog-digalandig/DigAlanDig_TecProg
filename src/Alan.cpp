@@ -51,7 +51,7 @@ void Alan::GetMovement() {
     Game::GetInstance()->GetGridControl()->CheckEnemyAlanCollision(true);
 }
 
-void Alan::Update(float dt) {
+void Alan::update(float dt) {
     if (maxPosition < std::max(associated.gridPosition.y + 4, 7.0)) {
         maxPosition = std::max(associated.gridPosition.y + 4, 7.0);
     }

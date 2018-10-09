@@ -24,10 +24,10 @@ class Item : public Component {
     }
 
     ~Item() { delete bg; }
-    void Update(float dt) {}
-    void RhythmUpdate() {}
+    void update(float dt) {}
+    void rhythmUpdate() {}
     void RhythmReset() {}
-    void Render(Common::Layer layer) const {}
+    void render(Common::Layer layer) const {}
 
     Sprite* bg;
     Vec2 center, numberCenter;
@@ -43,10 +43,10 @@ class AlanItemCount : public Component {
         itemCountItem.clear();
     }
 
-    void Update(float dt) {}
-    void RhythmUpdate() {}
+    void update(float dt) {}
+    void rhythmUpdate() {}
     void RhythmReset() {}
-    void Render(Common::Layer layer) const;
+    void render(Common::Layer layer) const;
     void ItemCollected(int itemType) {
         if (itemCount[itemType] > 0)
             itemCountItem[itemType]->GetComponent<Sprite*>()->SetFrame(

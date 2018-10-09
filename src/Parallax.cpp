@@ -9,7 +9,7 @@ void bgCircularY::Open(const std::string &file) {
     associated.box.size.Set(width, height);
 }
 
-void bgCircularY::Render(Common::Layer layer) const {
+void bgCircularY::render(Common::Layer layer) const {
     if (bgCircularY::texture) {
         int linit = -associated.box.y / associated.box.h;
         int lmax = linit + Camera::screenSize.y / associated.box.h;
@@ -35,7 +35,7 @@ void bgCircularX::Open(const std::string &file) {
     associated.box.size.Set(width, height);
 }
 
-void bgCircularX::Render(Common::Layer layer) const {
+void bgCircularX::render(Common::Layer layer) const {
     if (bgCircularX::texture) {
         int linit = -associated.box.x / associated.box.w;
         int lmax = linit + Camera::screenSize.x / associated.box.w;
