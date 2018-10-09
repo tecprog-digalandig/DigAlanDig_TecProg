@@ -1,6 +1,11 @@
-//Class that starts new game, calculate input time over the movement of the
-//caracter on screen (delta time), keep the game running and free resources
-//when the game is ended.
+/**
+* @file Game.cpp
+* @copyright 2018 Pedro H.
+* @brief Class that starts new game, calculate input time over the movement of
+* the caracter on screen (delta time), keep the game running and free resources
+* when the game is ended.
+*/
+
 
 #include "Game.h"
 #include <algorithm>
@@ -11,6 +16,9 @@
 
 Game* Game::_instance = nullptr;
 
+/**
+* Make sure to free allocated memory space.
+*/
 Game::~Game()
 {
     IMG_Quit();
@@ -22,11 +30,24 @@ Game::~Game()
     delete grid_control;
 }
 
+/**
+* @brief Starts new game
+* @param [in] title, w, h
+* @return pointer to class Game
+*/
+
 Game* Game::getInstance(const std::string& title, int w, int h)
 {
     if (!_instance) _instance = new Game(title, w, h);
     return _instance;
 }
+
+
+/**
+* @brief Keep the rhythm of movement in the game
+* @param [in] time rhythm is a integer value for measure the game rhythm
+* @return void
+*/
 
 void Game::updateBeatTime(int time_rhythm)
 {
@@ -35,12 +56,23 @@ void Game::updateBeatTime(int time_rhythm)
     if (std::abs(tick_counter - time_rhythm) > 1000) tick_counter = time_rhythm;
 }
 
+/**
+* @brief Delta time is the variation of time between human imput and movement of
+* the character on the screen.
+*/
+
 void Game::calculateDeltaTime()
 {
     int ticks_total = static_cast<int>(SDL_GetTicks());
     dt = ticks_total - frame_start;
-    // Maximum time, fix return from suspended
-    if (dt > 1000) dt = 1000;
+
+    /**
+    *Keeps delta time under 1000 ms,for smoothness in movement
+    */
+    if (dt > 1000)
+    {
+        dt = 1000;
+    }
 
     tick_counter += dt;
     dt /= 1000;
@@ -80,6 +112,9 @@ void Game::calculateDeltaTime()
     delta_rhythm = delta_rhythm_ms / (beat_time / 2.0);
 }
 
+/**
+* @brief Main game loop
+*/
 void Game::run()
 {
     if (stored_state)

@@ -1,4 +1,8 @@
-//Header file for HudCounter class, containing all its methods labels.
+/**
+* @file HudCounter.h
+* @copyright 2018 Pedro H.
+* @brief Header file for HudCounter class, containing all its methods labels.
+*/
 
 #ifndef HUDCOUNTER_H
 #define HUDCOUNTER_H

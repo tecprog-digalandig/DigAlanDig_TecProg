@@ -1,5 +1,10 @@
-//Header file for the class Game, contains the headers for all the methods of
-//the class.
+/**
+* @file Game.h
+* @copyright 2018 Pedro H.
+* @brief Header file for the class Game, contains the headers for all the
+* methods of the class.
+*/
+
 
 #ifndef GAME_H
 #define GAME_H
@@ -51,6 +56,10 @@ class Game
         void calculateDeltaTime();
         void toggleFullScreen();
 
+        /**
+        *Initializing contants to avoid issues
+        */
+
         static constexpr float bpm = 120;
         static constexpr float bit_rate = 44100;
         int adjust = 0;
@@ -66,11 +75,12 @@ class Game
         Game(const std::string& title, int width, int height);
 
         InputManager& input;
-        float delta_rhythm = 0;
+
         /*
         //delta_rhythm is a normalized variable for getting how close a press
         //was to the rhythm, 0 = perfect, 1 = worst.
         */
+        float delta_rhythm = 0;
 };
 
 #endif

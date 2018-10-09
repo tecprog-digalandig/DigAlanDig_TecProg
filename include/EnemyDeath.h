@@ -1,5 +1,9 @@
-//Header file for the class EnemyDeath, contains the headers for all the
-//methods of the class.
+/**
+* @file EnemyDeath.h
+* @copyright 2018 Pedro H.
+* @brief Header file for the class EnemyDeath, contains the headers for all the
+* methods of the class.
+*/
 
 #ifndef ENEMYDEATH_H
 #define ENEMYDEATH_H

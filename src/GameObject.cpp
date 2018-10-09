@@ -1,4 +1,8 @@
-//Class that create, move, update and render objects on the screen.
+/**
+* @file GameObject.cpp
+* @copyright 2018 Pedro H.
+* @brief Class that create, move, update and render objects on the screen.
+*/
 
 #include "GameObject.h"
 #include "Sound.h"
@@ -41,6 +45,10 @@ void GameObject::renderOrder(Common::Layer layer) const
     for (Component* component : components) component->render(layer);
 }
 
+/**
+* @brief Removing blocks when Alan digs it
+* @param [in] cpt is a Component pointer
+*/
 void GameObject::removeComponent(Component* cpt)
 {
     components.erase(std::remove(components.begin(), components.end(), cpt),

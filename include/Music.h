@@ -1,5 +1,9 @@
-//Header file for the Music class, containing all its methods and also
-//inicializating some parameters.
+/**
+* @file Music.h
+* @copyright 2018 Pedro H.
+* @brief Header file for the Music class, containing all its methods and also
+* inicializating some parameters.
+*/
 
 #ifndef MUSIC_H
 #define MUSIC_H
@@ -18,7 +22,7 @@ class Music
         explicit Music(const std::string &file) : music(nullptr) { Open(file); }
         ~Music() {}
 
-        void Play(int times = -1) const;
+        void Play(int times = -1) const;//Assigning -1 to times set the music off
         void Stop(int msToStop = 1500) const { Mix_FadeOutMusic(msToStop); }
         void Open(const std::string &file) { music = Resources::GetMusic(file); }
 

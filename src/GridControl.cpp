@@ -1,4 +1,8 @@
-//Class that implements methods that checks path, enemy and collision.
+/**
+* @file GridControl.cpp
+* @copyright 2018 Pedro H.
+* @brief Class that implements methods that checks path and collision with enemys.
+*/
 
 #include "GridControl.h"
 #include "Alan.h"
@@ -13,6 +17,12 @@ GridControl *GridControl::getInstance()
     return _instance;
 }
 
+/**
+* @brief Verify if a collision is with a enemy or block
+* @param [in] target <parameter_description> Vec2 object
+* @param [in] isAlan <parameter_description> bool variable
+* @return if its an enemy, is free, nothing or a block in the way.
+*/
 int GridControl::TestPath(Vec2 target, bool isAlan)
 {
     if ((target.x >= tileMap->GetWidth() || target.x < 0) ||
@@ -76,6 +86,10 @@ bool GridControl::VerifyEnemy(Vec2 target)
     return false;
 }
 
+/**
+* @brief Checks if Alan collide with an enemy and take damage.
+* @param [in] isAlan <parameter_description> bool variable
+*/
 void GridControl::CheckEnemyAlanCollision(bool isAlan)
 {
     for (auto enemy : enemies)

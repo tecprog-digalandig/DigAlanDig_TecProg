@@ -1,4 +1,8 @@
-//Header file for the class GameObject, containing all its methods labels.
+/**
+* @file GameObject.h
+* @copyright 2018 Pedro H.
+* @brief Header file for the class GameObject, containing all its methods labels.
+*/
 
 #ifndef GAMEOBJECT_H
 #define GAMEOBJECT_H
@@ -52,6 +56,9 @@ class GameObject
         Vec2 getGridPosition() const { return gridPosition; }
         Vec2 gridPosition;
 
+        /**
+        *Setting variables for the character animation.
+        */
         Rect box;
         bool world_reference = true;
         bool blink = false;

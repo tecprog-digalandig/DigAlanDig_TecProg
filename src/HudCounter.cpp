@@ -1,5 +1,9 @@
-//Class that inicializes heads-up display counting numbers on the screen, such
-//as the number of minerals the character is getting.
+/**
+* @file HudCounter.cpp
+* @copyright 2018 Pedro H.
+* @brief Class that inicializes heads-up display counting numbers on the screen,
+* such as the number of minerals the character is getting.
+*/
 
 #include "HudCounter.h"
 #include "InputManager.h"

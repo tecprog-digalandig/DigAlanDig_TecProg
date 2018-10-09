@@ -1,10 +1,24 @@
-//This class controls where and when the enemy will spawn, using as parameters
-//the camera and players position on the screen.
+/**
+* @file EnemySpawn.cpp
+* @copyright 2018 Pedro H.
+* @brief This class controls where and when the enemy will spawn, using as
+* parameters the camera and players position on the screen.
+*/
+
 
 #include "EnemySpawn.h"
 #include "Camera.h"
 #include "Enemy.h"
 #include "Game.h"
+
+
+/**
+* @brief controls the spawn of an enemy on the screen setting the poition on x
+* and y axis.
+* @param [in] dt is the variation of time between an input and the movement on
+* the screen.
+* @return void
+*/
 
 void EnemySpawn::update(float dt)
 {

@@ -1,5 +1,10 @@
-//Header file for the class EnemySpawn, contains the headers for all the
-//methods of the class.
+/**
+* @file EnemySpawn.h
+* @copyright 2018 Pedro H.
+* @brief Header file for the class EnemySpawn, contains the headers for all
+* the methods of the class.
+*/
+
 
 #ifndef ENEMYSPAWN_H
 #define ENEMYSPAWN_H
