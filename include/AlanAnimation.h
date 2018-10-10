@@ -1,3 +1,8 @@
+/**
+ * @brief 
+ * 
+ * @file AlanAnimation.h
+ */
 #ifndef ALANANIMATION_H
 #define ALANANIMATION_H
 #define INCLUDE_SDL

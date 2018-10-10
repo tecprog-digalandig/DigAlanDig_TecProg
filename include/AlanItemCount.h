@@ -1,3 +1,8 @@
+/**
+ * @brief 
+ * 
+ * @file AlanItemCount.h
+ */
 #ifndef ALANITEMCOUNT_H
 #define ALANITEMCOUNT_H
 #define INCLUDE_SDL

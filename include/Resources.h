@@ -1,3 +1,9 @@
+/**
+ * @brief 
+ * 
+ * @file Resources.h
+ * 
+ */
 #ifndef RESOURCES_H
 #define RESOURCES_H
 #define INCLUDE_SDL

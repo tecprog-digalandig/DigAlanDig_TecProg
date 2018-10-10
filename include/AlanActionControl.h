@@ -1,3 +1,9 @@
+/**
+ * @brief 
+ * 
+ * @file AlanActionControl.h
+ * 
+ */
 #ifndef ALANACTIONCONTROL_H
 #define ALANACTIONCONTROL_H
 #define INCLUDE_SDL
