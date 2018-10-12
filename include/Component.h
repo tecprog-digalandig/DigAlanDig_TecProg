@@ -15,7 +15,7 @@ class Component {
     virtual void RhythmUpdate() = 0;
     virtual void RhythmReset() {}
     virtual void Render(Common::Layer layer) const = 0;
-    virtual void start() {}
+    virtual void Start() {}
 
   protected:
     GameObject& associated;

@@ -24,7 +24,7 @@ class State {
     virtual void RhythmReset() {}
     virtual void Render() const = 0;
 
-    virtual void start() = 0;
+    virtual void Start() = 0;
     virtual void Pause() = 0;
     virtual void Resume() = 0;
 

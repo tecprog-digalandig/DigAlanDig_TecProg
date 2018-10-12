@@ -27,10 +27,10 @@ class GameObject
         bool IsDead() const { return isDead; }
         void RequestDelete() { isDead = true; }
         void AddComponent(Component *cpt);
-        void removeComponent(Component *cpt);
+        void RemoveComponent(Component *cpt);
 
-        void start();
-        void copyPosition(const GameObject &go);
+        void Start();
+        void CopyPosition(const GameObject &go);
 
         double angleRad() const { return angle_deg * M_PI / 180; }
 

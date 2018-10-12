@@ -22,12 +22,12 @@ class Game
         static Game* GetInstance(const std::string& title, int w, int h);
         float GetDeltaTime() const { return dt; }
 
-        void push(State* state) { stored_state = state; }
+        void Push(State* state) { stored_state = state; }
 
         // static std::unordered_map<std::string, int> idata;
         // static std::unordered_map<std::string, std::string> data;
         bool player_victory = false;
-        void fixTiming() { adjust = inicial_adjust; }
+        void FixTiming() { adjust = inicial_adjust; }
         void UpdateBeatTime(int time_rhythm);
         void StartBeatTime()
         {
@@ -48,8 +48,8 @@ class Game
 
         int frame_start;
         float dt;
-        void calculateDeltaTime();
-        void toggleFullScreen();
+        void CalculateDeltaTime();
+        void ToggleFullScreen();
 
         // TODO move to a configuration file
         static constexpr float bpm = 120;

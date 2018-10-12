@@ -53,7 +53,7 @@ class AlanAnimation : public Component {
     void Update(float dt);
     void RhythmUpdate() {}
     void Render(Common::Layer layer) const {}
-    void start() {
+    void Start() {
         currentState = State::IDLE;
         oldState = currentState;
         currentDirection = LEFT;

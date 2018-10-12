@@ -31,7 +31,7 @@ void Game::UpdateBeatTime(int time_rhythm)
     if (std::abs(tick_counter - time_rhythm) > 1000) tick_counter = time_rhythm;
 }
 
-void Game::calculateDeltaTime()
+void Game::CalculateDeltaTime()
 {
     int ticks_total = static_cast<int>(SDL_GetTicks());
     dt = ticks_total - frame_start;
@@ -81,14 +81,14 @@ void Game::Run()
     if (stored_state)
     {
         stateStack.emplace(stored_state);
-        stateStack.top()->start();
+        stateStack.top()->Start();
         stored_state = nullptr;
     }
 
     int fpb = 0;
     while (!stateStack.empty())
     {
-        calculateDeltaTime();
+        CalculateDeltaTime();
         input.Update(delta_rhythm);
 
         ++fpb;
@@ -126,7 +126,7 @@ void Game::Run()
         {
             stateStack.top()->StopMusic();
             stateStack.emplace(stored_state);
-            stateStack.top()->start();
+            stateStack.top()->Start();
             stored_state = nullptr;
             tick_counter = 0;
         }
@@ -136,12 +136,12 @@ void Game::Run()
 
         if (input.ActionPress(InputManager::FULLSCREEN))
         {
-            toggleFullScreen();
+            ToggleFullScreen();
         }
     }
 }
 
-void Game::toggleFullScreen()
+void Game::ToggleFullScreen()
 {
     static bool fullscreen = true;
     unsigned flag = (fullscreen) ? SDL_WINDOW_FULLSCREEN_DESKTOP : 0;

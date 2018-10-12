@@ -14,7 +14,7 @@ class Interpol : public Component {
     void RhythmUpdate() {}
     void RhythmReset() {}
     void Render(Common::Layer layer) const {}
-    void start() {}
+    void Start() {}
 
     bool IsMovementDone() { return movementDone; }
 

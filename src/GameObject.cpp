@@ -39,7 +39,7 @@ void GameObject::RenderOrder(Common::Layer layer) const
     for (Component* component : components) component->Render(layer);
 }
 
-void GameObject::removeComponent(Component* cpt)
+void GameObject::RemoveComponent(Component* cpt)
 {
     components.erase(std::remove(components.begin(), components.end(), cpt),
     components.end());
@@ -47,7 +47,7 @@ void GameObject::removeComponent(Component* cpt)
 
 void GameObject::AddComponent(Component* cpt) { components.emplace_back(cpt); }
 
-void GameObject::copyPosition(const GameObject& go)
+void GameObject::CopyPosition(const GameObject& go)
 {
     box = go.box;
     world_reference = go.world_reference;
@@ -55,10 +55,10 @@ void GameObject::copyPosition(const GameObject& go)
     angle_deg = go.angle_deg;
 }
 
-void GameObject::start()
+void GameObject::Start()
 {
     if (started) return;
-    for (auto c : components) c->start();
+    for (auto c : components) c->Start();
 
     started = true;
 }

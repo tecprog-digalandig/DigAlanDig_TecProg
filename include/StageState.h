@@ -16,7 +16,7 @@ class StageState : public State {
     void RhythmUpdate();
     void RhythmReset();
     void Render() const;
-    void start();
+    void Start();
     void Pause() {}
     void Resume() {}
 

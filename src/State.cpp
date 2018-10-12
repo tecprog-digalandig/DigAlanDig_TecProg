@@ -16,7 +16,7 @@ State::State() : input(InputManager::GetInstance()) {}
 std::weak_ptr<GameObject> State::AddObject(GameObject* go) {
     std::shared_ptr<GameObject> ptr(go);
     objectArray.emplace_back(ptr);
-    if (started) ptr->start();
+    if (started) ptr->Start();
 
     return ptr;
 }
@@ -37,7 +37,7 @@ void State::StartArray() {
     if (started) return;
 
     //    for (auto obj : objectArray) obj->Start();
-    for (size_t i = 0; i < objectArray.size(); i++) objectArray[i]->start();
+    for (size_t i = 0; i < objectArray.size(); i++) objectArray[i]->Start();
 
     started = true;
 }

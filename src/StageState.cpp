@@ -210,7 +210,7 @@ void StageState::loadAssets() {
     Mix_SetPostMix(noEffect, NULL);
 }
 
-void StageState::start() {
+void StageState::Start() {
     if (!started) loadAssets();
 
     StartArray();

@@ -18,7 +18,7 @@ class TitleState : public State {
     void Update(float dt);
     void Render() const;
     void RhythmUpdate();
-    void start();
+    void Start();
     void Pause() {}
     void Resume() {}
 };

@@ -72,6 +72,6 @@ void HudTimer::Update(float dt) {
     }
 
     risers.erase(std::remove_if(risers.begin(), risers.end(),
-                                [](Vec2 v) { return v.y < 570; }),
+                 [](Vec2 v) { return v.y < 570; }),
                  risers.end());
 }

@@ -118,7 +118,7 @@ void TitleState::loadAssets()
 }
 
 
-void TitleState::start()
+void TitleState::Start()
 {
     if (!started) loadAssets();
     StartArray();
@@ -128,7 +128,7 @@ void TitleState::Update(float delta_time)
 {
     input.title = true;
     if (input.ActionPress(input.ENTER))
-        Game::GetInstance()->push(new StageState());
+        Game::GetInstance()->Push(new StageState());
     UpdateArray(delta_time);
 }
 
