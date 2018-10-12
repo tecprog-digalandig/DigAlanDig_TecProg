@@ -22,7 +22,7 @@ void MiniTileMap::Render(Common::Layer layer) const {
     int y = associated.box.y;
     int valPos;
 
-    Vec2 alanPos = alan.lock()->GetGridPosition();
+    Vec2 alanPos = alan.lock()->getGridPosition();
 
     yMin = alanPos.y - 5;
 
@@ -40,7 +40,7 @@ void MiniTileMap::Render(Common::Layer layer) const {
             } else if (tileMap->At(posX, posY, TileMap::Layers::ITENS)) {
                 valPos = 4;
             } else if (posY >
-                       alan.lock()->GetComponent<Alan *>()->GetMaxPosition() +
+                       alan.lock()->getComponent<Alan *>()->GetMaxPosition() +
                            7) {
                 valPos = 1;
             } else {

@@ -103,7 +103,7 @@ int TileMap::At(int x, int y, int z) {
     return tileMat[z][y * width + x];
 }
 
-void TileMap::Render(Common::Layer layer) const {
+void TileMap::render(Common::Layer layer) const {
     if (layer == Common::Layer::DEFAULT)
         tileSet->setTileSetDefault();
     else

@@ -43,7 +43,7 @@ class AlanAnimation : public Component
         none_s = 0,
         idle,
         walkin,
-        fallin,
+        fallin_var,
         dig,
         climbin,
         dig_climb,
@@ -56,7 +56,7 @@ class AlanAnimation : public Component
 
     ~AlanAnimation();
 
-    void update(float dt);
+    void update(float delta_time);
 
     void rhythmUpdate() {}
 

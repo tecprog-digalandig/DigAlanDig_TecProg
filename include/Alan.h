@@ -26,7 +26,7 @@ class Alan : public Component
 
     void getMovement();
 
-    void update(float dt);
+    void update(float delta_time);
 
     void rhythmUpdate() {}
 
@@ -40,7 +40,7 @@ class Alan : public Component
 
         if (miss_counter > 1) 
         {
-            Game::getInstance()->combo /= 2;
+            Game::GetInstance()->combo /= 2;
         }
 
         moved = false;
@@ -90,7 +90,7 @@ class Alan : public Component
 
     int getHP() 
     { 
-        return HP; 
+        return life_enemy; 
     }
 
     void setItemCount(GameObject* go) 

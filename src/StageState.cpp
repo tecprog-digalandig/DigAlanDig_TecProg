@@ -164,8 +164,8 @@ void StageState::LoadAssets() {
     meterHeart->box.pos = {30, 30};
     meterHeart->AddComponent(new HeartMeter(
         *meterHeart, "assets/hud/barravida.png", "assets/hud/coracao.png"));
-    meterHeart->GetComponent<HeartMeter *>()->setIsHeart(true);
-    meterHeart->GetComponent<HeartMeter *>()->SetAlan(GetObjectPrt(alanGO));
+    meterHeart->getComponent<HeartMeter *>()->setIsHeart(true);
+    meterHeart->getComponent<HeartMeter *>()->SetAlan(GetObjectPrt(alanGO));
 
     GameObject *meterLight = new GameObject(Common::Layer::HUD);
     objectArray.emplace_back(meterLight);
@@ -173,8 +173,8 @@ void StageState::LoadAssets() {
     meterLight->box.pos = {30, 100};
     meterLight->AddComponent(new LightMeter(
         *meterLight, "assets/hud/barraluz.png", "assets/hud/raio.png"));
-    meterLight->GetComponent<LightMeter *>()->setIsHeart(false);
-    meterLight->GetComponent<LightMeter *>()->SetAlan(GetObjectPrt(alanGO));
+    meterLight->getComponent<LightMeter *>()->setIsHeart(false);
+    meterLight->getComponent<LightMeter *>()->SetAlan(GetObjectPrt(alanGO));
 
     GameObject *counterMetal = new GameObject(Common::Layer::HUD);
     objectArray.emplace_back(counterMetal);
@@ -201,7 +201,7 @@ void StageState::LoadAssets() {
     objectArray.emplace_back(itemCount);
     itemCount->worldReference = false;
     itemCount->AddComponent(new AlanItemCount(*itemCount));
-    lilAlan->SetItemCount(itemCount);
+    lilAlan->setItemCount(itemCount);
 
     // Music
     music.Open("assets/audio/marmota.ogg");
@@ -216,8 +216,8 @@ void StageState::Start() {
     StartArray();
 }
 
-void StageState::Update(float dt) {
-    Camera::Update(dt);
+void StageState::update(float delta_time) {
+    Camera::Update(delta_time);
 
     if (beat) {
         beat = false;
@@ -230,10 +230,10 @@ void StageState::Update(float dt) {
         Game::GetInstance()->UpdateBeatTime(halfBeatCounter * halfBeatTime);
         halfBeatCounter++;
     }
-    UpdateArray(dt);
+    UpdateArray(delta_time);
 }
 
-void StageState::RhythmUpdate() {
+void StageState::rhythmUpdate() {
     if (!musicPlaying) {
         music.Play();
         musicPlaying = true;
@@ -243,4 +243,4 @@ void StageState::RhythmUpdate() {
 
 void StageState::RhythmReset() { RhythmResetArray(); }
 
-void StageState::Render() const { RenderArray(); }
+void StageState::render() const { RenderArray(); }

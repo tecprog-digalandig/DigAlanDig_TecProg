@@ -32,7 +32,7 @@ int GridControl::TestPath(Vec2 target, bool isAlan) {
     }
 
     if (alan.lock()) {
-        if (target == alan.lock()->GetComponent<Alan *>()->GetGridPosition())
+        if (target == alan.lock()->getComponent<Alan *>()->getGridPosition())
             return WhatsThere::ALAN;
     }
 
@@ -48,8 +48,8 @@ int GridControl::TestPath(Vec2 target, bool isAlan) {
 
 bool GridControl::VerifyEnemy(Vec2 target) {
     for (auto enemy : enemies) {
-        if (enemy->GetComponent<Enemy *>()->GetGridPosition() == target &&
-            enemy->GetComponent<Enemy *>()->GetState() !=
+        if (enemy->getComponent<Enemy *>()->getGridPosition() == target &&
+            enemy->getComponent<Enemy *>()->GetState() !=
                 Enemy::State::WALKIN_S)
             return true;
     }
@@ -59,48 +59,48 @@ bool GridControl::VerifyEnemy(Vec2 target) {
 
 void GridControl::CheckEnemyAlanCollision(bool isAlan) {
     for (auto enemy : enemies) {
-        Vec2 alanPos = alan.lock()->GetComponent<Alan *>()->GetGridPosition();
-        Vec2 enemyPos = enemy->GetComponent<Enemy *>()->GetGridPosition();
+        Vec2 alanPos = alan.lock()->getComponent<Alan *>()->getGridPosition();
+        Vec2 enemyPos = enemy->getComponent<Enemy *>()->getGridPosition();
 
         if (alanPos.y == enemyPos.y &&
-            (enemy->GetComponent<Enemy *>()->GetState() ==
+            (enemy->getComponent<Enemy *>()->GetState() ==
                  Enemy::State::WALKIN_S ||
-             alan.lock()->GetComponent<Alan *>()->GetAction() ==
+             alan.lock()->getComponent<Alan *>()->GetAction() ==
                  AlanActionControl::Action::WALKIN)) {
             if ((alanPos.x - enemyPos.x) == 1 &&
-                (alan.lock()->GetComponent<Alan *>()->GetMovementDirection() ==
+                (alan.lock()->getComponent<Alan *>()->GetMovementDirection() ==
                      AlanActionControl::Direction::LEFT &&
-                 enemy->GetComponent<Enemy *>()->GetMovementDirection() ==
+                 enemy->getComponent<Enemy *>()->GetMovementDirection() ==
                      Enemy::Direction::RIGHT)) {
                 if (isAlan) {
                     alan.lock()
-                        ->GetComponent<AlanActionControl *>()
+                        ->getComponent<AlanActionControl *>()
                         ->SetMovementDirection(
                             AlanActionControl::Direction::NONE);
                 } else {
-                    enemy->GetComponent<Enemy *>()->SetAsHit();
-                    enemy->GetComponent<Interpol *>()->target = {
+                    enemy->getComponent<Enemy *>()->SetAsHit();
+                    enemy->getComponent<Interpol *>()->target = {
                         enemy->gridPosition.x + 1, enemy->gridPosition.y};
-                    alan.lock()->GetComponent<Alan *>()->TakeDamage();
+                    alan.lock()->getComponent<Alan *>()->takeDamage();
                 }
 
                 return;
             }
             if ((enemyPos.x - alanPos.x) == 1 &&
-                (alan.lock()->GetComponent<Alan *>()->GetMovementDirection() ==
+                (alan.lock()->getComponent<Alan *>()->GetMovementDirection() ==
                      AlanActionControl::Direction::RIGHT &&
-                 enemy->GetComponent<Enemy *>()->GetMovementDirection() ==
+                 enemy->getComponent<Enemy *>()->GetMovementDirection() ==
                      Enemy::Direction::LEFT)) {
                 if (isAlan) {
                     alan.lock()
-                        ->GetComponent<AlanActionControl *>()
+                        ->getComponent<AlanActionControl *>()
                         ->SetMovementDirection(
                             AlanActionControl::Direction::NONE);
                 } else {
-                    enemy->GetComponent<Enemy *>()->SetAsHit();
-                    enemy->GetComponent<Interpol *>()->target = {
+                    enemy->getComponent<Enemy *>()->SetAsHit();
+                    enemy->getComponent<Interpol *>()->target = {
                         enemy->gridPosition.x - 1, enemy->gridPosition.y};
-                    alan.lock()->GetComponent<Alan *>()->TakeDamage();
+                    alan.lock()->getComponent<Alan *>()->takeDamage();
                 }
 
                 return;

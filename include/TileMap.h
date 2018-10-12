@@ -16,9 +16,9 @@ class TileMap : public Component {
     void SetTileSet(TileSet* tileSet) { this->tileSet = tileSet; }
     int At(int x, int y, int z = 1);
 
-    void Update(float dt) {}
-    void RhythmUpdate() {}
-    void Render(Common::Layer layer) const;
+    void update(float delta_time) {}
+    void rhythmUpdate() {}
+    void render(Common::Layer layer) const;
 
     void RenderLayer(int layer, int cameraX = 0, int cameraY = 0) const;
 
@@ -29,7 +29,7 @@ class TileMap : public Component {
     void GetDamageGround(int damage, Vec2 posDamage);
     void ClearEnemyFromMap(Vec2 enemyPos);
 
-    void ItemCollected(Vec2 target, int layer) {
+    void itemCollected(Vec2 target, int layer) {
         tileMat[layer][target.y * width + target.x] = 0;
     }
 

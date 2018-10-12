@@ -95,16 +95,16 @@ void TitleState::Start() {
     StartArray();
 }
 
-void TitleState::Update(float dt) {
+void TitleState::update(float delta_time) {
     input.title = true;
     if (input.ActionPress(input.ENTER))
         Game::GetInstance()->Push(new StageState());
-    UpdateArray(dt);
+    UpdateArray(delta_time);
 }
 
-void TitleState::Render() const { RenderArray(); }
+void TitleState::render() const { RenderArray(); }
 
-void TitleState::RhythmUpdate() {
+void TitleState::rhythmUpdate() {
     if (!musicPlaying) {
         music.Play();
         musicPlaying = true;

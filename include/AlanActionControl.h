@@ -17,12 +17,12 @@ class AlanActionControl : public Component
   public:
     enum Direction 
     {
-         none = 0, up, down, left, right 
+         none = 0, up, down, left, right
     };
 
     enum Action 
     { 
-        standin = 0, walkin, climbing, falling
+        standin = 0, walkin, climbin, fallin_var
     };
 
     AlanActionControl(GameObject& associated, int grid_size)
@@ -32,7 +32,7 @@ class AlanActionControl : public Component
 
     ~AlanActionControl() {}
 
-    void fallin(float dt);
+    void fallin(float delta_time);
 
     bool shouldFall();
 
@@ -48,7 +48,7 @@ class AlanActionControl : public Component
 
     bool isClimbDirectionLeft(AlanAnimation* animation);
 
-    void update(float dt);
+    void update(float delta_time);
 
     void rhythmUpdate() {}
 

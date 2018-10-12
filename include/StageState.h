@@ -12,10 +12,10 @@ class StageState : public State {
   public:
     StageState();
     void LoadAssets();
-    void Update(float dt);
-    void RhythmUpdate();
+    void update(float delta_time);
+    void rhythmUpdate();
     void RhythmReset();
-    void Render() const;
+    void render() const;
     void Start();
     void Pause() {}
     void Resume() {}

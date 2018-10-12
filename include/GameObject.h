@@ -15,13 +15,13 @@ class GameObject {
         : layer(layer), isDead(false) {}
     ~GameObject();
 
-    void Update(float dt);
+    void Update(float delta_time);
     void RhythmUpdate();
     void RhythmReset();
 
     void RenderOrder(Common::Layer layer) const;
 
-    bool CanEnd() const;
+    bool canEnd() const;
 
     bool IsDead() const { return isDead; }
     void RequestDelete() { isDead = true; }
@@ -34,14 +34,14 @@ class GameObject {
     double AngleRad() const { return angleDeg * M_PI / 180; }
 
     template <class T>
-    T GetComponent() const {
+    T getComponent() const {
         for (Component *component : components)
             if (T t = dynamic_cast<T>(component)) return t;
 
         return nullptr;
     }
 
-    Vec2 GetGridPosition() const { return gridPosition; }
+    Vec2 getGridPosition() const { return gridPosition; }
     Vec2 gridPosition;
 
     Rect box;

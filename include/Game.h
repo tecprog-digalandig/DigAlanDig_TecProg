@@ -19,7 +19,7 @@ class Game {
     GridControl* GetGridControl() const { return gridControl; }
     static Game* GetInstance() { return _instance; }
     static Game* GetInstance(const std::string& title, int w, int h);
-    float GetDeltaTime() const { return dt; }
+    float GetDeltaTime() const { return delta_time; }
 
     void Push(State* state) { storedState = state; }
 
@@ -45,7 +45,7 @@ class Game {
     std::stack<std::unique_ptr<State>> stateStack;
 
     int frameStart;
-    float dt;
+    float delta_time;
     void CalculateDeltaTime();
     void ToggleFullScreen();
 

@@ -30,12 +30,12 @@ void Game::UpdateBeatTime(int timeRhythm) {
 
 void Game::CalculateDeltaTime() {
     int ticksTotal = static_cast<int>(SDL_GetTicks());
-    dt = ticksTotal - frameStart;
+    delta_time = ticksTotal - frameStart;
     // Maximum time, fix return from suspended
-    if (dt > 1000) dt = 1000;
+    if (delta_time > 1000) delta_time = 1000;
 
-    tickCounter += dt;
-    dt /= 1000;
+    tickCounter += delta_time;
+    delta_time /= 1000;
     frameStart = ticksTotal;
 
     if (input.KeyPress(SDL_SCANCODE_EQUALS)) {
@@ -89,7 +89,7 @@ void Game::Run() {
             fpb = 0;
         }
 
-        stateStack.top()->Update(dt);
+        stateStack.top()->Update(delta_time);
         stateStack.top()->Render();
         SDL_RenderPresent(renderer);
 

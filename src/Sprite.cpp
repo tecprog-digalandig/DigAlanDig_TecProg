@@ -42,7 +42,7 @@ void Sprite::SetFrame(int frame) {
     clipRect = Rect(pos, size);
 }
 
-void Sprite::Render(Common::Layer layer) const {
+void Sprite::render(Common::Layer layer) const {
     if (IsOpen()) {
         Vec2 offset;
         if (associated.worldReference) offset = Camera::pos;
@@ -57,18 +57,18 @@ void Sprite::Render(Common::Layer layer) const {
     }
 }
 
-void Sprite::Update(float dt) {
-    timeElapsed += dt;
+void Sprite::Update(float delta_time) {
+    timeElapsed += delta_time;
 
-    selfDestructCount.Update(dt);
+    selfDestructCount.Update(delta_time);
     if (secondsToSelfDestruct > 0 &&
         selfDestructCount.Get() > secondsToSelfDestruct) {
         associated.RequestDelete();
         return;
     }
 
-    if (associated.GetComponent<Alan *>() != nullptr) {
-        AlanUpdate(dt);
+    if (associated.getComponent<Alan *>() != nullptr) {
+        AlanUpdate(delta_time);
         return;
     } else {
         if (frameTime > 0 && ((currentFrame + 1) * frameTime <= timeElapsed)) {
@@ -78,7 +78,7 @@ void Sprite::Update(float dt) {
     }
 }
 
-void Sprite::AlanUpdate(float dt) {
+void Sprite::AlanUpdate(float delta_time) {
     if (frameTime > 0) {
         if (timeElapsed - (frameTime * (currentFrame - initFrame)) >=
             frameTime) {

@@ -48,7 +48,7 @@ class Sound : public Component
         if (chunk) chunk->volume = v;
     }
 
-    void update(float dt) {}
+    void update(float delta_time) {}
     void rhythmUpdate() {}
     void render(Common::Layer layer) const {}
 

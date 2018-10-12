@@ -7,7 +7,7 @@ AlanAnimation::AlanAnimation(GameObject &associated) : Component(associated)
 {
     AState[State::idle] = {"assets/img/alan/idle.png", 2, 2, -1};
     AState[State::walkin] = {"assets/img/alan/walkin.png", 2, 4, 0.1};
-    AState[State::fallin] = {"assets/img/alan/fallin.png", 2, 2, 0.1};
+    AState[State::fallin_var] = {"assets/img/alan/fallin.png", 2, 2, 0.1};
     AState[State::dig] = {"assets/img/alan/dig.png", 2, 8, 0.1};
     AState[State::climbin] = {"assets/img/alan/climb.png", 2, 4, 0.2};
     AState[State::dig_climb] = {"assets/img/alan/idle.png", 2, 2, 0.2};
@@ -38,7 +38,7 @@ void AlanAnimation::playSound(Transition trans)
     s->play();
 }
 
-void AlanAnimation::update(float dt) 
+void AlanAnimation::update(float delta_time) 
 {
     if (current_state == State::dancin || current_state == State::dead) return;
 
@@ -47,7 +47,7 @@ void AlanAnimation::update(float dt)
 
     if (sprite->frameTimePassed() &&
         alan->getMovementDirection() == AlanActionControl::Direction::none &&
-        current_state != State::fallin) 
+        current_state != State::fallin_var) 
         {
         if ((old_state == State::climbin || current_state == State::climbin) &&
             current_state != State::idle) 
@@ -83,7 +83,7 @@ void AlanAnimation::setAction(Transition trans, Direction dir)
             {
                 case fall:
                     old_state = current_state;
-                    current_state = State::fallin;
+                    current_state = State::fallin_var;
                     break;
 
                 case walk:
@@ -122,7 +122,7 @@ void AlanAnimation::setAction(Transition trans, Direction dir)
             {
                 case fall:
                     old_state = current_state;
-                    current_state = State::fallin;
+                    current_state = State::fallin_var;
                     break;
 
                 case none_t:
@@ -146,7 +146,7 @@ void AlanAnimation::setAction(Transition trans, Direction dir)
             }
             break;
 
-        case fallin:
+        case fallin_var:
             switch (trans) 
             {
                 case floor:
@@ -180,7 +180,7 @@ void AlanAnimation::setAction(Transition trans, Direction dir)
             {
                 case fall:
                     old_state = current_state;
-                    current_state = State::fallin;
+                    current_state = State::fallin_var;
                     break;
 
                 case none_t:
@@ -218,7 +218,7 @@ void AlanAnimation::setAction(Transition trans, Direction dir)
 
                 case stop_climb:
                     old_state = current_state;
-                    current_state = State::fallin;
+                    current_state = State::fallin_var;
                     break;
 
                 case dig_t:

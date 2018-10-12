@@ -16,7 +16,7 @@ class Music {
 
     void Play(int times = -1) const;
     void Stop(int msToStop = 1500) const { Mix_FadeOutMusic(msToStop); }
-    void Open(const std::string &file) { music = Resources::GetMusic(file); }
+    void Open(const std::string &file) { music = Resources::getMusic(file); }
 
     bool IsOpen() const { return (bool)music; }
 

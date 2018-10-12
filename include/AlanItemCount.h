@@ -30,7 +30,7 @@ class Item : public Component
             delete bg; 
         }
 
-        void update(float dt) {}
+        void update(float delta_time) {}
 
         void rhythmUpdate() {}
 
@@ -54,7 +54,7 @@ class AlanItemCount : public Component
             item_count_item.clear();
         }
 
-        void update(float dt) {}
+        void update(float delta_time) {}
 
         void rhythmUpdate() {}
 

@@ -1,7 +1,7 @@
 #include "GameObject.h"
 #include "Sound.h"
 
-bool GameObject::CanEnd() const { return true; }
+bool GameObject::canEnd() const { return true; }
 
 GameObject::~GameObject() {
     for (Component* component : components) delete (component);
@@ -10,10 +10,10 @@ GameObject::~GameObject() {
     tmp = box;
 }
 
-void GameObject::Update(float dt) {
+void GameObject::Update(float delta_time) {
     static float sum;
-    sum += dt;
-    for (Component* component : components) component->Update(dt);
+    sum += delta_time;
+    for (Component* component : components) component->Update(delta_time);
     if (move) {
         box.pos = tmp.pos + Vec2(0, 1) * sin(sum) * 30;
     }
@@ -30,7 +30,7 @@ void GameObject::RhythmReset() {
 void GameObject::RenderOrder(Common::Layer layer) const {
     if (!(this->layer & layer)) return;
 
-    for (Component* component : components) component->Render(layer);
+    for (Component* component : components) component->render(layer);
 }
 
 void GameObject::RemoveComponent(Component* cpt) {

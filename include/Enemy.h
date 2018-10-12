@@ -27,7 +27,7 @@ class Enemy : public Component {
 
     ~Enemy() {}
 
-    void Update(float dt);
+    void update(float delta_time);
     void RhythmUpdate() {
         numBeats++;
 
@@ -36,10 +36,10 @@ class Enemy : public Component {
             numBeats = 0;
         }
     }
-    void RhythmReset() {}
-    void Render(Common::Layer layer) const {}
+    void rhythmReset() {}
+    void render(Common::Layer layer) const {}
 
-    Vec2 GetGridPosition() { return associated.GetGridPosition(); }
+    Vec2 getGridPosition() { return associated.getGridPosition(); }
 
     void MovementDenied() { movementAllowed = false; }
 
@@ -47,13 +47,13 @@ class Enemy : public Component {
     State GetState() { return state; }
 
     void SetAsHit() {
-        associated.GetComponent<Interpol*>()->isHit = true;
+        associated.getComponent<Interpol*>()->isHit = true;
         movementAllowed = false;
     }
 
     bool VerifyDeath(Alan* alan);
 
-    void TakeDamage(int damage) { hp -= damage; }
+    void takeDamage(int damage) { life_enemy -= damage; }
     void ShouldTakeDamage(Alan* alan);
 
     void IsSurrounded();

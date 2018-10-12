@@ -5,7 +5,7 @@ std::unordered_map<std::string, std::shared_ptr<SDL_Texture>>
     Resources::imageTable;
 std::unordered_map<std::string, std::shared_ptr<Mix_Music>>
     Resources::musicTable;
-std::unordered_map<std::string, std::shared_ptr<Mix_Chunk>>
+std::unordered_map<std::string, std::shared_ptr<mix_chunk>>
     Resources::soundTable;
 
 std::shared_ptr<SDL_Texture> Resources::GetImage(const std::string& file) {
@@ -55,17 +55,17 @@ void Resources::ClearMusics() {
         if (element.second.unique()) musicTable.erase(element.first);
 }
 
-std::shared_ptr<Mix_Chunk> Resources::GetSound(const std::string& file) {
+std::shared_ptr<mix_chunk> Resources::GetSound(const std::string& file) {
     auto got = soundTable.find(file);
 
     if (got == soundTable.end()) {
-        Mix_Chunk* snd = Mix_LoadWAV(file.c_str());
+        mix_chunk* snd = Mix_LoadWAV(file.c_str());
         if (!snd) {
             std::cerr << "Mix_LoadWAV: " << Mix_GetError() << std::endl;
             exit(EXIT_SUCCESS);
         }
-        std::shared_ptr<Mix_Chunk> sp(
-            snd, [](Mix_Chunk* ptr) { Mix_FreeChunk(ptr); });
+        std::shared_ptr<mix_chunk> sp(
+            snd, [](mix_chunk* ptr) { Mix_FreeChunk(ptr); });
         soundTable.emplace(file, sp);
     }
 

@@ -4,6 +4,7 @@
 #define INCLUDE_SDL_IMAGE
 #define INCLUDE_SDL_MIXER
 #include "SDL_include.h"
+#include "Music.h"
 
 #include <memory>
 #include <string>
@@ -18,7 +19,7 @@ class Resources
     static std::shared_ptr<Mix_Music> getMusic(const std::string& file);
     static void clearMusics();
 
-    static std::shared_ptr<Mix_Chunk> getSound(const std::string& file);
+    static std::shared_ptr<mix_chunk> getSound(const std::string& file);
     static void clearSounds();
 
     static void clearAll();
@@ -28,7 +29,7 @@ class Resources
         image_table;
     static std::unordered_map<std::string, std::shared_ptr<Mix_Music>>
         music_table;
-    static std::unordered_map<std::string, std::shared_ptr<Mix_Chunk>>
+    static std::unordered_map<std::string, std::shared_ptr<mix_chunk>>
         sound_table;
 };
 

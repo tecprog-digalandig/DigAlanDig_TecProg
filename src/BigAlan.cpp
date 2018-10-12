@@ -5,12 +5,12 @@
 #include "GridControl.h"
 
 
-void BigAlan::Update(float dt) {
+void BigAlan::Update(float delta_time) {
     int combo = Game::GetInstance()->combo;
     int diffCombo = std::abs(combo - oldCombo);
     oldCombo = combo;
 
-    if(Game::GetInstance()->GetGridControl()->GetAlan().lock()->GetComponent<AlanAnimation *>()->GetCurrentState() == AlanAnimation::State::DEAD){
+    if(Game::GetInstance()->GetGridControl()->GetAlan().lock()->getComponent<AlanAnimation *>()->GetCurrentState() == AlanAnimation::State::DEAD){
         if(currentState != BAState::TRASH){
             currentState = BAState::TRASH;
             sprite->Open(state[currentState], 0);

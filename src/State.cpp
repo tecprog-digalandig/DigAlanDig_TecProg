@@ -42,14 +42,14 @@ void State::StartArray() {
     started = true;
 }
 
-void State::UpdateArray(float dt) {
+void State::UpdateArray(float delta_time) {
     // Update
-    //    for (auto obj : objectArray) obj->Update(dt);
-    for (size_t i = 0; i < objectArray.size(); i++) objectArray[i]->Update(dt);
+    //    for (auto obj : objectArray) obj->Update(delta_time);
+    for (size_t i = 0; i < objectArray.size(); i++) objectArray[i]->Update(delta_time);
 
     // Delete
     auto removeDead = [&](std::shared_ptr<GameObject> const& p) {
-        return p->IsDead() && p->CanEnd();
+        return p->IsDead() && p->canEnd();
     };
     objectArray.erase(
         std::remove_if(objectArray.begin(), objectArray.end(), removeDead),

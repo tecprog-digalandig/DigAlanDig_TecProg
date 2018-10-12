@@ -24,15 +24,15 @@ void Camera::RhythmUpdate() {
     if (focus) {
         if (offset.y > (focus->box.y +
                         Game::GetInstance()->GetCurrentState().GetGridSize()) &&
-            focus->GetComponent<Alan *>()->GetHP() > 0) {
-            focus->GetComponent<Alan *>()->TakeDamage();
+            focus->getComponent<Alan *>()->GetHP() > 0) {
+            focus->getComponent<Alan *>()->takeDamage();
         }
     }
 }
 
-void Camera::Update(float dt) {
+void Camera::Update(float delta_time) {
     if (shakeDuration > 0) {
-        shakeDuration -= dt;
+        shakeDuration -= delta_time;
         shake = {sin((rand() % (int)(2000 * M_PI)) / 1000.0) * shakeIntensity,
                  sin((rand() % (int)(2000 * M_PI)) / 1000.0) * shakeIntensity};
     } else {
@@ -56,17 +56,17 @@ void Camera::Update(float dt) {
             scrollFactor = (1.5 * (focus->box.y - pos.y) / screenSize.y + 0.5);
 
         case Camera::CONSTSCROLL: {
-            Vec2 focusGridPos = focus->GetGridPosition();
+            Vec2 focusGridPos = focus->getGridPosition();
             TileMap *tileMap = Game::GetInstance()->GetCurrentState().tileMap;
 
-            if (focus->GetComponent<AlanAnimation *>()->GetCurrentState() ==
+            if (focus->getComponent<AlanAnimation *>()->GetCurrentState() ==
                     AlanAnimation::State::DEAD ||
-                focus->GetComponent<AlanAnimation *>()->GetCurrentState() ==
+                focus->getComponent<AlanAnimation *>()->GetCurrentState() ==
                     AlanAnimation::State::DANCIN) {
                 if (offset.y >
                         ((focusGridPos.y + 1) * 100 - screenSize.y / 2) &&
                     offset.y > 0) {
-                    offset.y -= dt * 400;
+                    offset.y -= delta_time * 400;
                 }
                 break;
             }
@@ -76,10 +76,10 @@ void Camera::Update(float dt) {
                     (tileMap->GetHeight() *
                          Game::GetInstance()->GetCurrentState().GetGridSize() -
                      screenSize.y)) {
-                offset.y += speed.y * dt * scrollFactor;
+                offset.y += speed.y * delta_time * scrollFactor;
 
                 if (offset.y + screenSize.y - 300 < focus->box.y) {
-                    offset.y += 3 * speed.y * dt * scrollFactor;
+                    offset.y += 3 * speed.y * delta_time * scrollFactor;
                 }
             }
             break;
@@ -87,10 +87,10 @@ void Camera::Update(float dt) {
 
         case Camera::NONE:
             if (InputManager::GetInstance().KeyDown(SDL_SCANCODE_UP)) {
-                offset.y -= speed.y * dt * 10;
+                offset.y -= speed.y * delta_time * 10;
             }
             if (InputManager::GetInstance().KeyDown(SDL_SCANCODE_DOWN)) {
-                offset.y += speed.y * dt * 10;
+                offset.y += speed.y * delta_time * 10;
             }
             break;
     }
@@ -98,10 +98,10 @@ void Camera::Update(float dt) {
 
     static int acc = 30;
     if (InputManager::GetInstance().KeyDown(SDL_SCANCODE_COMMA)) {
-        speed.y -= acc * dt;
+        speed.y -= acc * delta_time;
     }
     if (InputManager::GetInstance().KeyDown(SDL_SCANCODE_PERIOD)) {
-        speed.y += acc * dt;
+        speed.y += acc * delta_time;
     }
     if (InputManager::GetInstance().KeyPress(SDL_SCANCODE_C)) {
         currentMove = (Movement)(currentMove + 1);

@@ -44,7 +44,7 @@ Enemy::Enemy(GameObject &associated, int enemyType)
     associated.AddComponent(interpol);
     sprite->Open(EState[state], Enemy::Direction::LEFT);
 
-    hp = 3;
+    life_enemy = 3;
     range = enemyType;
 
     tileMapPos.x = associated.box.x;
@@ -53,8 +53,8 @@ Enemy::Enemy(GameObject &associated, int enemyType)
 
 bool Enemy::VerifyDeath(Alan *alan) {
     // Inimigo morre se:
-    // 1. HP <= 0
-    if (hp <= 0) {
+    // 1. life_enemy <= 0
+    if (life_enemy <= 0) {
         return true;
     }
     // 2. Alan cai em cima dele
@@ -64,7 +64,7 @@ bool Enemy::VerifyDeath(Alan *alan) {
         return true;
     }
     // 3. Scroll da camera já passou da posição dele
-    if (associated.GetGridPosition().y <
+    if (associated.getGridPosition().y <
         (Camera::pos.y / Game::GetInstance()->GetCurrentState().GetGridSize()) -
             3) {
         return true;
@@ -87,7 +87,7 @@ void Enemy::ShouldTakeDamage(Alan *alan) {
             false) == GridControl::WhatsThere::ALAN &&
         alan->GetMovementDirection() == AlanActionControl::Direction::RIGHT) {
         if (!damageTaken) {
-            TakeDamage(alan->GetDamage());
+            takeDamage(alan->GetDamage());
             damageTaken = true;
         }
     } else if (Game::GetInstance()->GetGridControl()->TestPath(
@@ -97,7 +97,7 @@ void Enemy::ShouldTakeDamage(Alan *alan) {
                alan->GetMovementDirection() ==
                    AlanActionControl::Direction::LEFT) {
         if (!damageTaken) {
-            TakeDamage(alan->GetDamage());
+            takeDamage(alan->GetDamage());
             damageTaken = true;
         }
     } else {
@@ -115,20 +115,20 @@ void Enemy::IsSurrounded() {
         movementAllowed = false;
 }
 
-void Enemy::Update(float dt) {
+void Enemy::Update(float delta_time) {
     if (!Game::GetInstance()->GetGridControl()->GetAlan().lock() ||
-        !associated.GetComponent<Interpol *>()->IsMovementDone())
+        !associated.getComponent<Interpol *>()->IsMovementDone())
         return;
 
     Game::GetInstance()->GetGridControl()->CheckEnemyAlanCollision(false);
-    if (associated.GetComponent<Interpol *>()->isHit) return;
+    if (associated.getComponent<Interpol *>()->isHit) return;
 
-    Sprite *sprite = associated.GetComponent<Sprite *>();
+    Sprite *sprite = associated.getComponent<Sprite *>();
     Alan *alan = Game::GetInstance()
                      ->GetGridControl()
                      ->GetAlan()
                      .lock()
-                     ->GetComponent<Alan *>();
+                     ->getComponent<Alan *>();
 
     ShouldTakeDamage(alan);
 

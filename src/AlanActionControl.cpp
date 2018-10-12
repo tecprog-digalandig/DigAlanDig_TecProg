@@ -16,7 +16,7 @@ bool AlanActionControl::shouldFall()
                  true) == GridControl::WhatsThere::ENEMY));
 }
 
-void AlanActionControl::fallin(float dt) 
+void AlanActionControl::fallin(float delta_time) 
 {
     if (grids_left > 0) grids_left--;
     associated.gridPosition.y++;
@@ -105,7 +105,7 @@ bool AlanActionControl::isClimbDirectionLeft(AlanAnimation *animation)
            animation->getCurrentDirection() != AlanAnimation::Direction::right;
 }
 
-void AlanActionControl::update(float dt) 
+void AlanActionControl::update(float delta_time) 
 {
     if (!associated.getComponent<Interpol *>()->isMovementDone()) return;
 
@@ -147,7 +147,7 @@ void AlanActionControl::update(float dt)
         if (grids_left == 0) 
         {
             movement_direction = Direction::down;
-            action = Action::fallin;
+            action = Action::fallin_var;
             int y = associated.gridPosition.y + 1;
             while (!tile_map->at(associated.gridPosition.x, y)) 
             {
@@ -158,12 +158,12 @@ void AlanActionControl::update(float dt)
                                  AlanAnimation::Direction::left);
         }
 
-        fallin(dt);
+        fallin(delta_time);
 
         return;
     }
 
-    if (animation->getCurrentState() == AlanAnimation::State::fallin) 
+    if (animation->getCurrentState() == AlanAnimation::State::fallin_var) 
     {
         animation->setAction(AlanAnimation::Transition::floor,
                              AlanAnimation::Direction::left);

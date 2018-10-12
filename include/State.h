@@ -19,16 +19,16 @@ class State {
     }
 
     virtual void LoadAssets() = 0;
-    virtual void Update(float dt) = 0;
-    virtual void RhythmUpdate() = 0;
+    virtual void update(float delta_time) = 0;
+    virtual void rhythmUpdate() = 0;
     virtual void RhythmReset() {}
-    virtual void Render() const = 0;
+    virtual void render() const = 0;
 
     virtual void Start() = 0;
     virtual void Pause() = 0;
     virtual void Resume() = 0;
 
-    void UpdateArray(float dt);
+    void UpdateArray(float delta_time);
     void RhythmUpdateArray();
     void RhythmResetArray();
     void StartArray();
@@ -37,14 +37,22 @@ class State {
     virtual std::weak_ptr<GameObject> AddObject(GameObject* go);
     virtual std::weak_ptr<GameObject> GetObjectPrt(GameObject* go);
 
-    bool PopRequested() const { return popRequested; }
-    bool QuitRequested() const { return quitRequested; }
+    bool PopRequested() const { 
+      return popRequested; 
+      }
+    bool QuitRequested() const { 
+      return quitRequested; 
+      }
 
     TileMap* tileMap = nullptr;
 
-    Music* GetMusic() { return &music; }
+    Music* GetMusic() { 
+      return &music; 
+      }
 
-    void StopMusic() { musicPlaying = false; }
+    void StopMusic() { 
+      musicPlaying = false; 
+      }
 
     int GetGridSize() const { return gridSize; }
 

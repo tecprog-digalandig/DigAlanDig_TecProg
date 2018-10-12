@@ -18,17 +18,17 @@ class Light : public Component {
 
     ~Light() { delete sprite; }
 
-    void Update(float dt) {
+    void update(float delta_time) {
         if (auto ptr = follow.lock()) {
             associated.box.SetCenter(ptr->box.Center());
-            sprite->Update(dt);
+            sprite->update(delta_time);
         } else {
             associated.RequestDelete();
         }
     }
 
-    void RhythmUpdate() {}
-    void Render(Common::Layer layer) const { sprite->Render(layer); }
+    void rhythmUpdate() {}
+    void render(Common::Layer layer) const { sprite->Render(layer); }
 
     void SetSize(int size) {
         sprite->SetScaleX((double)size / sprite->GetHeight());
