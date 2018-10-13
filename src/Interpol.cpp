@@ -1,11 +1,23 @@
+#include <assert.h>
 #include "Interpol.h"
 #include "Enemy.h"
 #include "Game.h"
 #include "Sprite.h"
 
+/**
+ * @brief Construct a new Interpol:: Interpol object
+ * 
+ * @param associated 
+ */
 Interpol::Interpol(GameObject &associated) : Component(associated) {}
 
-void Interpol::update(float dt) {
+/**
+ * @brief update sprites of alan
+ * 
+ * @param dt 
+ */
+void Interpol::update(float dt) 
+{
     Sprite *sprite = associated.GetComponent<Sprite *>();
 
     speed.x = 10 * dt * Game::GetInstance()->GetCurrentState().GetGridSize() /
@@ -13,11 +25,16 @@ void Interpol::update(float dt) {
     speed.y = 10 * dt * Game::GetInstance()->GetCurrentState().GetGridSize() /
               sprite->GetFrameCount();
 
-    Vec2 newPos;
+    assert(speed.x > 0);          
+    assert(speed.y > 0);
+    Vec2 new_pos;
 
-    if (isHit) {
-        if (target.x > associated.gridPosition.x) {
-            newPos = {
+    if (is_hit) 
+    {
+        if (target.x > associated.gridPosition.x) 
+        {
+            new_pos = 
+            {
                 target.x *
                         Game::GetInstance()->GetCurrentState().GetGridSize() -
                     Game::GetInstance()->GetCurrentState().GetGridSize(),
@@ -25,46 +42,63 @@ void Interpol::update(float dt) {
                         Game::GetInstance()->GetCurrentState().GetGridSize() -
                     Game::GetInstance()->GetCurrentState().GetGridSize() / 2};
 
-        } else {
-            newPos = {
+        } 
+        else 
+        {
+            new_pos = 
+            {
                 target.x * Game::GetInstance()->GetCurrentState().GetGridSize(),
                 associated.gridPosition.y *
                         Game::GetInstance()->GetCurrentState().GetGridSize() -
                     Game::GetInstance()->GetCurrentState().GetGridSize() / 2};
         }
-    } else
-        newPos = {associated.gridPosition.x *
+    } 
+    else
+        new_pos = {associated.gridPosition.x *
                           Game::GetInstance()->GetCurrentState().GetGridSize() -
                       Game::GetInstance()->GetCurrentState().GetGridSize() / 2,
                   associated.gridPosition.y *
                           Game::GetInstance()->GetCurrentState().GetGridSize() -
                       Game::GetInstance()->GetCurrentState().GetGridSize() / 2};
 
-    if (associated.box.x != newPos.x) {
-        if (abs(newPos.x - associated.box.x) < speed.x) {
-            associated.box.x += (newPos.x - associated.box.x);
-        } else if (associated.box.x < newPos.x) {
+    if (associated.box.x != new_pos.x) 
+    {
+        if (abs(new_pos.x - associated.box.x) < speed.x) 
+        {
+            associated.box.x += (new_pos.x - associated.box.x);
+        } 
+        else if (associated.box.x < new_pos.x) 
+        {
             associated.box.x += speed.x;
-        } else {
+        } 
+        else 
+        {
             associated.box.x -= speed.x;
         }
 
-        if (movementDone) movementDone = !movementDone;
+        if (movement_done) movement_done = !movement_done;
     }
 
-    if (associated.box.y != newPos.y) {
-        if (abs(newPos.y - associated.box.y) < speed.y) {
-            associated.box.y += (newPos.y - associated.box.y);
-        } else if (associated.box.y < newPos.y) {
+    if (associated.box.y != new_pos.y) 
+    {
+        if (abs(new_pos.y - associated.box.y) < speed.y) 
+        {
+            associated.box.y += (new_pos.y - associated.box.y);
+        } 
+        else if (associated.box.y < new_pos.y) 
+        {
             associated.box.y += speed.y;
-        } else {
+        } 
+        else 
+        {
             associated.box.y -= speed.y;
         }
-        if (movementDone) movementDone = !movementDone;
+        if (movement_done) movement_done = !movement_done;
     }
 
-    if (associated.box.x == newPos.x && associated.box.y == newPos.y) {
-        if (isHit) isHit = !isHit;
-        if (!movementDone) movementDone = !movementDone;
+    if (associated.box.x == new_pos.x && associated.box.y == new_pos.y) 
+    {
+        if (isHit) is_hit = !is_hit;
+        if (!movement_done) movement_done = !movement_done;
     }
 }

@@ -1,23 +1,45 @@
+#include <assert.h>
 #include "Parallax.h"
 #include "Game.h"
 #include "Resources.h"
 
-void bgCircularY::Open(const std::string &file) {
+
+/**
+ * @brief open file of texture circular background on axis Y
+ * 
+ * @param file 
+ */
+void bgCircularY::Open(const std::string &file) 
+{
     texture = Resources::GetImage(file);
+    assert(texture != NULL);
 
     SDL_QueryTexture(texture.get(), nullptr, nullptr, &width, &height);
     associated.box.size.Set(width, height);
 }
 
-void bgCircularY::render(Common::Layer layer) const {
-    if (bgCircularY::texture) {
-        int linit = -associated.box.y / associated.box.h;
-        int lmax = linit + Camera::screenSize.y / associated.box.h;
-        if (Camera::screenSize.y - associated.box.y >
-            (lmax + 1) * associated.box.h)
-            lmax++;
+/**
+ * @brief  rendering layers of circular background on axis Y
+ * 
+ * @param layer 
+ */
+void bgCircularY::render(Common::Layer layer) const 
+{
+    if (bgCircularY::texture) 
+    {
+        int l_init = -associated.box.y / associated.box.h;
+        int l_max = l_init + Camera::screenSize.y / associated.box.h;
 
-        for (int i = linit; i <= lmax; i++) {
+
+        assert(l_init > 0);
+        assert(l_max > 0);
+
+        if (Camera::screenSize.y - associated.box.y >
+            (l_max + 1) * associated.box.h)
+            l_max++;
+
+        for (int i = l_init; i <= l_max; i++) 
+        {
             Rect dst(associated.box.pos.x, associated.box.pos.y + i * height,
                      (double)width, (double)height);
             SDL_Rect dstRect = dst;
@@ -28,22 +50,41 @@ void bgCircularY::render(Common::Layer layer) const {
     }
 }
 
-void bgCircularX::Open(const std::string &file) {
+/**
+ * @brief open file of texture circular background on axis X
+ * 
+ * @param file 
+ */
+void bgCircularX::Open(const std::string &file) 
+{
     texture = Resources::GetImage(file);
+    assert(texture != NULL);
 
     SDL_QueryTexture(texture.get(), nullptr, nullptr, &width, &height);
     associated.box.size.Set(width, height);
 }
 
-void bgCircularX::render(Common::Layer layer) const {
-    if (bgCircularX::texture) {
-        int linit = -associated.box.x / associated.box.w;
-        int lmax = linit + Camera::screenSize.x / associated.box.w;
-        if (Camera::screenSize.x - associated.box.x >
-            (lmax + 1) * associated.box.w)
-            lmax++;
+/**
+ * @brief  rendering layers of circular background on axis X
+ * 
+ * @param layer 
+ */
+void bgCircularX::render(Common::Layer layer) const 
+{
+    if (bgCircularX::texture) 
+    {
+        int l_init = -associated.box.x / associated.box.w;
+        int l_max = l_init + Camera::screenSize.x / associated.box.w;
 
-        for (int i = linit; i <= lmax; i++) {
+        assert(l_init > 0);
+        assert(l_max > 0);
+
+        if (Camera::screenSize.x - associated.box.x >
+            (l_max + 1) * associated.box.w)
+            l_max++;
+
+        for (int i = l_init; i <= l_max; i++) 
+        {
             Rect dst(associated.box.pos.x + i * width, associated.box.pos.y,
                      (double)width, (double)height);
             SDL_Rect dstRect = dst;

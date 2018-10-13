@@ -1,52 +1,78 @@
 #include "MiniTileMap.h"
 #include <algorithm>
+#include <assert.h>
 #include "Alan.h"
 #include "Camera.h"
 #include "Common.h"
 #include "Game.h"
 
+/**
+ * @brief Construct a new Mini Tile Map:: Mini Tile Map object
+ * 
+ * @param associated 
+ * @param tileSet 
+ * @param tileMap 
+ * @param alan 
+ */
 MiniTileMap::MiniTileMap(GameObject &associated, TileSet *tileSet,
                          TileMap *tileMap, std::weak_ptr<GameObject> alan)
     : Component(associated), tileMap(tileMap), tileSet(tileSet), alan(alan) {}
 
+
+/**
+ * @brief Destroy the Mini Tile Map:: Mini Tile Map object
+ * 
+ */
 MiniTileMap::~MiniTileMap() {}
 
-/*
-    Renderiza as camadas do mapa.
-*/
-void MiniTileMap::render(Common::Layer layer) const {
+
+/**
+ * @brief Rendering map layers
+ * 
+ * @param layer 
+ */
+void MiniTileMap::render(Common::Layer layer) const 
+{
     if (!alan.lock()) return;
 
-    int yMin;
+    int y_min;
     int x = associated.box.x;
     int y = associated.box.y;
-    int valPos;
+    int val_pos;
 
-    Vec2 alanPos = alan.lock()->GetGridPosition();
+    Vec2 alan_pos = alan.lock()->GetGridPosition();
 
-    yMin = alanPos.y - 5;
+    y_min = alan_pos.y - 5;
 
-    // Camera::pos.y / Game::GetInstance()->GetCurrentState().GetGridSize();
-
-    for (int posY = yMin; posY < tileMap->GetHeight(); posY++) {
-        for (int posX = 0; posX < tileMap->GetWidth(); posX++) {
-            // Coloca a marmota no minimapa
-            // valPos = tileMap->At(posX, posY, TileMap::Layers::BLOCOS);
-            if (posY < 0) {
-                valPos = 1;
-            } else if (alanPos.x == posX && alanPos.y == posY) {
-                valPos = 5;
-                // Faz a borda o minimapa
-            } else if (tileMap->At(posX, posY, TileMap::Layers::ITENS)) {
-                valPos = 4;
-            } else if (posY >
+    for (int pos_y = y_min; pos_y < tileMap->GetHeight(); pos_y++) 
+    {
+        for (int pos_x = 0; pos_x < tileMap->GetWidth(); pos_x++) 
+        {
+            // puts caracter on minimap
+            if (pos_y < 0) 
+            {
+                val_pos = 1;
+            } 
+            else if (alan_pos.x == pos_x && alan_pos.y == pos_y) 
+            {
+                val_pos = 5;
+                // make borda of minimap
+            } 
+            else if (tileMap->At(pos_x, pos_y, TileMap::Layers::ITENS)) 
+            {
+                val_pos = 4;
+            } 
+            else if (pos_y >
                        alan.lock()->GetComponent<Alan *>()->GetMaxPosition() +
-                           7) {
-                valPos = 1;
-            } else {
-                valPos = 1;
+                           7) 
+            {
+                val_pos = 1;
+            } 
+            else 
+            {
+                val_pos = 1;
             }
-            tileSet->RenderTile(valPos, x, y);
+            tileSet->RenderTile(val_pos, x, y);
 
             x += tileSet->GetTileWidth();
         }
