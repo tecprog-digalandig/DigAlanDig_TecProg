@@ -76,7 +76,7 @@ class Enemy : public Component {
     Sprite::SpriteState EState[State::STATE_MAX];
     InputManager& input;
 
-    bool damageTaken = false;
+    bool damage_taken = false;
 };
 
 #endif  // ENEMY_H

@@ -41,7 +41,7 @@ class Sprite : public Component {
     void AlanUpdate(float delta_time);
     void rhythmUpdate() {
         if (frameTime == -1)
-            SetFrame(((currentFrame - initFrame) + 1) % frameCount + initFrame);
+            setFrame(((currentFrame - initFrame) + 1) % frameCount + initFrame);
     }
     void RhythmReset() {}
     void render(Common::Layer layer) const;
@@ -51,9 +51,9 @@ class Sprite : public Component {
     void SetScaleX(const Vec2& v) { SetScaleX(v.x, v.y); }
     Vec2 GetScale() const { return scale; }
 
-    void SetFrame(int frame);
-    void SetFrameCount(int frameCount) { this->frameCount = frameCount; }
-    void SetFrameTime(float frameTime) { this->frameTime = frameTime; }
+    void setFrame(int frame);
+    void setFrameCount(int frameCount) { this->frameCount = frameCount; }
+    void setFrameTime(float frameTime) { this->frameTime = frameTime; }
 
     bool FrameTimePassed() {
         if (frameTimeTotal < 0) return false;
@@ -78,7 +78,7 @@ class Sprite : public Component {
     void TimeElapsedReset() { timeElapsed = 0; }
 
   private:
-    std::shared_ptr<SDL_Texture> texture = nullptr;
+    std::shared_ptr<sdl_texture> texture = nullptr;
     int width = 0;
     int height = 0;
     int frameCount = 1;

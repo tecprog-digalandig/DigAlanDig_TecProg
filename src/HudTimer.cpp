@@ -43,20 +43,20 @@ void HudTimer::render(Common::Layer layer) const {
 
 void HudTimer::SetMeterFrame() const {
     if (associated.box.x < maxM && associated.box.x > minM) {
-        meter->SetFrame(2);
+        meter->setFrame(2);
         meter->SetScaleX(1.5);
     } else {
-        meter->SetFrame(0);
+        meter->setFrame(0);
         meter->SetScaleX(0.8);
     }
 }
 
 void HudTimer::Update(float delta_time) {
     if (std::abs(input.GetDeltaRhythm()) < 0.5) {
-        meter->SetFrame(2);
+        meter->setFrame(2);
         meter->SetScaleX(1.5);
     } else {
-        meter->SetFrame(0);
+        meter->setFrame(0);
         meter->SetScaleX(0.8);
     }
 

@@ -35,7 +35,7 @@ void AlanAnimation::playSound(Transition trans)
     }
 
     s->setVolume(100);
-    s->play();
+    s->play_func();
 }
 
 void AlanAnimation::update(float delta_time) 

@@ -197,11 +197,11 @@ void StageState::LoadAssets() {
     counterPetro->AddComponent(new HudCounter(
         *counterPetro, "assets/hud/item3.png", "assets/hud/petroleoi.png"));
 
-    GameObject *itemCount = new GameObject(Common::Layer::HUD);
-    objectArray.emplace_back(itemCount);
-    itemCount->worldReference = false;
-    itemCount->AddComponent(new AlanItemCount(*itemCount));
-    lilAlan->setItemCount(itemCount);
+    GameObject *item_count = new GameObject(Common::Layer::HUD);
+    objectArray.emplace_back(item_count);
+    item_count->worldReference = false;
+    item_count->AddComponent(new AlanItemCount(*item_count));
+    lilAlan->setItemCount(item_count);
 
     // Music
     music.Open("assets/audio/marmota.ogg");
@@ -235,7 +235,7 @@ void StageState::update(float delta_time) {
 
 void StageState::rhythmUpdate() {
     if (!musicPlaying) {
-        music.Play();
+        music.play_func();
         musicPlaying = true;
     }
     RhythmUpdateArray();

@@ -1,49 +1,49 @@
 #include "Resources.h"
 #include "Game.h"
 
-std::unordered_map<std::string, std::shared_ptr<SDL_Texture>>
-    Resources::imageTable;
-std::unordered_map<std::string, std::shared_ptr<Mix_Music>>
-    Resources::musicTable;
+std::unordered_map<std::string, std::shared_ptr<sdl_texture>>
+    Resources::image_table;
+std::unordered_map<std::string, std::shared_ptr<mix_music>>
+    Resources::music_table;
 std::unordered_map<std::string, std::shared_ptr<mix_chunk>>
-    Resources::soundTable;
+    Resources::sound_table;
 
-std::shared_ptr<SDL_Texture> Resources::GetImage(const std::string& file) {
-    auto got = imageTable.find(file);
+std::shared_ptr<sdl_texture> Resources::GetImage(const std::string& file) {
+    auto got = image_table.find(file);
 
-    if (got == imageTable.end()) {
-        SDL_Texture* tex =
+    if (got == image_table.end()) {
+        sdl_texture* tex =
             IMG_LoadTexture(Game::GetInstance()->GetRenderer(), file.c_str());
         if (!tex) {
             std::cerr << "IMG_LoadTexture: " << SDL_GetError() << std::endl;
             exit(EXIT_SUCCESS);
         }
 
-        std::shared_ptr<SDL_Texture> sp(
-            tex, [](SDL_Texture* ptr) { SDL_DestroyTexture(ptr); });
-        imageTable.emplace(file, sp);
+        std::shared_ptr<sdl_texture> sp(
+            tex, [](sdl_texture* ptr) { SDL_DestroyTexture(ptr); });
+        image_table.emplace(file, sp);
     }
 
-    return imageTable[file];
+    return image_table[file];
 }
 
 void Resources::ClearImages() {
-    for (auto element : imageTable)
-        if (element.second.unique()) imageTable.erase(element.first);
+    for (auto element : image_table)
+        if (element.second.unique()) image_table.erase(element.first);
 }
 
-std::shared_ptr<Mix_Music> Resources::GetMusic(const std::string& file) {
+std::shared_ptr<mix_music> Resources::GetMusic(const std::string& file) {
     auto got = musicTable.find(file);
 
     if (got == musicTable.end()) {
-        Mix_Music* mus = Mix_LoadMUS(file.c_str());
+        mix_music* mus = Mix_LoadMUS(file.c_str());
         if (!mus) {
             std::cerr << "Mix_LoadMUS :" << SDL_GetError() << std::endl;
             exit(EXIT_SUCCESS);
         }
 
-        std::shared_ptr<Mix_Music> sp(
-            mus, [](Mix_Music* ptr) { Mix_FreeMusic(ptr); });
+        std::shared_ptr<mix_music> sp(
+            mus, [](mix_music* ptr) { Mix_FreeMusic(ptr); });
         musicTable.emplace(file, sp);
     }
 
@@ -56,9 +56,9 @@ void Resources::ClearMusics() {
 }
 
 std::shared_ptr<mix_chunk> Resources::GetSound(const std::string& file) {
-    auto got = soundTable.find(file);
+    auto got = sound_table.find(file);
 
-    if (got == soundTable.end()) {
+    if (got == sound_table.end()) {
         mix_chunk* snd = Mix_LoadWAV(file.c_str());
         if (!snd) {
             std::cerr << "Mix_LoadWAV: " << Mix_GetError() << std::endl;
@@ -66,15 +66,15 @@ std::shared_ptr<mix_chunk> Resources::GetSound(const std::string& file) {
         }
         std::shared_ptr<mix_chunk> sp(
             snd, [](mix_chunk* ptr) { Mix_FreeChunk(ptr); });
-        soundTable.emplace(file, sp);
+        sound_table.emplace(file, sp);
     }
 
-    return soundTable[file];
+    return sound_table[file];
 }
 
 void Resources::ClearSounds() {
-    for (auto element : soundTable)
-        if (element.second.unique()) soundTable.erase(element.first);
+    for (auto element : sound_table)
+        if (element.second.unique()) sound_table.erase(element.first);
 }
 
 void Resources::ClearAll() {

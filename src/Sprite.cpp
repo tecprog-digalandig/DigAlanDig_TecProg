@@ -10,7 +10,7 @@ void Sprite::Open(const std::string &file) {
     SDL_QueryTexture(texture.get(), nullptr, nullptr, &width, &height);
     width /= frameCount;
     frameTimeTotal = frameTime;
-    SetFrame(0);
+    setFrame(0);
     associated.box.size.Set(width, height);
     timeElapsed = 0;
 }
@@ -23,7 +23,7 @@ void Sprite::Open(SpriteState sstate, int dir) {
     frameCount = sstate.frameCount;
     initFrame = dir * sstate.frameCount;
 
-    SetFrame(initFrame);
+    setFrame(initFrame);
     frameTimeTotal = sstate.frameTime * sstate.frameCount;
     frameTime = sstate.frameTime;
     associated.box.size.Set(width, height);
@@ -35,7 +35,7 @@ void Sprite::SetScaleX(double scaleX, double scaleY) {
     scale.y = scaleY ? scaleY : scale.y;
 }
 
-void Sprite::SetFrame(int frame) {
+void Sprite::setFrame(int frame) {
     currentFrame = frame;
     Vec2 size(width, height);
     Vec2 pos(width * (currentFrame), 0);
@@ -62,7 +62,7 @@ void Sprite::Update(float delta_time) {
 
     selfDestructCount.Update(delta_time);
     if (secondsToSelfDestruct > 0 &&
-        selfDestructCount.Get() > secondsToSelfDestruct) {
+        selfDestructCount.get() > secondsToSelfDestruct) {
         associated.RequestDelete();
         return;
     }
@@ -73,7 +73,7 @@ void Sprite::Update(float delta_time) {
     } else {
         if (frameTime > 0 && ((currentFrame + 1) * frameTime <= timeElapsed)) {
             int newFrame = floor(timeElapsed / frameTime);
-            SetFrame(newFrame % frameCount);
+            setFrame(newFrame % frameCount);
         }
     }
 }
@@ -83,17 +83,17 @@ void Sprite::AlanUpdate(float delta_time) {
         if (timeElapsed - (frameTime * (currentFrame - initFrame)) >=
             frameTime) {
             if ((currentFrame - initFrame) < (frameCount - 1)) {
-                SetFrame(currentFrame + 1);
+                setFrame(currentFrame + 1);
 
             } else {
-                SetFrame(initFrame);
+                setFrame(initFrame);
             }
         }
     } else if (frameTime != -1) {
         if (timeElapsed - (std::abs(frameTime) * (currentFrame - initFrame)) >=
             std::abs(frameTime)) {
             if ((currentFrame - initFrame) < (frameCount - 1))
-                SetFrame(currentFrame + 1);
+                setFrame(currentFrame + 1);
         }
     }
 }

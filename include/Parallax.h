@@ -29,7 +29,7 @@ class bgCircularY : public Component {
     void render(Common::Layer layer) const;
 
   private:
-    std::shared_ptr<SDL_Texture> texture = nullptr;
+    std::shared_ptr<sdl_texture> texture = nullptr;
     int width = 0, height = 0;
 };
 
@@ -47,7 +47,7 @@ class bgCircularX : public Component {
     int GetWidth() { return width; }
 
   private:
-    std::shared_ptr<SDL_Texture> texture = nullptr;
+    std::shared_ptr<sdl_texture> texture = nullptr;
     int width = 0, height = 0;
 };
 

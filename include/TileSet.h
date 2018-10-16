@@ -14,8 +14,8 @@ class TileSet {
     int GetTileWidth() const { return tileWidth; }
     int GetTileHeight() const { return tileHeight; }
 
-    void setTileSetDefault() { tileSet = tileSet_d.get(); }
-    void setTileSetLight() { tileSet = tileSet_l.get(); }
+    void setTileSetDefault() { tile_set = tileSet_d.get(); }
+    void setTileSetLight() { tile_set = tileSet_l.get(); }
 
     int GetItemType(int i) {
         i--;
@@ -26,9 +26,9 @@ class TileSet {
     }
 
   private:
-    SDL_Texture* tileSet = nullptr;
-    std::shared_ptr<SDL_Texture> tileSet_d = nullptr;
-    std::shared_ptr<SDL_Texture> tileSet_l = nullptr;
+    sdl_texture* tileSet = nullptr;
+    std::shared_ptr<sdl_texture> tileSet_d = nullptr;
+    std::shared_ptr<sdl_texture> tileSet_l = nullptr;
 
     std::unordered_map<int, int> item2type;
     int rows = 0, columns = 0;

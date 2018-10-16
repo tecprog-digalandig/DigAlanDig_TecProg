@@ -92,8 +92,8 @@ void State::RenderLight() const {
     SDL_Renderer* renderer = Game::GetInstance()->GetRenderer();
 
     // Rendering default layer to texture
-    static SDL_Texture* texDefault = SDL_CreateTexture(
-        renderer, SDL_PIXELFORMAT_RGBA8888, SDL_TEXTUREACCESS_TARGET,
+    static sdl_texture* texDefault = SDL_CreateTexture(
+        renderer, SDL_PIXELFORMAT_RGBA8888, sdl_textureACCESS_TARGET,
         Camera::screenSize.x, Camera::screenSize.y);
     SDL_SetRenderTarget(renderer, texDefault);
     SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0);
@@ -104,8 +104,8 @@ void State::RenderLight() const {
     }
 
     // Rendering to texture (Lights to an texture)
-    static SDL_Texture* texLight = SDL_CreateTexture(
-        renderer, SDL_PIXELFORMAT_RGBA8888, SDL_TEXTUREACCESS_TARGET,
+    static sdl_texture* texLight = SDL_CreateTexture(
+        renderer, SDL_PIXELFORMAT_RGBA8888, sdl_textureACCESS_TARGET,
         Camera::screenSize.x, Camera::screenSize.y);
 
     SDL_SetRenderTarget(renderer, texLight);

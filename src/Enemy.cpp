@@ -86,9 +86,9 @@ void Enemy::ShouldTakeDamage(Alan *alan) {
             Vec2(associated.gridPosition.x - 1, associated.gridPosition.y),
             false) == GridControl::WhatsThere::ALAN &&
         alan->GetMovementDirection() == AlanActionControl::Direction::RIGHT) {
-        if (!damageTaken) {
+        if (!damage_taken) {
             takeDamage(alan->GetDamage());
-            damageTaken = true;
+            damage_taken = true;
         }
     } else if (Game::GetInstance()->GetGridControl()->TestPath(
                    Vec2(associated.gridPosition.x + 1,
@@ -96,12 +96,12 @@ void Enemy::ShouldTakeDamage(Alan *alan) {
                    false) == GridControl::WhatsThere::ALAN &&
                alan->GetMovementDirection() ==
                    AlanActionControl::Direction::LEFT) {
-        if (!damageTaken) {
+        if (!damage_taken) {
             takeDamage(alan->GetDamage());
-            damageTaken = true;
+            damage_taken = true;
         }
     } else {
-        damageTaken = false;
+        damage_taken = false;
     }
 }
 

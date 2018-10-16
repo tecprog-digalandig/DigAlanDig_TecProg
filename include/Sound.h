@@ -15,7 +15,7 @@ class Sound : public Component
         : Component(associated), chunk(nullptr), played(false) 
         {
         open(file);
-        if (play) play();
+        if (play) play_func();
     }
 
     ~Sound() { stop(); 
@@ -36,11 +36,11 @@ class Sound : public Component
         return played && !mixPlaying(channel); 
     }
 
-    void play(int times = 1);
+    void play_func(int times = 1);
 
     void stop() const 
     {
-        if (chunk) mixHaltChannel(channel);
+        if (chunk) //mixHaltChannel(int channel);
     }
 
     void setVolume(int v) 
@@ -50,6 +50,7 @@ class Sound : public Component
 
     void update(float delta_time) {}
     void rhythmUpdate() {}
+    void mixHaltChannel(int channel){}
     void render(Common::Layer layer) const {}
 
   private:

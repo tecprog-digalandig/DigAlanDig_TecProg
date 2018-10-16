@@ -55,9 +55,9 @@ void HudMeter::setMeter(int i) const {
     }
 
     if (tmp >= 2)
-        meter->SetFrame(2);
+        meter->setFrame(2);
     else if (tmp == 1)
-        meter->SetFrame(1);
+        meter->setFrame(1);
     else
-        meter->SetFrame(0);
+        meter->setFrame(0);
 }

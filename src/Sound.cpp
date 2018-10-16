@@ -1,7 +1,7 @@
 #include "Sound.h"
 #include <iostream>
 
-void Sound::play(int times) 
+void Sound::play_func(int times) 
 {
     times -= (times > 0) ? 1 : times;
 

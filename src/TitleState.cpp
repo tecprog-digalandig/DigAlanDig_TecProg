@@ -106,7 +106,7 @@ void TitleState::render() const { RenderArray(); }
 
 void TitleState::rhythmUpdate() {
     if (!musicPlaying) {
-        music.Play();
+        music.play_func();
         musicPlaying = true;
     }
     RhythmUpdateArray();

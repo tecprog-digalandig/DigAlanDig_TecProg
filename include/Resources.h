@@ -13,10 +13,10 @@
 class Resources 
 {
   public:
-    static std::shared_ptr<SDL_Texture> getImage(const std::string& file);
+    static std::shared_ptr<sdl_texture> getImage(const std::string& file);
     static void clearImages();
 
-    static std::shared_ptr<Mix_Music> getMusic(const std::string& file);
+    static std::shared_ptr<mix_music> getMusic(const std::string& file);
     static void clearMusics();
 
     static std::shared_ptr<mix_chunk> getSound(const std::string& file);
@@ -25,9 +25,11 @@ class Resources
     static void clearAll();
 
   private:
-    static std::unordered_map<std::string, std::shared_ptr<SDL_Texture>>
+
+    
+    static std::unordered_map<std::string, std::shared_ptr<sdl_texture>>
         image_table;
-    static std::unordered_map<std::string, std::shared_ptr<Mix_Music>>
+    static std::unordered_map<std::string, std::shared_ptr<mix_music>>
         music_table;
     static std::unordered_map<std::string, std::shared_ptr<mix_chunk>>
         sound_table;

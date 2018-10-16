@@ -14,16 +14,16 @@ class Music {
     explicit Music(const std::string &file) : music(nullptr) { Open(file); }
     ~Music() {}
 
-    void Play(int times = -1) const;
+    void play_func(int times = -1) const;
     void Stop(int msToStop = 1500) const { Mix_FadeOutMusic(msToStop); }
     void Open(const std::string &file) { music = Resources::getMusic(file); }
 
     bool IsOpen() const { return (bool)music; }
 
-    Mix_Music *GetMixMusic() { return music.get(); }
+    mix_music *GetMixMusic() { return music.get(); }
 
   private:
-    std::shared_ptr<Mix_Music> music = nullptr;
+    std::shared_ptr<mix_music> music = nullptr;
 };
 
 #endif

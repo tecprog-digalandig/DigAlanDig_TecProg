@@ -28,11 +28,11 @@ TileSet::TileSet(const std::string& file) {
     }
 
     item2type[12] = item2type[13] = item2type[22] = item2type[23] =
-        item2type[4] = item2type[5] = (int)Common::ItemType::GOLD;
+        item2type[4] = item2type[5] = (int)Common::ItemType::gold;
     item2type[11] = item2type[16] = item2type[17] = item2type[20] =
-        item2type[21] = item2type[8] = (int)Common::ItemType::DIAMOND;
+        item2type[21] = item2type[8] = (int)Common::ItemType::diamond;
     item2type[6] = item2type[7] = item2type[18] = item2type[19] =
-        item2type[14] = item2type[15] = (int)Common::ItemType::PETROLEUM;
+        item2type[14] = item2type[15] = (int)Common::ItemType::petroleum;
 }
 
 void TileSet::RenderTile(unsigned index, float x, float y) const {

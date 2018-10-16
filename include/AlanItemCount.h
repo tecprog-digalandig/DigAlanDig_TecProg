@@ -64,16 +64,16 @@ class AlanItemCount : public Component
 
         void itemCollected(int item_type) 
         {
-            if (itemCount[item_type] > 0)
-            itemCountItem[item_type]->getComponent<Sprite*>()->setFrame(
-                --itemCount[item_type]);
+            if (item_count[item_type] > 0)
+            item_count_item[item_type]->getComponent<Sprite*>()->setFrame(
+                --item_count[item_type]);
         }
 
         bool collectedAllItens() 
         {
-            if (itemCount[Common::ItemType::diamond] == 0 &&
-                itemCount[Common::ItemType::petroleum] == 0 &&
-                itemCount[Common::ItemType::gold] == 0)
+            if (item_count[Common::ItemType::diamond] == 0 &&
+                item_count[Common::ItemType::petroleum] == 0 &&
+                item_count[Common::ItemType::gold] == 0)
             return true;
 
             return false;
