@@ -26,9 +26,9 @@ class TileSet {
     }
 
   private:
-    sdl_texture* tileSet = nullptr;
-    std::shared_ptr<sdl_texture> tileSet_d = nullptr;
-    std::shared_ptr<sdl_texture> tileSet_l = nullptr;
+    SDL_Texture* tileSet = nullptr;
+    std::shared_ptr<SDL_Texture> tileSet_d = nullptr;
+    std::shared_ptr<SDL_Texture> tileSet_l = nullptr;
 
     std::unordered_map<int, int> item2type;
     int rows = 0, columns = 0;

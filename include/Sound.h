@@ -54,7 +54,7 @@ class Sound : public Component
     void render(Common::Layer layer) const {}
 
   private:
-    std::shared_ptr<mix_chunk> chunk;
+    std::shared_ptr<Mix_Chunk> chunk;
     int channel = 0;
     mutable bool played;
 };

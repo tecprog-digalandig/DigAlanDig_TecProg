@@ -78,7 +78,7 @@ class Sprite : public Component {
     void TimeElapsedReset() { timeElapsed = 0; }
 
   private:
-    std::shared_ptr<sdl_texture> texture = nullptr;
+    std::shared_ptr<SDL_Texture> texture = nullptr;
     int width = 0;
     int height = 0;
     int frameCount = 1;

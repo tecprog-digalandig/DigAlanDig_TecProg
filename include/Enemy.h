@@ -53,7 +53,7 @@ class Enemy : public Component {
 
     bool VerifyDeath(Alan* alan);
 
-    void takeDamage(int damage) { life_enemy -= damage; }
+    void takeDamage(int damage) { life_enemy = damage; }
     void ShouldTakeDamage(Alan* alan);
 
     void IsSurrounded();

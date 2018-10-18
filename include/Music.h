@@ -20,10 +20,10 @@ class Music {
 
     bool IsOpen() const { return (bool)music; }
 
-    mix_music *GetMixMusic() { return music.get(); }
+    Mix_Music *GetMixMusic() { return music.get(); }
 
   private:
-    std::shared_ptr<mix_music> music = nullptr;
+    std::shared_ptr<Mix_Music> music = nullptr;
 };
 
 #endif

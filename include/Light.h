@@ -28,7 +28,7 @@ class Light : public Component {
     }
 
     void rhythmUpdate() {}
-    void render(Common::Layer layer) const { sprite->Render(layer); }
+    void render(Common::Layer layer) const { sprite->render(layer); }
 
     void SetSize(int size) {
         sprite->SetScaleX((double)size / sprite->GetHeight());
