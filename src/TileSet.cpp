@@ -1,13 +1,17 @@
 #include "TileSet.h"
 #include "Common.h"
 #include "Game.h"
+#include <assert.h>
 
 TileSet::TileSet(const string& file) 
 { 
     json json_file; 
-    Common::readJson(json_file, file);
+    assert(file != "");     //T17
 
+    Common::readJson(json_file, file);
     string image_file = json_file.at("image");
+    assert(image_file != "");     //T17
+    
     image_file.replace(image_file.begin(), image_file.begin() + 3, "assets/");  
     tile_set_d = Resources::GetImage(image_file);
     image_file.replace(image_file.end() - 4, image_file.end() - 4, "_light");   

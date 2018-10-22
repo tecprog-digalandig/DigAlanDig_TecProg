@@ -132,7 +132,10 @@ void TitleState::loadAssets()
 
 void TitleState::start() 
 {
-    if (!started) loadAssets(); 
+    if (!started)
+    {
+        loadAssets();
+    } 
     StartArray();
 }
 

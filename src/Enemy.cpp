@@ -5,6 +5,7 @@
 #include "EnemySpawn.h"
 #include "Game.h"
 #include "StageState.h"
+#include <assert.h>
 
 Enemy::Enemy(GameObject &associated, int enemy_type)
     : Component(associated), input(InputManager::GetInstance()) {
@@ -54,24 +55,25 @@ Enemy::Enemy(GameObject &associated, int enemy_type)
 
 bool Enemy::VerifyDeath(Alan *alan)
 {
-    // Inimigo morre se:
-    // 1. life_enemy <= 0
+    
+    assert(alan != NULL);   //T17
+    
     if (life_enemy <= 0) {
         return true;
     }
-    // 2. Alan cai em cima dele
+   
     if (Game::GetInstance()->GetGridControl()->TestPath(
             Vec2(associated.gridPosition.x, associated.gridPosition.y),
             false) == GridControl::WhatsThere::ALAN) {
         return true;
     }
-    // 3. Scroll da camera já passou da posição dele
+   
     if (associated.GetGridPosition().y <
         (Camera::pos.y / Game::GetInstance()->GetCurrentState().GetGridSize()) -
             3) {
         return true;
     }
-    // 4. Espaço embaixo dele não é uma pedra
+   
     if (Game::GetInstance()->GetGridControl()->TestPath(
             Vec2(associated.gridPosition.x, associated.gridPosition.y + 1),
             false) != GridControl::WhatsThere::ROCK) {
@@ -83,6 +85,9 @@ bool Enemy::VerifyDeath(Alan *alan)
 
 void Enemy::ShouldTakeDamage(Alan *alan)
 {
+    
+    assert(alan != NULL);   //T17
+
     if (state != State::IDLE_S) return;
 
     if (Game::GetInstance()->GetGridControl()->TestPath(

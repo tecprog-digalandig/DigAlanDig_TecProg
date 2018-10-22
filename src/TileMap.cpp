@@ -6,11 +6,13 @@
 #include "Common.h"
 #include "Game.h"
 #include "Sprite.h"
+#include <assert.h>
 
 using json = nlohmann::json;
 
 TileMap::TileMap(GameObject& associated, const string& file, bool infinity)
     : Component(associated), infinity(infinity) {
+    assert(file != "");      //T17    
     layerIndex["base"] = Layers::BASE;
     layerIndex["blocos"] = Layers::BLOCOS;
     layerIndex["itens"] = Layers::ITENS;
@@ -25,6 +27,7 @@ TileMap::TileMap(GameObject& associated, const string& file, bool infinity)
 TileMap::~TileMap() {}
 
 void TileMap::LoadList(const string& file) {
+    assert(file != "");      //T17
     json jsonFile;
     Common::readJson(jsonFile, file);
     for (auto it = jsonFile["files"].begin(); it != jsonFile["files"].end(); ++it) {
@@ -37,6 +40,7 @@ void TileMap::LoadList(const string& file) {
 
 void TileMap::Load(const string& file) {
     json jsonFile;
+    assert(file != "");      //T17
     Common::readJson(jsonFile, file);
 
     string tileSetFile = jsonFile.at("tilesets").at(0).at("source");
