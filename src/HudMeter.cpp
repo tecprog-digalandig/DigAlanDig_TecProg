@@ -32,7 +32,7 @@ void HudMeter::render(Common::Layer layer) const {
 
     associated.box += offset1;
 
-    float s = InputManager::GetInstance().scaleFactor();
+    float s = InputManager::getInstance().scaleFactor();
     for (int i = 0; i < 3; i++) {
         setMeter(i);
         meter->SetScaleX(s);
@@ -47,11 +47,11 @@ void HudMeter::setMeter(int i) const {
     if (isHeart)
         tmp = alan.lock()->getComponent<Alan*>()->GetHP() - i * 2;
     else {
-        if (!Game::GetInstance()->combo)
+        if (!Game::getInstance()->combo)
             tmp = 0;
         else
             tmp =
-                (int)floor(Game::GetInstance()->combo / (5 * (i + 1))) - i + 1;
+                (int)floor(Game::getInstance()->combo / (5 * (i + 1))) - i + 1;
     }
 
     if (tmp >= 2)

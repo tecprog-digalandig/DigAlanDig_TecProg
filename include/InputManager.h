@@ -11,8 +11,8 @@ class InputManager {
     enum Action {
         NONE,
         DIG_DOWN,
-        DIG_LEFT,
-        DIG_RIGHT,
+        DIG_left,
+        DIG_right,
         DIG_UP,
         ENTER,
         ESCAPE,
@@ -22,7 +22,7 @@ class InputManager {
 
     void Update(float deltaRhythm);
 
-    bool KeyDown(int key) const { return keyState[key]; }
+    bool keyDown(int key) const { return keyState[key]; }
     bool KeyPress(int key) const {
         return (frame == keyUpdate[key]) && keyState[key];
     }
@@ -57,9 +57,9 @@ class InputManager {
     int finger2action(const Vec2& v) const;
 
     enum mouseKey {
-        LEFT = SDL_BUTTON_LEFT,
+        left = SDL_BUTTON_LEFT,
         MIDDLE = SDL_BUTTON_MIDDLE,
-        RIGHT = SDL_BUTTON_RIGHT
+        right = SDL_BUTTON_RIGHT
     };
 
     int GetMouseX() const { return mouseX; }
@@ -74,7 +74,7 @@ class InputManager {
     bool QuitRequested() const { return quitRequested; }
 
     // Meyes' singleton
-    static InputManager& GetInstance() {
+    static InputManager& getInstance() {
         static InputManager input;
         return input;
     }

@@ -12,17 +12,17 @@ InputManager::InputManager() {
     gamepad2action[SDL_CONTROLLER_BUTTON_A] = Action::DIG_DOWN;
     gamepad2action[SDL_CONTROLLER_BUTTON_DPAD_DOWN] = Action::DIG_DOWN;
 
-    key2action[SDL_SCANCODE_LEFT] = Action::DIG_LEFT;
-    gamepad2action[SDL_CONTROLLER_BUTTON_X] = Action::DIG_LEFT;
-    gamepad2action[SDL_CONTROLLER_BUTTON_DPAD_LEFT] = Action::DIG_LEFT;
+    key2action[SDL_SCANCODE_LEFT] = Action::DIG_left;
+    gamepad2action[SDL_CONTROLLER_BUTTON_X] = Action::DIG_left;
+    gamepad2action[SDL_CONTROLLER_BUTTON_DPAD_LEFT] = Action::DIG_left;
 
     key2action[SDL_SCANCODE_UP] = Action::DIG_UP;
     gamepad2action[SDL_CONTROLLER_BUTTON_Y] = Action::DIG_UP;
     gamepad2action[SDL_CONTROLLER_BUTTON_DPAD_UP] = Action::DIG_UP;
 
-    key2action[SDL_SCANCODE_RIGHT] = Action::DIG_RIGHT;
-    gamepad2action[SDL_CONTROLLER_BUTTON_B] = Action::DIG_RIGHT;
-    gamepad2action[SDL_CONTROLLER_BUTTON_DPAD_RIGHT] = Action::DIG_RIGHT;
+    key2action[SDL_SCANCODE_RIGHT] = Action::DIG_right;
+    gamepad2action[SDL_CONTROLLER_BUTTON_B] = Action::DIG_right;
+    gamepad2action[SDL_CONTROLLER_BUTTON_DPAD_RIGHT] = Action::DIG_right;
 
     key2action[SDL_SCANCODE_F] = Action::FULLSCREEN;
     gamepad2action[SDL_CONTROLLER_BUTTON_RIGHTSHOULDER] = Action::FULLSCREEN;
@@ -30,8 +30,8 @@ InputManager::InputManager() {
 
 int InputManager::finger2action(const Vec2 &v) const {
     if (title) return Action::ENTER;
-    if (v.x < 0.15) return Action::DIG_LEFT;
-    if (v.x > 0.85) return Action::DIG_RIGHT;
+    if (v.x < 0.15) return Action::DIG_left;
+    if (v.x > 0.85) return Action::DIG_right;
     if (v.y > 0.5) return Action::DIG_DOWN;
     if (v.y > 0.1) return Action::DIG_UP;
     return Action::ESCAPE;

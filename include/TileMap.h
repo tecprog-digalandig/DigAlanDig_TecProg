@@ -26,7 +26,7 @@ class TileMap : public Component {
     int GetHeight() const { return height; }
     int GetDepth() const { return depth; }
 
-    void GetDamageGround(int damage, Vec2 posDamage);
+    void getDamageGround(int damage, Vec2 posDamage);
     void ClearEnemyFromMap(Vec2 enemyPos);
 
     void itemCollected(Vec2 target, int layer) {

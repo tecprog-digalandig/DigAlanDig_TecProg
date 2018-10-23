@@ -117,10 +117,10 @@ void SpawnDust(Vec2 pos) {
     GameObject* go = new GameObject();
     go->AddComponent(new Sprite(*go, "assets/img/dust.png", 3, 0.2, 3 * 0.2));
     go->box.SetCenter((pos * 100) + Vec2(50, 50));
-    Game::GetInstance()->GetCurrentState().AddObject(go);
+    Game::getInstance()->getCurrentState().AddObject(go);
 }
 
-void TileMap::GetDamageGround(int damage, Vec2 posDamage) {
+void TileMap::getDamageGround(int damage, Vec2 posDamage) {
     int valPos = At(posDamage.x, posDamage.y);
     if (valPos == 1) return;
 

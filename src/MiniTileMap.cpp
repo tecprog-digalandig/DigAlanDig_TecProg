@@ -14,7 +14,7 @@ MiniTileMap::~MiniTileMap() {}
 /*
     Renderiza as camadas do mapa.
 */
-void MiniTileMap::Render(Common::Layer layer) const {
+void MiniTileMap::render(Common::Layer layer) const {
     if (!alan.lock()) return;
 
     int yMin;
@@ -26,7 +26,7 @@ void MiniTileMap::Render(Common::Layer layer) const {
 
     yMin = alanPos.y - 5;
 
-    // Camera::pos.y / Game::GetInstance()->GetCurrentState().GetGridSize();
+    // Camera::pos.y / Game::getInstance()->getCurrentState().GetGridSize();
 
     for (int posY = yMin; posY < tileMap->GetHeight(); posY++) {
         for (int posX = 0; posX < tileMap->GetWidth(); posX++) {
@@ -40,7 +40,7 @@ void MiniTileMap::Render(Common::Layer layer) const {
             } else if (tileMap->At(posX, posY, TileMap::Layers::ITENS)) {
                 valPos = 4;
             } else if (posY >
-                       alan.lock()->getComponent<Alan *>()->GetMaxPosition() +
+                       alan.lock()->getComponent<Alan *>()->getMaxPosition() +
                            7) {
                 valPos = 1;
             } else {

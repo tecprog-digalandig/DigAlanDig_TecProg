@@ -11,7 +11,7 @@
 #include "TileMap.h"
 #include "Vec2.h"
 
-State::State() : input(InputManager::GetInstance()) {}
+State::State() : input(InputManager::getInstance()) {}
 
 std::weak_ptr<GameObject> State::AddObject(GameObject* go) {
     std::shared_ptr<GameObject> ptr(go);
@@ -89,11 +89,11 @@ int PulseColor(float dtR, int combo) {
 }
 
 void State::RenderLight() const {
-    SDL_Renderer* renderer = Game::GetInstance()->GetRenderer();
+    SDL_Renderer* renderer = Game::getInstance()->GetRenderer();
 
     // Rendering default layer to texture
     static SDL_Texture* texDefault = SDL_CreateTexture(
-        renderer, SDL_PIXELFORMAT_RGBA8888, SDL_TextureACCESS_TARGET,
+        renderer, SDL_PIXELFORMAT_RGBA8888, SDL_TEXTUREACCESS_TARGET,
         Camera::screenSize.x, Camera::screenSize.y);
     SDL_SetRenderTarget(renderer, texDefault);
     SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0);
@@ -105,12 +105,12 @@ void State::RenderLight() const {
 
     // Rendering to texture (Lights to an texture)
     static SDL_Texture* texLight = SDL_CreateTexture(
-        renderer, SDL_PIXELFORMAT_RGBA8888, SDL_TextureACCESS_TARGET,
+        renderer, SDL_PIXELFORMAT_RGBA8888, SDL_TEXTUREACCESS_TARGET,
         Camera::screenSize.x, Camera::screenSize.y);
 
     SDL_SetRenderTarget(renderer, texLight);
 
-    int color = PulseColor(input.GetDeltaRhythm(), Game::GetInstance()->combo);
+    int color = PulseColor(input.GetDeltaRhythm(), Game::getInstance()->combo);
     SDL_SetRenderDrawColor(renderer, color, color, color * 0.8, 255);
     SDL_RenderClear(renderer);
     SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_ADD);

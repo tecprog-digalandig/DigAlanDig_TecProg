@@ -5,12 +5,12 @@
 
 Interpol::Interpol(GameObject &associated) : Component(associated) {}
 
-void Interpol::Update(float delta_time) {
+void Interpol::update(float delta_time) {
     Sprite *sprite = associated.getComponent<Sprite *>();
 
-    speed.x = 10 * delta_time * Game::GetInstance()->GetCurrentState().GetGridSize() /
+    speed.x = 10 * delta_time * Game::getInstance()->getCurrentState().GetGridSize() /
               sprite->GetFrameCount();
-    speed.y = 10 * delta_time * Game::GetInstance()->GetCurrentState().GetGridSize() /
+    speed.y = 10 * delta_time * Game::getInstance()->getCurrentState().GetGridSize() /
               sprite->GetFrameCount();
 
     Vec2 newPos;
@@ -19,26 +19,26 @@ void Interpol::Update(float delta_time) {
         if (target.x > associated.gridPosition.x) {
             newPos = {
                 target.x *
-                        Game::GetInstance()->GetCurrentState().GetGridSize() -
-                    Game::GetInstance()->GetCurrentState().GetGridSize(),
+                        Game::getInstance()->getCurrentState().GetGridSize() -
+                    Game::getInstance()->getCurrentState().GetGridSize(),
                 associated.gridPosition.y *
-                        Game::GetInstance()->GetCurrentState().GetGridSize() -
-                    Game::GetInstance()->GetCurrentState().GetGridSize() / 2};
+                        Game::getInstance()->getCurrentState().GetGridSize() -
+                    Game::getInstance()->getCurrentState().GetGridSize() / 2};
 
         } else {
             newPos = {
-                target.x * Game::GetInstance()->GetCurrentState().GetGridSize(),
+                target.x * Game::getInstance()->getCurrentState().GetGridSize(),
                 associated.gridPosition.y *
-                        Game::GetInstance()->GetCurrentState().GetGridSize() -
-                    Game::GetInstance()->GetCurrentState().GetGridSize() / 2};
+                        Game::getInstance()->getCurrentState().GetGridSize() -
+                    Game::getInstance()->getCurrentState().GetGridSize() / 2};
         }
     } else
         newPos = {associated.gridPosition.x *
-                          Game::GetInstance()->GetCurrentState().GetGridSize() -
-                      Game::GetInstance()->GetCurrentState().GetGridSize() / 2,
+                          Game::getInstance()->getCurrentState().GetGridSize() -
+                      Game::getInstance()->getCurrentState().GetGridSize() / 2,
                   associated.gridPosition.y *
-                          Game::GetInstance()->GetCurrentState().GetGridSize() -
-                      Game::GetInstance()->GetCurrentState().GetGridSize() / 2};
+                          Game::getInstance()->getCurrentState().GetGridSize() -
+                      Game::getInstance()->getCurrentState().GetGridSize() / 2};
 
     if (associated.box.x != newPos.x) {
         if (abs(newPos.x - associated.box.x) < speed.x) {

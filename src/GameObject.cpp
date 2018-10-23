@@ -13,14 +13,14 @@ GameObject::~GameObject() {
 void GameObject::Update(float delta_time) {
     static float sum;
     sum += delta_time;
-    for (Component* component : components) component->Update(delta_time);
+    for (Component* component : components) component->update(delta_time);
     if (move) {
         box.pos = tmp.pos + Vec2(0, 1) * sin(sum) * 30;
     }
 }
 
 void GameObject::RhythmUpdate() {
-    for (Component* component : components) component->RhythmUpdate();
+    for (Component* component : components) component->rhythmUpdate();
 }
 
 void GameObject::RhythmReset() {

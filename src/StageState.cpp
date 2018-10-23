@@ -87,7 +87,7 @@ void StageState::LoadAssets() {
     tileMap = new TileMap(*gm, "assets/map/manager.json", true);
     gm->AddComponent(tileMap);
 
-    Game::GetInstance()->GetGridControl()->SetTileMap(tileMap);
+    Game::getInstance()->getGridControl()->SetTileMap(tileMap);
 
     // Alan
     GameObject *alanGO = new GameObject();
@@ -97,10 +97,10 @@ void StageState::LoadAssets() {
     alanGO->gridPosition = gp;
     objectArray.emplace_back(alanGO);
 
-    Game::GetInstance()->GetGridControl()->SetAlan(GetObjectPrt(alanGO));
+    Game::getInstance()->getGridControl()->SetAlan(GetObjectPrt(alanGO));
 
     alanGO->AddComponent(
-        new Sprite(*alanGO, "assets/img/alan/idle.png", 2, 0.2));
+        new Sprite(*alanGO, "assets/img/alan/IDLE.png", 2, 0.2));
     alanGO->AddComponent(new Sound(*alanGO));
 
     Alan *lilAlan = new Alan(*alanGO);
@@ -204,7 +204,7 @@ void StageState::LoadAssets() {
     lilAlan->setItemCount(item_count);
 
     // Music
-    music.Open("assets/audio/marmota.ogg");
+    music.isOpen("assets/audio/marmota.ogg");
     count = 0;
     halfBeatCounter = 0;
     Mix_SetPostMix(noEffect, NULL);
@@ -225,9 +225,9 @@ void StageState::update(float delta_time) {
         static const int beatTime = (60 * 1000) / bpm;
         static const int halfBeatTime = beatTime / 2;
 
-        if (halfBeatCounter == 0) Game::GetInstance()->StartBeatTime();
+        if (halfBeatCounter == 0) Game::getInstance()->StartBeatTime();
 
-        Game::GetInstance()->UpdateBeatTime(halfBeatCounter * halfBeatTime);
+        Game::getInstance()->UpdateBeatTime(halfBeatCounter * halfBeatTime);
         halfBeatCounter++;
     }
     UpdateArray(delta_time);

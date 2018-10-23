@@ -26,7 +26,7 @@ class TileSet {
     }
 
   private:
-    SDL_Texture* tileSet = nullptr;
+    SDL_Texture* tile_set = nullptr;
     std::shared_ptr<SDL_Texture> tileSet_d = nullptr;
     std::shared_ptr<SDL_Texture> tileSet_l = nullptr;
 

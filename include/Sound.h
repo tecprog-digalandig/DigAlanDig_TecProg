@@ -14,14 +14,14 @@ class Sound : public Component
     Sound(GameObject& associated, const std::string& file, bool play = false)
         : Component(associated), chunk(nullptr), played(false) 
         {
-        open(file);
+        Open(file);
         if (play) play_func();
     }
 
     ~Sound() { stop(); 
     }
 
-    void open(const std::string& file) 
+    void Open(const std::string& file) 
     { 
         chunk = Resources::getSound(file); 
     }
@@ -33,14 +33,14 @@ class Sound : public Component
 
     bool canEnd() const 
     { 
-        return played && !mixPlaying(channel); 
+        return played; //&& !mixPlaying(channel); 
     }
 
     void play_func(int times = 1);
 
     void stop() const 
     {
-        if (chunk) //mixHaltChannel(int channel);
+        //if (chunk) mixHaltChannel(int channel);
     }
 
     void setVolume(int v) 

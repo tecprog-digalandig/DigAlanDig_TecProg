@@ -84,7 +84,7 @@ void TitleState::LoadAssets() {
     objectArray.emplace_back(gm);
     gm->AddComponent(sprite);
 
-    Game::GetInstance()->StartBeatTime();
+    Game::getInstance()->StartBeatTime();
 
     music.Open("assets/audio/menu.ogg");
 }
@@ -98,7 +98,7 @@ void TitleState::Start() {
 void TitleState::update(float delta_time) {
     input.title = true;
     if (input.ActionPress(input.ENTER))
-        Game::GetInstance()->Push(new StageState());
+        Game::getInstance()->Push(new StageState());
     UpdateArray(delta_time);
 }
 

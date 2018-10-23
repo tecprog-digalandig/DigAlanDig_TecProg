@@ -16,7 +16,7 @@ class Interpol : public Component {
     void render(Common::Layer layer) const {}
     void Start() {}
 
-    bool IsMovementDone() { return movementDone; }
+    bool isMovementDone() { return movementDone; }
 
     Vec2 target;
     bool isHit = false;

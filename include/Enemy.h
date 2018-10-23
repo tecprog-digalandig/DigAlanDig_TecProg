@@ -20,7 +20,7 @@
 
 class Enemy : public Component {
   public:
-    enum Direction { LEFT = 0, RIGHT };
+    enum Direction { left = 0, right };
     enum State { NONE_S = 0, IDLE_S, WALKIN_S, DIE_S, STATE_MAX };
 
     Enemy(GameObject& associated, int enemyType = 1);
@@ -43,7 +43,7 @@ class Enemy : public Component {
 
     void MovementDenied() { movementAllowed = false; }
 
-    Direction GetMovementDirection() { return movementDirection; }
+    Direction getMovementDirection() { return movementDirection; }
     State GetState() { return state; }
 
     void SetAsHit() {
@@ -61,7 +61,7 @@ class Enemy : public Component {
     bool movementAllowed = false;
 
   private:
-    Direction movementDirection = Direction::LEFT;
+    Direction movementDirection = Direction::left;
 
     // 2<=range<=7
     int range, steps = 0;
@@ -69,7 +69,7 @@ class Enemy : public Component {
 
     int numBeats = 0;
 
-    int hp;
+    int hp, life_enemy;
 
     Vec2 tileMapPos;
 

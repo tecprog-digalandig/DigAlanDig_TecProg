@@ -15,7 +15,7 @@ AlanItemCount::AlanItemCount(GameObject& associated) : Component(associated)
     item_count_item[Common::ItemType::gold]->addComponent(new Item(
         *item_count_item[Common::ItemType::gold],
         item_count_item[Common::ItemType::gold]->box.Center(),
-        vec2(item_count_item[Common::ItemType::gold]->box.Center().x + 20,
+        Vec2(item_count_item[Common::ItemType::gold]->box.Center().x + 20,
              item_count_item[Common::ItemType::gold]->box.Center().y + 5)));
     std::cout << "gold COUNT = " << item_count[Common::ItemType::gold]
               << std::endl;
@@ -33,7 +33,7 @@ AlanItemCount::AlanItemCount(GameObject& associated) : Component(associated)
     item_count_item[Common::ItemType::diamond]->addComponent(new Item(
         *item_count_item[Common::ItemType::diamond],
         item_count_item[Common::ItemType::diamond]->box.Center(),
-        vec2(item_count_item[Common::ItemType::diamond]->box.Center().x + 20,
+        Vec2(item_count_item[Common::ItemType::diamond]->box.Center().x + 20,
              item_count_item[Common::ItemType::diamond]->box.Center().y + 5)));
     sprite->setFrame(item_count[Common::ItemType::diamond]);
 
@@ -49,7 +49,7 @@ AlanItemCount::AlanItemCount(GameObject& associated) : Component(associated)
     item_count_item[Common::ItemType::petroleum]->addComponent(new Item(
         *item_count_item[Common::ItemType::petroleum],
         item_count_item[Common::ItemType::petroleum]->box.Center(),
-        vec2(item_count_item[Common::ItemType::petroleum]->box.Center().x + 20,
+        Vec2(item_count_item[Common::ItemType::petroleum]->box.Center().x + 20,
              item_count_item[Common::ItemType::petroleum]->box.Center().y + 5)));
     sprite->setFrame(item_count[Common::ItemType::petroleum]);
 }

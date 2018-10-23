@@ -5,12 +5,12 @@
 
 AlanAnimation::AlanAnimation(GameObject &associated) : Component(associated) 
 {
-    AState[State::idle] = {"assets/img/alan/idle.png", 2, 2, -1};
-    AState[State::walkin] = {"assets/img/alan/walkin.png", 2, 4, 0.1};
+    AState[State::IDLE] = {"assets/img/alan/IDLE.png", 2, 2, -1};
+    AState[State::WALK] = {"assets/img/alan/WALKin.png", 2, 4, 0.1};
     AState[State::fallin_var] = {"assets/img/alan/fallin.png", 2, 2, 0.1};
     AState[State::dig] = {"assets/img/alan/dig.png", 2, 8, 0.1};
     AState[State::climbin] = {"assets/img/alan/climb.png", 2, 4, 0.2};
-    AState[State::dig_climb] = {"assets/img/alan/idle.png", 2, 2, 0.2};
+    AState[State::dig_climb] = {"assets/img/alan/IDLE.png", 2, 2, 0.2};
     AState[State::dancin] = {"assets/img/alan/dance.png", 10, 10, -1};
     AState[State::dead] = {"assets/img/alan/die.png", 3, 3, -0.5};     
 }
@@ -21,14 +21,14 @@ void AlanAnimation::playSound(Transition trans)
 {
     Sound *s = associated.getComponent<Sound *>();
     switch (trans) {
-        case Transition::walk:
-            s->open("assets/audio/andando.wav");
+        case Transition::WALK:
+            s->Open("assets/audio/andando.wav");
             break;
         case Transition::dig_t:
-            s->open("assets/audio/cavando.wav");
+            s->Open("assets/audio/cavando.wav");
             break;
-        case Transition::hit_t
-            s->open("assets/audio/dor.wav");
+        case Transition::hit_t:
+            s->Open("assets/audio/dor.wav");
             break;
         default:
             return;
@@ -46,23 +46,23 @@ void AlanAnimation::update(float delta_time)
     Alan *alan = associated.getComponent<Alan *>();
 
     if (sprite->frameTimePassed() &&
-        alan->getMovementDirection() == AlanActionControl::Direction::none &&
+        alan->getMovementDirection() == AlanActionControl::Direction::NONE &&
         current_state != State::fallin_var) 
         {
         if ((old_state == State::climbin || current_state == State::climbin) &&
-            current_state != State::idle) 
+            current_state != State::IDLE) 
             {
             old_state = current_state;
             current_state = State::climbin;
             if (current_direction != Direction::left &&
                 current_direction != Direction::right)
                 current_direction = old_direction;
-            sprite->open(AState[current_state], current_direction);
+            sprite->Open(AState[current_state], current_direction);
         } else 
         {
             old_state = current_state;
-            current_state = State::idle;
-            sprite->open(AState[current_state], Direction::left);
+            current_state = State::IDLE;
+            sprite->Open(AState[current_state], Direction::left);
         }
     }
 }
@@ -75,10 +75,10 @@ void AlanAnimation::setAction(Transition trans, Direction dir)
             old_state = current_state;
             std::cout << "STATE NONE!" << std::endl;
 
-            current_state = State::idle;
+            current_state = State::IDLE;
             break;
 
-        case idle:
+        case IDLE:
             switch (trans) 
             {
                 case fall:
@@ -86,9 +86,9 @@ void AlanAnimation::setAction(Transition trans, Direction dir)
                     current_state = State::fallin_var;
                     break;
 
-                case walk:
+                case WALK:
                     old_state = current_state;
-                    current_state = State::walkin;
+                    current_state = State::WALKIN_S;
                     break;
 
                 case climb:
@@ -106,7 +106,7 @@ void AlanAnimation::setAction(Transition trans, Direction dir)
                     current_state = State::dancin;
                     break;
 
-                case DIE:
+                case die:
                     old_state = current_state;
                     current_state = State::dead;
                     break;
@@ -117,7 +117,7 @@ void AlanAnimation::setAction(Transition trans, Direction dir)
             }
             break;
 
-        case walkin:
+        case WALK:
             switch (trans) 
             {
                 case fall:
@@ -127,7 +127,7 @@ void AlanAnimation::setAction(Transition trans, Direction dir)
 
                 case none_t:
                     old_state = current_state;
-                    current_state = State::idle;
+                    current_state = State::IDLE;
                     break;
 
                 case dance:
@@ -151,12 +151,12 @@ void AlanAnimation::setAction(Transition trans, Direction dir)
             {
                 case floor:
                     old_state = current_state;
-                    current_state = State::idle;
+                    current_state = State::IDLE;
                     break;
 
                 case none_t:
                     old_state = current_state;
-                    current_state = State::idle;
+                    current_state = State::IDLE;
                     break;
 
                 case dance:
@@ -185,7 +185,7 @@ void AlanAnimation::setAction(Transition trans, Direction dir)
 
                 case none_t:
                     old_state = current_state;
-                    current_state = State::idle;
+                    current_state = State::IDLE;
                     break;
 
                 case dance:
@@ -209,11 +209,11 @@ void AlanAnimation::setAction(Transition trans, Direction dir)
             {
                 case none_t:
                     old_state = current_state;
-                    current_state = State::idle;
+                    current_state = State::IDLE;
                     break;
-                case walk:
+                case WALK:
                     old_state = current_state;
-                    current_state = State::walkin;
+                    current_state = State::WALKIN_S;
                     break;
 
                 case stop_climb:
@@ -254,5 +254,5 @@ void AlanAnimation::setAction(Transition trans, Direction dir)
     current_direction = dir;
 
     Sprite *sprite = associated.getComponent<Sprite *>();
-    sprite->open(AState[current_state], dir);
+    sprite->Open(AState[current_state], dir);
 }

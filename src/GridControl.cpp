@@ -5,12 +5,12 @@
 
 GridControl *GridControl::_instance = nullptr;
 
-GridControl *GridControl::GetInstance() {
+GridControl *GridControl::getInstance() {
     if (!_instance) _instance = new GridControl();
     return _instance;
 }
 
-int GridControl::TestPath(Vec2 target, bool isAlan) {
+int GridControl::testPath(Vec2 target, bool isAlan) {
     if ((target.x >= tileMap->GetWidth() || target.x < 0) ||
         (target.y >= tileMap->GetHeight() || target.y < 0)) {
         return WhatsThere::NONE;
@@ -65,17 +65,17 @@ void GridControl::CheckEnemyAlanCollision(bool isAlan) {
         if (alanPos.y == enemyPos.y &&
             (enemy->getComponent<Enemy *>()->GetState() ==
                  Enemy::State::WALKIN_S ||
-             alan.lock()->getComponent<Alan *>()->GetAction() ==
-                 AlanActionControl::Action::WALKIN)) {
+             alan.lock()->getComponent<Alan *>()->getAction() ==
+                 AlanActionControl::Action::WALK)) {
             if ((alanPos.x - enemyPos.x) == 1 &&
-                (alan.lock()->getComponent<Alan *>()->GetMovementDirection() ==
-                     AlanActionControl::Direction::LEFT &&
-                 enemy->getComponent<Enemy *>()->GetMovementDirection() ==
-                     Enemy::Direction::RIGHT)) {
+                (alan.lock()->getComponent<Alan *>()->getMovementDirection() ==
+                     AlanActionControl::Direction::left &&
+                 enemy->getComponent<Enemy *>()->getMovementDirection() ==
+                     Enemy::Direction::right)) {
                 if (isAlan) {
                     alan.lock()
                         ->getComponent<AlanActionControl *>()
-                        ->SetMovementDirection(
+                        ->setMovementDirection(
                             AlanActionControl::Direction::NONE);
                 } else {
                     enemy->getComponent<Enemy *>()->SetAsHit();
@@ -87,14 +87,14 @@ void GridControl::CheckEnemyAlanCollision(bool isAlan) {
                 return;
             }
             if ((enemyPos.x - alanPos.x) == 1 &&
-                (alan.lock()->getComponent<Alan *>()->GetMovementDirection() ==
-                     AlanActionControl::Direction::RIGHT &&
-                 enemy->getComponent<Enemy *>()->GetMovementDirection() ==
-                     Enemy::Direction::LEFT)) {
+                (alan.lock()->getComponent<Alan *>()->getMovementDirection() ==
+                     AlanActionControl::Direction::right &&
+                 enemy->getComponent<Enemy *>()->getMovementDirection() ==
+                     Enemy::Direction::left)) {
                 if (isAlan) {
                     alan.lock()
                         ->getComponent<AlanActionControl *>()
-                        ->SetMovementDirection(
+                        ->setMovementDirection(
                             AlanActionControl::Direction::NONE);
                 } else {
                     enemy->getComponent<Enemy *>()->SetAsHit();

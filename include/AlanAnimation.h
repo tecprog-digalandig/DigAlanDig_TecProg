@@ -22,7 +22,7 @@ class AlanAnimation : public Component
     enum Transition 
     {
         none_t,
-        walk,
+        WALK,
         hit_t,
         climb,
         stop_climb,
@@ -41,7 +41,7 @@ class AlanAnimation : public Component
     enum State 
     {
         none_s = 0,
-        idle,
+        IDLE,
         walkin,
         fallin_var,
         dig,
@@ -64,7 +64,7 @@ class AlanAnimation : public Component
 
     void start() 
     {
-        current_state = State::idle;
+        current_state = State::IDLE;
         old_state = current_state;
         current_direction = left;
         old_direction = current_direction;

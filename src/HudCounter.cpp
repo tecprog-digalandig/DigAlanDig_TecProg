@@ -25,6 +25,6 @@ void HudCounter::render(Common::Layer layer) const {
 
     associated.box += offset1;
 
-    counter->SetScaleX(2.3 - InputManager::GetInstance().scaleFactor());
+    counter->SetScaleX(2.3 - InputManager::getInstance().scaleFactor());
     counter->render(layer);
 }

@@ -14,7 +14,7 @@ class State {
   public:
     State();
     virtual ~State() {
-        music.Stop();
+        music.stop();
         objectArray.clear();
     }
 
@@ -46,7 +46,7 @@ class State {
 
     TileMap* tileMap = nullptr;
 
-    Music* GetMusic() { 
+    Music* getMusic() { 
       return &music; 
       }
 

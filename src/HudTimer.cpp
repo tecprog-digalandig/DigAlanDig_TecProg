@@ -1,7 +1,7 @@
 #include "HudTimer.h"
 
 HudTimer::HudTimer(GameObject& associated)
-    : Component(associated), input(InputManager::GetInstance()) {
+    : Component(associated), input(InputManager::getInstance()) {
     Vec2 center = associated.box.Center();
 
     bg = new Sprite(associated, "assets/hud/timerbg.png");
@@ -51,7 +51,7 @@ void HudTimer::SetMeterFrame() const {
     }
 }
 
-void HudTimer::Update(float delta_time) {
+void HudTimer::update(float delta_time) {
     if (std::abs(input.GetDeltaRhythm()) < 0.5) {
         meter->setFrame(2);
         meter->SetScaleX(1.5);

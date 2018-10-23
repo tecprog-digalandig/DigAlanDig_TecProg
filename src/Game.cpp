@@ -17,7 +17,7 @@ Game::~Game() {
     delete gridControl;
 }
 
-Game* Game::GetInstance(const std::string& title, int w, int h) {
+Game* Game::getInstance(const std::string& title, int w, int h) {
     if (!_instance) _instance = new Game(title, w, h);
     return _instance;
 }
@@ -81,7 +81,7 @@ void Game::Run() {
         if (shouldRhythmUpdate) {
             shouldRhythmUpdate = false;
             if (!offBeat) {
-                stateStack.top()->RhythmUpdate();
+                stateStack.top()->rhythmUpdate();
                 Camera::RhythmUpdate();
             } else
                 stateStack.top()->RhythmReset();
@@ -89,16 +89,16 @@ void Game::Run() {
             fpb = 0;
         }
 
-        stateStack.top()->Update(delta_time);
-        stateStack.top()->Render();
+        stateStack.top()->update(delta_time);
+        stateStack.top()->render();
         SDL_RenderPresent(renderer);
 
         if (stateStack.top()->PopRequested() ||
             stateStack.top()->QuitRequested()) {
             Camera::Follow(nullptr);
-            Game::GetInstance()->GetGridControl()->ClearEnemyVector();
+            Game::getInstance()->getGridControl()->ClearEnemyVector();
             stateStack.pop();
-            Resources::ClearAll();
+            Resources::clearAll();
             if (!stateStack.empty()) stateStack.top()->Resume();
         }
 
@@ -126,7 +126,7 @@ void Game::ToggleFullScreen() {
 }
 
 Game::Game(const std::string& title, int width, int height)
-    : input(InputManager::GetInstance()) {
+    : input(InputManager::getInstance()) {
     if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO | SDL_INIT_TIMER |
                  SDL_INIT_JOYSTICK | SDL_INIT_GAMECONTROLLER |
                  SDL_INIT_HAPTIC) < 0) {
@@ -181,5 +181,5 @@ Game::Game(const std::string& title, int width, int height)
     SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "linear");
     SDL_RenderSetLogicalSize(renderer, width, height);
 
-    gridControl = GridControl::GetInstance();
+    gridControl = GridControl::getInstance();
 }

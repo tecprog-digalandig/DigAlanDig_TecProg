@@ -15,10 +15,10 @@ class Game {
     ~Game();
     void Run();
     SDL_Renderer* GetRenderer() const { return renderer; }
-    State& GetCurrentState() const { return *stateStack.top(); }
-    GridControl* GetGridControl() const { return gridControl; }
-    static Game* GetInstance() { return _instance; }
-    static Game* GetInstance(const std::string& title, int w, int h);
+    State& getCurrentState() const { return *stateStack.top(); }
+    GridControl* getGridControl() const { return gridControl; }
+    static Game* getInstance() { return _instance; }
+    static Game* getInstance(const std::string& title, int w, int h);
     float GetDeltaTime() const { return delta_time; }
 
     void Push(State* state) { storedState = state; }

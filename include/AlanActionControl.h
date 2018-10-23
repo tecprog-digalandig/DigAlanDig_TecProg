@@ -17,7 +17,7 @@ class AlanActionControl : public Component
   public:
     enum Direction 
     {
-         none = 0, up, down, left, right
+         NONE = 0, up, down, left, right
     };
 
     enum Action 
@@ -27,7 +27,7 @@ class AlanActionControl : public Component
 
     AlanActionControl(GameObject& associated, int grid_size)
         : Component(associated),
-          input(InputManager::GetInstance()),
+          input(InputManager::getInstance()),
           grid_size(grid_size) {}
 
     ~AlanActionControl() {}
@@ -46,7 +46,7 @@ class AlanActionControl : public Component
 
     bool isFree();
 
-    bool isClimbDirectionLeft(AlanAnimation* animation);
+    bool isClimbDirectionleft(AlanAnimation* animation);
 
     void update(float delta_time);
 
@@ -55,7 +55,7 @@ class AlanActionControl : public Component
     void rhythmReset() {}
 
     void render(Common::Layer layer) const {}
-
+    
     bool isMovementDone() 
     { 
         return !animation_on_going; 
@@ -82,7 +82,7 @@ class AlanActionControl : public Component
     }
 
   private:
-    Direction movement_direction = Direction::none;
+    Direction movement_direction = Direction::NONE;
     Action action = Action::standin;
     int grids_left = 0;
 

@@ -9,6 +9,7 @@
 #include <iostream>
 #include <queue>
 #include <string>
+#include <vector>
 #include "Component.h"
 #include "Game.h"
 #include "InputManager.h"
@@ -22,7 +23,7 @@ class Item : public Component
           center(newCenter),
           numberCenter(newNumberCenter) 
         {
-            bg = new sprite(associated, "assets/hud/ovocinza.png");
+            //bg = new sprite(associated, "assets/hud/ovocinza.png");
         }
 
         ~Item() 
@@ -39,7 +40,7 @@ class Item : public Component
         void render(Common::Layer layer) const {}
 
         Sprite* bg;
-        Vec2 center, number_center;
+        Vec2 center, numberCenter;
         int sprite_count = 1;
 };
 

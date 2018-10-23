@@ -9,6 +9,7 @@
 #include <iostream>
 #include <queue>
 #include <string>
+#include <vector>
 #include "AlanActionControl.h"
 #include "Component.h"
 #include "Game.h"
@@ -40,7 +41,7 @@ class Alan : public Component
 
         if (miss_counter > 1) 
         {
-            Game::GetInstance()->combo /= 2;
+            Game::getInstance()->combo /= 2;
         }
 
         moved = false;
@@ -78,14 +79,14 @@ class Alan : public Component
     {
         if (!damage_taken) 
         {
-            life_enemy--;
+            //life_enemy--;
             damage_taken = true;
         }
     }
 
     void setDamage(int damage) 
     { 
-        this->damage = damage; 
+        //this->damage = damage; 
     }
 
     int getHP() 

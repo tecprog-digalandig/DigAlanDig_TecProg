@@ -5,7 +5,7 @@
 #include "Sprite.h"
 
 Alan::Alan(GameObject &associated)
-    : Component(associated), input(InputManager::GetInstance()) 
+    : Component(associated), input(InputManager::getInstance()) 
     {}
 
 // Direção do movimento
