@@ -1,5 +1,5 @@
-#ifndef SPRITE_H
-#define SPRITE_H
+#ifndef Sprite_H
+#define Sprite_H
 #define INCLUDE_SDL
 #include "SDL_include.h"
 
@@ -37,7 +37,7 @@ class Sprite : public Component {
     int GetHeight() const { return height; }
     bool isOpen() const { return static_cast<bool>(Sprite::texture); }
 
-    void update(float delta_time);
+    void Update(float delta_time);
     void AlanUpdate(float delta_time);
     void rhythmUpdate() {
         if (frameTime == -1)
@@ -69,7 +69,7 @@ class Sprite : public Component {
         SDL_SetTextureBlendMode(texture.get(), mode);
     }
 
-    void SetColor(int r, int g, int b) {
+    void setColor(int r, int g, int b) {
         SDL_SetTextureColorMod(texture.get(), r, g, b);
     }
 

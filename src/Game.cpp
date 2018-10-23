@@ -51,11 +51,11 @@ void Game::CalculateDeltaTime() {
     int newHalfBeatCounter = fixedTicks / halfBeatTime;
     if (newHalfBeatCounter > halfBeatCounter) {
         halfBeatCounter = newHalfBeatCounter;
-        shouldRhythmUpdate = true;
+        shouldrhythmUpdate = true;
         offBeat = halfBeatCounter % 2;
 
     } else {
-        shouldRhythmUpdate = false;
+        shouldrhythmUpdate = false;
     }
 
     int a = fixedTicks - (halfBeatCounter / 2) * beatTime;
@@ -78,18 +78,18 @@ void Game::Run() {
         input.Update(deltaRhythm);
 
         fpb++;
-        if (shouldRhythmUpdate) {
-            shouldRhythmUpdate = false;
+        if (shouldrhythmUpdate) {
+            shouldrhythmUpdate = false;
             if (!offBeat) {
                 stateStack.top()->rhythmUpdate();
-                Camera::RhythmUpdate();
+                Camera::rhythmUpdate();
             } else
                 stateStack.top()->RhythmReset();
             std::cout << "." << offBeat << "." << fpb << std::endl;
             fpb = 0;
         }
 
-        stateStack.top()->update(delta_time);
+        stateStack.top()->Update(delta_time);
         stateStack.top()->render();
         SDL_RenderPresent(renderer);
 
@@ -113,7 +113,7 @@ void Game::Run() {
         SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
         SDL_RenderClear(renderer);
 
-        if (input.ActionPress(InputManager::FULLSCREEN)) ToggleFullScreen();
+        if (input.actionPress(InputManager::FULLSCREEN)) ToggleFullScreen();
     }
 }
 

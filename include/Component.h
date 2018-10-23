@@ -11,7 +11,7 @@ class Component {
     explicit Component(GameObject& associated) : associated(associated) {}
     virtual ~Component() {}
 
-    virtual void update(float delta_time);
+    virtual void Update(float delta_time);
     virtual void rhythmUpdate();
     virtual void RhythmReset() {}
     virtual void render(Common::Layer layer) const = 0;

@@ -6,7 +6,7 @@
 AlanAnimation::AlanAnimation(GameObject &associated) : Component(associated) 
 {
     AState[State::IDLE] = {"assets/img/alan/IDLE.png", 2, 2, -1};
-    AState[State::WALK] = {"assets/img/alan/WALKin.png", 2, 4, 0.1};
+    AState[State::walkin] = {"assets/img/alan/WALKin.png", 2, 4, 0.1};
     AState[State::fallin_var] = {"assets/img/alan/fallin.png", 2, 2, 0.1};
     AState[State::dig] = {"assets/img/alan/dig.png", 2, 8, 0.1};
     AState[State::climbin] = {"assets/img/alan/climb.png", 2, 4, 0.2};
@@ -19,7 +19,7 @@ AlanAnimation::~AlanAnimation() {}
 
 void AlanAnimation::playSound(Transition trans) 
 {
-    Sound *s = associated.getComponent<Sound *>();
+    Sound *s = associated.GetComponent<Sound *>();
     switch (trans) {
         case Transition::WALK:
             s->Open("assets/audio/andando.wav");
@@ -38,12 +38,12 @@ void AlanAnimation::playSound(Transition trans)
     s->play_func();
 }
 
-void AlanAnimation::update(float delta_time) 
+void AlanAnimation::Update(float delta_time) 
 {
     if (current_state == State::dancin || current_state == State::dead) return;
 
-    Sprite *sprite = associated.getComponent<Sprite *>();
-    Alan *alan = associated.getComponent<Alan *>();
+    Sprite *sprite =associated.GetComponent<Sprite *>();
+    Alan *alan = associated.GetComponent<Alan *>();
 
     if (sprite->frameTimePassed() &&
         alan->getMovementDirection() == AlanActionControl::Direction::NONE &&
@@ -88,7 +88,7 @@ void AlanAnimation::setAction(Transition trans, Direction dir)
 
                 case WALK:
                     old_state = current_state;
-                    current_state = State::WALKIN_S;
+                    current_state = State::walkin;
                     break;
 
                 case climb:
@@ -117,7 +117,7 @@ void AlanAnimation::setAction(Transition trans, Direction dir)
             }
             break;
 
-        case WALK:
+        case walkin:
             switch (trans) 
             {
                 case fall:
@@ -213,7 +213,7 @@ void AlanAnimation::setAction(Transition trans, Direction dir)
                     break;
                 case WALK:
                     old_state = current_state;
-                    current_state = State::WALKIN_S;
+                    current_state = State::walkin;
                     break;
 
                 case stop_climb:
@@ -253,6 +253,6 @@ void AlanAnimation::setAction(Transition trans, Direction dir)
     old_direction = current_direction;
     current_direction = dir;
 
-    Sprite *sprite = associated.getComponent<Sprite *>();
+    Sprite *sprite =associated.GetComponent<Sprite *>();
     sprite->Open(AState[current_state], dir);
 }

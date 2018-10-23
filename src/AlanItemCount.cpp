@@ -5,11 +5,11 @@ AlanItemCount::AlanItemCount(GameObject& associated) : Component(associated)
 {
     item_count.emplace(Common::ItemType::gold, rand() % 5);
     item_count_item.emplace(Common::ItemType::gold,
-                          new gameObject(Common::Layer::HUD));
+                          new GameObject(Common::Layer::HUD));
     item_count_item[Common::ItemType::gold]->box.x = 950;
     item_count_item[Common::ItemType::gold]->box.y = 115;
     item_count_item[Common::ItemType::gold]->world_reference = false;
-    Sprite* sprite = new sprite(*item_count_item[Common::ItemType::gold],
+    Sprite* sprite =new Sprite(*item_count_item[Common::ItemType::gold],
                                 "assets/hud/numbers.png", 10, -2);
     item_count_item[Common::ItemType::gold]->addComponent(sprite);
     item_count_item[Common::ItemType::gold]->addComponent(new Item(
@@ -23,11 +23,11 @@ AlanItemCount::AlanItemCount(GameObject& associated) : Component(associated)
 
     item_count.emplace(Common::ItemType::diamond, rand() % 5 + 4);
     item_count_item.emplace(Common::ItemType::diamond,
-                          new gameObject(Common::Layer::HUD));
+                          new GameObject(Common::Layer::HUD));
     item_count_item[Common::ItemType::diamond]->box.x = 950;
     item_count_item[Common::ItemType::diamond]->box.y = 263;
     item_count_item[Common::ItemType::diamond]->world_reference = false;
-    sprite = new sprite(*item_count_item[Common::ItemType::diamond],
+    sprite =new Sprite(*item_count_item[Common::ItemType::diamond],
                         "assets/hud/numbers.png", 10, -2);
     item_count_item[Common::ItemType::diamond]->addComponent(sprite);
     item_count_item[Common::ItemType::diamond]->addComponent(new Item(
@@ -39,11 +39,11 @@ AlanItemCount::AlanItemCount(GameObject& associated) : Component(associated)
 
     item_count.emplace(Common::ItemType::petroleum, rand() % 5 + 4);
     item_count_item.emplace(Common::ItemType::petroleum,
-                          new gameObject(Common::Layer::HUD));
+                          new GameObject(Common::Layer::HUD));
     item_count_item[Common::ItemType::petroleum]->box.x = 950;
     item_count_item[Common::ItemType::petroleum]->box.y = 415;
     item_count_item[Common::ItemType::petroleum]->world_reference = false;
-    sprite = new sprite(*item_count_item[Common::ItemType::petroleum],
+    sprite =new Sprite(*item_count_item[Common::ItemType::petroleum],
                         "assets/hud/numbers.png", 10, -2);
     item_count_item[Common::ItemType::petroleum]->addComponent(sprite);
     item_count_item[Common::ItemType::petroleum]->addComponent(new Item(
@@ -58,19 +58,19 @@ void AlanItemCount::render(Common::Layer layer) const
 {
     for (auto item : item_count_item) 
     {
-        item.second->box.setCenter(item.second->getComponent<Item*>()->center);
+        item.second->box.setCenter(item.second->GetComponent<Item*>()->center);
 
         if (!item_count.at(item.first)) 
         {
-            item.second->getComponent<Item*>()->bg->setColor(0, 255, 0);
+            item.second->GetComponent<Item*>()->bg->setColor(0, 255, 0);
         }
 
-        item.second->getComponent<Item*>()->bg->render(layer);
+        item.second->GetComponent<Item*>()->bg->render(layer);
 
-        item.second->getComponent<Item*>()->bg->setColor(255, 255, 255);
+        item.second->GetComponent<Item*>()->bg->setColor(255, 255, 255);
 
         item.second->box.setCenter(
-            item.second->getComponent<Item*>()->numberCenter);
+            item.second->GetComponent<Item*>()->numberCenter);
         item.second->renderOrder(layer);
     }
 }

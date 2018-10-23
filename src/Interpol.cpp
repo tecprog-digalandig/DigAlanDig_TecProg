@@ -5,8 +5,8 @@
 
 Interpol::Interpol(GameObject &associated) : Component(associated) {}
 
-void Interpol::update(float delta_time) {
-    Sprite *sprite = associated.getComponent<Sprite *>();
+void Interpol::Update(float delta_time) {
+    Sprite *sprite =associated.GetComponent<Sprite *>();
 
     speed.x = 10 * delta_time * Game::getInstance()->getCurrentState().GetGridSize() /
               sprite->GetFrameCount();

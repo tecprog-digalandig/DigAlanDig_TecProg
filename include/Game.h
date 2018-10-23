@@ -60,7 +60,7 @@ class Game {
     int halfBeatCounter = 0;
     int tickCounter = 0;
     bool offBeat = false;
-    bool shouldRhythmUpdate = false;
+    bool shouldrhythmUpdate = false;
 
     Game(const std::string& title, int width, int height);
 

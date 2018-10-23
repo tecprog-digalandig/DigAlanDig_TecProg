@@ -12,16 +12,16 @@ class Light : public Component {
           follow(follow),
           sprite(new Sprite(associated, "assets/img/light.png")) {
         sprite->SetBlendMode(SDL_BLENDMODE_ADD);
-        sprite->SetColor(255, 255, 255 * 0.8);
+        sprite->setColor(255, 255, 255 * 0.8);
         SetSize(600);
     }
 
     ~Light() { delete sprite; }
 
-    void update(float delta_time) {
+    void Update(float delta_time) {
         if (auto ptr = follow.lock()) {
-            associated.box.SetCenter(ptr->box.Center());
-            sprite->update(delta_time);
+            associated.box.setCenter(ptr->box.Center());
+            sprite->Update(delta_time);
         } else {
             associated.RequestDelete();
         }

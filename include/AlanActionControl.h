@@ -48,7 +48,7 @@ class AlanActionControl : public Component
 
     bool isClimbDirectionleft(AlanAnimation* animation);
 
-    void update(float delta_time);
+    void Update(float delta_time);
 
     void rhythmUpdate() {}
 

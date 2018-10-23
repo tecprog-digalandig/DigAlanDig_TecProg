@@ -27,8 +27,8 @@ class Enemy : public Component {
 
     ~Enemy() {}
 
-    void update(float delta_time);
-    void RhythmUpdate() {
+    void Update(float delta_time);
+    void rhythmUpdate() {
         numBeats++;
 
         if (!movementAllowed && numBeats > 1) {
@@ -47,7 +47,7 @@ class Enemy : public Component {
     State GetState() { return state; }
 
     void SetAsHit() {
-        associated.getComponent<Interpol*>()->isHit = true;
+        associated.GetComponent<Interpol*>()->isHit = true;
         movementAllowed = false;
     }
 

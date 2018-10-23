@@ -27,7 +27,7 @@ class Alan : public Component
 
     void getMovement();
 
-    void update(float delta_time);
+    void Update(float delta_time);
 
     void rhythmUpdate() {}
 
@@ -61,13 +61,13 @@ class Alan : public Component
 
     AlanActionControl::Direction getMovementDirection() 
     {
-        return associated.getComponent<AlanActionControl*>()
+        return associated.GetComponent<AlanActionControl*>()
             ->getMovementDirection();
     }
 
     AlanActionControl::Action getAction() 
     {
-        return associated.getComponent<AlanActionControl*>()->getAction();
+        return associated.GetComponent<AlanActionControl*>()->getAction();
     }
 
     int getDamage() 

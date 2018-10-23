@@ -40,7 +40,7 @@ void MiniTileMap::render(Common::Layer layer) const {
             } else if (tileMap->At(posX, posY, TileMap::Layers::ITENS)) {
                 valPos = 4;
             } else if (posY >
-                       alan.lock()->getComponent<Alan *>()->getMaxPosition() +
+                       alan.lock()->GetComponent<Alan *>()->getMaxPosition() +
                            7) {
                 valPos = 1;
             } else {

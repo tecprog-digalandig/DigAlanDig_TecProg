@@ -38,10 +38,10 @@ Enemy::Enemy(GameObject &associated, int enemyType)
                                 0.2};
     }
 
-    Sprite *sprite = new Sprite(associated);
+    Sprite *sprite =new Sprite(associated);
     Interpol *interpol = new Interpol(associated);
-    associated.AddComponent(sprite);
-    associated.AddComponent(interpol);
+    associated.addComponent(sprite);
+    associated.addComponent(interpol);
     sprite->Open(EState[state], Enemy::Direction::left);
 
     life_enemy = 3;
@@ -115,20 +115,20 @@ void Enemy::IsSurrounded() {
         movementAllowed = false;
 }
 
-void Enemy::update(float delta_time) {
+void Enemy::Update(float delta_time) {
     if (!Game::getInstance()->getGridControl()->GetAlan().lock() ||
-        !associated.getComponent<Interpol *>()->isMovementDone())
+        !associated.GetComponent<Interpol *>()->isMovementDone())
         return;
 
     Game::getInstance()->getGridControl()->CheckEnemyAlanCollision(false);
-    if (associated.getComponent<Interpol *>()->isHit) return;
+    if (associated.GetComponent<Interpol *>()->isHit) return;
 
-    Sprite *sprite = associated.getComponent<Sprite *>();
+    Sprite *sprite =associated.GetComponent<Sprite *>();
     Alan *alan = Game::getInstance()
                      ->getGridControl()
                      ->GetAlan()
                      .lock()
-                     ->getComponent<Alan *>();
+                     ->GetComponent<Alan *>();
 
     ShouldTakeDamage(alan);
 

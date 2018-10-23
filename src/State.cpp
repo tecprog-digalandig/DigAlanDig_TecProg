@@ -56,12 +56,12 @@ void State::UpdateArray(float delta_time) {
         objectArray.end());
 
     // KeyPress
-    if (input.ActionPress(input.ESCAPE) || input.QuitRequested())
+    if (input.actionPress(input.ESCAPE) || input.QuitRequested())
         quitRequested = true;
 }
 
-void State::RhythmUpdateArray() {
-    for (auto obj : objectArray) obj->RhythmUpdate();
+void State::rhythmUpdateArray() {
+    for (auto obj : objectArray) obj->rhythmUpdate();
 }
 
 void State::RhythmResetArray() {
@@ -100,7 +100,7 @@ void State::RenderLight() const {
     SDL_RenderClear(renderer);
 
     for (auto obj : objectArray) {
-        obj->RenderOrder(Common::Layer::DEFAULT);
+        obj->renderOrder(Common::Layer::DEFAULT);
     }
 
     // Rendering to texture (Lights to an texture)
@@ -110,12 +110,12 @@ void State::RenderLight() const {
 
     SDL_SetRenderTarget(renderer, texLight);
 
-    int color = PulseColor(input.GetDeltaRhythm(), Game::getInstance()->combo);
+    int color = PulseColor(input.getDeltaRhythm(), Game::getInstance()->combo);
     SDL_SetRenderDrawColor(renderer, color, color, color * 0.8, 255);
     SDL_RenderClear(renderer);
     SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_ADD);
     for (auto obj : objectArray) {
-        obj->RenderOrder(Common::Layer::LIGHT);
+        obj->renderOrder(Common::Layer::LIGHT);
     }
 
     // Rendering the texture to screen (multiply light texture to screen)
@@ -134,16 +134,16 @@ void State::RenderLight() const {
 
 void State::RenderArray() const {
     for (auto obj : objectArray) {
-        obj->RenderOrder(Common::Layer::BG);
+        obj->renderOrder(Common::Layer::BG);
     }
 
     RenderLight();
 
     for (auto obj : objectArray) {
         if (!obj->blink) {
-            obj->RenderOrder(Common::Layer::HUD);
+            obj->renderOrder(Common::Layer::HUD);
         } else {
-            if (input.shouldShow) obj->RenderOrder(Common::Layer::HUD);
+            if (input.shouldShow) obj->renderOrder(Common::Layer::HUD);
         }
     }
 }

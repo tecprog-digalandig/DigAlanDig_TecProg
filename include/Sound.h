@@ -48,9 +48,10 @@ class Sound : public Component
         if (chunk) chunk->volume = v;
     }
 
-    void update(float delta_time) {}
+    void Update(float delta_time) {}
     void rhythmUpdate() {}
     void mixHaltChannel(int channel){}
+    //void mixGetError(){}
     void render(Common::Layer layer) const {}
 
   private:

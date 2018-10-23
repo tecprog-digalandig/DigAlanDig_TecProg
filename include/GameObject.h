@@ -1,5 +1,5 @@
-#ifndef GAMEOBJECT_H
-#define GAMEOBJECT_H
+#ifndef GameObject_H
+#define GameObject_H
 #include <algorithm>
 #include <memory>
 #include <vector>
@@ -16,16 +16,16 @@ class GameObject {
     ~GameObject();
 
     void Update(float delta_time);
-    void RhythmUpdate();
+    void rhythmUpdate();
     void RhythmReset();
 
-    void RenderOrder(Common::Layer layer) const;
+    void renderOrder(Common::Layer layer) const;
 
     bool canEnd() const;
 
     bool IsDead() const { return isDead; }
     void RequestDelete() { isDead = true; }
-    void AddComponent(Component *cpt);
+    void addComponent(Component *cpt);
     void RemoveComponent(Component *cpt);
 
     void Start();
@@ -34,7 +34,7 @@ class GameObject {
     double AngleRad() const { return angleDeg * M_PI / 180; }
 
     template <class T>
-    T getComponent() const {
+    T GetComponent() const {
         for (Component *component : components)
             if (T t = dynamic_cast<T>(component)) return t;
 
@@ -45,7 +45,7 @@ class GameObject {
     Vec2 gridPosition;
 
     Rect box;
-    bool worldReference = true;
+    bool world_reference = true;
     bool blink = false;
     bool move = false;
     bool fromPlayer = false;
@@ -61,4 +61,4 @@ class GameObject {
     bool isDead;
 };
 
-#endif  // GAMEOBJECT_H
+#endif  // GameObject_H

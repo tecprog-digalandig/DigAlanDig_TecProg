@@ -3,7 +3,7 @@
 #include "Enemy.h"
 #include "Game.h"
 
-void EnemySpawn::update(float delta_time) {
+void EnemySpawn::Update(float delta_time) {
     while (currentY <
            ((int)(((Camera::pos.y + Camera::screenSize.y) /
                    Game::getInstance()->getCurrentState().GetGridSize()) +
@@ -21,7 +21,7 @@ void EnemySpawn::update(float delta_time) {
                     Game::getInstance()->getCurrentState().GetGridSize() / 2;
                 go->gridPosition.x = x;
                 go->gridPosition.y = currentY;
-                go->AddComponent(new Enemy(*go, enemy));
+                go->addComponent(new Enemy(*go, enemy));
                 Game::getInstance()->getGridControl()->AddEnemy(go);
                 Game::getInstance()->getCurrentState().AddObject(go);
             }

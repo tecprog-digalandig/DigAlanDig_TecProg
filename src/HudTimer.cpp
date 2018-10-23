@@ -5,15 +5,15 @@ HudTimer::HudTimer(GameObject& associated)
     Vec2 center = associated.box.Center();
 
     bg = new Sprite(associated, "assets/hud/timerbg.png");
-    associated.box.SetCenter(center);
+    associated.box.setCenter(center);
     boxbg = associated.box;
 
     meter = new Sprite(associated, "assets/hud/raio.png", 3, 1e9);
-    associated.box.SetCenter(center);
+    associated.box.setCenter(center);
     boxmeter = associated.box;
 
     fg = new Sprite(associated, "assets/hud/timerfg.png");
-    associated.box.SetCenter(center);
+    associated.box.setCenter(center);
     boxfg = associated.box;
 
     moveLenght = boxbg.w / 2 - boxmeter.w / 2;
@@ -27,7 +27,7 @@ void HudTimer::render(Common::Layer layer) const {
     bg->render(layer);
 
     associated.box = boxmeter;
-    associated.box.x += moveLenght * -input.GetDeltaRhythm();
+    associated.box.x += moveLenght * -input.getDeltaRhythm();
     SetMeterFrame();
     meter->render(layer);
 
@@ -51,8 +51,8 @@ void HudTimer::SetMeterFrame() const {
     }
 }
 
-void HudTimer::update(float delta_time) {
-    if (std::abs(input.GetDeltaRhythm()) < 0.5) {
+void HudTimer::Update(float delta_time) {
+    if (std::abs(input.getDeltaRhythm()) < 0.5) {
         meter->setFrame(2);
         meter->SetScaleX(1.5);
     } else {

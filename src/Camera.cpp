@@ -20,12 +20,12 @@ void Camera::Unfollow() { focus = nullptr; }
 
 Vec2 Camera::Center() { return pos + screenSize / 2; }
 
-void Camera::RhythmUpdate() {
+void Camera::rhythmUpdate() {
     if (focus) {
         if (offset.y > (focus->box.y +
                         Game::getInstance()->getCurrentState().GetGridSize()) &&
-            focus->getComponent<Alan *>()->GetHP() > 0) {
-            focus->getComponent<Alan *>()->takeDamage();
+            focus->GetComponent<Alan *>()->getHP() > 0) {
+            focus->GetComponent<Alan *>()->takeDamage();
         }
     }
 }
@@ -59,10 +59,10 @@ void Camera::Update(float delta_time) {
             Vec2 focusGridPos = focus->getGridPosition();
             TileMap *tileMap = Game::getInstance()->getCurrentState().tileMap;
 
-            if (focus->getComponent<AlanAnimation *>()->getCurrentState() ==
-                    AlanAnimation::State::DEAD ||
-                focus->getComponent<AlanAnimation *>()->getCurrentState() ==
-                    AlanAnimation::State::DANCIN) {
+            if (focus->GetComponent<AlanAnimation *>()->getCurrentState() ==
+                    AlanAnimation::State::dead ||
+                focus->GetComponent<AlanAnimation *>()->getCurrentState() ==
+                    AlanAnimation::State::dancin) {
                 if (offset.y >
                         ((focusGridPos.y + 1) * 100 - screenSize.y / 2) &&
                     offset.y > 0) {
@@ -109,7 +109,7 @@ void Camera::Update(float delta_time) {
     }
 }
 
-void Camera::Shake(int intensity, float duration) {
+void Camera::shakefunc(int intensity, float duration) {
     shakeIntensity = intensity;
     shakeDuration = duration;
 }
