@@ -45,7 +45,7 @@ void Sprite::setFrame(int frame) {
 void Sprite::render(Common::Layer layer) const {
     if (isOpen()) {
         Vec2 offset;
-        if (associated.worldReference) offset = Camera::pos;
+        if (associated.world_reference) offset = Camera::pos;
         Rect dst(associated.box.pos - offset, {(double)width, (double)height});
 
         if (scale.x != 1 || scale.y != 1) dst.Scale(scale);
@@ -57,7 +57,7 @@ void Sprite::render(Common::Layer layer) const {
     }
 }
 
-void Sprite::update(float delta_time) {
+void Sprite::Update(float delta_time) {
     timeElapsed += delta_time;
 
     selfDestructCount.Update(delta_time);
@@ -67,7 +67,7 @@ void Sprite::update(float delta_time) {
         return;
     }
 
-    if (associated.getComponent<Alan *>() != nullptr) {
+    if (associated.GetComponent<Alan *>() != nullptr) {
         AlanUpdate(delta_time);
         return;
     } else {

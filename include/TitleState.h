@@ -15,7 +15,7 @@ class TitleState : public State {
     TitleState();
     ~TitleState() {}
     void LoadAssets();
-    void update(float delta_time);
+    void Update(float delta_time);
     void render() const;
     void rhythmUpdate();
     void Start();

@@ -10,7 +10,7 @@ void BigAlan::Update(float delta_time) {
     int diffCombo = std::abs(combo - oldCombo);
     oldCombo = combo;
 
-    if(Game::getInstance()->getGridControl()->GetAlan().lock()->getComponent<AlanAnimation *>()->getCurrentState() == AlanAnimation::State::dead){
+    if(Game::getInstance()->getGridControl()->GetAlan().lock()->GetComponent<AlanAnimation *>()->getCurrentState() == AlanAnimation::State::dead){
         if(currentState != BAState::TRASH){
             currentState = BAState::TRASH;
             sprite->Open(state[currentState], 0);

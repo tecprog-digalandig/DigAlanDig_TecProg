@@ -23,7 +23,7 @@ class Item : public Component
           center(newCenter),
           numberCenter(newNumberCenter) 
         {
-            //bg = new sprite(associated, "assets/hud/ovocinza.png");
+            //bg = new Sprite(associated, "assets/hud/ovocinza.png");
         }
 
         ~Item() 
@@ -31,7 +31,7 @@ class Item : public Component
             delete bg; 
         }
 
-        void update(float delta_time) {}
+        void Update(float delta_time) {}
 
         void rhythmUpdate() {}
 
@@ -41,7 +41,7 @@ class Item : public Component
 
         Sprite* bg;
         Vec2 center, numberCenter;
-        int sprite_count = 1;
+        int Sprite_count = 1;
 };
 
 class AlanItemCount : public Component 
@@ -55,7 +55,7 @@ class AlanItemCount : public Component
             item_count_item.clear();
         }
 
-        void update(float delta_time) {}
+        void Update(float delta_time) {}
 
         void rhythmUpdate() {}
 
@@ -66,7 +66,7 @@ class AlanItemCount : public Component
         void itemCollected(int item_type) 
         {
             if (item_count[item_type] > 0)
-            item_count_item[item_type]->getComponent<Sprite*>()->setFrame(
+            item_count_item[item_type]->GetComponent<Sprite*>()->setFrame(
                 --item_count[item_type]);
         }
 

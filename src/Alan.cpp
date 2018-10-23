@@ -12,35 +12,35 @@ Alan::Alan(GameObject &associated)
 void Alan::getMovement() 
 {
     if (moved ||
-        associated.getComponent<AlanActionControl *>()->getMovementDirection())
+        associated.GetComponent<AlanActionControl *>()->getMovementDirection())
         return;
     //
     if (input.actionPress(input.dig_up)) 
     {
-        associated.getComponent<AlanActionControl *>()->setMovementDirection(
+        associated.GetComponent<AlanActionControl *>()->setMovementDirection(
             AlanActionControl::Direction::up);
         moved = true;
     }
     if (input.actionPress(input.dig_down)) 
     {
-        associated.getComponent<AlanActionControl *>()->setMovementDirection(
+        associated.GetComponent<AlanActionControl *>()->setMovementDirection(
             AlanActionControl::Direction::down);
         moved = true;
     }
     if (input.actionPress(input.dig_left)) 
     {
-        associated.getComponent<AlanActionControl *>()->setMovementDirection(
+        associated.GetComponent<AlanActionControl *>()->setMovementDirection(
             AlanActionControl::Direction::left);
         moved = true;
     }
     if (input.actionPress(input.dig_right)) 
     {
-        associated.getComponent<AlanActionControl *>()->setMovementDirection(
+        associated.GetComponent<AlanActionControl *>()->setMovementDirection(
             AlanActionControl::Direction::right);
         moved = true;
     }
 
-    if (associated.getComponent<AlanActionControl *>()
+    if (associated.GetComponent<AlanActionControl *>()
             ->getMovementDirection()) 
             {
         float duty = 0.6;
@@ -51,16 +51,16 @@ void Alan::getMovement()
             Game::getInstance()->combo++;
         } else 
         {
-            Camera::shake();
+            Camera::shakefunc();
             Game::getInstance()->combo = 0;
             std::cout << "\n\nMiss: " << input.getDeltaRhythm() << "\n\n";
         }
     }
 
-    Game::getInstance()->getGridControl()->checkEnemyAlanCollision(true);
+    Game::getInstance()->getGridControl()->CheckEnemyAlanCollision(true);
 }
 
-void Alan::update(float delta_time) 
+void Alan::Update(float delta_time) 
 {
     if (max_position < std::max(associated.gridPosition.y + 4, 7.0)) 
     {

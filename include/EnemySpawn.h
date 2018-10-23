@@ -19,7 +19,7 @@ class EnemySpawn : public Component {
 
     ~EnemySpawn() {}
 
-    void update(float delta_time);
+    void Update(float delta_time);
     void rhythmUpdate() {}
     void RhythmReset() {}
     void render(Common::Layer layer) const {}

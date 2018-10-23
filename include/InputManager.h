@@ -10,10 +10,10 @@ class InputManager {
   public:
     enum Action {
         NONE,
-        DIG_DOWN,
-        DIG_left,
-        DIG_right,
-        DIG_UP,
+        dig_down,
+        dig_left,
+        dig_right,
+        dig_up,
         ENTER,
         ESCAPE,
         FULLSCREEN,
@@ -47,7 +47,7 @@ class InputManager {
     }
 
     bool ActionDown(Action button) const { return actionState[button]; }
-    bool ActionPress(Action button) const {
+    bool actionPress(Action button) const {
         return (frame == actionUpdate[button]) && actionState[button];
     }
     bool ActionRelease(Action button) const {
@@ -81,9 +81,9 @@ class InputManager {
 
     float scaleFactor() const;
 
-    float GetDeltaRhythm() const { return deltaRhythm; }
+    float getDeltaRhythm() const { return deltaRhythm; }
 
-    void Move();
+    void move();
 
     float Moved();
 

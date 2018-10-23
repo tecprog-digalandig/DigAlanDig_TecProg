@@ -45,7 +45,7 @@ void HudMeter::setMeter(int i) const {
     int tmp;
 
     if (isHeart)
-        tmp = alan.lock()->getComponent<Alan*>()->GetHP() - i * 2;
+        tmp = alan.lock()->GetComponent<Alan*>()->getHP() - i * 2;
     else {
         if (!Game::getInstance()->combo)
             tmp = 0;

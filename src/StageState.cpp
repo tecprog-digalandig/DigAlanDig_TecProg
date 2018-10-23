@@ -46,38 +46,38 @@ void StageState::LoadAssets() {
 
     // BG
     GameObject *backG = new GameObject(Common::Layer::BG);
-    backG->worldReference = false;
+    backG->world_reference = false;
     objectArray.emplace_back(backG);
-    backG->AddComponent(new bgCircularY(*backG, "assets/img/bg1.png"));
-    backG->AddComponent(new ParallaxY(*backG, 0.1));
+    backG->addComponent(new bgCircularY(*backG, "assets/img/bg1.png"));
+    backG->addComponent(new ParallaxY(*backG, 0.1));
     backG->box.pos = {212, 0};
 
     backG = new GameObject(Common::Layer::BG);
-    backG->worldReference = false;
+    backG->world_reference = false;
     objectArray.emplace_back(backG);
-    backG->AddComponent(new bgCircularY(*backG, "assets/img/bg2.png"));
-    backG->AddComponent(new ParallaxY(*backG, 0.3));
+    backG->addComponent(new bgCircularY(*backG, "assets/img/bg2.png"));
+    backG->addComponent(new ParallaxY(*backG, 0.3));
     backG->box.pos = {212, 0};
 
     backG = new GameObject(Common::Layer::BG);
-    backG->worldReference = false;
+    backG->world_reference = false;
     objectArray.emplace_back(backG);
-    backG->AddComponent(new bgCircularY(*backG, "assets/img/bg3.png"));
-    backG->AddComponent(new ParallaxY(*backG, 0.5));
+    backG->addComponent(new bgCircularY(*backG, "assets/img/bg3.png"));
+    backG->addComponent(new ParallaxY(*backG, 0.5));
     backG->box.pos = {212, 0};
 
     backG = new GameObject(Common::Layer::BG);
-    backG->worldReference = false;
+    backG->world_reference = false;
     objectArray.emplace_back(backG);
-    backG->AddComponent(new bgCircularY(*backG, "assets/img/bg4.png"));
-    backG->AddComponent(new ParallaxY(*backG, 0.7));
+    backG->addComponent(new bgCircularY(*backG, "assets/img/bg4.png"));
+    backG->addComponent(new ParallaxY(*backG, 0.7));
     backG->box.pos = {212, 0};
 
     backG = new GameObject();
-    backG->worldReference = false;
+    backG->world_reference = false;
     objectArray.emplace_back(backG);
-    backG->AddComponent(new bgCircularY(*backG, "assets/img/bg5.png"));
-    backG->AddComponent(new ParallaxY(*backG, 0.9));
+    backG->addComponent(new bgCircularY(*backG, "assets/img/bg5.png"));
+    backG->addComponent(new ParallaxY(*backG, 0.9));
     backG->box.pos = {212, 0};
 
     // TileMap
@@ -85,7 +85,7 @@ void StageState::LoadAssets() {
         new GameObject(Common::Layer::DEFAULT | Common::Layer::LIGHT);
     objectArray.emplace_back(gm);
     tileMap = new TileMap(*gm, "assets/map/manager.json", true);
-    gm->AddComponent(tileMap);
+    gm->addComponent(tileMap);
 
     Game::getInstance()->getGridControl()->SetTileMap(tileMap);
 
@@ -99,39 +99,39 @@ void StageState::LoadAssets() {
 
     Game::getInstance()->getGridControl()->SetAlan(GetObjectPrt(alanGO));
 
-    alanGO->AddComponent(
+    alanGO->addComponent(
         new Sprite(*alanGO, "assets/img/alan/IDLE.png", 2, 0.2));
-    alanGO->AddComponent(new Sound(*alanGO));
+    alanGO->addComponent(new Sound(*alanGO));
 
     Alan *lilAlan = new Alan(*alanGO);
-    alanGO->AddComponent(lilAlan);
+    alanGO->addComponent(lilAlan);
 
-    alanGO->AddComponent(new Interpol(*alanGO));
-    alanGO->AddComponent(new AlanAnimation(*alanGO));
-    alanGO->AddComponent(new AlanActionControl(*alanGO, GetGridSize()));
+    alanGO->addComponent(new Interpol(*alanGO));
+    alanGO->addComponent(new AlanAnimation(*alanGO));
+    alanGO->addComponent(new AlanActionControl(*alanGO, GetGridSize()));
 
     GameObject *alanL = new GameObject(Common::Layer::LIGHT);
     objectArray.emplace_back(alanL);
-    alanL->AddComponent(new Light(*alanL, GetObjectPrt(alanGO)));
+    alanL->addComponent(new Light(*alanL, GetObjectPrt(alanGO)));
 
     Camera::Follow(alanGO);
 
     GameObject *esGO = new GameObject();
-    esGO->AddComponent(new EnemySpawn(*esGO, tileMap));
+    esGO->addComponent(new EnemySpawn(*esGO, tileMap));
     objectArray.emplace_back(esGO);
 
     GameObject *frameG = new GameObject(Common::Layer::HUD);
-    frameG->worldReference = false;
+    frameG->world_reference = false;
     objectArray.emplace_back(frameG);
-    frameG->AddComponent(new bgCircularY(*frameG, "assets/img/framebg.png"));
-    frameG->AddComponent(new ParallaxY(*frameG, 1));
+    frameG->addComponent(new bgCircularY(*frameG, "assets/img/framebg.png"));
+    frameG->addComponent(new ParallaxY(*frameG, 1));
     frameG->box.pos = {0, 0};
 
     // MiniMap
     GameObject *MiniMapTile = new GameObject(Common::Layer::HUD);
-    MiniMapTile->worldReference = false;
+    MiniMapTile->world_reference = false;
     MiniMapTile->box.pos = {30, 180};
-    MiniMapTile->AddComponent(
+    MiniMapTile->addComponent(
         new Sprite(*MiniMapTile, "assets/img/bgminimap.png"));
     objectArray.emplace_back(MiniMapTile);
 
@@ -140,67 +140,67 @@ void StageState::LoadAssets() {
     TileSet *minitileSet = new TileSet("assets/map/miniground.json");
     MiniTileMap *miniTilemap = new MiniTileMap(*MiniMapTile, minitileSet,
                                                tileMap, GetObjectPrt(alanGO));
-    MiniMapTile->AddComponent(miniTilemap);
+    MiniMapTile->addComponent(miniTilemap);
     objectArray.emplace_back(MiniMapTile);
 
     // Big-Alan
     GameObject *bigAlan = new GameObject(Common::Layer::HUD);
     objectArray.emplace_back(bigAlan);
-    bigAlan->AddComponent(new Sprite(*bigAlan, "assets/img/mooda.png", 2, -1));
-    bigAlan->AddComponent(new BigAlan(*bigAlan));
-    bigAlan->worldReference = false;
+    bigAlan->addComponent(new Sprite(*bigAlan, "assets/img/mooda.png", 2, -1));
+    bigAlan->addComponent(new BigAlan(*bigAlan));
+    bigAlan->world_reference = false;
     bigAlan->box.pos = {0, Camera::screenSize.y - bigAlan->box.h};
 
     // HUD
     GameObject *timerHud = new GameObject(Common::Layer::HUD);
     objectArray.emplace_back(timerHud);
-    timerHud->worldReference = false;
+    timerHud->world_reference = false;
     timerHud->box.pos = {212 + 600 / 2, Camera::screenSize.y - 50};
-    timerHud->AddComponent(new HudTimer(*timerHud));
+    timerHud->addComponent(new HudTimer(*timerHud));
 
     GameObject *meterHeart = new GameObject(Common::Layer::HUD);
     objectArray.emplace_back(meterHeart);
-    meterHeart->worldReference = false;
+    meterHeart->world_reference = false;
     meterHeart->box.pos = {30, 30};
-    meterHeart->AddComponent(new HeartMeter(
+    meterHeart->addComponent(new HeartMeter(
         *meterHeart, "assets/hud/barravida.png", "assets/hud/coracao.png"));
-    meterHeart->getComponent<HeartMeter *>()->setIsHeart(true);
-    meterHeart->getComponent<HeartMeter *>()->SetAlan(GetObjectPrt(alanGO));
+    meterHeart->GetComponent<HeartMeter *>()->setIsHeart(true);
+    meterHeart->GetComponent<HeartMeter *>()->SetAlan(GetObjectPrt(alanGO));
 
     GameObject *meterLight = new GameObject(Common::Layer::HUD);
     objectArray.emplace_back(meterLight);
-    meterLight->worldReference = false;
+    meterLight->world_reference = false;
     meterLight->box.pos = {30, 100};
-    meterLight->AddComponent(new LightMeter(
+    meterLight->addComponent(new LightMeter(
         *meterLight, "assets/hud/barraluz.png", "assets/hud/raio.png"));
-    meterLight->getComponent<LightMeter *>()->setIsHeart(false);
-    meterLight->getComponent<LightMeter *>()->SetAlan(GetObjectPrt(alanGO));
+    meterLight->GetComponent<LightMeter *>()->setIsHeart(false);
+    meterLight->GetComponent<LightMeter *>()->SetAlan(GetObjectPrt(alanGO));
 
     GameObject *counterMetal = new GameObject(Common::Layer::HUD);
     objectArray.emplace_back(counterMetal);
-    counterMetal->worldReference = false;
+    counterMetal->world_reference = false;
     counterMetal->box.pos = {850, 10};
-    counterMetal->AddComponent(new HudCounter(
+    counterMetal->addComponent(new HudCounter(
         *counterMetal, "assets/hud/item1.png", "assets/hud/metali.png"));
 
     GameObject *counterCristal = new GameObject(Common::Layer::HUD);
     objectArray.emplace_back(counterCristal);
-    counterCristal->worldReference = false;
+    counterCristal->world_reference = false;
     counterCristal->box.pos = {850, 160};
-    counterCristal->AddComponent(new HudCounter(
+    counterCristal->addComponent(new HudCounter(
         *counterCristal, "assets/hud/item2.png", "assets/hud/cristali.png"));
 
     GameObject *counterPetro = new GameObject(Common::Layer::HUD);
     objectArray.emplace_back(counterPetro);
-    counterPetro->worldReference = false;
+    counterPetro->world_reference = false;
     counterPetro->box.pos = {850, 310};
-    counterPetro->AddComponent(new HudCounter(
+    counterPetro->addComponent(new HudCounter(
         *counterPetro, "assets/hud/item3.png", "assets/hud/petroleoi.png"));
 
     GameObject *item_count = new GameObject(Common::Layer::HUD);
     objectArray.emplace_back(item_count);
-    item_count->worldReference = false;
-    item_count->AddComponent(new AlanItemCount(*item_count));
+    item_count->world_reference = false;
+    item_count->addComponent(new AlanItemCount(*item_count));
     lilAlan->setItemCount(item_count);
 
     // Music
@@ -216,7 +216,7 @@ void StageState::Start() {
     StartArray();
 }
 
-void StageState::update(float delta_time) {
+void StageState::Update(float delta_time) {
     Camera::Update(delta_time);
 
     if (beat) {
@@ -238,7 +238,7 @@ void StageState::rhythmUpdate() {
         music.play_func();
         musicPlaying = true;
     }
-    RhythmUpdateArray();
+    rhythmUpdateArray();
 }
 
 void StageState::RhythmReset() { RhythmResetArray(); }

@@ -20,7 +20,7 @@ void AlanActionControl::fallin(float delta_time)
 {
     if (grids_left > 0) grids_left--;
     associated.gridPosition.y++;
-    associated.getComponent<Sprite *>()->timeElapsedReset();
+    associated.GetComponent<Sprite *>()->timeElapsedReset();
 }
 
 bool AlanActionControl::isFree() 
@@ -66,7 +66,7 @@ bool AlanActionControl::isBlock()
 
 bool AlanActionControl::canClimb() 
 {
-    return input.keyDown(SDL_SCANCODE_A) && action != Action::WALK;
+    return input.keyDown(SDL_SCANCODE_A) && action != Action::walkin;
 }
 
 bool AlanActionControl::inClimbPosition(AlanAnimation *animation) 
@@ -105,17 +105,17 @@ bool AlanActionControl::isClimbDirectionleft(AlanAnimation *animation)
            animation->getCurrentDirection() != AlanAnimation::Direction::right;
 }
 
-void AlanActionControl::update(float delta_time) 
+void AlanActionControl::Update(float delta_time) 
 {
-    if (!associated.getComponent<Interpol *>()->isMovementDone()) return;
+    if (!associated.GetComponent<Interpol *>()->isMovementDone()) return;
 
-    Alan *alan = associated.getComponent<Alan *>();
-    AlanAnimation *animation = associated.getComponent<AlanAnimation *>();
+    Alan *alan = associated.GetComponent<Alan *>();
+    AlanAnimation *animation = associated.GetComponent<AlanAnimation *>();
     TileMap *tile_map = Game::getInstance()->getCurrentState().tileMap;
-    Sprite *sprite = associated.getComponent<Sprite *>();
+    Sprite *sprite =associated.GetComponent<Sprite *>();
 
     if (alan->getItemCount()
-            ->getComponent<AlanItemCount *>()
+            ->GetComponent<AlanItemCount *>()
             ->collectedAllItens()) {
         if (animation->getCurrentState() != AlanAnimation::State::dancin) 
         {
@@ -183,9 +183,9 @@ void AlanActionControl::update(float delta_time)
         return;
     }
 
-    if (action != Action::WALK) 
+    if (action != Action::walkin) 
     {
-        action = Action::WALK;
+        action = Action::walkin;
     }
     // Up bate na pedra acima dele se houver
     if (movement_direction == Direction::up) 
@@ -201,7 +201,7 @@ void AlanActionControl::update(float delta_time)
                                             associated.gridPosition.y - 1),
                                        TileMap::Layers::ITENS);
                 alan->getItemCount()
-                    ->getComponent<AlanItemCount *>()
+                    ->GetComponent<AlanItemCount *>()
                     ->itemCollected(item_type);
             }
 
@@ -235,7 +235,7 @@ void AlanActionControl::update(float delta_time)
                 Vec2(associated.gridPosition.x, associated.gridPosition.y + 1),
                 TileMap::Layers::ITENS);
             alan->getItemCount()
-                ->getComponent<AlanItemCount *>()
+                ->GetComponent<AlanItemCount *>()
                 ->itemCollected(item_type);
 
             animation->setAction(AlanAnimation::Transition::dig_t,
@@ -277,7 +277,7 @@ void AlanActionControl::update(float delta_time)
                                             associated.gridPosition.y),
                                        TileMap::Layers::ITENS);
                 alan->getItemCount()
-                    ->getComponent<AlanItemCount *>()
+                    ->GetComponent<AlanItemCount *>()
                     ->itemCollected(item_type);
             }
 
@@ -320,7 +320,7 @@ void AlanActionControl::update(float delta_time)
                                             associated.gridPosition.y),
                                        TileMap::Layers::ITENS);
                 alan->getItemCount()
-                    ->getComponent<AlanItemCount *>()
+                    ->GetComponent<AlanItemCount *>()
                     ->itemCollected(item_type);
             }
 

@@ -16,77 +16,77 @@ TitleState::TitleState() {}
 
 void TitleState::LoadAssets() {
     GameObject* gm = new GameObject(Common::Layer::BG);
-    gm->worldReference = false;
+    gm->world_reference = false;
     objectArray.emplace_back(gm);
-    gm->AddComponent(
+    gm->addComponent(
         new Sprite(*gm, "assets/img/HUD e menus/menu principal/Tela_menu.png"));
 
     gm = new GameObject(Common::Layer::BG);
     gm->box.x = 0;
     gm->box.y = 0;
-    gm->worldReference = false;
+    gm->world_reference = false;
     objectArray.emplace_back(gm);
-    gm->AddComponent(new ParallaxX(*gm, 2));
-    gm->AddComponent(new bgCircularX(
+    gm->addComponent(new ParallaxX(*gm, 2));
+    gm->addComponent(new bgCircularX(
         *gm, "assets/img/HUD e menus/menu principal/Espaço Profundo.png"));
 
     gm = new GameObject(Common::Layer::BG);
     gm->box.x = 0;
     gm->box.y = 4300;
-    gm->worldReference = false;
+    gm->world_reference = false;
     objectArray.emplace_back(gm);
-    gm->AddComponent(new ParallaxX(*gm));
-    gm->AddComponent(new bgCircularX(
+    gm->addComponent(new ParallaxX(*gm));
+    gm->addComponent(new bgCircularX(
         *gm, "assets/img/HUD e menus/menu principal/nuvem_1.png"));
 
     gm = new GameObject(Common::Layer::BG);
     gm->box.x = 0;
     gm->box.y = 3500;
-    gm->worldReference = false;
+    gm->world_reference = false;
     objectArray.emplace_back(gm);
-    gm->AddComponent(new ParallaxX(*gm, 2));
-    gm->AddComponent(new bgCircularX(
+    gm->addComponent(new ParallaxX(*gm, 2));
+    gm->addComponent(new bgCircularX(
         *gm, "assets/img/HUD e menus/menu principal/nuvem_2.png"));
 
     gm = new GameObject(Common::Layer::BG);
     gm->box.x = 0;
     gm->box.y = 5000;
-    gm->worldReference = false;
+    gm->world_reference = false;
     objectArray.emplace_back(gm);
-    gm->AddComponent(new ParallaxX(*gm, 3));
-    gm->AddComponent(new bgCircularX(
+    gm->addComponent(new ParallaxX(*gm, 3));
+    gm->addComponent(new bgCircularX(
         *gm, "assets/img/HUD e menus/menu principal/nuvem_3.png"));
 
     gm = new GameObject(Common::Layer::HUD);
-    Sprite* sprite = new Sprite(*gm, "assets/img/title.png");
+    Sprite* sprite =new Sprite(*gm, "assets/img/title.png");
     sprite->SetScaleX(0.45);
-    gm->box.SetCenter(Camera::Center().x / 2, Camera::Center().y - 50);
-    gm->worldReference = false;
+    gm->box.setCenter(Camera::Center().x / 2, Camera::Center().y - 50);
+    gm->world_reference = false;
     objectArray.emplace_back(gm);
-    gm->AddComponent(sprite);
+    gm->addComponent(sprite);
 
     gm = new GameObject(Common::Layer::HUD);
-    sprite = new Sprite(*gm, "assets/img/pressSpace.png");
+    sprite =new Sprite(*gm, "assets/img/pressSpace.png");
     sprite->SetScaleX(0.9);
-    gm->box.SetCenter(Camera::Center().x, Camera::Center().y + 300);
-    gm->worldReference = false;
+    gm->box.setCenter(Camera::Center().x, Camera::Center().y + 300);
+    gm->world_reference = false;
     gm->blink = true;
     objectArray.emplace_back(gm);
-    gm->AddComponent(sprite);
+    gm->addComponent(sprite);
 
     gm = new GameObject(Common::Layer::HUD);
-    sprite = new Sprite(*gm, "assets/img/marmozord_fly.png", 2, -1);
+    sprite =new Sprite(*gm, "assets/img/marmozord_fly.png", 2, -1);
     sprite->SetScaleX(1.4);
-    gm->box.SetCenter(Camera::Center().x + 220, Camera::Center().y);
+    gm->box.setCenter(Camera::Center().x + 220, Camera::Center().y);
     gm->setRect(gm->box);
-    gm->worldReference = false;
+    gm->world_reference = false;
     gm->move = true;
     objectArray.emplace_back(gm);
-    gm->AddComponent(sprite);
+    gm->addComponent(sprite);
 
     Game::getInstance()->StartBeatTime();
 
-    music.Open("assets/audio/menu.ogg");
+    music.isOpen("assets/audio/menu.ogg");
 }
 
 void TitleState::Start() {
@@ -95,9 +95,9 @@ void TitleState::Start() {
     StartArray();
 }
 
-void TitleState::update(float delta_time) {
+void TitleState::Update(float delta_time) {
     input.title = true;
-    if (input.ActionPress(input.ENTER))
+    if (input.actionPress(input.ENTER))
         Game::getInstance()->Push(new StageState());
     UpdateArray(delta_time);
 }
@@ -109,6 +109,6 @@ void TitleState::rhythmUpdate() {
         music.play_func();
         musicPlaying = true;
     }
-    RhythmUpdateArray();
+    rhythmUpdateArray();
     input.shouldShow = !input.shouldShow;
 }

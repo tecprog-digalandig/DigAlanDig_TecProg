@@ -8,7 +8,7 @@ class BigAlan : public Component {
     enum BAState { TRASH = 0, DECENT, GOOD, STARTER, MAXSTATE };
 
     explicit BigAlan(GameObject &associated) : Component(associated) {
-        sprite = associated.getComponent<Sprite *>();
+        sprite =associated.GetComponent<Sprite *>();
         state[BAState::STARTER] = {"assets/img/mooda.png", 2, 2, -1};
         state[BAState::GOOD] = {"assets/img/mooda.png", 2, 2, -1};
         state[BAState::DECENT] = {"assets/img/mood2.png", 1, 1, 1};
@@ -16,7 +16,7 @@ class BigAlan : public Component {
     }
 
     void Update(float delta_time);
-    void RhythmUpdate() {
+    void rhythmUpdate() {
         associated.box.y += offset;
         offset = -offset;
     }

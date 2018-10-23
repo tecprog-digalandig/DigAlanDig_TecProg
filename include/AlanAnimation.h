@@ -56,7 +56,7 @@ class AlanAnimation : public Component
 
     ~AlanAnimation();
 
-    void update(float delta_time);
+    void Update(float delta_time);
 
     void rhythmUpdate() {}
 
