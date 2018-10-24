@@ -1,5 +1,6 @@
 #include "Alan.h"
 #include <algorithm>
+#include <assert.h>
 #include "AlanAnimation.h"
 #include "Interpol.h"
 #include "Sprite.h"
@@ -13,6 +14,7 @@ void Alan::getMovement()
 {
     if (moved ||
         associated.GetComponent<AlanActionControl *>()->getMovementDirection())
+        assert(NULL);
         return;
     //
     if (input.actionPress(input.dig_up)) 
@@ -20,30 +22,35 @@ void Alan::getMovement()
         associated.GetComponent<AlanActionControl *>()->setMovementDirection(
             AlanActionControl::Direction::up);
         moved = true;
+        assert(moved == true);
     }
     if (input.actionPress(input.dig_down)) 
     {
         associated.GetComponent<AlanActionControl *>()->setMovementDirection(
             AlanActionControl::Direction::down);
         moved = true;
+        assert(moved == true);
     }
     if (input.actionPress(input.dig_left)) 
     {
         associated.GetComponent<AlanActionControl *>()->setMovementDirection(
             AlanActionControl::Direction::left);
         moved = true;
+        assert(moved == true);
     }
     if (input.actionPress(input.dig_right)) 
     {
         associated.GetComponent<AlanActionControl *>()->setMovementDirection(
             AlanActionControl::Direction::right);
         moved = true;
+        assert(moved == true);
     }
 
     if (associated.GetComponent<AlanActionControl *>()
             ->getMovementDirection()) 
             {
         float duty = 0.6;
+        assert(duty != NULL);
         input.move();
         if (std::abs(input.getDeltaRhythm()) < duty) 
         {
@@ -65,6 +72,7 @@ void Alan::Update(float delta_time)
     if (max_position < std::max(associated.gridPosition.y + 4, 7.0)) 
     {
         max_position = std::max(associated.gridPosition.y + 4, 7.0);
+        assert(max_position != NULL);
     }
 
     getMovement();

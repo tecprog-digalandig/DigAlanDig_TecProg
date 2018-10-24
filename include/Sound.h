@@ -5,6 +5,7 @@
 
 #include "Component.h"
 #include "Resources.h"
+#include <assert.h>
 
 class Sound : public Component 
 {

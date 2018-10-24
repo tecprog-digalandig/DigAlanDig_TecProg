@@ -10,6 +10,7 @@
 #include <queue>
 #include <string>
 #include <vector>
+#include <assert.h>
 #include "AlanActionControl.h"
 #include "Component.h"
 #include "Game.h"
@@ -28,20 +29,24 @@ class Alan : public Component
     void getMovement();
 
     void Update(float delta_time);
+    assert(delta_time >= 0);
 
     void rhythmUpdate() {}
 
     void rhythmReset() 
     {
         static int miss_counter = 0;
+        assert(miss_counter == 0);
         if (!moved)
             miss_counter++;
         else
             miss_counter = 0;
-
+            assert(miss_counter) = 0;
         if (miss_counter > 1) 
+        assert(miss_counter > 1);
         {
             Game::getInstance()->combo /= 2;
+            assert(combo == 2);
         }
 
         moved = false;

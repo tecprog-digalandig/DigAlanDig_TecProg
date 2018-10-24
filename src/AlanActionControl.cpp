@@ -4,6 +4,7 @@
 #include "Game.h"
 #include "Interpol.h"
 #include "Sprite.h"
+#include <assert.h>
 
 bool AlanActionControl::shouldFall() 
 {
@@ -18,6 +19,7 @@ bool AlanActionControl::shouldFall()
 
 void AlanActionControl::fallin(float delta_time) 
 {
+    assert(delta_time >= 0);
     if (grids_left > 0) grids_left--;
     associated.gridPosition.y++;
     associated.GetComponent<Sprite *>()->timeElapsedReset();
@@ -107,6 +109,7 @@ bool AlanActionControl::isClimbDirectionleft(AlanAnimation *animation)
 
 void AlanActionControl::Update(float delta_time) 
 {
+    assert(delta_time >= 0);
     if (!associated.GetComponent<Interpol *>()->isMovementDone()) return;
 
     Alan *alan = associated.GetComponent<Alan *>();
@@ -148,7 +151,9 @@ void AlanActionControl::Update(float delta_time)
         {
             movement_direction = Direction::down;
             action = Action::fallin_var;
+            assert(action != NULL);
             int y = associated.gridPosition.y + 1;
+            assert(y != NULL);
             while (!tile_map->At(associated.gridPosition.x, y)) 
             {
                 grids_left++;
@@ -169,15 +174,17 @@ void AlanActionControl::Update(float delta_time)
                              AlanAnimation::Direction::left);
         action = Action::standin;
         movement_direction = Direction::NONE;
+        assert(movement_direction != NULL);
     }
 
-    if (movement_direction == Direction::NONE) 
+    if (movement_direction == Direction::NONE)
     {
         if (action != Action::climbin || !input.keyDown(SDL_SCANCODE_A)) 
         {
             animation->setAction(AlanAnimation::Transition::none_t,
                                  AlanAnimation::Direction::left);
             action = Action::standin;
+            assert(action != NULL);
         }
 
         return;
@@ -186,6 +193,7 @@ void AlanActionControl::Update(float delta_time)
     if (action != Action::walkin) 
     {
         action = Action::walkin;
+        assert(action != NULL);
     }
     // Up bate na pedra acima dele se houver
     if (movement_direction == Direction::up) 
@@ -207,16 +215,20 @@ void AlanActionControl::Update(float delta_time)
 
             if (!animation_on_going) 
             {
+                assert(animation != nullptr);
                 animation->setAction(AlanAnimation::Transition::dig_t,
                                      AlanAnimation::Direction::up);
                 animation_on_going = true;
             }
+
             if (sprite->frameTimePassed()) 
             {
                 tile_map->getDamageGround(alan->getDamage(),
                                          Vec2(associated.gridPosition.x,
                                               associated.gridPosition.y - 1));
                 movement_direction = Direction::NONE;
+                assert(movement_direction != NULL);
+                assert(animation_on_going == false);
                 animation_on_going = false;
             }
 
@@ -224,9 +236,11 @@ void AlanActionControl::Update(float delta_time)
         } else 
         {
             movement_direction = Direction::NONE;
+            assert(movement_direction != NULL);
         }
         // Down bate na pedra embaixo dele
-    } else if (movement_direction == Direction::down) 
+    } 
+    else if (movement_direction == Direction::down) 
     {
         if (int item_type = Game::getInstance()->getGridControl()->isItem(Vec2(
                 associated.gridPosition.x, associated.gridPosition.y + 1))) 
@@ -245,11 +259,13 @@ void AlanActionControl::Update(float delta_time)
                 alan->getDamage(),
                 Vec2(associated.gridPosition.x, associated.gridPosition.y + 1));
             movement_direction = Direction::NONE;
+            assert(movement_direction != NULL);
             associated.gridPosition.y++;
         } else 
         {
             if (!animation_on_going) 
             {
+                assert(animation_on_going != NULL);
                 animation->setAction(AlanAnimation::Transition::dig_t,
                                      AlanAnimation::Direction::down);
                 animation_on_going = true;
@@ -260,6 +276,8 @@ void AlanActionControl::Update(float delta_time)
                                          Vec2(associated.gridPosition.x,
                                               associated.gridPosition.y + 1));
                 movement_direction = Direction::NONE;
+                assert(movement_direction != NULL);
+                assert(animation_on_going == false);
                 animation_on_going = false;
             }
         }
@@ -269,6 +287,7 @@ void AlanActionControl::Update(float delta_time)
         // pedra
         if (!isFree()) 
         {
+            assert(movement_direction != NULL);
             if (int item_type = Game::getInstance()->getGridControl()->isItem(
                     Vec2(associated.gridPosition.x - 1,
                          associated.gridPosition.y))) 
@@ -296,6 +315,8 @@ void AlanActionControl::Update(float delta_time)
                                                   associated.gridPosition.y));
                 }
                 movement_direction = Direction::NONE;
+                assert(movement_direction != NULL);
+                assert(animation_on_going == false);
                 animation_on_going = false;
             }
 
@@ -305,6 +326,7 @@ void AlanActionControl::Update(float delta_time)
                                  AlanAnimation::Direction::left);
 
             movement_direction = Direction::NONE;
+            assert(movement_direction != NULL);
             associated.gridPosition.x--;
         }
     } else 
@@ -339,6 +361,8 @@ void AlanActionControl::Update(float delta_time)
                                                   associated.gridPosition.y));
                 }
                 movement_direction = Direction::NONE;
+                assert(movement_direction != NULL);
+                assert(animation_on_going == false);
                 animation_on_going = false;
             }
 
@@ -350,10 +374,12 @@ void AlanActionControl::Update(float delta_time)
             movement_direction = Direction::NONE;
             associated.gridPosition.x++;
             animation_on_going = false;
+            assert(animation_on_going == false);
         }
     }
     if (animation->getCurrentState() == AlanAnimation::State::IDLE) 
     {
         animation_on_going = false;
+        assert(animation_on_going == false);
     }
 }

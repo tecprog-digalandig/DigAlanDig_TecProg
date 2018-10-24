@@ -8,6 +8,7 @@
 
 #include <memory>
 #include <string>
+#include <assert.h>
 #include <unordered_map>
 
 class Resources 

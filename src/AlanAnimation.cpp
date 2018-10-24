@@ -2,6 +2,7 @@
 #include "Alan.h"
 #include "AlanActionControl.h"
 #include "Sound.h"
+#include <assert.h>
 
 AlanAnimation::AlanAnimation(GameObject &associated) : Component(associated) 
 {
@@ -40,27 +41,36 @@ void AlanAnimation::playSound(Transition trans)
 
 void AlanAnimation::Update(float delta_time) 
 {
+    assert(delta_time >= 0);
     if (current_state == State::dancin || current_state == State::dead) return;
-
+    assert(current_state != NULL);
     Sprite *sprite =associated.GetComponent<Sprite *>();
     Alan *alan = associated.GetComponent<Alan *>();
 
     if (sprite->frameTimePassed() &&
         alan->getMovementDirection() == AlanActionControl::Direction::NONE &&
         current_state != State::fallin_var) 
+        assert(current_state != NULL);
         {
         if ((old_state == State::climbin || current_state == State::climbin) &&
             current_state != State::IDLE) 
+            assert(current_state != NULL);
+            assert(old_state != NULL);
             {
             old_state = current_state;
+            assert(old_state == current_state);
+            assert(current_state != NULL);
             current_state = State::climbin;
             if (current_direction != Direction::left &&
                 current_direction != Direction::right)
+                assert(current_direction == old_direction);
                 current_direction = old_direction;
             sprite->Open(AState[current_state], current_direction);
         } else 
         {
+            assert(old_state == current_state);
             old_state = current_state;
+            assert(current_state != NULL);
             current_state = State::IDLE;
             sprite->Open(AState[current_state], Direction::left);
         }
@@ -69,12 +79,15 @@ void AlanAnimation::Update(float delta_time)
 
 void AlanAnimation::setAction(Transition trans, Direction dir) 
 {
-    switch (current_state) 
+    assert(current_state);
+    switch (current_state)
+     
     {
         case none_s:
+            assert(old_state == current_state);
             old_state = current_state;
             std::cout << "STATE NONE!" << std::endl;
-
+            assert(current_state != NULL);
             current_state = State::IDLE;
             break;
 
@@ -82,32 +95,44 @@ void AlanAnimation::setAction(Transition trans, Direction dir)
             switch (trans) 
             {
                 case fall:
+                    assert(old_state == current_state);
                     old_state = current_state;
+                    assert(current_state != NULL);
                     current_state = State::fallin_var;
                     break;
 
                 case WALK:
+                    assert(old_state == current_state);
                     old_state = current_state;
+                    assert(current_state != NULL);
                     current_state = State::walkin;
                     break;
 
                 case climb:
+                    assert(old_state == current_state);
                     old_state = current_state;
+                    assert(current_state != NULL);
                     current_state = State::climbin;
                     break;
 
                 case dig_t:
+                    assert(old_state == current_state);
                     old_state = current_state;
+                    assert(current_state != NULL);
                     current_state = State::dig;
                     break;
 
                 case dance:
+                    assert(old_state == current_state);
                     old_state = current_state;
+                    assert(current_state != NULL);
                     current_state = State::dancin;
                     break;
 
                 case die:
+                    assert(old_state == current_state);
                     old_state = current_state;
+                    assert(current_state != NULL);
                     current_state = State::dead;
                     break;
 
@@ -121,22 +146,30 @@ void AlanAnimation::setAction(Transition trans, Direction dir)
             switch (trans) 
             {
                 case fall:
+                    assert(old_state == current_state);
                     old_state = current_state;
+                    assert(current_state != NULL);
                     current_state = State::fallin_var;
                     break;
 
                 case none_t:
+                    assert(old_state == current_state);
                     old_state = current_state;
+                    assert(current_state != NULL);
                     current_state = State::IDLE;
                     break;
 
                 case dance:
+                    assert(old_state == current_state);
                     old_state = current_state;
+                    assert(current_state != NULL);
                     current_state = State::dancin;
                     break;
 
                 case die:
+                    assert(old_state == current_state);
                     old_state = current_state;
+                    assert(current_state != NULL);
                     current_state = State::dead;
                     break;
 
@@ -150,22 +183,30 @@ void AlanAnimation::setAction(Transition trans, Direction dir)
             switch (trans) 
             {
                 case floor:
+                    assert(old_state == current_state);
                     old_state = current_state;
+                    assert(current_state != NULL);
                     current_state = State::IDLE;
                     break;
 
                 case none_t:
+                    assert(old_state == current_state);
                     old_state = current_state;
+                    assert(current_state != NULL);
                     current_state = State::IDLE;
                     break;
 
                 case dance:
+                    assert(old_state == current_state);
                     old_state = current_state;
+                    assert(current_state != NULL);
                     current_state = State::dancin;
                     break;
 
                 case die:
+                    assert(old_state == current_state);
                     old_state = current_state;
+                    assert(current_state != NULL);
                     current_state = State::dead;
                     break;
 
@@ -179,22 +220,30 @@ void AlanAnimation::setAction(Transition trans, Direction dir)
             switch (trans) 
             {
                 case fall:
+                    assert(old_state == current_state);
                     old_state = current_state;
+                    assert(current_state != NULL);
                     current_state = State::fallin_var;
                     break;
 
                 case none_t:
+                    assert(old_state == current_state);
                     old_state = current_state;
+                    assert(current_state != NULL);
                     current_state = State::IDLE;
                     break;
 
                 case dance:
+                    assert(old_state == current_state);
                     old_state = current_state;
+                    assert(current_state != NULL);
                     current_state = State::dancin;
                     break;
 
                 case die:
+                    assert(old_state == current_state);
                     old_state = current_state;
+                    assert(current_state != NULL);
                     current_state = State::dead;
                     break;
 
@@ -208,21 +257,29 @@ void AlanAnimation::setAction(Transition trans, Direction dir)
             switch (trans) 
             {
                 case none_t:
+                    assert(old_state == current_state);
                     old_state = current_state;
+                    assert(current_state != NULL);
                     current_state = State::IDLE;
                     break;
                 case WALK:
+                    assert(old_state == current_state);
                     old_state = current_state;
+                    assert(current_state != NULL);
                     current_state = State::walkin;
                     break;
 
                 case stop_climb:
+                    assert(old_state == current_state);
                     old_state = current_state;
+                    assert(current_state != NULL);
                     current_state = State::fallin_var;
                     break;
 
                 case dig_t:
+                    assert(old_state == current_state);
                     old_state = current_state;
+                    assert(current_state != NULL);
                     current_state = State::dig_climb;
                     break;
 

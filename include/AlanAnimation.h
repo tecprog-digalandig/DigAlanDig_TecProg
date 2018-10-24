@@ -7,6 +7,7 @@
 #include "SDL_include.h"
 
 #include <iostream>
+#include <assert.h>
 #include <queue>
 #include <string>
 #include <vector>

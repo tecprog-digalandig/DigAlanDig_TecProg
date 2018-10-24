@@ -1,5 +1,6 @@
 #include "AlanItemCount.h"
 #include "Common.h"
+#include <assert.h>
 
 AlanItemCount::AlanItemCount(GameObject& associated) : Component(associated) 
 {
@@ -60,8 +61,10 @@ void AlanItemCount::render(Common::Layer layer) const
     {
         item.second->box.setCenter(item.second->GetComponent<Item*>()->center);
 
+        assert(item.first != NULL);
         if (!item_count.at(item.first)) 
         {
+            assert(item.second != NULL);
             item.second->GetComponent<Item*>()->bg->setColor(0, 255, 0);
         }
 

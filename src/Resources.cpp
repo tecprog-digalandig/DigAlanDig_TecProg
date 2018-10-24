@@ -1,5 +1,6 @@
 #include "Resources.h"
 #include "Game.h"
+#include <assert.h>
 
 std::unordered_map<std::string, std::shared_ptr<SDL_Texture>>
     Resources::image_table;
