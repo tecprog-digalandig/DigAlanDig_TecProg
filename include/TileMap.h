@@ -34,6 +34,7 @@ class TileMap : public Component {
     void ItemCollected(Vec2 target, int layer) {
         tileMat[layer][target.y * width + target.x] = 0;
     }
+    bool as(int x, int y);
 
     enum Layers { BASE = 0, BLOCOS, ITENS, INIMIGOS };
 

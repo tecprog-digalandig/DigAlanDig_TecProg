@@ -92,20 +92,36 @@ void TileMap::GetNextFile() {
 
 int TileMap::At(int x, int y, int z) {
     bool valid = (x >= 0) && (x < width) && (y >= 0) && (z >= 0) && (z < depth);
-    if (!valid) return 1;
+    if (!valid) {
+        return 1;
+    }
+    else{
 
-    while (infinity &&
-           ((y >= height) ||
-            ((Camera::pos.y + Camera::screenSize.y) / 100) >= height)) {
+    }
+    
+    bool ass = as(x,y);
+    
+    while (infinity && ass) {
         Load(TileMapsFiles[currentFile]);
         GetNextFile();
+        ass = as(x,y);
     }
 
     if (z == Layers::ITENS) {
         return tileSet->GetItemType(tileMat[z][y * width + x]);
     }
+    else{
+
+    }
+
     return tileMat[z][y * width + x];
 }
+
+bool TileMap::as(int x, int y){
+    bool as = ((y >= height) || ((Camera::pos.y + Camera::screenSize.y) / 100) >= height);
+    
+    return as;
+} 
 
 void TileMap::render(Common::Layer layer) const {
     if (layer == Common::Layer::DEFAULT)
@@ -131,6 +147,9 @@ void TileMap::GetDamageGround(int damage, Vec2 posDamage) {
     if (tileMat[groundLayer][(int)(posDamage.y * width + posDamage.x)]) {
         tileMat[groundLayer][(int)(posDamage.y * width + posDamage.x)] = 0;
         SpawnDust(posDamage);
+    }
+    else {
+
     }
     // tileSet->RenderTile(valPos - 1, posDamage.x, posDamage.y);
 }

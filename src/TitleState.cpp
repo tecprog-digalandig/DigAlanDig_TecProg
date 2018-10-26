@@ -64,7 +64,7 @@ void TitleState::loadAssets()
     objectArray.emplace_back(initial_layout);
     initial_layout->AddComponent(new ParallaxX(*initial_layout, SPACE_VELOCITY));   
     initial_layout->AddComponent(new bgCircularX(
-        *initial_layout, SPACE_SCREEN));    
+        *initial_layout, SPACE_SCREEN));
 
     // Add the first moving cloud to the layout
     initial_layout = new GameObject(Common::Layer::BG);
@@ -132,18 +132,24 @@ void TitleState::loadAssets()
 
 void TitleState::start() 
 {
-    if (!started)
-    {
+    if (!started){
         loadAssets();
     } 
+    else{
+    
+    }
+
     StartArray();
 }
 
 void TitleState::update(float delta_time)  
 {
     input.title = true;
-    if (input.ActionPress(input.ENTER))
+    if (input.ActionPress(input.ENTER)){
         Game::GetInstance()->Push(new StageState());
+    }
+    else{}
+
     UpdateArray(delta_time);
 }
 
@@ -151,10 +157,12 @@ void TitleState::render() const { RenderArray(); }
 
 void TitleState::rhythmUpdate() 
 {
-    if (!musicPlaying) 
-    {
+    if (!musicPlaying) {
         music.Play();
         musicPlaying = true;
+    }
+    else{
+
     }
 
     RhythmUpdateArray();

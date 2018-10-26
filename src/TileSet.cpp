@@ -32,6 +32,9 @@ TileSet::TileSet(const string& file)
         cout << "Tileset mismatch" << endl;
         exit(EXIT_SUCCESS);
     }
+    else{
+
+    }
 
     item2type[12] = item2type[13] = item2type[22] = item2type[23] =
         item2type[4] = item2type[5] = (int)Common::ItemType::GOLD;
@@ -50,6 +53,9 @@ void TileSet::RenderTile(unsigned index, float position_x, float position_y) con
     {
         cerr << "Tile is out of range" << endl;
         exit(EXIT_SUCCESS);
+    }
+    else{
+        
     }
 
     SDL_Rect pos = {(int)position_x, (int)position_y, tile_width, tile_height}; 

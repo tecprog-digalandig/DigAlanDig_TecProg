@@ -9,7 +9,6 @@
 
 Enemy::Enemy(GameObject &associated, int enemy_type)
     : Component(associated), input(InputManager::GetInstance()) {
-    enemy_type = 0;    
     if (enemy_type == 1) {
         EState[State::IDLE_S] = {"assets/img/enemies/enemy1/idle.png", 2, 2,
                                  -1};
