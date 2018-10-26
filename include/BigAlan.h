@@ -53,7 +53,8 @@ class BigAlan : public Component {
    */
     Sprite::SpriteState state[BAState::MAXSTATE];
     BAState current_state = BAState::STARTER;
-    int offset = 0, old_combo = 0;
+    // Modulo 5 - usando unsigned
+    int unsigned offset = 0, old_combo = 0;
     assert(offset == 0);
     assert(old_combo == 0);
     Sprite *sprite;
