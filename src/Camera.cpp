@@ -20,26 +20,37 @@ GameObject *Camera::focus = nullptr;
 int Camera::shake_intensity = 0;
 float Camera::shake_duration = 0;
 
-// the focus of the camera is updated as the 
-// character descends into the scene
+/**
+ * @brief the focus of the camera is updated 
+ * as the character descends into the scene
+ * 
+ * @param new_focus 
+ */
 void Camera::Follow(GameObject *new_focus) 
 { 
     focus = new_focus;
 }
-
-// calls the function that will not focus on 
-// the center of the screen
+/**
+ * @brief calls the function that will not focus on
+ * the center of the screen
+ */
 void Camera::Unfollow()
 { 
     focus = nullptr;
 }
-// function that will calculate the center of the screen
+/**
+ * @brief function that will calculate the center of the screen
+ * 
+ * @return Vec2 
+ */
 Vec2 Camera::Center()
 { 
     return pos + screenSize / 2;
 }
-
-// The screen is updated according to the movement of the character
+/**
+ * @brief The screen is updated according to the movement of the character
+ * 
+ */
 void Camera::RhythmUpdate()
 {
     // if the focus is updated with the new focus
@@ -52,8 +63,11 @@ void Camera::RhythmUpdate()
         }
     } // if -- focus update has been verified
 }
-
-// calculates the intensity and duration of the shake screen
+/**
+ * @brief calculates the intensity and duration of the shake screen
+ * 
+ * @param dt 
+ */
 void Camera::Update(float dt)
 {
     // calculates the intensity in which it will shake the 
