@@ -51,7 +51,7 @@ Vec2 Camera::Center()
  * @brief The screen is updated according to the movement of the character
  * 
  */
-void Camera::RhythmUpdate()
+void Camera::rhythmUpdate()
 {
     // if the focus is updated with the new focus
     if (focus) {
@@ -68,7 +68,7 @@ void Camera::RhythmUpdate()
  * 
  * @param dt 
  */
-void Camera::Update(float dt)
+void Camera::update(float dt)
 {
     // calculates the intensity in which it will shake the 
     // screen according to the path traveled

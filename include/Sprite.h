@@ -37,14 +37,14 @@ class Sprite : public Component {
     int GetHeight() const { return height; }
     bool IsOpen() const { return static_cast<bool>(Sprite::texture); }
 
-    void Update(float dt);
+    void update(float dt);
     void AlanUpdate(float dt);
-    void RhythmUpdate() {
+    void rhythmUpdate() {
         if (frameTime == -1)
             SetFrame(((currentFrame - initFrame) + 1) % frameCount + initFrame);
     }
     void RhythmReset() {}
-    void Render(Common::Layer layer) const;
+    void render(Common::Layer layer) const;
 
     void SetScaleX(double scaleX, double scaleY);
     void SetScaleX(double s) { SetScaleX(s, s); }

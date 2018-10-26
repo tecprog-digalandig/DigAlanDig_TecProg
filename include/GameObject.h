@@ -15,8 +15,8 @@ class GameObject {
         : layer(layer), isDead(false) {}
     ~GameObject();
 
-    void Update(float dt);
-    void RhythmUpdate();
+    void update(float dt);
+    void rhythmUpdate();
     void RhythmReset();
 
     void RenderOrder(Common::Layer layer) const;
@@ -28,7 +28,7 @@ class GameObject {
     void AddComponent(Component *cpt);
     void RemoveComponent(Component *cpt);
 
-    void Start();
+    void start();
     void CopyPosition(const GameObject &go);
 
     double AngleRad() const { return angleDeg * M_PI / 180; }
@@ -45,7 +45,7 @@ class GameObject {
     Vec2 gridPosition;
 
     Rect box;
-    bool worldReference = true;
+    bool world_reference = true;
     bool blink = false;
     bool move = false;
     bool fromPlayer = false;

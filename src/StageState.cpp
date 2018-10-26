@@ -40,41 +40,41 @@ void StageState::noEffect(void *udata, Uint8 *stream, int len) {
     }
 }
 
-void StageState::LoadAssets() {
+void StageState::loadAssets() {
     Camera::offset.Set(-(Camera::screenSize.x - 812), 0);
     input.title = false;
 
     // BG
     GameObject *backG = new GameObject(Common::Layer::BG);
-    backG->worldReference = false;
+    backG->world_reference = false;
     objectArray.emplace_back(backG);
     backG->AddComponent(new bgCircularY(*backG, "assets/img/bg1.png"));
     backG->AddComponent(new ParallaxY(*backG, 0.1));
     backG->box.pos = {212, 0};
 
     backG = new GameObject(Common::Layer::BG);
-    backG->worldReference = false;
+    backG->world_reference = false;
     objectArray.emplace_back(backG);
     backG->AddComponent(new bgCircularY(*backG, "assets/img/bg2.png"));
     backG->AddComponent(new ParallaxY(*backG, 0.3));
     backG->box.pos = {212, 0};
 
     backG = new GameObject(Common::Layer::BG);
-    backG->worldReference = false;
+    backG->world_reference = false;
     objectArray.emplace_back(backG);
     backG->AddComponent(new bgCircularY(*backG, "assets/img/bg3.png"));
     backG->AddComponent(new ParallaxY(*backG, 0.5));
     backG->box.pos = {212, 0};
 
     backG = new GameObject(Common::Layer::BG);
-    backG->worldReference = false;
+    backG->world_reference = false;
     objectArray.emplace_back(backG);
     backG->AddComponent(new bgCircularY(*backG, "assets/img/bg4.png"));
     backG->AddComponent(new ParallaxY(*backG, 0.7));
     backG->box.pos = {212, 0};
 
     backG = new GameObject();
-    backG->worldReference = false;
+    backG->world_reference = false;
     objectArray.emplace_back(backG);
     backG->AddComponent(new bgCircularY(*backG, "assets/img/bg5.png"));
     backG->AddComponent(new ParallaxY(*backG, 0.9));
@@ -121,7 +121,7 @@ void StageState::LoadAssets() {
     objectArray.emplace_back(esGO);
 
     GameObject *frameG = new GameObject(Common::Layer::HUD);
-    frameG->worldReference = false;
+    frameG->world_reference = false;
     objectArray.emplace_back(frameG);
     frameG->AddComponent(new bgCircularY(*frameG, "assets/img/framebg.png"));
     frameG->AddComponent(new ParallaxY(*frameG, 1));
@@ -129,7 +129,7 @@ void StageState::LoadAssets() {
 
     // MiniMap
     GameObject *MiniMapTile = new GameObject(Common::Layer::HUD);
-    MiniMapTile->worldReference = false;
+    MiniMapTile->world_reference = false;
     MiniMapTile->box.pos = {30, 180};
     MiniMapTile->AddComponent(
         new Sprite(*MiniMapTile, "assets/img/bgminimap.png"));
@@ -148,19 +148,19 @@ void StageState::LoadAssets() {
     objectArray.emplace_back(bigAlan);
     bigAlan->AddComponent(new Sprite(*bigAlan, "assets/img/mooda.png", 2, -1));
     bigAlan->AddComponent(new BigAlan(*bigAlan));
-    bigAlan->worldReference = false;
+    bigAlan->world_reference = false;
     bigAlan->box.pos = {0, Camera::screenSize.y - bigAlan->box.h};
 
     // HUD
     GameObject *timerHud = new GameObject(Common::Layer::HUD);
     objectArray.emplace_back(timerHud);
-    timerHud->worldReference = false;
+    timerHud->world_reference = false;
     timerHud->box.pos = {212 + 600 / 2, Camera::screenSize.y - 50};
     timerHud->AddComponent(new HudTimer(*timerHud));
 
     GameObject *meterHeart = new GameObject(Common::Layer::HUD);
     objectArray.emplace_back(meterHeart);
-    meterHeart->worldReference = false;
+    meterHeart->world_reference = false;
     meterHeart->box.pos = {30, 30};
     meterHeart->AddComponent(new HeartMeter(
         *meterHeart, "assets/hud/barravida.png", "assets/hud/coracao.png"));
@@ -169,7 +169,7 @@ void StageState::LoadAssets() {
 
     GameObject *meterLight = new GameObject(Common::Layer::HUD);
     objectArray.emplace_back(meterLight);
-    meterLight->worldReference = false;
+    meterLight->world_reference = false;
     meterLight->box.pos = {30, 100};
     meterLight->AddComponent(new LightMeter(
         *meterLight, "assets/hud/barraluz.png", "assets/hud/raio.png"));
@@ -178,28 +178,28 @@ void StageState::LoadAssets() {
 
     GameObject *counterMetal = new GameObject(Common::Layer::HUD);
     objectArray.emplace_back(counterMetal);
-    counterMetal->worldReference = false;
+    counterMetal->world_reference = false;
     counterMetal->box.pos = {850, 10};
     counterMetal->AddComponent(new HudCounter(
         *counterMetal, "assets/hud/item1.png", "assets/hud/metali.png"));
 
     GameObject *counterCristal = new GameObject(Common::Layer::HUD);
     objectArray.emplace_back(counterCristal);
-    counterCristal->worldReference = false;
+    counterCristal->world_reference = false;
     counterCristal->box.pos = {850, 160};
     counterCristal->AddComponent(new HudCounter(
         *counterCristal, "assets/hud/item2.png", "assets/hud/cristali.png"));
 
     GameObject *counterPetro = new GameObject(Common::Layer::HUD);
     objectArray.emplace_back(counterPetro);
-    counterPetro->worldReference = false;
+    counterPetro->world_reference = false;
     counterPetro->box.pos = {850, 310};
     counterPetro->AddComponent(new HudCounter(
         *counterPetro, "assets/hud/item3.png", "assets/hud/petroleoi.png"));
 
     GameObject *itemCount = new GameObject(Common::Layer::HUD);
     objectArray.emplace_back(itemCount);
-    itemCount->worldReference = false;
+    itemCount->world_reference = false;
     itemCount->AddComponent(new AlanItemCount(*itemCount));
     lilAlan->SetItemCount(itemCount);
 
@@ -210,14 +210,14 @@ void StageState::LoadAssets() {
     Mix_SetPostMix(noEffect, NULL);
 }
 
-void StageState::Start() {
-    if (!started) LoadAssets();
+void StageState::start() {
+    if (!started) loadAssets();
 
     StartArray();
 }
 
-void StageState::Update(float dt) {
-    Camera::Update(dt);
+void StageState::update(float dt) {
+    Camera::update(dt);
 
     if (beat) {
         beat = false;
@@ -233,7 +233,7 @@ void StageState::Update(float dt) {
     UpdateArray(dt);
 }
 
-void StageState::RhythmUpdate() {
+void StageState::rhythmUpdate() {
     if (!musicPlaying) {
         music.Play();
         musicPlaying = true;
@@ -243,4 +243,4 @@ void StageState::RhythmUpdate() {
 
 void StageState::RhythmReset() { RhythmResetArray(); }
 
-void StageState::Render() const { RenderArray(); }
+void StageState::render() const { RenderArray(); }

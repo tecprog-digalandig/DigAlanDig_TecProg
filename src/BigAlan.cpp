@@ -15,7 +15,7 @@
  * 
  * @param dt 
  */
-void BigAlan::Update(float dt) 
+void BigAlan::update(float dt) 
 {
     // calculations of the combos that will be used 
     // to define the bigAlan animation
