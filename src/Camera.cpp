@@ -107,6 +107,9 @@ void Camera::update(float dt)
                     offset.y > 0) {
                     offset.y -= dt * 400;
                 }
+                else {
+                    // There's nothing to do
+                }
                 break;
             }
             // structure to calculate the size of the screen that will be shown
@@ -120,6 +123,9 @@ void Camera::update(float dt)
                 if (offset.y + screenSize.y - 300 < focus->box.y) {
                     offset.y += 3 * speed.y * dt * scroll_factor;
                 }
+                else {
+                    // There's nothing to do
+                }
             }
             break;
         }
@@ -129,8 +135,14 @@ void Camera::update(float dt)
             if (InputManager::GetInstance().KeyDown(SDL_SCANCODE_UP)) {
                 offset.y -= speed.y * dt * 10;
             }
+            else {
+                // There's nothing to do
+            }
             if (InputManager::GetInstance().KeyDown(SDL_SCANCODE_DOWN)) {
                 offset.y += speed.y * dt * 10;
+            }
+            else {
+                // There's nothing to do
             }
             break;
     }
@@ -141,12 +153,21 @@ void Camera::update(float dt)
     if (InputManager::GetInstance().KeyDown(SDL_SCANCODE_COMMA)) {
         speed.y -= acceleration * dt;
     }
+    else {
+        // There's nothing to do
+    }
     if (InputManager::GetInstance().KeyDown(SDL_SCANCODE_PERIOD)) {
         speed.y += acceleration * dt;
+    }
+    else {
+        // There's nothing to do
     }
     if (InputManager::GetInstance().KeyPress(SDL_SCANCODE_C)) {
         current_move = (Movement)(current_move + 1);
         if (current_move > Camera::NONE) current_move = Camera::ATTACHED;
+    }
+    else {
+        // There's nothing to do
     }
 }
 

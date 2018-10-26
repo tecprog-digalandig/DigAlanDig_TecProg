@@ -57,4 +57,7 @@ void BigAlan::update(float dt)
             current_state = BAState::STARTER;
     }
     if (current_state != old_state) sprite->Open(state[current_state], 0);
+    else { 
+        // There's nothing to do 
+    } 
 }

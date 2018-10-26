@@ -21,6 +21,9 @@ char *Common::fileRead(const char *file_name)
         free(res);
         return nullptr;
     }
+    else {
+        // There's nothing to do
+    }
 
     res[nb_read_total] = '\0';
     return res;
@@ -31,6 +34,9 @@ void Common::readJson(json &j, const std::string &file)
     char *data = Common::fileRead(file.c_str());
     assert(data != nullptr);
     if (data == nullptr) exit(0);
+    else {
+        // There's nothing to do
+    }
 
     j = json::parse(data, data + strlen(data));
     free(data);
