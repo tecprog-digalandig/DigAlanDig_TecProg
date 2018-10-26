@@ -56,24 +56,24 @@ Enemy::Enemy(GameObject &associated, int enemy_type)
 
 bool Enemy::VerifyDeath(Alan *alan)
 {
-    // Inimigo morre se:
+    // Enemy dies if:
     // 1. life_enemy <= 0
     if (life_enemy <= 0) {
         return true;
     }
-    // 2. Alan cai em cima dele
+    // 2. Alan falls on top of him
     if (Game::GetInstance()->GetGridControl()->TestPath(
             Vec2(associated.gridPosition.x, associated.gridPosition.y),
             false) == GridControl::WhatsThere::ALAN) {
         return true;
     }
-    // 3. Scroll da camera já passou da posição dele
+    // 3. Camera Scroll has already passed its position
     if (associated.GetGridPosition().y <
         (Camera::pos.y / Game::GetInstance()->GetCurrentState().GetGridSize()) -
             3) {
         return true;
     }
-    // 4. Espaço embaixo dele não é uma pedra
+    // 4. Space below it is not a stone
     if (Game::GetInstance()->GetGridControl()->TestPath(
             Vec2(associated.gridPosition.x, associated.gridPosition.y + 1),
             false) != GridControl::WhatsThere::ROCK) {
