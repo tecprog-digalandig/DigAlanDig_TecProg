@@ -5,13 +5,14 @@
 #include "EnemySpawn.h"
 #include "Game.h"
 #include "StageState.h"
+#include <assert.h>
 
 Enemy::Enemy(GameObject &associated, int enemy_type)
     : Component(associated), input(InputManager::GetInstance()) {
-    enemy_type = 0;    
     if (enemy_type == 1) {
+        assert(enemy_type == 1);
         EState[State::IDLE_S] = {"assets/img/enemies/enemy1/idle.png", 2, 2,
-                                 -1};
+                                 -1};                         
         EState[State::WALKIN_S] = {"assets/img/enemies/enemy1/walkin.png", 2, 4,
                                    0.2};
         EState[State::DIE_S] = {"assets/img/enemies/enemy1/idle.png", 2, 2,
@@ -46,6 +47,7 @@ Enemy::Enemy(GameObject &associated, int enemy_type)
     sprite->Open(EState[state], Enemy::Direction::LEFT);
 
     life_enemy = 3;
+    assert(life_enemy == 3);
     range = enemy_type;
 
     tileMapPos.x = associated.box.x;

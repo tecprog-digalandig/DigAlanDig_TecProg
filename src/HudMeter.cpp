@@ -1,6 +1,7 @@
 #include "HudMeter.h"
 #include "Alan.h"
 #include "InputManager.h"
+#include <assert.h>
 
 HudMeter::HudMeter(GameObject& associated, const std::string& bg_file,
                    const std::string& meter_file)
@@ -50,6 +51,8 @@ void HudMeter::setMeter(int i) const {
         if (!Game::GetInstance()->combo)
         {
             tmp = 0;
+            assert(tmp == 0);
+            
         }
         else
         {

@@ -8,6 +8,8 @@
 #define BIGALAN_H
 #include "Component.h"
 #include "Sprite.h"
+#include <assert.h>
+
 /**
  * @brief the class must be called to make the changes related to the main character
  * 
@@ -52,6 +54,8 @@ class BigAlan : public Component {
     Sprite::SpriteState state[BAState::MAXSTATE];
     BAState current_state = BAState::STARTER;
     int offset = 0, old_combo = 0;
+    assert(offset == 0);
+    assert(old_combo == 0);
     Sprite *sprite;
 };
 /**

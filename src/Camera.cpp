@@ -11,6 +11,7 @@
 #include "Game.h"
 #include "InputManager.h"
 #include "TileMap.h"
+#include <assert.h>
 
 Vec2 Camera::pos, Camera::shake, Camera::speed(60, 60), Camera::screenSize;
 Vec2 Camera::offset;
@@ -63,11 +64,7 @@ void Camera::rhythmUpdate()
         }
     } // if -- focus update has been verified
 }
-/**
- * @brief calculates the intensity and duration of the shake screen
- * 
- * @param dt 
- */
+
 void Camera::update(float dt)
 {
     // calculates the intensity in which it will shake the 

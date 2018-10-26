@@ -8,6 +8,7 @@
 #define CAMERA_H
 #include "GameObject.h"
 #include "Vec2.h"
+#include <assert.h>
 
 class Camera {
   public:

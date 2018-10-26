@@ -1,4 +1,5 @@
 #include "Common.h"
+#include <assert.h>
 
 char *Common::fileRead(const char *file_name)
 {
@@ -28,6 +29,7 @@ char *Common::fileRead(const char *file_name)
 void Common::readJson(json &j, const std::string &file)
 {
     char *data = Common::fileRead(file.c_str());
+    assert(data != nullptr);
     if (data == nullptr) exit(0);
 
     j = json::parse(data, data + strlen(data));
