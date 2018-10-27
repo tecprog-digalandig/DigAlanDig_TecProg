@@ -82,7 +82,8 @@ class Enemy : public Component {
     Direction movement_direction = Direction::LEFT;
 
     // 2<=range<=7
-    int range, steps = 0;
+    // Modulo 5 - usando unsigned
+    int unsigned range, steps = 0;
     State state = State::IDLE_S;
 
     int num_beats = 0;

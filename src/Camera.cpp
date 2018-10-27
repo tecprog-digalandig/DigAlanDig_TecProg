@@ -107,6 +107,7 @@ void Camera::update(float dt)
                     offset.y > 0) {
                     offset.y -= dt * 400;
                 }
+                // Modulo 5 - Comportamento default
                 else {
                     // There's nothing to do
                 }
@@ -123,6 +124,7 @@ void Camera::update(float dt)
                 if (offset.y + screenSize.y - 300 < focus->box.y) {
                     offset.y += 3 * speed.y * dt * scroll_factor;
                 }
+                // Modulo 5 - Comportamento default
                 else {
                     // There's nothing to do
                 }
@@ -135,12 +137,14 @@ void Camera::update(float dt)
             if (InputManager::GetInstance().KeyDown(SDL_SCANCODE_UP)) {
                 offset.y -= speed.y * dt * 10;
             }
+            // Modulo 5 - Comportamento default
             else {
                 // There's nothing to do
             }
             if (InputManager::GetInstance().KeyDown(SDL_SCANCODE_DOWN)) {
                 offset.y += speed.y * dt * 10;
             }
+            // Modulo 5 - Comportamento default
             else {
                 // There's nothing to do
             }
@@ -153,12 +157,14 @@ void Camera::update(float dt)
     if (InputManager::GetInstance().KeyDown(SDL_SCANCODE_COMMA)) {
         speed.y -= acceleration * dt;
     }
+    // Modulo 5 - Comportamento default
     else {
         // There's nothing to do
     }
     if (InputManager::GetInstance().KeyDown(SDL_SCANCODE_PERIOD)) {
         speed.y += acceleration * dt;
     }
+    // Modulo 5 - Comportamento default
     else {
         // There's nothing to do
     }
@@ -166,6 +172,7 @@ void Camera::update(float dt)
         current_move = (Movement)(current_move + 1);
         if (current_move > Camera::NONE) current_move = Camera::ATTACHED;
     }
+    // Modulo 5 - Comportamento default
     else {
         // There's nothing to do
     }

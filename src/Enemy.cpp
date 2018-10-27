@@ -61,18 +61,21 @@ bool Enemy::VerifyDeath(Alan *alan)
     if (life_enemy <= 0) {
         return true;
     }
+    // Modulo 5 - Clareza
     // 2. Alan falls on top of him
     if (Game::GetInstance()->GetGridControl()->TestPath(
             Vec2(associated.gridPosition.x, associated.gridPosition.y),
             false) == GridControl::WhatsThere::ALAN) {
         return true;
     }
+    // Modulo 5 - Clareza
     // 3. Camera Scroll has already passed its position
     if (associated.GetGridPosition().y <
         (Camera::pos.y / Game::GetInstance()->GetCurrentState().GetGridSize()) -
             3) {
         return true;
     }
+    // Modulo 5 - Clareza
     // 4. Space below it is not a stone
     if (Game::GetInstance()->GetGridControl()->TestPath(
             Vec2(associated.gridPosition.x, associated.gridPosition.y + 1),
@@ -120,8 +123,8 @@ void Enemy::IsSurrounded()
             false) != GridControl::WhatsThere::FREE)
         movement_allowed = false;
 }
-
-void Enemy::update(float dt)
+// Modulo 5 - Tipos descritivos. Const
+void Enemy::update(const float dt)
 {
     if (!Game::GetInstance()->GetGridControl()->GetAlan().lock() ||
         !associated.GetComponent<Interpol *>()->IsMovementDone())

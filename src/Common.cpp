@@ -21,6 +21,7 @@ char *Common::fileRead(const char *file_name)
         free(res);
         return nullptr;
     }
+    // Modulo 5 - Comportamento default
     else {
         // There's nothing to do
     }
@@ -32,8 +33,8 @@ char *Common::fileRead(const char *file_name)
 void Common::readJson(json &j, const std::string &file)
 {
     char *data = Common::fileRead(file.c_str());
-    assert(data != nullptr);
     if (data == nullptr) exit(0);
+    // Modulo 5 - Comportamento default
     else {
         // There's nothing to do
     }
