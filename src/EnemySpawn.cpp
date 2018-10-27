@@ -26,7 +26,7 @@ void EnemySpawn::update(float dt)
     while ( current_y < ( (int)( ( (Camera::pos.y + Camera::screenSize.y) /
             Game::getInstance()->getCurrentState().GetGridSize() ) + 4) ) )
     {
-        for (int x = 0; x < tileMap->GetWidth(); ++x)
+        for (int x = 0; x < tileMap->GetWidth(); x = x + 1)
         {
             assert(x>=0);
             if (int enemy = tileMap->At(x, current_y, TileMap::Layers::INIMIGOS) )
@@ -48,6 +48,6 @@ void EnemySpawn::update(float dt)
                 //Nothing to do
             }
         }
-        ++current_y;
+        current_y = current_y + 1;
     }
 }

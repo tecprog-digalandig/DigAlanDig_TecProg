@@ -39,7 +39,14 @@ Game::~Game()
 
 Game* Game::getInstance(const std::string& title, int w, int h)
 {
-    if (!_instance) _instance = new Game(title, w, h);
+    if (!_instance)
+    {
+        _instance = new Game(title, w, h);
+    }
+    else
+    {
+        //Nothing to do
+    }
     assert(_instance != nullptr);
     return _instance;
 }
@@ -55,7 +62,14 @@ void Game::updateBeatTime(int time_rhythm)
 {
     std::cout << tick_counter << " ; " << time_rhythm << std::endl;
     tick_counter = (tick_counter * 9 + time_rhythm) / 10;
-    if (std::abs(tick_counter - time_rhythm) > 1000) tick_counter = time_rhythm;
+    if (std::abs(tick_counter - time_rhythm) > 1000)
+    {
+        tick_counter = time_rhythm;
+    }
+    else
+    {
+        //Nothing to do
+    }
 }
 
 /**
@@ -150,7 +164,7 @@ void Game::run()
         calculateDeltaTime();
         input.update(delta_rhythm);
 
-        ++fpb;
+        fpb = fbp + 1;
         if (should_rhythm_update)
         {
             should_rhythm_update = false;
@@ -182,7 +196,14 @@ void Game::run()
             Game::getInstance()->getGridControl()->ClearEnemyVector();
             stateStack.pop();
             Resources::ClearAll();
-            if (!stateStack.empty()) stateStack.top()->Resume();
+            if
+            {
+                (!stateStack.empty()) stateStack.top()->Resume();
+            }
+            else
+            {
+                //Nothing to do
+            }
         }
         else
         {

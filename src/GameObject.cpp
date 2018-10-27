@@ -28,6 +28,10 @@ void GameObject::update(float dt)
     {
         box.pos = tmp.pos + Vec2(0, 1) * sin(sum) * 30;
     }
+    else
+    {
+        //Nothing to do
+    }
 }
 
 void GameObject::rhythmUpdate()
