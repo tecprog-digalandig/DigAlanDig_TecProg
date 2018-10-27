@@ -1,31 +1,53 @@
+/**
+* @file EnemySpawn.cpp
+* @copyright 2018 Pedro H.
+* @brief This class controls where and when the enemy will spawn, using as
+* parameters the camera and players position on the screen.
+*/
+
+
 #include "EnemySpawn.h"
 #include "Camera.h"
 #include "Enemy.h"
 #include "Game.h"
+#include <assert.h>
 
-void EnemySpawn::update(float dt) {
-    while (currentY <
-           ((int)(((Camera::pos.y + Camera::screenSize.y) /
-                   Game::GetInstance()->GetCurrentState().GetGridSize()) +
-                  4))) {
-        for (int x = 0; x < tileMap->GetWidth(); x++) {
-            if (int enemy =
-                    tileMap->At(x, currentY, TileMap::Layers::INIMIGOS)) {
+/**
+* @brief controls the spawn of an enemy on the screen setting the poition on x
+* and y axis.
+* @param [in] dt is the variation of time between an input and the movement on
+* the screen.
+* @return void
+*/
+
+void EnemySpawn::update(float dt)
+{
+    assert(dt >= 0);
+    while ( current_y < ( (int)( ( (Camera::pos.y + Camera::screenSize.y) /
+            Game::getInstance()->getCurrentState().GetGridSize() ) + 4) ) )
+    {
+        for (int x = 0; x < tileMap->GetWidth(); ++x)
+        {
+            assert(x>=0);
+            if (int enemy = tileMap->At(x, current_y, TileMap::Layers::INIMIGOS) )
+            {
+                assert(current_y >= 0);
                 GameObject* go = new GameObject();
-                go->box.x =
-                    x * Game::GetInstance()->GetCurrentState().GetGridSize() -
-                    Game::GetInstance()->GetCurrentState().GetGridSize() / 2;
-                go->box.y =
-                    currentY *
-                        Game::GetInstance()->GetCurrentState().GetGridSize() -
-                    Game::GetInstance()->GetCurrentState().GetGridSize() / 2;
+                go->box.x = x * Game::getInstance()->getCurrentState().GetGridSize() -
+                    Game::getInstance()->getCurrentState().GetGridSize() / 2;
+                go->box.y = current_y * Game::getInstance()->getCurrentState().GetGridSize() -
+                    Game::getInstance()->getCurrentState().GetGridSize() / 2;
                 go->gridPosition.x = x;
-                go->gridPosition.y = currentY;
-                go->AddComponent(new Enemy(*go, enemy));
-                Game::GetInstance()->GetGridControl()->AddEnemy(go);
-                Game::GetInstance()->GetCurrentState().AddObject(go);
+                go->gridPosition.y = current_y;
+                go->addComponent(new Enemy(*go, enemy));
+                Game::getInstance()->getGridControl()->AddEnemy(go);
+                Game::getInstance()->getCurrentState().AddObject(go);
+            }
+            else
+            {
+                //Nothing to do
             }
         }
-        currentY++;
+        ++current_y;
     }
 }
