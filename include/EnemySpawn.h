@@ -1,3 +1,11 @@
+/**
+* @file EnemySpawn.h
+* @copyright 2018 Pedro H.
+* @brief Header file for the class EnemySpawn, contains the headers for all
+* the methods of the class.
+*/
+
+
 #ifndef ENEMYSPAWN_H
 #define ENEMYSPAWN_H
 #define INCLUDE_SDL
@@ -12,21 +20,22 @@
 #include "TileMap.h"
 #include "Vec2.h"
 
-class EnemySpawn : public Component {
-  public:
-    EnemySpawn(GameObject &associated, TileMap *tileMap)
+class EnemySpawn : public Component
+{
+    public:
+        EnemySpawn(GameObject &associated, TileMap *tileMap)
         : Component(associated), tileMap(tileMap) {}
 
-    ~EnemySpawn() {}
+        ~EnemySpawn(){}
 
-    void update(float dt);
-    void rhythmUpdate() {}
-    void RhythmReset() {}
-    void render(Common::Layer layer) const {}
+        void update(float dt);
+        void rhythmUpdate() {}
+        void rhythmReset() {}
+        void render(Common::Layer layer) const {}
 
-  private:
-    TileMap *tileMap;
-    int currentY = 0;
+    private:
+        TileMap *tileMap;
+        int current_y = 0;
 };
 
-#endif  // ENEMYSPAWN_H
+#endif

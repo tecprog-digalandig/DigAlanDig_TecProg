@@ -1,3 +1,9 @@
+/**
+* @file GameObject.h
+* @copyright 2018 Pedro H.
+* @brief Header file for the class GameObject, containing all its methods labels.
+*/
+
 #ifndef GAMEOBJECT_H
 #define GAMEOBJECT_H
 #include <algorithm>
@@ -9,56 +15,65 @@
 
 class Component;
 
-class GameObject {
-  public:
-    explicit GameObject(unsigned int layer = Common::Layer::DEFAULT)
-        : layer(layer), isDead(false) {}
-    ~GameObject();
+class GameObject
+{
+    public:
+        explicit GameObject(unsigned int layer = Common::Layer::DEFAULT)
+                 : layer(layer), isDead(false) {}
+        ~GameObject();
 
-    void update(float dt);
-    void rhythmUpdate();
-    void RhythmReset();
+        void update(float dt);
+        void rhythmUpdate();
+        void rhythmReset();
 
-    void RenderOrder(Common::Layer layer) const;
+        void renderOrder(Common::Layer layer) const;
 
-    bool CanEnd() const;
+        bool canEnd() const;
 
-    bool IsDead() const { return isDead; }
-    void RequestDelete() { isDead = true; }
-    void AddComponent(Component *cpt);
-    void RemoveComponent(Component *cpt);
+        bool isDead() const { return isDead; }
+        void requestDelete() { isDead = true; }
+        void addComponent(Component *cpt);
+        void removeComponent(Component *cpt);
 
-    void start();
-    void CopyPosition(const GameObject &go);
+        void start();
+        void copyPosition(const GameObject &go);
 
-    double AngleRad() const { return angleDeg * M_PI / 180; }
+        double angleRad() const { return angle_deg * M_PI / 180; }
 
-    template <class T>
-    T GetComponent() const {
-        for (Component *component : components)
-            if (T t = dynamic_cast<T>(component)) return t;
+        template <class T>
+        T getComponent() const
+        {
+            for (Component *component : components)
+            {
+                if (T t = dynamic_cast<T>(component))
+                {
+                    return t;
+                }
+            }
+            return nullptr;
+        }
 
-        return nullptr;
-    }
+        Vec2 getGridPosition() const { return gridPosition; }
+        Vec2 gridPosition;
 
-    Vec2 GetGridPosition() const { return gridPosition; }
-    Vec2 gridPosition;
+        /**
+        *Setting variables for the character animation.
+        */
+        Rect box;
+        bool world_reference = true;
+        bool blink = false;
+        bool move = false;
+        bool from_player = false;
+        bool started = false;
+        double angle_deg = 0;
+        unsigned int layer;
 
-    Rect box;
-    bool world_reference = true;
-    bool blink = false;
-    bool move = false;
-    bool fromPlayer = false;
-    bool started = false;
-    double angleDeg = 0;
-    unsigned int layer;
+        void setRect(Rect a) { tmp = a; }
+        Rect tmp;
 
-    void setRect(Rect a) { tmp = a; }
-    Rect tmp;
-
-  private:
-    std::vector<Component *> components;
-    bool isDead;
+    private:
+        std::vector<Component *> components;
+        bool isDead;
 };
 
-#endif  // GAMEOBJECT_H
+#endif
