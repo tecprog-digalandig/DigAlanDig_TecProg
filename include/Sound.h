@@ -20,7 +20,7 @@ class Sound : public Component {
 
     void Open(const std::string& file) { chunk = Resources::GetSound(file); }
     bool IsOpen() const { return (bool)chunk; }
-    bool CanEnd() const { return played && !Mix_Playing(channel); }
+    bool canEnd() const { return played && !Mix_Playing(channel); }
     void Play(int times = 1);
     void Stop() const {
         if (chunk) Mix_HaltChannel(channel);

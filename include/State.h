@@ -18,7 +18,7 @@ class State {
         objectArray.clear();
     }
 
-    virtual void LoadAssets() = 0;
+    virtual void loadAssets() = 0;
     virtual void Update(float dt) = 0;
     virtual void RhythmUpdate() = 0;
     virtual void RhythmReset() {}

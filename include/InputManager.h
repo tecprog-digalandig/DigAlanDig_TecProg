@@ -116,7 +116,7 @@ class InputManager {
     int mouseX = 0;
     int mouseY = 0;
 
-    void UpdateKey(int& update, bool& state, bool newValue) const;
+    void UpdateKey(int& Update, bool& state, bool newValue) const;
     int frame = 0;
 
     float deltaRhythm = 0;

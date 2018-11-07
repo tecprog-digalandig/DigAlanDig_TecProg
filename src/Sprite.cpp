@@ -45,14 +45,14 @@ void Sprite::SetFrame(int frame) {
 void Sprite::Render(Common::Layer layer) const {
     if (IsOpen()) {
         Vec2 offset;
-        if (associated.worldReference) offset = Camera::pos;
+        if (associated.world_reference) offset = Camera::pos;
         Rect dst(associated.box.pos - offset, {(double)width, (double)height});
 
         if (scale.x != 1 || scale.y != 1) dst.Scale(scale);
 
         SDL_Rect dstRect = dst;
         SDL_RenderCopyEx(Game::GetInstance()->GetRenderer(), texture.get(),
-                         &clipRect, &dstRect, associated.angleDeg, nullptr,
+                         &clipRect, &dstRect, associated.angle_deg, nullptr,
                          SDL_FLIP_NONE);
     }
 }

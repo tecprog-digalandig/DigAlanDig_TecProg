@@ -37,10 +37,10 @@ int InputManager::finger2action(const Vec2 &v) const {
     return Action::ESCAPE;
 }
 
-inline void InputManager::UpdateKey(int &update, bool &state,
+inline void InputManager::UpdateKey(int &Update, bool &state,
                                     bool newValue) const {
     if (state != newValue) {
-        update = frame;
+        Update = frame;
         state = newValue;
     }
 }

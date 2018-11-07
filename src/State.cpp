@@ -49,7 +49,7 @@ void State::UpdateArray(float dt) {
 
     // Delete
     auto removeDead = [&](std::shared_ptr<GameObject> const& p) {
-        return p->IsDead() && p->CanEnd();
+        return p->IsDead() && p->canEnd();
     };
     objectArray.erase(
         std::remove_if(objectArray.begin(), objectArray.end(), removeDead),

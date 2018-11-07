@@ -14,7 +14,7 @@ class TitleState : public State {
   public:
     TitleState();
     ~TitleState() {}
-    void LoadAssets();
+    void loadAssets();
     void Update(float dt);
     void Render() const;
     void RhythmUpdate();

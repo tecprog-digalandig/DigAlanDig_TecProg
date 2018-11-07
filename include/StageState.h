@@ -11,7 +11,7 @@
 class StageState : public State {
   public:
     StageState();
-    void LoadAssets();
+    void loadAssets();
     void Update(float dt);
     void RhythmUpdate();
     void RhythmReset();
