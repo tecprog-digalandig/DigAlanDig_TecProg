@@ -20,38 +20,38 @@ class InputManager {
         ACTION_MAX
     };
 
-    void Update(float deltaRhythm);
+    void update(float delta_rhythm);
 
-    bool keyDown(int key) const { return keyState[key]; }
-    bool KeyPress(int key) const {
-        return (frame == keyUpdate[key]) && keyState[key];
+    bool key_down(int key) const { return key_state[key]; }
+    bool key_press(int key) const {
+        return (frame == key_update[key]) && key_state[key];
     }
-    bool KeyRelease(int key) const {
-        return (frame == keyUpdate[key]) && !keyState[key];
-    }
-
-    bool MouseDown(int button) const { return fingerState[button]; }
-    bool MousePress(int button) const {
-        return (frame == fingerUpdate[button]) && fingerState[button];
-    }
-    bool MouseRelease(int button) const {
-        return (frame == fingerUpdate[button]) && !fingerState[button];
+    bool key_release(int key) const {
+        return (frame == key_update[key]) && !key_state[key];
     }
 
-    bool GamepadDown(int button) const { return gamepadState[button]; }
-    bool GamepadPress(int button) const {
-        return (frame == gamepadUpdate[button]) && gamepadState[button];
+    bool mouse_down(int button) const { return finger_state[button]; }
+    bool mouse_press(int button) const {
+        return (frame == finger_update[button]) && finger_state[button];
     }
-    bool GamepadRelease(int button) const {
-        return (frame == gamepadUpdate[button]) && !gamepadState[button];
+    bool mouse_release(int button) const {
+        return (frame == finger_update[button]) && !finger_state[button];
     }
 
-    bool ActionDown(Action button) const { return actionState[button]; }
-    bool actionPress(Action button) const {
-        return (frame == actionUpdate[button]) && actionState[button];
+    bool gamepad_down(int button) const { return gamepad_state[button]; }
+    bool gamepad_press(int button) const {
+        return (frame == gamepad_update[button]) && gamepad_state[button];
     }
-    bool ActionRelease(Action button) const {
-        return (frame == actionUpdate[button]) && !actionState[button];
+    bool gamepad_release(int button) const {
+        return (frame == gamepad_update[button]) && !gamepad_state[button];
+    }
+
+    bool action_down(Action button) const { return action_state[button]; }
+    bool action_press(Action button) const {
+        return (frame == action_update[button]) && action_state[button];
+    }
+    bool action_release(Action button) const {
+        return (frame == action_update[button]) && !action_state[button];
     }
 
     int finger2action(const Vec2& v) const;
@@ -62,16 +62,16 @@ class InputManager {
         right = SDL_BUTTON_RIGHT
     };
 
-    int GetMouseX() const { return mouseX; }
-    int GetMouseY() const { return mouseY; }
-    Vec2 GetMouse() const { return Vec2(mouseX, mouseY); }
-    int GetWorldMouseX() const { return mouseX + Camera::pos.x; }
-    int GetWorldMouseY() const { return mouseY + Camera::pos.y; }
-    Vec2 GetWorldMouse() const {
-        return Vec2(mouseX + Camera::pos.x, mouseY + Camera::pos.y);
+    int get_mouse_x() const { return mouse_x; }
+    int get_mouse_y() const { return mouse_y; }
+    Vec2 get_mouse() const { return Vec2(mouse_x, mouse_y); }
+    int get_world_mouse_x() const { return mouse_x + Camera::pos.x; }
+    int get_world_mouse_y() const { return mouse_y + Camera::pos.y; }
+    Vec2 get_world_mouse() const {
+        return Vec2(mouse_x + Camera::pos.x, mouse_y + Camera::pos.y);
     }
 
-    bool QuitRequested() const { return quitRequested; }
+    bool quit_requested() const { return quit_requested; }
 
     // Meyes' singleton
     static InputManager& getInstance() {
@@ -79,16 +79,16 @@ class InputManager {
         return input;
     }
 
-    float scaleFactor() const;
+    float scale_factor() const;
 
-    float getDeltaRhythm() const { return deltaRhythm; }
+    float get_delta_rhythm() const { return delta_rhythm; }
 
     void move();
 
-    float Moved();
+    float moved();
 
     bool title = true;
-    bool shouldShow = true;
+    bool should_show = true;
 
   private:
     // Disallow compiler generated ctor, dtor and copy
@@ -97,36 +97,36 @@ class InputManager {
     InputManager& operator=(InputManager const&);
     ~InputManager() {}
 
-    bool AddController(int id);
-    void RemoveController(void);
-    SDL_GameController* gameController;
+    bool add_controller(int id);
+    void remove_controller(void);
+    SDL_GameController* game_controller;
 
-    bool gamepadState[SDL_CONTROLLER_BUTTON_MAX] = {0};
-    int gamepadUpdate[SDL_CONTROLLER_BUTTON_MAX] = {0};
+    bool gamepad_state[SDL_CONTROLLER_BUTTON_MAX] = {0};
+    int gamepad_update[SDL_CONTROLLER_BUTTON_MAX] = {0};
 
-    bool keyState[SDL_NUM_SCANCODES] = {0};
-    int keyUpdate[SDL_NUM_SCANCODES] = {0};
+    bool key_state[SDL_NUM_SCANCODES] = {0};
+    int key_update[SDL_NUM_SCANCODES] = {0};
 
-    bool fingerState[6] = {0};
-    int fingerUpdate[6] = {0};
+    bool finger_state[6] = {0};
+    int finger_update[6] = {0};
 
-    bool quitRequested = 0;
-    int updateCounter = 0;
+    bool quit_requested = 0;
+    int update_counter = 0;
 
-    int mouseX = 0;
-    int mouseY = 0;
+    int mouse_x = 0;
+    int mouse_y = 0;
 
     void UpdateKey(int& Update, bool& state, bool newValue) const;
     int frame = 0;
 
-    float deltaRhythm = 0;
-    float keyAdjust = 0;
+    float delta_rhythm = 0;
+    float key_adjust = 0;
     float score = 10;
 
-    bool actionState[Action::ACTION_MAX] = {0};
-    int actionUpdate[Action::ACTION_MAX] = {0};
+    bool action_state[Action::ACTION_MAX] = {0};
+    int action_update[Action::ACTION_MAX] = {0};
     std::unordered_map<int, Action> gamepad2action;
     std::unordered_map<int, Action> key2action;
 };
 
-#endif  // INPUTMANAGER_H
+#endif

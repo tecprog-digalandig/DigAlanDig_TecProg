@@ -14,8 +14,8 @@ class State {
   public:
     State();
     virtual ~State() {
-        music.Stop();
-        objectArray.clear();
+        music.stop(); 
+        object_array.clear(); 
     }
 
     virtual void loadAssets() = 0;
@@ -24,9 +24,9 @@ class State {
     virtual void RhythmReset() {}
     virtual void render() const = 0;
 
-    virtual void Start() = 0;
-    virtual void Pause() = 0;
-    virtual void Resume() = 0;
+    virtual void start() = 0; 
+    virtual void pause() = 0; 
+    virtual void resume() = 0; 
 
     void UpdateArray(float delta_time);
     void rhythmUpdateArray();
@@ -34,8 +34,8 @@ class State {
     void StartArray();
     void RenderArray() const;
 
-    virtual std::weak_ptr<GameObject> AddObject(GameObject* go);
-    virtual std::weak_ptr<GameObject> GetObjectPrt(GameObject* go);
+    virtual std::weak_ptr<GameObject> add_object(GameObject* go); 
+    virtual std::weak_ptr<GameObject> get_object_ptr(GameObject* go); 
 
     bool PopRequested() const { 
       return popRequested; 
@@ -44,7 +44,7 @@ class State {
       return quitRequested; 
       }
 
-    TileMap* tileMap = nullptr;
+    TileMap* tile_map = nullptr; 
 
     Music* getMusic() { 
       return &music; 
@@ -54,24 +54,24 @@ class State {
       musicPlaying = false; 
       }
 
-    int GetGridSize() const { return gridSize; }
+    int get_grid_size() const { return grid_size; } 
 
   protected:
-    const int gridSize = 100;
+    const int grid_size = 100; 
 
-    bool popRequested = false;
-    bool quitRequested = false;
-    bool started = false;
+    bool pop_requested = false; 
+    bool quit_requested = false; 
+    bool started = false; 
 
-    std::vector<std::shared_ptr<GameObject>> objectArray;
+    std::vector<std::shared_ptr<GameObject>> object_array; 
 
     InputManager& input;
     Music music;
-    bool musicPlaying = false;
-    TileSet* tileSet = nullptr;
+    bool music_playing = false; 
+    TileSet* tile_set = nullptr; 
 
   private:
-    void RenderLight() const;
+    void render_light() const; 
 };
 
 #endif

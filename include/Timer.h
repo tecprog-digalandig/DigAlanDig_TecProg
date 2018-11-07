@@ -12,4 +12,4 @@ class Timer {
     float time = 0;
 };
 
-#endif  // TIMER_H
+#endif 

@@ -25,18 +25,18 @@
 StageState::StageState() {}
 
 int StageState::count = 0;
-int StageState::timeRhythm = 0;
+int StageState::time_rhythm = 0; 
 bool StageState::beat = false;
 
-void StageState::noEffect(void *udata, Uint8 *stream, int len) {
-    static constexpr float bitPBeat = 44100 * (120 / 60);
-    static constexpr float halfBitPBeat = bitPBeat / 2;
+void StageState::noeffect(void *udata, Uint8 *stream, int len) { 
+    static constexpr float bit_p_beat = 44100 * (120 / 60); 
+    static constexpr float half_bit_p_beat = bit_p_beat / 2; 
 
     count += len;
-    if (count >= halfBitPBeat) {
+    if (count >= half_bit_p_beat) { 
         beat = true;
-        count -= halfBitPBeat;
-        timeRhythm = SDL_GetTicks();
+        count -= half_bit_p_beat; 
+        time_rhythm = SDL_GetTicks(); 
     }
 }
 
@@ -90,12 +90,12 @@ void StageState::loadAssets() {
     Game::getInstance()->getGridControl()->SetTileMap(tileMap);
 
     // Alan
-    GameObject *alanGO = new GameObject();
+    GameObject *alan_go = new GameObject(); 
     Vec2 gp(3, 0);
-    alanGO->box.x = (gp.x * GetGridSize()) - GetGridSize() / 2;
-    alanGO->box.y = (gp.y * GetGridSize()) - GetGridSize() / 2;
-    alanGO->gridPosition = gp;
-    objectArray.emplace_back(alanGO);
+    alan_go->box.x = (gp.x * GetGridSize()) - GetGridSize() / 2; 
+    alan_go->box.y = (gp.y * GetGridSize()) - GetGridSize() / 2; 
+    alan_go->gridPosition = gp; 
+    object_array.emplace_back(alan_go); 
 
     Game::getInstance()->getGridControl()->SetAlan(GetObjectPrt(alanGO));
 
@@ -114,7 +114,9 @@ void StageState::loadAssets() {
     objectArray.emplace_back(alanL);
     alanL->addComponent(new Light(*alanL, GetObjectPrt(alanGO)));
 
-    Camera::Follow(alanGO);
+    GameObject *es_go = new GameObject(); 
+    es_go->add_component(new EnemySpawn(*es_go, tile_map)); 
+    object_array.emplace_back(es_go); 
 
     GameObject *esGO = new GameObject();
     esGO->addComponent(new EnemySpawn(*esGO, tileMap));
@@ -206,14 +208,14 @@ void StageState::loadAssets() {
     // Music
     music.isOpen("assets/audio/marmota.ogg");
     count = 0;
-    halfBeatCounter = 0;
-    Mix_SetPostMix(noEffect, NULL);
+    half_beat_counter = 0;
+    Mix_SetPostMix(no_effect, NULL);
 }
 
 void StageState::Start() {
     if (!started) loadAssets();
 
-    StartArray();
+    start_array();
 }
 
 void StageState::Update(float delta_time) {
@@ -222,15 +224,15 @@ void StageState::Update(float delta_time) {
     if (beat) {
         beat = false;
         static constexpr float bpm = 120;
-        static const int beatTime = (60 * 1000) / bpm;
-        static const int halfBeatTime = beatTime / 2;
+        static const int beat_time = (60 * 1000) / bpm;
+        static const int half_beat_time = beat_time / 2;
 
         if (halfBeatCounter == 0) Game::getInstance()->StartBeatTime();
 
-        Game::getInstance()->UpdateBeatTime(halfBeatCounter * halfBeatTime);
+        Game::getInstance()->UpdateBeatTime(halfBeatCounter * half_beat_time);
         halfBeatCounter++;
     }
-    UpdateArray(delta_time);
+    ypdateArray(delta_time);
 }
 
 void StageState::rhythmUpdate() {
@@ -241,6 +243,6 @@ void StageState::rhythmUpdate() {
     rhythmUpdateArray();
 }
 
-void StageState::RhythmReset() { RhythmResetArray(); }
+void StageState::rhythm_reset() { rhythm_reset_array(); }
 
 void StageState::render() const { RenderArray(); }
