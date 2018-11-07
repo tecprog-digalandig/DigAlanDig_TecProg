@@ -1,19 +1,19 @@
 #include "HudTimer.h"
 
 HudTimer::HudTimer(GameObject& associated)
-    : Component(associated), input(InputManager::GetInstance()) {
+    : Component(associated), input(InputManager::getInstance()) {
     Vec2 center = associated.box.Center();
 
     bg = new Sprite(associated, "assets/hud/timerbg.png");
-    associated.box.SetCenter(center);
+    associated.box.setCenter(center);
     boxbg = associated.box;
 
     meter = new Sprite(associated, "assets/hud/raio.png", 3, 1e9);
-    associated.box.SetCenter(center);
+    associated.box.setCenter(center);
     boxmeter = associated.box;
 
     fg = new Sprite(associated, "assets/hud/timerfg.png");
-    associated.box.SetCenter(center);
+    associated.box.setCenter(center);
     boxfg = associated.box;
 
     moveLenght = boxbg.w / 2 - boxmeter.w / 2;
@@ -22,41 +22,41 @@ HudTimer::HudTimer(GameObject& associated)
     maxM = boxmeter.x + moveLenght * 0.5;
 }
 
-void HudTimer::Render(Common::Layer layer) const {
+void HudTimer::render(Common::Layer layer) const {
     associated.box = boxbg;
-    bg->Render(layer);
+    bg->render(layer);
 
     associated.box = boxmeter;
-    associated.box.x += moveLenght * -input.GetDeltaRhythm();
+    associated.box.x += moveLenght * -input.getDeltaRhythm();
     SetMeterFrame();
-    meter->Render(layer);
+    meter->render(layer);
 
     for (auto rise : risers) {
         associated.box.pos = rise;
         SetMeterFrame();
-        meter->Render(layer);
+        meter->render(layer);
     }
 
     associated.box = boxfg;
-    fg->Render(layer);
+    fg->render(layer);
 }
 
 void HudTimer::SetMeterFrame() const {
     if (associated.box.x < maxM && associated.box.x > minM) {
-        meter->SetFrame(2);
+        meter->setFrame(2);
         meter->SetScaleX(1.5);
     } else {
-        meter->SetFrame(0);
+        meter->setFrame(0);
         meter->SetScaleX(0.8);
     }
 }
 
-void HudTimer::Update(float dt) {
-    if (std::abs(input.GetDeltaRhythm()) < 0.5) {
-        meter->SetFrame(2);
+void HudTimer::Update(float delta_time) {
+    if (std::abs(input.getDeltaRhythm()) < 0.5) {
+        meter->setFrame(2);
         meter->SetScaleX(1.5);
     } else {
-        meter->SetFrame(0);
+        meter->setFrame(0);
         meter->SetScaleX(0.8);
     }
 
@@ -68,7 +68,7 @@ void HudTimer::Update(float dt) {
     }
 
     for (auto& rise : risers) {
-        rise.y -= dt * speed;
+        rise.y -= delta_time * speed;
     }
 
     risers.erase(std::remove_if(risers.begin(), risers.end(),

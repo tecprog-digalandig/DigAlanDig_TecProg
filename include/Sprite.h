@@ -1,5 +1,5 @@
-#ifndef SPRITE_H
-#define SPRITE_H
+#ifndef Sprite_H
+#define Sprite_H
 #define INCLUDE_SDL
 #include "SDL_include.h"
 
@@ -35,27 +35,27 @@ class Sprite : public Component {
     void SetClip(int x, int y, int w, int h) { clipRect = {x, y, w, h}; }
     int GetWidth() const { return width; }
     int GetHeight() const { return height; }
-    bool IsOpen() const { return static_cast<bool>(Sprite::texture); }
+    bool isOpen() const { return static_cast<bool>(Sprite::texture); }
 
-    void Update(float dt);
-    void AlanUpdate(float dt);
-    void RhythmUpdate() {
+    void Update(float delta_time);
+    void AlanUpdate(float delta_time);
+    void rhythmUpdate() {
         if (frameTime == -1)
-            SetFrame(((currentFrame - initFrame) + 1) % frameCount + initFrame);
+            setFrame(((currentFrame - initFrame) + 1) % frameCount + initFrame);
     }
     void RhythmReset() {}
-    void Render(Common::Layer layer) const;
+    void render(Common::Layer layer) const;
 
     void SetScaleX(double scaleX, double scaleY);
     void SetScaleX(double s) { SetScaleX(s, s); }
     void SetScaleX(const Vec2& v) { SetScaleX(v.x, v.y); }
     Vec2 GetScale() const { return scale; }
 
-    void SetFrame(int frame);
-    void SetFrameCount(int frameCount) { this->frameCount = frameCount; }
-    void SetFrameTime(float frameTime) { this->frameTime = frameTime; }
+    void setFrame(int frame);
+    void setFrameCount(int frameCount) { this->frameCount = frameCount; }
+    void setFrameTime(float frameTime) { this->frameTime = frameTime; }
 
-    bool FrameTimePassed() {
+    bool frameTimePassed() {
         if (frameTimeTotal < 0) return false;
 
         if (timeElapsed < frameTimeTotal)
@@ -69,13 +69,13 @@ class Sprite : public Component {
         SDL_SetTextureBlendMode(texture.get(), mode);
     }
 
-    void SetColor(int r, int g, int b) {
+    void setColor(int r, int g, int b) {
         SDL_SetTextureColorMod(texture.get(), r, g, b);
     }
 
     int GetFrameCount() { return frameCount; }
 
-    void TimeElapsedReset() { timeElapsed = 0; }
+    void timeElapsedReset() { timeElapsed = 0; }
 
   private:
     std::shared_ptr<SDL_Texture> texture = nullptr;

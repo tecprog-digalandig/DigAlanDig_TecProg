@@ -103,7 +103,7 @@ int TileMap::At(int x, int y, int z) {
     return tileMat[z][y * width + x];
 }
 
-void TileMap::Render(Common::Layer layer) const {
+void TileMap::render(Common::Layer layer) const {
     if (layer == Common::Layer::DEFAULT)
         tileSet->setTileSetDefault();
     else
@@ -115,12 +115,12 @@ void TileMap::Render(Common::Layer layer) const {
 
 void SpawnDust(Vec2 pos) {
     GameObject* go = new GameObject();
-    go->AddComponent(new Sprite(*go, "assets/img/dust.png", 3, 0.2, 3 * 0.2));
-    go->box.SetCenter((pos * 100) + Vec2(50, 50));
-    Game::GetInstance()->GetCurrentState().AddObject(go);
+    go->addComponent(new Sprite(*go, "assets/img/dust.png", 3, 0.2, 3 * 0.2));
+    go->box.setCenter((pos * 100) + Vec2(50, 50));
+    Game::getInstance()->getCurrentState().AddObject(go);
 }
 
-void TileMap::GetDamageGround(int damage, Vec2 posDamage) {
+void TileMap::getDamageGround(int damage, Vec2 posDamage) {
     int valPos = At(posDamage.x, posDamage.y);
     if (valPos == 1) return;
 

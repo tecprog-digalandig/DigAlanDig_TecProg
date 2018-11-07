@@ -2,17 +2,16 @@
 #include "Common.h"
 #include "Game.h"
 
-TileSet::TileSet(const string& file) 
-{ 
-    json json_file; 
-    Common::readJson(json_file, file);
+TileSet::TileSet(const std::string& file) {
+    json j;
+    Common::read_Json(j, file);
 
-    string image_file = json_file.at("image");
-    image_file.replace(image_file.begin(), image_file.begin() + 3, "assets/");  
-    tile_set_d = Resources::GetImage(image_file);
-    image_file.replace(image_file.end() - 4, image_file.end() - 4, "_light");   
-    tile_set_l = Resources::GetImage(image_file);
-    SDL_SetTextureBlendMode(tile_set_l.get(), SDL_BLENDMODE_ADD);
+    std::string imgFile = j.at("image");
+    imgFile.replace(imgFile.begin(), imgFile.begin() + 3, "assets/");
+    tileSet_d = Resources::getImage(imgFile);
+    imgFile.replace(imgFile.end() - 4, imgFile.end() - 4, "_light");
+    tileSet_l = Resources::getImage(imgFile);
+    SDL_SetTextureBlendMode(tileSet_l.get(), SDL_BLENDMODE_ADD);
     setTileSetDefault();
 
     tile_height = json_file.at("tileheight");   
@@ -30,11 +29,11 @@ TileSet::TileSet(const string& file)
     }
 
     item2type[12] = item2type[13] = item2type[22] = item2type[23] =
-        item2type[4] = item2type[5] = (int)Common::ItemType::GOLD;
+        item2type[4] = item2type[5] = (int)Common::ItemType::gold;
     item2type[11] = item2type[16] = item2type[17] = item2type[20] =
-        item2type[21] = item2type[8] = (int)Common::ItemType::DIAMOND;
+        item2type[21] = item2type[8] = (int)Common::ItemType::diamond;
     item2type[6] = item2type[7] = item2type[18] = item2type[19] =
-        item2type[14] = item2type[15] = (int)Common::ItemType::PETROLEUM;
+        item2type[14] = item2type[15] = (int)Common::ItemType::petroleum;
 }
 
 void TileSet::RenderTile(unsigned index, float position_x, float position_y) const 
@@ -53,5 +52,5 @@ void TileSet::RenderTile(unsigned index, float position_x, float position_y) con
                      tile_height * ((int)index / columns), tile_width,
                      tile_height};
 
-    SDL_RenderCopy(Game::GetInstance()->GetRenderer(), tile_set, &clip, &pos);
+    SDL_RenderCopy(Game::getInstance()->GetRenderer(), tile_set, &clip, &pos);
 }

@@ -8,7 +8,7 @@ using json = nlohmann::json;
 
 namespace Common {
 enum Layer { BG = 1, DEFAULT = 2, FG = 4, LIGHT = 8, HUD = 16 };
-enum ItemType { GOLD = 1, DIAMOND, PETROLEUM };
+enum ItemType { gold = 1, diamond, petroleum };
 
 // From SDL wiki
 char *fileRead(const char *file_name);

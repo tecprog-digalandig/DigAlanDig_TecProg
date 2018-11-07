@@ -12,58 +12,86 @@
 
 #include "AlanAnimation.h"
 
-class AlanActionControl : public Component {
+class AlanActionControl : public Component 
+{
   public:
-    enum Direction { NONE = 0, UP, DOWN, LEFT, RIGHT };
-    enum Action { STANDIN = 0, WALKIN, CLIMBING, FALLIN };
+    enum Direction 
+    {
+         NONE = 0, up, down, left, right
+    };
 
-    AlanActionControl(GameObject& associated, int gridSize)
+    enum Action 
+    { 
+        standin = 0, walkin, climbin, fallin_var
+    };
+
+    AlanActionControl(GameObject& associated, int grid_size)
         : Component(associated),
-          input(InputManager::GetInstance()),
-          gridSize(gridSize) {}
+          input(InputManager::getInstance()),
+          grid_size(grid_size) {}
 
     ~AlanActionControl() {}
 
-    void Fallin(float dt);
+    void fallin(float delta_time);
 
-    bool ShouldFall();
+    bool shouldFall();
 
-    bool CanClimb();
-    bool InClimbPosition(AlanAnimation* animation);
-    bool ClimbPathFree();
+    bool canClimb();
 
-    bool IsBlock();
-    bool IsFree();
+    bool inClimbPosition(AlanAnimation* animation);
 
-    bool IsClimbDirectionLeft(AlanAnimation* animation);
+    bool climbPathFree();
 
-    void Update(float dt);
-    void RhythmUpdate() {}
-    void RhythmReset() {}
-    void Render(Common::Layer layer) const {}
+    bool isBlock();
 
-    bool IsMovementDone() { return !animationOnGoing; }
+    bool isFree();
 
-    AlanActionControl::Direction GetMovementDirection() {
-        return movementDirection;
+    bool isClimbDirectionleft(AlanAnimation* animation);
+
+    void Update(float delta_time);
+
+    void rhythmUpdate() {}
+
+    void rhythmReset() {}
+
+    void render(Common::Layer layer) const {}
+    
+    bool isMovementDone() 
+    { 
+        return !animation_on_going; 
     }
-    void SetMovementDirection(Direction movementDirection) {
-        this->movementDirection = movementDirection;
+
+    AlanActionControl::Direction getMovementDirection() 
+    {
+        return movement_direction;
     }
-    void SetAction(Action action) { this->action = action; }
-    Action GetAction() { return action; }
+
+    void setMovementDirection(Direction movementDirection) 
+    {
+        this->movement_direction = movement_direction;
+    }
+
+    void setAction(Action action) 
+    { 
+        this->action = action; 
+    }
+
+    Action getAction() 
+    { 
+        return action; 
+    }
 
   private:
-    Direction movementDirection = Direction::NONE;
-    Action action = Action::STANDIN;
-    int gridsLeft = 0;
+    Direction movement_direction = Direction::NONE;
+    Action action = Action::standin;
+    int grids_left = 0;
 
     InputManager& input;
 
-    int gridSize;
+    int grid_size;
 
     bool moved = false;
-    bool animationOnGoing = false;
+    bool animation_on_going = false;
 };
 
 #endif  // ALANACTIONCONTROL_H

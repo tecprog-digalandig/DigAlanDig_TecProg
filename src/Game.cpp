@@ -18,8 +18,7 @@ Game::~Game()
     delete grid_control;
 }
 
-Game* Game::GetInstance(const std::string& title, int w, int h)
-{
+Game* Game::getInstance(const std::string& title, int w, int h) {
     if (!_instance) _instance = new Game(title, w, h);
     return _instance;
 }
@@ -31,15 +30,14 @@ void Game::UpdateBeatTime(int time_rhythm)
     if (std::abs(tick_counter - time_rhythm) > 1000) tick_counter = time_rhythm;
 }
 
-void Game::CalculateDeltaTime()
-{
+void Game::CalculateDeltaTime() {
     int ticks_total = static_cast<int>(SDL_GetTicks());
-    dt = ticks_total - frame_start;
+    delta_time = ticks_total - frame_start;
     // Maximum time, fix return from suspended
-    if (dt > 1000) dt = 1000;
+    if (delta_time > 1000) delta_time = 1000;
 
-    tick_counter += dt;
-    dt /= 1000;
+    tick_counter += delta_time;
+    delta_time /= 1000;
     frame_start = ticks_total;
 
     if (input.KeyPress(SDL_SCANCODE_EQUALS))
@@ -97,8 +95,8 @@ void Game::Run()
             should_rhythm_update = false;
             if (!off_beat)
             {
-                stateStack.top()->RhythmUpdate();
-                Camera::RhythmUpdate();
+                stateStack.top()->rhythmUpdate();
+                Camera::rhythmUpdate();
             }
             else
             {
@@ -108,17 +106,17 @@ void Game::Run()
             }
         }
 
-        stateStack.top()->Update(dt);
-        stateStack.top()->Render();
+        stateStack.top()->Update(delta_time);
+        stateStack.top()->render();
         SDL_RenderPresent(renderer);
 
         if (stateStack.top()->PopRequested() ||
             stateStack.top()->QuitRequested())
         {
             Camera::Follow(nullptr);
-            Game::GetInstance()->GetGridControl()->ClearEnemyVector();
+            Game::getInstance()->getGridControl()->ClearEnemyVector();
             stateStack.pop();
-            Resources::ClearAll();
+            Resources::clearAll();
             if (!stateStack.empty()) stateStack.top()->Resume();
         }
 
@@ -134,7 +132,7 @@ void Game::Run()
         SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
         SDL_RenderClear(renderer);
 
-        if (input.ActionPress(InputManager::FULLSCREEN))
+        if (input.actionPress(InputManager::FULLSCREEN))
         {
             ToggleFullScreen();
         }
@@ -151,8 +149,7 @@ void Game::ToggleFullScreen()
 }
 
 Game::Game(const std::string& title, int width, int height)
-    : input(InputManager::GetInstance())
-{
+    : input(InputManager::getInstance()) {
     if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO | SDL_INIT_TIMER |
                  SDL_INIT_JOYSTICK | SDL_INIT_GAMECONTROLLER |
                  SDL_INIT_HAPTIC) < 0)
@@ -217,5 +214,5 @@ Game::Game(const std::string& title, int width, int height)
     SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "linear");
     SDL_RenderSetLogicalSize(renderer, width, height);
 
-    grid_control = GridControl::GetInstance();
+    grid_control = GridControl::getInstance();
 }

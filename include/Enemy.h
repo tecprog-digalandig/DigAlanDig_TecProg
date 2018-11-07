@@ -20,7 +20,7 @@
 
 class Enemy : public Component {
   public:
-    enum Direction { LEFT = 0, RIGHT };
+    enum Direction { left = 0, right };
     enum State { NONE_S = 0, IDLE_S, WALKIN_S, DIE_S, STATE_MAX };
 
     Enemy(GameObject& associated, int enemy_type = 1);
@@ -37,8 +37,8 @@ class Enemy : public Component {
             num_beats = 0;
         }
     }
-    void RhythmReset() {}
-    void Render(Common::Layer layer) const {}
+    void rhythmReset() {}
+    void render(Common::Layer layer) const {}
 
     Vec2 GetGridPosition()
     {
@@ -79,7 +79,7 @@ class Enemy : public Component {
     bool movement_allowed = false;
 
   private:
-    Direction movement_direction = Direction::LEFT;
+    Direction movementDirection = Direction::left;
 
     // 2<=range<=7
     int range, steps = 0;

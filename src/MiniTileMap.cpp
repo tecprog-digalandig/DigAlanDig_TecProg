@@ -7,31 +7,30 @@
 
 MiniTileMap::MiniTileMap(GameObject &associated, TileSet *tile_set,
                          TileMap *tileMap, std::weak_ptr<GameObject> alan)
-    : Component(associated), tileMap(tileMap), tile_set(tile_set), alan(alan) {}
+    : Component(associated), tile_map(tile_map), tile_set(tile_set), alan(alan) {}
 
 MiniTileMap::~MiniTileMap() {}
 
 /*
     Renderiza as camadas do mapa.
 */
-void MiniTileMap::Render(Common::Layer layer) const
-{
-    if (!alan.lock()) { return };
+void MiniTileMap::render(Common::Layer layer) const {
+    if (!alan.lock()) return;
 
     int y_min;
     int x = associated.box.x;
     int y = associated.box.y;
     int val_pos;
 
-    Vec2 alan_pos = alan.lock()->GetGridPosition();
+    Vec2 alan_pos = alan.lock()->getGridPosition();
 
     y_min = alan_pos.y - 5;
 
-    // Camera::pos.y / Game::GetInstance()->GetCurrentState().GetGridSize();
+    // Camera::pos.y / Game::getInstance()->getCurrentState().GetGridSize();
 
-    for (int posY = y_min; posY < tileMap->GetHeight(); posY++)
+    for (int posY = y_min; posY < tile_map->GetHeight(); posY++)
     {
-        for (int posX = 0; posX < tileMap->GetWidth(); posX++)
+        for (int posX = 0; posX < tile_map->GetWidth(); posX++)
         {
             // Coloca a marmota no minimapa
             // val_pos = tileMap->At(posX, posY, TileMap::Layers::BLOCOS);
@@ -43,17 +42,18 @@ void MiniTileMap::Render(Common::Layer layer) const
             {
                 val_pos = 5;
                 // Faz a borda o minimapa
-            }
-            else if (tileMap->At(posX, posY, TileMap::Layers::ITENS))
+            } 
+            else if (tile_map->At(posX, posY, TileMap::Layers::ITENS)) 
             {
                 val_pos = 4;
-            }
+            } 
             else if (posY >
-                       alan.lock()->GetComponent<Alan *>()->GetMaxPosition() + 7)
+                alan.lock()->GetComponent<Alan *>()->getMaxPosition() +
+                           7) 
             {
                 val_pos = 1;
-            }
-            else
+            } 
+            else 
             {
                 val_pos = 1;
             }

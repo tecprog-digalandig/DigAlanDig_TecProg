@@ -10,17 +10,16 @@
 #include "InputManager.h"
 #include "State.h"
 
-class Game
-{
-    public:
-        ~Game();
-        void Run();
-        SDL_Renderer* GetRenderer() const { return renderer; }
-        State& GetCurrentState() const { return *stateStack.top(); }
-        GridControl* GetGridControl() const { return grid_control; }
-        static Game* GetInstance() { return _instance; }
-        static Game* GetInstance(const std::string& title, int w, int h);
-        float GetDeltaTime() const { return dt; }
+class Game {
+  public:
+    ~Game();
+    void Run();
+    SDL_Renderer* GetRenderer() const { return renderer; }
+    State& getCurrentState() const { return *stateStack.top(); }
+    GridControl* getGridControl() const { return grid_control; }
+    static Game* getInstance() { return _instance; }
+    static Game* getInstance(const std::string& title, int w, int h);
+    float GetDeltaTime() const { return delta_time; }
 
         void Push(State* state) { stored_state = state; }
 
@@ -46,10 +45,10 @@ class Game
         GridControl* grid_control = nullptr;
         std::stack<std::unique_ptr<State>> stateStack;
 
-        int frame_start;
-        float dt;
-        void CalculateDeltaTime();
-        void ToggleFullScreen();
+    int frame_start;
+    float delta_time;
+    void CalculateDeltaTime();
+    void ToggleFullScreen();
 
         // TODO move to a configuration file
         static constexpr float bpm = 120;
@@ -57,12 +56,12 @@ class Game
         int adjust = 0;
         static const int inicial_adjust = 40;
 
-        static const int beat_time = (60 * 1000) / bpm;
-        static const int half_beat_time = beat_time / 2;
-        int half_beat_counter = 0;
-        int tick_counter = 0;
-        bool off_beat = false;
-        bool should_rhythm_update = false;
+    static const int beat_time = (60 * 1000) / bpm;
+    static const int half_beat_time = beat_time / 2;
+    int half_beat_counter = 0;
+    int tick_counter = 0;
+    bool offBeat = false;
+    bool should_rhythmUpdate = false;
 
         Game(const std::string& title, int width, int height);
 

@@ -14,10 +14,10 @@ class TitleState : public State {
   public:
     TitleState();
     ~TitleState() {}
-    void loadAssets();
-    void Update(float dt);
-    void Render() const;
-    void RhythmUpdate();
+    void LoadAssets();
+    void Update(float delta_time);
+    void render() const;
+    void rhythmUpdate();
     void Start();
     void Pause() {}
     void Resume() {}

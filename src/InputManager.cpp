@@ -8,21 +8,21 @@ InputManager::InputManager() {
     key2action[SDL_SCANCODE_SPACE] = Action::ENTER;
     gamepad2action[SDL_CONTROLLER_BUTTON_START] = Action::ENTER;
 
-    key2action[SDL_SCANCODE_DOWN] = Action::DIG_DOWN;
-    gamepad2action[SDL_CONTROLLER_BUTTON_A] = Action::DIG_DOWN;
-    gamepad2action[SDL_CONTROLLER_BUTTON_DPAD_DOWN] = Action::DIG_DOWN;
+    key2action[SDL_SCANCODE_DOWN] = Action::dig_down;
+    gamepad2action[SDL_CONTROLLER_BUTTON_A] = Action::dig_down;
+    gamepad2action[SDL_CONTROLLER_BUTTON_DPAD_DOWN] = Action::dig_down;
 
-    key2action[SDL_SCANCODE_LEFT] = Action::DIG_LEFT;
-    gamepad2action[SDL_CONTROLLER_BUTTON_X] = Action::DIG_LEFT;
-    gamepad2action[SDL_CONTROLLER_BUTTON_DPAD_LEFT] = Action::DIG_LEFT;
+    key2action[SDL_SCANCODE_LEFT] = Action::dig_left;
+    gamepad2action[SDL_CONTROLLER_BUTTON_X] = Action::dig_left;
+    gamepad2action[SDL_CONTROLLER_BUTTON_DPAD_LEFT] = Action::dig_left;
 
-    key2action[SDL_SCANCODE_UP] = Action::DIG_UP;
-    gamepad2action[SDL_CONTROLLER_BUTTON_Y] = Action::DIG_UP;
-    gamepad2action[SDL_CONTROLLER_BUTTON_DPAD_UP] = Action::DIG_UP;
+    key2action[SDL_SCANCODE_UP] = Action::dig_up;
+    gamepad2action[SDL_CONTROLLER_BUTTON_Y] = Action::dig_up;
+    gamepad2action[SDL_CONTROLLER_BUTTON_DPAD_UP] = Action::dig_up;
 
-    key2action[SDL_SCANCODE_RIGHT] = Action::DIG_RIGHT;
-    gamepad2action[SDL_CONTROLLER_BUTTON_B] = Action::DIG_RIGHT;
-    gamepad2action[SDL_CONTROLLER_BUTTON_DPAD_RIGHT] = Action::DIG_RIGHT;
+    key2action[SDL_SCANCODE_RIGHT] = Action::dig_right;
+    gamepad2action[SDL_CONTROLLER_BUTTON_B] = Action::dig_right;
+    gamepad2action[SDL_CONTROLLER_BUTTON_DPAD_RIGHT] = Action::dig_right;
 
     key2action[SDL_SCANCODE_F] = Action::FULLSCREEN;
     gamepad2action[SDL_CONTROLLER_BUTTON_RIGHTSHOULDER] = Action::FULLSCREEN;
@@ -30,10 +30,10 @@ InputManager::InputManager() {
 
 int InputManager::finger2action(const Vec2 &v) const {
     if (title) return Action::ENTER;
-    if (v.x < 0.15) return Action::DIG_LEFT;
-    if (v.x > 0.85) return Action::DIG_RIGHT;
-    if (v.y > 0.5) return Action::DIG_DOWN;
-    if (v.y > 0.1) return Action::DIG_UP;
+    if (v.x < 0.15) return Action::dig_left;
+    if (v.x > 0.85) return Action::dig_right;
+    if (v.y > 0.5) return Action::dig_down;
+    if (v.y > 0.1) return Action::dig_up;
     return Action::ESCAPE;
 }
 
@@ -46,7 +46,7 @@ inline void InputManager::UpdateKey(int &Update, bool &state,
 }
 
 float InputManager::scaleFactor() const {
-    float dR = GetDeltaRhythm();
+    float dR = getDeltaRhythm();
     static constexpr float maxS = 0.3;
     float scale = pow(10, -(std::abs(dR) - 1)) / 10;
     if (scale > 0.8) scale += 0.5;
@@ -123,8 +123,8 @@ void InputManager::Update(float deltaRhythm) {
         }
     }
 
-    if (GamepadPress(SDL_CONTROLLER_BUTTON_LEFTSTICK)) Camera::Shake(4, 0.1);
-    if (KeyPress(SDL_SCANCODE_5)) Camera::Shake(4, 0.1);
+    if (GamepadPress(SDL_CONTROLLER_BUTTON_LEFTSTICK)) //Camera::CheckEnemyAlanCollision(4, 0.1);
+    if (KeyPress(SDL_SCANCODE_5)) Camera::shakefunc(4, 0.1);
 
     if (KeyPress(SDL_SCANCODE_0)) {
         keyAdjust += 0.05;
@@ -136,7 +136,7 @@ void InputManager::Update(float deltaRhythm) {
     }
 }
 
-void InputManager::Move() { score = deltaRhythm; }
+void InputManager::move() { score = deltaRhythm; }
 
 float InputManager::Moved() {
     float tmp = score;

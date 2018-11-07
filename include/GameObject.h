@@ -1,5 +1,5 @@
-#ifndef GAMEOBJECT_H
-#define GAMEOBJECT_H
+#ifndef GameObject_H
+#define GameObject_H
 #include <algorithm>
 #include <memory>
 #include <vector>
@@ -16,18 +16,18 @@ class GameObject
             : layer(layer), isDead(false) {}
         ~GameObject();
 
-        void Update(float dt);
-        void RhythmUpdate();
-        void RhythmReset();
+    void Update(float delta_time);
+    void rhythmUpdate();
+    void RhythmReset();
 
-        void RenderOrder(Common::Layer layer) const;
+    void renderOrder(Common::Layer layer) const;
 
-        bool canEnd() const;
+    bool canEnd() const;
 
-        bool IsDead() const { return isDead; }
-        void RequestDelete() { isDead = true; }
-        void AddComponent(Component *cpt);
-        void RemoveComponent(Component *cpt);
+    bool IsDead() const { return isDead; }
+    void RequestDelete() { isDead = true; }
+    void addComponent(Component *cpt);
+    void RemoveComponent(Component *cpt);
 
         void Start();
         void CopyPosition(const GameObject &go);
@@ -47,7 +47,7 @@ class GameObject
             return nullptr;
         }
 
-        Vec2 GetGridPosition() const { return gridPosition; }
+        Vec2 getGridPosition() const { return gridPosition; }
         Vec2 gridPosition;
 
         Rect box;
@@ -67,4 +67,4 @@ class GameObject
         bool isDead;
 };
 
-#endif
+#endif  // GameObject_H

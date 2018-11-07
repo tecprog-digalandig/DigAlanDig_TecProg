@@ -5,6 +5,7 @@
 #include "SDL_include.h"
 
 #include <iostream>
+#include <memory>
 #include <string>
 #include "Resources.h"
 

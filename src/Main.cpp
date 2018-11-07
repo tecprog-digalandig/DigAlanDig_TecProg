@@ -23,7 +23,7 @@ int main(int argc, char** argv) {
 #endif
     srand(time(0));
 
-    Game* game = Game::GetInstance("Groundhog Dig", 1024, 768);
+    Game* game = Game::getInstance("Groundhog Dig", 1024, 768);
     game->Push(new TitleState());
     game->Run();
 

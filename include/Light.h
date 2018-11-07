@@ -13,7 +13,7 @@ class Light : public Component {
           sprite(new Sprite(associated, "assets/img/light.png"))
     {
         sprite->SetBlendMode(SDL_BLENDMODE_ADD);
-        sprite->SetColor(255, 255, 255 * 0.8);
+        sprite->setColor(255, 255, 255 * 0.8);
         SetSize(600);
     }
 
@@ -22,17 +22,17 @@ class Light : public Component {
         delete sprite;
     }
 
-    void Update(float dt) {
+    void Update(float delta_time) {
         if (auto ptr = follow.lock()) {
-            associated.box.SetCenter(ptr->box.Center());
-            sprite->Update(dt);
+            associated.box.setCenter(ptr->box.Center());
+            sprite->Update(delta_time);
         } else {
             associated.RequestDelete();
             }
     }
 
-    void RhythmUpdate() {}
-    void Render(Common::Layer layer) const { sprite->Render(layer); }
+    void rhythmUpdate() {}
+    void render(Common::Layer layer) const { sprite->render(layer); }
 
     void SetSize(int size)
     {

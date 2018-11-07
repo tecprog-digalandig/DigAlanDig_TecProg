@@ -7,12 +7,12 @@ class Camera {
   public:
     static void Follow(GameObject* newFocus);
     static void Unfollow();
-    static void Update(float dt);
+    static void Update(float delta_time);
     static Vec2 Center();
-    static void Shake(int intensity = 4, float duration = 0.1);
+    static void shakefunc(int intensity = 4, float duration = 0.1);
     /* static void SetNewCameraPos(Vec2 newPos) { pos = newPos; } */
 
-    static void RhythmUpdate();
+    static void rhythmUpdate();
 
     static Vec2 pos, speed, screenSize, offset;
 
