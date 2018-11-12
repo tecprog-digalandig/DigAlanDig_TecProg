@@ -12,9 +12,9 @@ class Light : public Component {
           follow(follow),
           sprite(new Sprite(associated, "assets/img/light.png"))
     {
-        sprite->SetBlendMode(SDL_BLENDMODE_ADD);
+        sprite->setBlendMode(SDL_BLENDMODE_ADD);
         sprite->setColor(255, 255, 255 * 0.8);
-        SetSize(600);
+        setSize(600);
     }
 
     ~Light()
@@ -22,26 +22,26 @@ class Light : public Component {
         delete sprite;
     }
 
-    void Update(float delta_time) {
+    void update(float delta_time) {
         if (auto ptr = follow.lock()) {
             associated.box.setCenter(ptr->box.Center());
-            sprite->Update(delta_time);
+            sprite->update(delta_time);
         } else {
-            associated.RequestDelete();
+            associated.requestDelete();
             }
     }
 
     void rhythmUpdate() {}
-    void render(Common::Layer layer) const { sprite->render(layer); }
+    void render(Common::layer layer) const { sprite->render(layer); }
 
-    void SetSize(int size)
+    void setSize(int size)
     {
-        sprite->SetScaleX((double)size / sprite->GetHeight());
+        sprite->setScaleX((double)size / sprite->GetHeight());
     }
 
-    int GetSize() const
+    int getSize() const
     {
-        return sprite->GetScale().x * sprite->GetHeight();
+        return sprite->getScale().x * sprite->GetHeight();
     }
 
   private:

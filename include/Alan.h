@@ -27,7 +27,7 @@ class Alan : public Component
 
     void getMovement();
 
-    void Update(float delta_time);
+    void update(float delta_time);
 
     void rhythmUpdate() {}
 
@@ -47,7 +47,7 @@ class Alan : public Component
         moved = false;
         damage_taken = false;
     }
-    void render(Common::Layer layer) const {}
+    void render(Common::layer layer) const {}
 
     int getMaxPosition() const 
     { 
@@ -59,15 +59,15 @@ class Alan : public Component
         return associated.getGridPosition(); 
     }
 
-    AlanActionControl::Direction getMovementDirection() 
+    AlanActionControl::direction getMovementDirection() 
     {
-        return associated.GetComponent<AlanActionControl*>()
+        return associated.getComponent<AlanActionControl*>()
             ->getMovementDirection();
     }
 
     AlanActionControl::Action getAction() 
     {
-        return associated.GetComponent<AlanActionControl*>()->getAction();
+        return associated.getComponent<AlanActionControl*>()->getAction();
     }
 
     int getDamage() 

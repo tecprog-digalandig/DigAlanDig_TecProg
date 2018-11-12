@@ -4,9 +4,19 @@
 class Timer {
   public:
     Timer() {}
-    void Update(float delta_time) { time += delta_time; }
-    void Restart() { time = 0; }
-    float get() const { return time; }
+    void update(float delta_time) 
+    { 
+        time += delta_time; 
+    }
+
+    void restart() 
+    { 
+        time = 0; 
+    }
+    float get() const 
+    { 
+        return time; 
+    }
 
   private:
     float time = 0;

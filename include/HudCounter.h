@@ -10,10 +10,10 @@ class HudCounter : public Component
                    const std::string& itemFile);
         ~HudCounter();
 
-    void Update(float delta_time) {}
+    void update(float delta_time) {}
 
     void rhythmUpdate() {}
-    void render(Common::Layer layer) const;
+    void render(Common::layer layer) const;
 
         Sprite *bg, *counter;
         Rect boxbg;

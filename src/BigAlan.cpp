@@ -5,12 +5,12 @@
 #include "GridControl.h"
 
 
-void BigAlan::Update(float delta_time) {
-    int combo = Game::getInstance()->combo;
-    int diffCombo = std::abs(combo - old_combo);
+void BigAlan::update(float dt) 
+{
+    int combo = Game::GetInstance()->combo;
+    int diff_combo = std::abs(combo - old_combo);
     old_combo = combo;
-
-    if(Game::getInstance()->getGridControl()->GetAlan().lock()->GetComponent<AlanAnimation *>()->getCurrentState() == AlanAnimation::State::dead){
+    if(Game::GetInstance()->GetGridControl()->GetAlan().lock()->GetComponent<AlanAnimation *>()->GetCurrentState() == AlanAnimation::State::DEAD){
         if(current_state != BAState::TRASH){
             current_state = BAState::TRASH;
             sprite->Open(state[current_state], 0);
@@ -21,19 +21,18 @@ void BigAlan::Update(float delta_time) {
     switch (current_state) {
         case BAState::STARTER:
         case BAState::GOOD:
-            if (Game::getInstance()->combo > 10)
+            if (Game::GetInstance()->combo > 10)
                 current_state = BAState::GOOD;
-            else if (diffCombo > 5)
+            else if (diff_combo > 5)
                 current_state = BAState::DECENT;
-            else if (diffCombo > 10)
+            else if (diff_combo > 10)
                 current_state = BAState::TRASH;
-
             break;
         case BAState::DECENT:
-            if (Game::getInstance()->combo > 2) current_state = BAState::STARTER;
+            if (Game::GetInstance()->combo > 2) current_state = BAState::STARTER;
             break;
         case BAState::TRASH:
-            if (Game::getInstance()->combo > 3) current_state = BAState::STARTER;
+            if (Game::GetInstance()->combo > 3) current_state = BAState::STARTER;
             break;
         default:
             current_state = BAState::STARTER;

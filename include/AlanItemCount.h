@@ -31,13 +31,13 @@ class Item : public Component
             delete bg; 
         }
 
-        void Update(float delta_time) {}
+        void update(float delta_time) {}
 
         void rhythmUpdate() {}
 
         void rhythmReset() {}
 
-        void render(Common::Layer layer) const {}
+        void render(Common::layer layer) const {}
 
         Sprite* bg;
         Vec2 center, numberCenter;
@@ -61,20 +61,20 @@ class AlanItemCount : public Component
 
         void rhythmReset() {}
 
-        void render(Common::Layer layer) const;
+        void render(Common::layer layer) const;
 
         void itemCollected(int item_type) 
         {
             if (item_count[item_type] > 0)
-            item_count_item[item_type]->GetComponent<Sprite*>()->setFrame(
+            item_count_item[item_type]->getComponent<Sprite*>()->setFrame(
                 --item_count[item_type]);
         }
 
         bool collectedAllItens() 
         {
-            if (item_count[Common::ItemType::diamond] == 0 &&
-                item_count[Common::ItemType::petroleum] == 0 &&
-                item_count[Common::ItemType::gold] == 0)
+            if (item_count[Common::item_type::diamond] == 0 &&
+                item_count[Common::item_type::petroleum] == 0 &&
+                item_count[Common::item_type::gold] == 0)
             return true;
 
             return false;

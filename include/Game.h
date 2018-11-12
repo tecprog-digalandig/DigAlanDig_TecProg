@@ -15,7 +15,7 @@ class Game {
     ~Game();
     void Run();
     SDL_Renderer* GetRenderer() const { return renderer; }
-    State& getCurrentState() const { return *stateStack.top(); }
+    State& getCurrentState() const { return *StateStack.top(); }
     GridControl* getGridControl() const { return grid_control; }
     static Game* getInstance() { return _instance; }
     static Game* getInstance(const std::string& title, int w, int h);

@@ -12,9 +12,9 @@ class Component {
     virtual ~Component() {}
 
     virtual void update(float dt) = 0;
-    virtual void rhythm_update() = 0;
-    virtual void rhythm_reset() {}
-    virtual void render(Common::Layer layer) const = 0;
+    virtual void rhythmUpdate() = 0;
+    virtual void RhythmReset() {}
+    virtual void render(Common::layer layer) const = 0;
     virtual void start() {}
 
   protected:

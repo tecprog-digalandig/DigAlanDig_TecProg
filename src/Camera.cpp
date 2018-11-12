@@ -14,7 +14,7 @@ GameObject *Camera::focus = nullptr;
 int Camera::shake_intensity = 0;
 float Camera::shake_duration = 0;
 
-void Camera::Follow(GameObject *new_focus)
+void Camera::follow(GameObject *new_focus)
 {
     focus = new_focus;
 }
@@ -39,7 +39,7 @@ void Camera::rhythmUpdate() {
     }
 }
 
-void Camera::Update(float delta_time)
+void Camera::update(float delta_time)
 {
     if (shake_duration > 0) {
         shake_duration -= dt;
@@ -106,20 +106,20 @@ void Camera::Update(float delta_time)
     }
     pos = shake + offset;
 
-    static int acc = 30;
-    if (InputManager::getInstance().keyDown(SDL_SCANCODE_COMMA)) {
-        speed.y -= acc * delta_time;
+    static int acceleration = 30;
+    if (InputManager::GetInstance().KeyDown(SDL_SCANCODE_COMMA)) {
+        speed.y -= acceleration * dt;
     }
-    if (InputManager::getInstance().keyDown(SDL_SCANCODE_PERIOD)) {
-        speed.y += acc * delta_time;
+    if (InputManager::GetInstance().KeyDown(SDL_SCANCODE_PERIOD)) {
+        speed.y += acceleration * dt;
     }
-    if (InputManager::getInstance().KeyPress(SDL_SCANCODE_C)) {
+    if (InputManager::GetInstance().KeyPress(SDL_SCANCODE_C)) {
         current_move = (Movement)(current_move + 1);
         if (current_move > Camera::NONE) current_move = Camera::ATTACHED;
     }
 }
 
-void Camera::shakefunc(int intensity, float duration) {
+void Camera::shakeFunc(int intensity, float duration) {
     shake_intensity = intensity;
     shake_duration = duration;
 }

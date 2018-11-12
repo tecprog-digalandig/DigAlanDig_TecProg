@@ -18,9 +18,9 @@ class MiniTileMap : public Component
 
     ~MiniTileMap();
 
-    void Update(float delta_time) {}
+    void update(float delta_time) {}
     void rhythmUpdate() {}
-    void render(Common::Layer layer) const;
+    void render(Common::layer layer) const;
 
   private:
     TileMap *tile_map;

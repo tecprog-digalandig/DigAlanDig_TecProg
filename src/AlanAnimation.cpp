@@ -38,7 +38,7 @@ void AlanAnimation::playSound(Transition trans)
     s->play_func();
 }
 
-void AlanAnimation::Update(float delta_time) 
+void AlanAnimation::update(float delta_time) 
 {
     if (current_state == State::dancin || current_state == State::dead) return;
 

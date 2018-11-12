@@ -5,19 +5,19 @@
 
 class Camera {
   public:
-    static void Follow(GameObject* newFocus);
-    static void Unfollow();
-    static void Update(float delta_time);
-    static Vec2 Center();
-    static void shakefunc(int intensity = 4, float duration = 0.1);
+    static void follow(GameObject* newFocus);
+    static void unfollow();
+    static void update(float delta_time);
+    static Vec2 center();
+    static void shakeFunc(int intensity = 4, float duration = 0.1);
     /* static void SetNewCameraPos(Vec2 newPos) { pos = newPos; } */
 
     static void rhythmUpdate();
 
-    static Vec2 pos, speed, screenSize, offset;
+    static Vec2 pos, speed, screen_size, off_set;
 
-    enum Movement { ATTACHED = 1, CONSTSCROLL, FRIENDLYSCROLL, NONE };
-    static Movement current_move;
+    enum movement { ATTACHED = 1, CONSTSCROLL, FRIENDLYSCROLL, NONE };
+    static movement current_move;
 
   private:
     static GameObject* focus;

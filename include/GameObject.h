@@ -12,30 +12,33 @@ class Component;
 class GameObject
 {
     public:
-        explicit GameObject(unsigned int layer = Common::Layer::DEFAULT)
-            : layer(layer), isDead(false) {}
+        explicit GameObject(unsigned int layer = Common::layer::DEFAULT)
+            : layer(layer), is_dead(false) {}
         ~GameObject();
 
-    void Update(float delta_time);
+    void update(float delta_time);
     void rhythmUpdate();
-    void RhythmReset();
+    void rhythmReset();
 
-    void renderOrder(Common::Layer layer) const;
+    void renderOrder(Common::layer layer) const;
 
     bool canEnd() const;
 
-    bool IsDead() const { return isDead; }
-    void RequestDelete() { isDead = true; }
+    bool isDead() const { return isDead; }
+    void requestDelete() { is_dead = true; }
     void addComponent(Component *cpt);
-    void RemoveComponent(Component *cpt);
+    void removeComponent(Component *cpt);
 
-        void Start();
-        void CopyPosition(const GameObject &go);
+    void start();
+    void copyPosition(const GameObject &go);
 
-        double angleRad() const { return angle_deg * M_PI / 180; }
+        double angleRad() const 
+        { 
+            return angle_deg * M_PI / 180; 
+        }
 
         template <class T>
-        T GetComponent() const
+        T getComponent() const
         {
             for (Component *component : components)
             {
@@ -47,8 +50,12 @@ class GameObject
             return nullptr;
         }
 
-        Vec2 getGridPosition() const { return gridPosition; }
-        Vec2 gridPosition;
+        Vec2 getGridPosition() const 
+        { 
+            return grid_position; 
+        }
+
+        Vec2 grid_position;
 
         Rect box;
         bool world_reference = true;
@@ -64,7 +71,7 @@ class GameObject
 
     private:
         std::vector<Component *> components;
-        bool isDead;
+        bool is_dead;
 };
 
 #endif  // GameObject_H

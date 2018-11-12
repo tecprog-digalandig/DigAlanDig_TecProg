@@ -51,11 +51,11 @@ class Sound : public Component
         if (chunk) chunk->volume = v;
     }
 
-    void Update(float delta_time) {}
+    void update(float delta_time) {}
     void rhythmUpdate() {}
     void mixHaltChannel(int channel){}
     //void mixGetError(){}
-    void render(Common::Layer layer) const {}
+    void render(Common::layer layer) const {}
 
   private:
     std::shared_ptr<Mix_Chunk> chunk;

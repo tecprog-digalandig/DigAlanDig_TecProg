@@ -105,7 +105,7 @@ bool AlanActionControl::isClimbDirectionleft(AlanAnimation *animation)
            animation->getCurrentDirection() != AlanAnimation::Direction::right;
 }
 
-void AlanActionControl::Update(float delta_time) 
+void AlanActionControl::update(float delta_time) 
 {
     if (!associated.GetComponent<Interpol *>()->isMovementDone()) return;
 

@@ -16,17 +16,17 @@ class EnemySpawn : public Component
 {
     public:
         EnemySpawn(GameObject &associated, TileMap *tileMap)
-        : Component(associated), tileMap(tileMap) {}
+        : Component(associated), tile_map(tile_map) {}
 
         ~EnemySpawn() {}
 
-    void Update(float delta_time);
+    void update(float delta_time);
     void rhythmUpdate() {}
-    void RhythmReset() {}
-    void render(Common::Layer layer) const {}
+    void rhythmReset() {}
+    void render(Common::layer layer) const {}
 
     private:
-        TileMap *tileMap;
+        TileMap *tile_map;
         int current_y = 0;
 };
 

@@ -11,10 +11,17 @@ GameObject::~GameObject()
     tmp = box;
 }
 
+<<<<<<< HEAD
 void GameObject::Update(float delta_time) {
     static float sum;
     sum += delta_time;
     for (Component* component : components) component->Update(delta_time);
+=======
+void GameObject::update(float dt) {
+    static float sum;
+    sum += dt;
+    for (Component* component : components) component->update(dt);
+>>>>>>> 26ad0751d659fc099e9afdd63220ee4bd9fe09f9
     if (move) {
         box.pos = tmp.pos + Vec2(0, 1) * sin(sum) * 30;
     }
@@ -47,14 +54,22 @@ void GameObject::CopyPosition(const GameObject& go)
 {
     box = go.box;
     world_reference = go.world_reference;
+<<<<<<< HEAD
     from_player = go.from_player;
     angle_deg = go.angle_deg;
 }
 
 void GameObject::Start()
 {
+=======
+    fromPlayer = go.fromPlayer;
+    angleDeg = go.angleDeg;
+}
+
+void GameObject::start() {
+>>>>>>> 26ad0751d659fc099e9afdd63220ee4bd9fe09f9
     if (started) return;
-    for (auto c : components) c->Start();
+    for (auto c : components) c->start();
 
     started = true;
 }

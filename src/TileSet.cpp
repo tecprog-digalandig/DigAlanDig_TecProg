@@ -2,16 +2,17 @@
 #include "Common.h"
 #include "Game.h"
 
-TileSet::TileSet(const std::string& file) {
-    json j;
-    Common::read_Json(j, file);
+TileSet::TileSet(const string& file) 
+{ 
+    json json_file; 
+    Common::readJson(json_file, file);
 
-    std::string imgFile = j.at("image");
-    imgFile.replace(imgFile.begin(), imgFile.begin() + 3, "assets/");
-    tileSet_d = Resources::getImage(imgFile);
-    imgFile.replace(imgFile.end() - 4, imgFile.end() - 4, "_light");
-    tileSet_l = Resources::getImage(imgFile);
-    SDL_SetTextureBlendMode(tileSet_l.get(), SDL_BLENDMODE_ADD);
+    string image_file = json_file.at("image");
+    image_file.replace(image_file.begin(), image_file.begin() + 3, "assets/");  
+    tile_set_d = Resources::GetImage(image_file);
+    image_file.replace(image_file.end() - 4, image_file.end() - 4, "_light");   
+    tile_set_l = Resources::GetImage(image_file);
+    SDL_SetTextureBlendMode(tile_set_l.get(), SDL_BLENDMODE_ADD);
     setTileSetDefault();
 
     tile_height = json_file.at("tileheight");   

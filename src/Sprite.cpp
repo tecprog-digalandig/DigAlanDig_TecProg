@@ -72,6 +72,7 @@ void Sprite::set_frame(int frame) {
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void Sprite::render(Common::Layer layer) const {
     if (isOpen()) {
         Vec2 offset;
@@ -82,6 +83,12 @@ void Sprite::render(Common::Layer layer) const {
         Vec2 offset;
         if (associated.world_reference) offset = Camera::pos; 
 >>>>>>> 702c55cc40968618a3571eb2f9a2b3d2471736e4
+=======
+void Sprite::render(Common::Layer layer) const {
+    if (IsOpen()) {
+        Vec2 offset;
+        if (associated.world_reference) offset = Camera::pos;
+>>>>>>> 26ad0751d659fc099e9afdd63220ee4bd9fe09f9
         Rect dst(associated.box.pos - offset, {(double)width, (double)height});
 
         if (scale.x != 1 || scale.y != 1) dst.Scale(scale);
@@ -99,6 +106,7 @@ void Sprite::render(Common::Layer layer) const {
     }
 }
 
+<<<<<<< HEAD
 void Sprite::update(float dt) { 
     time_elapsed += dt; 
 
@@ -106,6 +114,15 @@ void Sprite::update(float dt) {
     if (seconds_to_self_destruct > 0 && 
         self_destruct_count.get() > seconds_to_self_destruct) { 
         associated.request_delete(); 
+=======
+void Sprite::update(float dt) {
+    timeElapsed += dt;
+
+    selfDestructCount.update(dt);
+    if (secondsToSelfDestruct > 0 &&
+        selfDestructCount.Get() > secondsToSelfDestruct) {
+        associated.RequestDelete();
+>>>>>>> 26ad0751d659fc099e9afdd63220ee4bd9fe09f9
         return;
     }
 

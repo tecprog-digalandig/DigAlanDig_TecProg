@@ -51,9 +51,15 @@ void HudTimer::SetMeterFrame() const {
     }
 }
 
+<<<<<<< HEAD
 void HudTimer::Update(float delta_time) {
     if (std::abs(input.getDeltaRhythm()) < 0.5) {
         meter->setFrame(2);
+=======
+void HudTimer::update(float dt) {
+    if (std::abs(input.GetDeltaRhythm()) < 0.5) {
+        meter->SetFrame(2);
+>>>>>>> 26ad0751d659fc099e9afdd63220ee4bd9fe09f9
         meter->SetScaleX(1.5);
     } else {
         meter->setFrame(0);
