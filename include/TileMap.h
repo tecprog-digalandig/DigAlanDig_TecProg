@@ -34,11 +34,11 @@ class TileMap : public Component {
     void ItemCollected(Vec2 target, int layer) {
         tileMat[layer][target.y * width + target.x] = 0;
     }
-    bool as(int x, int y);
+    bool isForwardPosition(int position_alan);
 
     enum Layers { BASE = 0, BLOCOS, ITENS, INIMIGOS };
 
-  private:
+  private: // T24
     vector<vector<int>> tileMat;
     vector<string> TileMapsFiles;
     unordered_map<string, int> layerIndex;

@@ -14,6 +14,9 @@
 #include "StageState.h"
 #include "TileMap.h"
 #include "Vec2.h"
+#include "spdlog/spdlog.h"
+#include "spdlog/sinks/stdout_color_sinks.h" //support for stdout logging
+#include "spdlog/sinks/basic_file_sink.h" // support for basic file logging
 #define POSITION_X_SPACE 0
 #define POSITION_Y_SPACE 0
 #define SPACE_VELOCITY 2
@@ -39,8 +42,8 @@
 #define POSITION_Y_TITLE Camera::Center().y - 50
 #define SCALE_X_PRESS_SPACE 0.9
 #define POSITION_X_PRESS_SPACE Camera::Center().x
-#define POSITION_Y_PRESS_SPACE Camera::Center().y + 300
 #define SCALE_X_SPACESHIP 1.4
+#define POSITION_Y_PRESS_SPACE Camera::Center().y + 300
 #define POSITION_X_SPACESHIP Camera::Center().x + 200
 #define POSITION_Y_SPACESHIP Camera::Center().y
     
@@ -49,13 +52,17 @@ TitleState::TitleState() {}
 
 void TitleState::loadAssets() 
 {   
+        
+    auto my_logger = spdlog::basic_logger_mt("log", "logs/basic.txt");
+    
     // Add background to layout
     GameObject* initial_layout = new GameObject(Common::Layer::BG);  
     initial_layout->world_reference = false;    
     objectArray.emplace_back(initial_layout);
     initial_layout->AddComponent(
         new Sprite(*initial_layout, MENU_SCREEN));  
-
+    my_logger->info("background has been added to the menu");
+    
     // Add moving space to layout
     initial_layout = new GameObject(Common::Layer::BG);
     initial_layout->box.x = POSITION_X_SPACE;      
@@ -65,6 +72,7 @@ void TitleState::loadAssets()
     initial_layout->AddComponent(new ParallaxX(*initial_layout, SPACE_VELOCITY));   
     initial_layout->AddComponent(new bgCircularX(
         *initial_layout, SPACE_SCREEN));
+    my_logger->info("moving space has been added to the menu");
 
     // Add the first moving cloud to the layout
     initial_layout = new GameObject(Common::Layer::BG);
@@ -75,6 +83,7 @@ void TitleState::loadAssets()
     initial_layout->AddComponent(new ParallaxX(*initial_layout));
     initial_layout->AddComponent(new bgCircularX(
         *initial_layout, CLOUD_1)); 
+    my_logger->info("first moving cloud has been added to the menu");
 
     // Add the second moving cloud to the layout
     initial_layout = new GameObject(Common::Layer::BG);
@@ -84,6 +93,7 @@ void TitleState::loadAssets()
     objectArray.emplace_back(initial_layout);
     initial_layout->AddComponent(new ParallaxX(*initial_layout, CLOUD_2_VELOCITY)); 
     initial_layout->AddComponent(new bgCircularX(*initial_layout, CLOUD_2));    
+    my_logger->info("second moving cloud has been added to the menu");
 
     // Add the third moving cloud to the layout
     initial_layout = new GameObject(Common::Layer::BG);
@@ -93,6 +103,7 @@ void TitleState::loadAssets()
     objectArray.emplace_back(initial_layout);
     initial_layout->AddComponent(new ParallaxX(*initial_layout, CLOUD_3_VELOCITY)); 
     initial_layout->AddComponent(new bgCircularX(*initial_layout, CLOUD_3));    
+    my_logger->info("third moving cloud has been added to the menu");
 
     // Add title to the layout
     initial_layout = new GameObject(Common::Layer::HUD);
@@ -102,6 +113,7 @@ void TitleState::loadAssets()
     initial_layout->world_reference = false;
     objectArray.emplace_back(initial_layout);
     initial_layout->AddComponent(sprite);
+    my_logger->info("title has been added to the menu");
 
     // add image "Press Space" to the layout
     initial_layout = new GameObject(Common::Layer::HUD);
@@ -112,7 +124,8 @@ void TitleState::loadAssets()
     initial_layout->blink = true;
     objectArray.emplace_back(initial_layout);
     initial_layout->AddComponent(sprite);
-    
+    my_logger->info("Press Space has been added to the menu");
+
     // add spaceship to the layout
     initial_layout = new GameObject(Common::Layer::HUD);
     sprite = new Sprite(*initial_layout, SPACESHIP_MENU, 2, -1);    
@@ -123,6 +136,7 @@ void TitleState::loadAssets()
     initial_layout->move = true;
     objectArray.emplace_back(initial_layout);
     initial_layout->AddComponent(sprite);
+    my_logger->info("spaceship has been added to the menu");
 
     Game::GetInstance()->StartBeatTime();
     music.Open(AUDIO_MENU); 
@@ -130,39 +144,38 @@ void TitleState::loadAssets()
 }
 
 
-void TitleState::start() 
-{
+void TitleState::start() {
     if (!started){
         loadAssets();
     } 
-    else{
-    
+    else{  //T23
+        // There's nothing to do
     }
 
     StartArray();
 }
 
-void TitleState::update(float delta_time)  
-{
+void TitleState::update(float delta_time)  {
     input.title = true;
     if (input.ActionPress(input.ENTER)){
         Game::GetInstance()->Push(new StageState());
     }
-    else{}
+    else{  //T23
+        // There's nothing to do
+    }
 
     UpdateArray(delta_time);
 }
 
 void TitleState::render() const { RenderArray(); }
 
-void TitleState::rhythmUpdate() 
-{
+void TitleState::rhythmUpdate() {
     if (!musicPlaying) {
         music.Play();
         musicPlaying = true;
     }
-    else{
-
+    else{ //T23
+        // There's nothing to do
     }
 
     RhythmUpdateArray();

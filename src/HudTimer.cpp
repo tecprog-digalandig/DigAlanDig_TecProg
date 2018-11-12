@@ -1,4 +1,6 @@
 #include "HudTimer.h"
+#include "spdlog/spdlog.h"
+
 
 using namespace std;
 HudTimer::HudTimer(GameObject& associated)
@@ -63,7 +65,7 @@ void HudTimer::update(float dt) {
 
     float mov = input.Moved();
     if (mov < 1.1) {
-        cout << "Mov" << mov << endl;
+        spdlog::get("console")->info("Move: {}", mov);
         Vec2 rise(boxmeter.pos + Vec2(moveLenght, 0) * -mov);
         risers.push_back(rise);
     }

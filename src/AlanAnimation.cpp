@@ -28,7 +28,8 @@ void AlanAnimation::PlaySound(Transition trans) {
         case Transition::HIT_T:
             s->Open("assets/audio/dor.wav");
             break;
-        default:
+        default: //T23
+            // There's nothing to do
             return;
     }
 

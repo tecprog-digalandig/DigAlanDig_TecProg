@@ -2,15 +2,15 @@
 #include "Common.h"
 #include "Game.h"
 #include <assert.h>
+#include "spdlog/spdlog.h"
 
 TileSet::TileSet(const string& file) 
 { 
     json json_file; 
-    assert(file != "");     //T17
-
+    assert(file != ""); 
     Common::readJson(json_file, file);
     string image_file = json_file.at("image");
-    assert(image_file != "");     //T17
+    assert(image_file != "");
     
     image_file.replace(image_file.begin(), image_file.begin() + 3, "assets/");  
     tile_set_d = Resources::GetImage(image_file);
@@ -28,12 +28,12 @@ TileSet::TileSet(const string& file)
     rows = height / tile_height;
 
     if (width != json_file.at("imagewidth") || height != json_file.at("imageheight")) 
-    { 
-        cout << "Tileset mismatch" << endl;
+    {
+        spdlog::get("console")->error("Tileset mismatch");
         exit(EXIT_SUCCESS);
     }
-    else{
-
+    else{  //T23
+        // There's nothing to do
     }
 
     item2type[12] = item2type[13] = item2type[22] = item2type[23] =
@@ -47,15 +47,15 @@ TileSet::TileSet(const string& file)
 void TileSet::RenderTile(unsigned index, float position_x, float position_y) const 
 {   
     if (index == 0) return;
-    /*Tiled index starts at 1*/
+    
     index--;
     if ((int)index >= (rows * columns)) 
     {
-        cerr << "Tile is out of range" << endl;
+        spdlog::get("console")->error("Tile is out of range");
         exit(EXIT_SUCCESS);
     }
-    else{
-        
+    else{  //T23
+        // There's nothing to do
     }
 
     SDL_Rect pos = {(int)position_x, (int)position_y, tile_width, tile_height}; 
