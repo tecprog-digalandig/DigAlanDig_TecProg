@@ -13,7 +13,7 @@ using json = nlohmann::json;
 
 TileMap::TileMap(GameObject& associated, const string& file, bool infinity)
     : Component(associated), infinity(infinity) {
-    assert(file != "");      //T17    
+    assert(file != "");          
     layerIndex["base"] = Layers::BASE;
     layerIndex["blocos"] = Layers::BLOCOS;
     layerIndex["itens"] = Layers::ITENS;
@@ -50,7 +50,8 @@ void TileMap::Load(const string& file) {
 
     width = jsonFile.at("width");
     height += (int)jsonFile.at("height");
-    spdlog::get("console")->info("Height: {}", height);
+
+    spdlog::get("console")->info("Height: {}", height);  //T29
        
     depth = jsonFile.at("layers").size();
 

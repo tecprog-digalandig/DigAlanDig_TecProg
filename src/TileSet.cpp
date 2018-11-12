@@ -3,6 +3,8 @@
 #include "Game.h"
 #include <assert.h>
 #include "spdlog/spdlog.h"
+#include "spdlog/sinks/stdout_color_sinks.h"
+
 
 TileSet::TileSet(const string& file) 
 { 
@@ -28,8 +30,9 @@ TileSet::TileSet(const string& file)
     rows = height / tile_height;
 
     if (width != json_file.at("imagewidth") || height != json_file.at("imageheight")) 
-    {
-        spdlog::get("console")->error("Tileset mismatch");
+    { 
+        auto err_logger = spdlog::stderr_color_mt("stderr"); //T32
+        err_logger->error("Tileset mismatch"); //T32
         exit(EXIT_SUCCESS);
     }
     else{  //T23
@@ -51,7 +54,8 @@ void TileSet::RenderTile(unsigned index, float position_x, float position_y) con
     index--;
     if ((int)index >= (rows * columns)) 
     {
-        spdlog::get("console")->error("Tile is out of range");
+        auto err_logger = spdlog::stderr_color_mt("stderr"); //T32
+        err_logger->error("Tile is out of range"); //T32
         exit(EXIT_SUCCESS);
     }
     else{  //T23
