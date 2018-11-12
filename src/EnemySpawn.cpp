@@ -23,7 +23,7 @@
 void EnemySpawn::update(float dt)
 {
     assert(dt >= 0);
-    while ( current_y < ( (int)( ( (Camera::pos.y + Camera::screenSize.y) /
+    while ( current_y < ( static_cast<int>( ( (Camera::pos.y + Camera::screenSize.y) /
             Game::getInstance()->getCurrentState().GetGridSize() ) + 4) ) )
     {
         for (int x = 0; x < tileMap->GetWidth(); x = x + 1)
