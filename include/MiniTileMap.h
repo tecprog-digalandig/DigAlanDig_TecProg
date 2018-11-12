@@ -10,20 +10,21 @@
 #include "TileMap.h"
 #include "TileSet.h"
 
-class MiniTileMap : public Component {
+class MiniTileMap : public Component
+{
   public:
     MiniTileMap(GameObject &associated, TileSet *tileSet, TileMap *tileMap,
                 std::weak_ptr<GameObject> alan);
 
     ~MiniTileMap();
 
-    void update(float dt) {}
+    void update(float delta_time) {}
     void rhythmUpdate() {}
-    void render(Common::Layer layer) const;
+    void render(Common::layer layer) const;
 
   private:
-    TileMap *tileMap;
-    TileSet *tileSet;
+    TileMap *tile_map;
+    TileSet *tile_set;
     std::weak_ptr<GameObject> alan;
 };
 

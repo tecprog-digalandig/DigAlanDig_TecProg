@@ -9,6 +9,7 @@
 #include <iostream>
 #include <queue>
 #include <string>
+#include <vector>
 #include "AlanActionControl.h"
 #include "Component.h"
 #include "Game.h"
@@ -17,71 +18,106 @@
 #include "TileMap.h"
 #include "Vec2.h"
 
-class Alan : public Component {
+class Alan : public Component 
+{
   public:
     explicit Alan(GameObject& associated);
 
     ~Alan() {}
 
-    void GetMovement();
+    void getMovement();
 
-    void update(float dt);
+    void update(float delta_time);
+
     void rhythmUpdate() {}
-    void RhythmReset() {
-        static int missCounter = 0;
-        if (!moved)
-            missCounter++;
-        else
-            missCounter = 0;
 
-        if (missCounter > 1) {
-            Game::GetInstance()->combo /= 2;
+    void rhythmReset() 
+    {
+        static int miss_counter = 0;
+        if (!moved)
+            miss_counter++;
+        else
+            miss_counter = 0;
+
+        if (miss_counter > 1) 
+        {
+            Game::getInstance()->combo /= 2;
         }
 
         moved = false;
-        damageTaken = false;
+        damage_taken = false;
     }
-    void render(Common::Layer layer) const {}
+    void render(Common::layer layer) const {}
 
-    int GetMaxPosition() const { return maxPosition; }
-
-    Vec2 GetGridPosition() { return associated.GetGridPosition(); }
-
-    AlanActionControl::Direction GetMovementDirection() {
-        return associated.GetComponent<AlanActionControl*>()
-            ->GetMovementDirection();
-    }
-    AlanActionControl::Action GetAction() {
-        return associated.GetComponent<AlanActionControl*>()->GetAction();
+    int getMaxPosition() const 
+    { 
+        return max_position; 
     }
 
-    int GetDamage() { return damage; }
-    void TakeDamage() {
-        if (!damageTaken) {
-            hp--;
-            damageTaken = true;
+    Vec2 getGridPosition() 
+    { 
+        return associated.getGridPosition(); 
+    }
+
+    AlanActionControl::direction getMovementDirection() 
+    {
+        return associated.getComponent<AlanActionControl*>()
+            ->getMovementDirection();
+    }
+
+    AlanActionControl::Action getAction() 
+    {
+        return associated.getComponent<AlanActionControl*>()->getAction();
+    }
+
+    int getDamage() 
+    { 
+        return damage; 
+    }
+
+    void takeDamage() 
+    {
+        if (!damage_taken) 
+        {
+            //life_enemy--;
+            damage_taken = true;
         }
     }
-    void SetDamage(int damage) { this->damage = damage; }
-    int GetHP() { return hp; }
 
-    void SetItemCount(GameObject* go) { itemCount = go; }
-    GameObject* GetItemCount() { return itemCount; }
+    void setDamage(int damage) 
+    { 
+        //this->damage = damage; 
+    }
+
+    int getHP() 
+    { 
+        return life_enemy; 
+    }
+
+    void setItemCount(GameObject* go) 
+    { 
+        item_count = go; 
+    }
+
+    GameObject* getItemCount() 
+    { 
+        return item_count; 
+    }
 
   private:
-    GameObject* itemCount;
-    int hp = 6;
+    GameObject* item_count;
+    const int life_enemy = 6;
 
-    int maxPosition = 0;
-    int gridsLeft = 0;
+    int max_position = 0;
+    int grids_left = 0;
 
     InputManager& input;
 
-    int damage = 1;
+    const int damage = 1;
 
     bool moved = false;
-    bool damageTaken = false;
-    bool animationOnGoing = false;
+    bool damage_taken = false;
+    bool animation_on_going = false;
 };
 
 #endif  // ALAN_H

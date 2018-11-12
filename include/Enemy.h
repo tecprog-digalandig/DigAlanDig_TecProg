@@ -20,58 +20,59 @@
 
 class Enemy : public Component {
   public:
-    enum Direction { LEFT = 0, RIGHT };
-    enum State { NONE_S = 0, IDLE_S, WALKIN_S, DIE_S, STATE_MAX };
+    enum direction { left = 0, right };
+    enum state { NONE_S = 0, IDLE_S, WALKIN_S, DIE_S, STATE_MAX };
 
     Enemy(GameObject& associated, int enemy_type = 1);
 
     ~Enemy() {}
 
-    void update(float dt);
+    void update(float delta_time);
     void rhythmUpdate()
     {
         num_beats++;
 
-        if (!movement_allowed && num_beats > 1) {
+        if (!movement_allowed && num_beats > 1) 
+        {
             movement_allowed = true;
             num_beats = 0;
         }
     }
-    void RhythmReset() {}
-    void render(Common::Layer layer) const {}
+    void rhythmReset() {}
+    void render(Common::layer layer) const {}
 
-    Vec2 GetGridPosition()
-    { 
-        return associated.GetGridPosition();
+    Vec2 getGridPosition()
+    {
+        return associated.getGridPosition();
     }
 
-    void MovementDenied()
-    { 
+    void movementDenied()
+    {
         movement_allowed = false;
     }
 
-    Direction GetMovementDirection()
+    direction GetMovementDirection()
     {
         return movement_direction;
     }
-    State GetState()
-    { 
+    state getState()
+    {
         return state;
     }
 
-    void SetAsHit()
+    void setAsHit()
     {
-        associated.GetComponent<Interpol*>()->isHit = true;
+        associated.getComponent<Interpol*>()->is_hit = true;
         movement_allowed = false;
     }
 
-    bool VerifyDeath(Alan* alan);
+    bool verifyDeath(Alan* alan);
 
-    void TakeDamage(int damage)
-    { 
+    void takeDamage(int damage)
+    {
         life_enemy -= damage;
     }
-    
+
     void ShouldTakeDamage(Alan* alan);
 
     void IsSurrounded();
@@ -79,11 +80,11 @@ class Enemy : public Component {
     bool movement_allowed = false;
 
   private:
-    Direction movement_direction = Direction::LEFT;
+    direction movement_direction = direction::left;
 
     // 2<=range<=7
     int range, steps = 0;
-    State state = State::IDLE_S;
+    state state = state::IDLE_S;
 
     int num_beats = 0;
 
@@ -91,7 +92,7 @@ class Enemy : public Component {
 
     Vec2 tileMapPos;
 
-    Sprite::SpriteState EState[State::STATE_MAX];
+    Sprite::SpriteState EState[state::STATE_MAX];
     InputManager& input;
 
     bool damage_taken = false;

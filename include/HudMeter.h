@@ -10,24 +10,24 @@ class HudMeter : public Component {
              const std::string& meter_file);
     ~HudMeter();
 
-    void update(float dt) {}
+    void update(float delta_time) {}
 
     void rhythmUpdate() {}
-    void render(Common::Layer layer) const;
+    void render(Common::layer layer) const;
 
-    void SetAlan(std::weak_ptr<GameObject> alan) 
-    { 
+    void setAlan(std::weak_ptr<GameObject> alan)
+    {
       this->alan = alan;
     }
-    void setIsHeart(bool isHeart) 
-    { 
-      this->isHeart = isHeart;
+    void setIsHeart(bool is_heart)
+    {
+      this->is_heart = is_heart;
     }
 
     void setLevel(int level);
 
   private:
-    bool isHeart = false;
+    bool is_heart = false;
     std::weak_ptr<GameObject> alan;
     Sprite *bg, *meter;
     Rect boxbg;
@@ -37,7 +37,7 @@ class HudMeter : public Component {
     void setMeter(int i) const;
 };
 
-class HeartMeter : public HudMeter 
+class HeartMeter : public HudMeter
 {
   public:
     HeartMeter(GameObject& associated, const std::string& bg_file,
@@ -45,7 +45,7 @@ class HeartMeter : public HudMeter
         : HudMeter(associated, bg_file, meter_file){};
 };
 
-class LightMeter : public HudMeter 
+class LightMeter : public HudMeter
 {
   public:
     LightMeter(GameObject& associated, const std::string& bg_file,

@@ -16,64 +16,88 @@
 #include "TileMap.h"
 #include "Vec2.h"
 
-class AlanAnimation : public Component {
+class AlanAnimation : public Component 
+{
   public:
-    enum Transition {
-        NONE_T,
+    enum Transition 
+    {
+        none_t,
         WALK,
-        HIT_T,
-        CLIMB,
-        STOP_CLIMB,
-        FLOOR,
-        FALL,
-        DIG_T,
-        DANCE,
-        DIE
+        hit_t,
+        climb,
+        stop_climb,
+        floor,
+        fall,
+        dig_t,
+        dance,
+        die
     };
 
-    enum Direction { LEFT = 0, RIGHT, UP, DOWN };
+    enum Direction 
+    { 
+        left = 0, right, up, down
+    };
 
-    enum State {
-        NONE_S = 0,
+    enum State 
+    {
+        none_s = 0,
         IDLE,
-        WALKIN,
-        FALLIN,
-        DIG,
-        CLIMBIN,
-        DIG_CLIMB,
-        DANCIN,
-        DEAD,
-        STATE_MAX
+        walkin,
+        fallin_var,
+        dig,
+        climbin,
+        dig_climb,
+        dancin,
+        dead,
+        state_max
     };
 
     explicit AlanAnimation(GameObject &associated);
 
     ~AlanAnimation();
 
-    void update(float dt);
+    void Update(float delta_time);
+
     void rhythmUpdate() {}
+
     void render(Common::Layer layer) const {}
-    void start() {
-        currentState = State::IDLE;
-        oldState = currentState;
-        currentDirection = LEFT;
-        oldDirection = currentDirection;
+
+    void start() 
+    {
+        current_state = State::IDLE;
+        old_state = current_state;
+        current_direction = left;
+        old_direction = current_direction;
     }
 
-    void SetAction(Transition trans, Direction dir);
+    void setAction(Transition trans, Direction dir);
 
-    Direction GetCurrentDirection() { return currentDirection; }
-    Direction GetOldDirection() { return oldDirection; }
+    Direction getCurrentDirection() 
+    { 
+        return current_direction; 
+    }
 
-    State GetCurrentState() { return currentState; }
-    State GetOldState() { return oldState; }
+    Direction getOldDirection() 
+    { 
+        return old_direction; 
+    }
+
+    State getCurrentState() 
+    { 
+        return current_state; 
+    }
+
+    State getOldState() 
+    { 
+        return old_state; 
+    }
 
   private:
-    State oldState = NONE_S, currentState = NONE_S;
-    Direction oldDirection = LEFT, currentDirection = LEFT;
-    Sprite::SpriteState AState[State::STATE_MAX];
+    State old_state = none_s, current_state = none_s;
+    Direction old_direction = left, current_direction = left;
+    Sprite::SpriteState AState[State::state_max];
 
-    void PlaySound(Transition trans);
+    void playSound(Transition trans);
 };
 
 #endif  // ALANANIMATION_H

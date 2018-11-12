@@ -9,61 +9,80 @@
 #include <iostream>
 #include <queue>
 #include <string>
+#include <vector>
 #include "Component.h"
 #include "Game.h"
 #include "InputManager.h"
 #include "Sprite.h"
 
-class Item : public Component {
-  public:
-    Item(GameObject& associated, Vec2 newCenter, Vec2 newNumberCenter)
+class Item : public Component 
+{
+    public:
+        Item(GameObject& associated, Vec2 newCenter, Vec2 newNumberCenter)
         : Component(associated),
           center(newCenter),
-          numberCenter(newNumberCenter) {
-        bg = new Sprite(associated, "assets/hud/ovocinza.png");
-    }
+          numberCenter(newNumberCenter) 
+        {
+            //bg = new Sprite(associated, "assets/hud/ovocinza.png");
+        }
 
-    ~Item() { delete bg; }
-    void update(float dt) {}
-    void rhythmUpdate() {}
-    void RhythmReset() {}
-    void render(Common::Layer layer) const {}
+        ~Item() 
+        { 
+            delete bg; 
+        }
 
-    Sprite* bg;
-    Vec2 center, numberCenter;
-    int spriteCount = 1;
+        void update(float delta_time) {}
+
+        void rhythmUpdate() {}
+
+        void rhythmReset() {}
+
+        void render(Common::layer layer) const {}
+
+        Sprite* bg;
+        Vec2 center, numberCenter;
+        int Sprite_count = 1;
 };
 
-class AlanItemCount : public Component {
-  public:
-    AlanItemCount(GameObject& associated);
+class AlanItemCount : public Component 
+{
+    public:
+        AlanItemCount(GameObject& associated);
 
-    ~AlanItemCount() {
-        itemCount.clear();
-        itemCountItem.clear();
-    }
+        ~AlanItemCount() 
+        {
+            item_count.clear();
+            item_count_item.clear();
+        }
 
-    void update(float dt) {}
-    void rhythmUpdate() {}
-    void RhythmReset() {}
-    void render(Common::Layer layer) const;
-    void ItemCollected(int itemType) {
-        if (itemCount[itemType] > 0)
-            itemCountItem[itemType]->GetComponent<Sprite*>()->SetFrame(
-                --itemCount[itemType]);
-    }
-    bool CollectedAllItens() {
-        if (itemCount[Common::ItemType::DIAMOND] == 0 &&
-            itemCount[Common::ItemType::PETROLEUM] == 0 &&
-            itemCount[Common::ItemType::GOLD] == 0)
+        void Update(float delta_time) {}
+
+        void rhythmUpdate() {}
+
+        void rhythmReset() {}
+
+        void render(Common::layer layer) const;
+
+        void itemCollected(int item_type) 
+        {
+            if (item_count[item_type] > 0)
+            item_count_item[item_type]->getComponent<Sprite*>()->setFrame(
+                --item_count[item_type]);
+        }
+
+        bool collectedAllItens() 
+        {
+            if (item_count[Common::item_type::diamond] == 0 &&
+                item_count[Common::item_type::petroleum] == 0 &&
+                item_count[Common::item_type::gold] == 0)
             return true;
 
-        return false;
-    }
+            return false;
+        }
 
-  private:
-    std::unordered_map<int, GameObject*> itemCountItem;
-    std::unordered_map<int, int> itemCount;
+    private:
+    std::unordered_map<int, GameObject*> item_count_item;
+    std::unordered_map<int, int> item_count;
 };
 
 #endif  // ALANITEMCOUNT_H

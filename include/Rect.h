@@ -49,19 +49,19 @@ class Rect {
         this->size = size;
     }
 
-    void SetCenter(double x, double y) {
+    void setCenter(double x, double y) {
         this->x = x - (w / 2);
         this->y = y - (h / 2);
     }
 
-    void SetCenter(const Vec2& c) { SetCenter(c.x, c.y); }
+    void setCenter(const Vec2& c) { setCenter(c.x, c.y); }
 
     Vec2 Center() const { return Vec2(pos + size / 2); }
 
     void Scale(const Vec2& v) {
         Vec2 c = Center();
         size *= v;
-        SetCenter(c);
+        setCenter(c);
     }
 
     bool IsInsideX(double _x) const { return (_x >= x) && (_x < (x + w)); }

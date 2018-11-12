@@ -11,19 +11,19 @@
 #include "TileMap.h"
 #include "Vec2.h"
 
-State::State() : input(InputManager::GetInstance()) {}
+State::State() : input(InputManager::getInstance()) {}
 
-std::weak_ptr<GameObject> State::AddObject(GameObject* go) {
+std::weak_ptr<GameObject> State::add_object(GameObject* go) {
     std::shared_ptr<GameObject> ptr(go);
-    objectArray.emplace_back(ptr);
+    object_array.emplace_back(ptr);
     if (started) ptr->start();
 
     return ptr;
 }
 
-std::weak_ptr<GameObject> State::GetObjectPrt(GameObject* go) {
+std::weak_ptr<GameObject> State::get_object_ptr(GameObject* go) {
     std::weak_ptr<GameObject> wp;
-    for (std::shared_ptr<GameObject>& obj : objectArray) {
+    for (std::shared_ptr<GameObject>& obj : object_array) {
         if (obj.get() == go) {
             wp = obj;
             break;
@@ -33,42 +33,42 @@ std::weak_ptr<GameObject> State::GetObjectPrt(GameObject* go) {
     return wp;
 }
 
-void State::StartArray() {
+void State::start_array() {
     if (started) return;
 
-    //    for (auto obj : objectArray) obj->Start();
-    for (size_t i = 0; i < objectArray.size(); i++) objectArray[i]->start();
+    //    for (auto obj : object_array) obj->Start();
+    for (size_t i = 0; i < object_array.size(); i++) object_array[i]->Start();
 
     started = true;
 }
 
-void State::UpdateArray(float dt) {
+void State::UpdateArray(float delta_time) {
     // Update
-    //    for (auto obj : objectArray) obj->update(dt);
-    for (size_t i = 0; i < objectArray.size(); i++) objectArray[i]->update(dt);
+    //    for (auto obj : objectArray) obj->Update(delta_time);
+    for (size_t i = 0; i < objectArray.size(); i++) objectArray[i]->Update(delta_time);
 
     // Delete
     auto removeDead = [&](std::shared_ptr<GameObject> const& p) {
-        return p->IsDead() && p->CanEnd();
+        return p->IsDead() && p->canEnd();
     };
-    objectArray.erase(
-        std::remove_if(objectArray.begin(), objectArray.end(), removeDead),
-        objectArray.end());
+    object_array.erase(
+        std::remove_if(object_array.begin(), object_array.end(), remove_dead),
+        object_array.end());
 
     // KeyPress
-    if (input.ActionPress(input.ESCAPE) || input.QuitRequested())
+    if (input.actionPress(input.ESCAPE) || input.QuitRequested())
         quitRequested = true;
 }
 
-void State::RhythmUpdateArray() {
+void State::rhythmUpdateArray() {
     for (auto obj : objectArray) obj->rhythmUpdate();
 }
 
-void State::RhythmResetArray() {
-    for (auto obj : objectArray) obj->RhythmReset();
+void State::rhythmResetArray() {
+    for (auto obj : object_array) obj->rhythmReset();
 }
 
-float fixRange2(float value, float fix) {
+float fix_range_2(float value, float fix) {
     float ret = value + fix;
     if (ret > 1.0)
         ret -= 2;
@@ -78,72 +78,72 @@ float fixRange2(float value, float fix) {
     return ret;
 }
 
-int PulseColor(float dtR, int combo) {
+int pulse_color(float dtr, int combo) {
     static const int minColor = 10;
-    dtR = fixRange2(dtR, 1);
-    dtR = (dtR > 0) ? 0 : -dtR;
+    dtr = fix_range_2(dtr, 1);
+    dtr = (dtr > 0) ? 0 : -dtr;
     combo = (combo > 15) ? 15 : combo;
-    dtR = dtR * 2 * (combo * 10 + 10) + minColor;
-    dtR = (dtR < 0) ? 0 : dtR;
-    return (dtR > 255) ? 255 : dtR;
+    dtr = dtr * 2 * (combo * 10 + 10) + minColor;
+    dtr = (dtr < 0) ? 0 : dtr;
+    return (dtr > 255) ? 255 : dtr;
 }
 
 void State::RenderLight() const {
-    SDL_Renderer* renderer = Game::GetInstance()->GetRenderer();
+    SDL_Renderer* renderer = Game::getInstance()->GetRenderer();
 
     // Rendering default layer to texture
-    static SDL_Texture* texDefault = SDL_CreateTexture(
+    static SDL_Texture* tex_default = SDL_CreateTexture(
         renderer, SDL_PIXELFORMAT_RGBA8888, SDL_TEXTUREACCESS_TARGET,
-        Camera::screenSize.x, Camera::screenSize.y);
-    SDL_SetRenderTarget(renderer, texDefault);
+        Camera::screen_size.x, Camera::screen_size.y);
+    SDL_SetRenderTarget(renderer, tex_default);
     SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0);
     SDL_RenderClear(renderer);
 
-    for (auto obj : objectArray) {
-        obj->RenderOrder(Common::Layer::DEFAULT);
+    for (auto obj : object_array) {
+        obj->render_order(Common::Layer::DEFAULT);
     }
 
     // Rendering to texture (Lights to an texture)
-    static SDL_Texture* texLight = SDL_CreateTexture(
+    static SDL_Texture* tex_light = SDL_CreateTexture(
         renderer, SDL_PIXELFORMAT_RGBA8888, SDL_TEXTUREACCESS_TARGET,
-        Camera::screenSize.x, Camera::screenSize.y);
+        Camera::screen_size.x, Camera::screen_size.y);
 
-    SDL_SetRenderTarget(renderer, texLight);
+    SDL_SetRenderTarget(renderer, tex_light);
 
-    int color = PulseColor(input.GetDeltaRhythm(), Game::GetInstance()->combo);
+    int color = pulse_color(input.get_delta_rhythm(), Game::get_instance()->combo);
     SDL_SetRenderDrawColor(renderer, color, color, color * 0.8, 255);
     SDL_RenderClear(renderer);
     SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_ADD);
-    for (auto obj : objectArray) {
-        obj->RenderOrder(Common::Layer::LIGHT);
+    for (auto obj : object_array) {
+        obj->render_order(Common::Layer::LIGHT);
     }
 
     // Rendering the texture to screen (multiply light texture to screen)
-    SDL_SetRenderTarget(renderer, texDefault);
+    SDL_SetRenderTarget(renderer, tex_default);
 
-    SDL_SetTextureBlendMode(texDefault, SDL_BLENDMODE_MOD);
+    SDL_SetTextureBlendMode(tex_default, SDL_BLENDMODE_MOD);
     SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_MOD);
-    SDL_SetTextureBlendMode(texLight, SDL_BLENDMODE_MOD);
-    SDL_RenderCopy(renderer, texLight, NULL, NULL);
+    SDL_SetTextureBlendMode(tex_light, SDL_BLENDMODE_MOD);
+    SDL_RenderCopy(renderer, tex_light, NULL, NULL);
 
     SDL_SetRenderTarget(renderer, NULL);
     SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_BLEND);
-    SDL_SetTextureBlendMode(texDefault, SDL_BLENDMODE_BLEND);
-    SDL_RenderCopy(renderer, texDefault, NULL, NULL);
+    SDL_SetTextureBlendMode(tex_default, SDL_BLENDMODE_BLEND);
+    SDL_RenderCopy(renderer, tex_default, NULL, NULL);
 }
 
-void State::RenderArray() const {
+void State::renderArray() const {
     for (auto obj : objectArray) {
-        obj->RenderOrder(Common::Layer::BG);
+        obj->renderOrder(Common::Layer::BG);
     }
 
-    RenderLight();
+    render_light();
 
-    for (auto obj : objectArray) {
+    for (auto obj : object_array) {
         if (!obj->blink) {
-            obj->RenderOrder(Common::Layer::HUD);
+            obj->renderOrder(Common::Layer::HUD);
         } else {
-            if (input.shouldShow) obj->RenderOrder(Common::Layer::HUD);
+            if (input.shouldShow) obj->renderOrder(Common::Layer::HUD);
         }
     }
 }

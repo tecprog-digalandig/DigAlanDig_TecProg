@@ -7,43 +7,43 @@
 #include "StageState.h"
 
 Enemy::Enemy(GameObject &associated, int enemy_type)
-    : Component(associated), input(InputManager::GetInstance()) {
-    enemy_type = 0;    
+    : Component(associated), input(InputManager::getInstance()) {
+    enemy_type = 0;
     if (enemy_type == 1) {
         EState[State::IDLE_S] = {"assets/img/enemies/enemy1/idle.png", 2, 2,
                                  -1};
         EState[State::WALKIN_S] = {"assets/img/enemies/enemy1/walkin.png", 2, 4,
                                    0.2};
-        EState[State::DIE_S] = {"assets/img/enemies/enemy1/idle.png", 2, 2,
+        EState[State::DIE_S] = {"assets/img/enemies/enemy1/IDLE.png", 2, 2,
                                 0.2};
     } else if (enemy_type == 2) {
         EState[State::IDLE_S] = {"assets/img/enemies/enemy2/idle.png", 2, 2,
                                  -1};
         EState[State::WALKIN_S] = {"assets/img/enemies/enemy2/walkin.png", 2, 4,
                                    0.2};
-        EState[State::DIE_S] = {"assets/img/enemies/enemy2/idle.png", 2, 2,
+        EState[State::DIE_S] = {"assets/img/enemies/enemy2/IDLE.png", 2, 2,
                                 0.2};
     } else if (enemy_type == 3) {
         EState[State::IDLE_S] = {"assets/img/enemies/enemy3/idle.png", 2, 2,
                                  -1};
         EState[State::WALKIN_S] = {"assets/img/enemies/enemy3/walkin.png", 2, 4,
                                    0.2};
-        EState[State::DIE_S] = {"assets/img/enemies/enemy3/idle.png", 2, 2,
+        EState[State::DIE_S] = {"assets/img/enemies/enemy3/IDLE.png", 2, 2,
                                 0.2};
     } else {
-        EState[State::IDLE_S] = {"assets/img/enemies/enemy1/idle.png", 2, 2,
+        EState[State::IDLE_S] = {"assets/img/enemies/enemy1/IDLE.png", 2, 2,
                                  -1};
         EState[State::WALKIN_S] = {"assets/img/enemies/enemy1/walkin.png", 2, 4,
                                    0.2};
-        EState[State::DIE_S] = {"assets/img/enemies/enemy1/idle.png", 2, 2,
+        EState[State::DIE_S] = {"assets/img/enemies/enemy1/IDLE.png", 2, 2,
                                 0.2};
     }
 
-    Sprite *sprite = new Sprite(associated);
+    Sprite *sprite =new Sprite(associated);
     Interpol *interpol = new Interpol(associated);
-    associated.AddComponent(sprite);
-    associated.AddComponent(interpol);
-    sprite->Open(EState[state], Enemy::Direction::LEFT);
+    associated.addComponent(sprite);
+    associated.addComponent(interpol);
+    sprite->Open(EState[state], Enemy::Direction::left);
 
     life_enemy = 3;
     range = enemy_type;
@@ -60,19 +60,19 @@ bool Enemy::VerifyDeath(Alan *alan)
         return true;
     }
     // 2. Alan cai em cima dele
-    if (Game::GetInstance()->GetGridControl()->TestPath(
+    if (Game::getInstance()->getGridControl()->testPath(
             Vec2(associated.gridPosition.x, associated.gridPosition.y),
             false) == GridControl::WhatsThere::ALAN) {
         return true;
     }
     // 3. Scroll da camera já passou da posição dele
-    if (associated.GetGridPosition().y <
-        (Camera::pos.y / Game::GetInstance()->GetCurrentState().GetGridSize()) -
+    if (associated.getGridPosition().y <
+        (Camera::pos.y / Game::getInstance()->getCurrentState().GetGridSize()) -
             3) {
         return true;
     }
     // 4. Espaço embaixo dele não é uma pedra
-    if (Game::GetInstance()->GetGridControl()->TestPath(
+    if (Game::getInstance()->getGridControl()->testPath(
             Vec2(associated.gridPosition.x, associated.gridPosition.y + 1),
             false) != GridControl::WhatsThere::ROCK) {
         return true;
@@ -85,22 +85,22 @@ void Enemy::ShouldTakeDamage(Alan *alan)
 {
     if (state != State::IDLE_S) return;
 
-    if (Game::GetInstance()->GetGridControl()->TestPath(
+    if (Game::getInstance()->getGridControl()->testPath(
             Vec2(associated.gridPosition.x - 1, associated.gridPosition.y),
             false) == GridControl::WhatsThere::ALAN &&
-        alan->GetMovementDirection() == AlanActionControl::Direction::RIGHT) {
+        alan->getMovementDirection() == AlanActionControl::Direction::right) {
         if (!damage_taken) {
-            TakeDamage(alan->GetDamage());
+            TakeDamage(alan->getDamage());
             damage_taken = true;
         }
-    } else if (Game::GetInstance()->GetGridControl()->TestPath(
+    } else if (Game::getInstance()->getGridControl()->testPath(
                    Vec2(associated.gridPosition.x + 1,
                         associated.gridPosition.y),
                    false) == GridControl::WhatsThere::ALAN &&
-               alan->GetMovementDirection() ==
-                   AlanActionControl::Direction::LEFT) {
+               alan->getMovementDirection() ==
+                   AlanActionControl::Direction::left) {
         if (!damage_taken) {
-            TakeDamage(alan->GetDamage());
+            TakeDamage(alan->getDamage());
             damage_taken = true;
         }
     } else {
@@ -110,27 +110,26 @@ void Enemy::ShouldTakeDamage(Alan *alan)
 
 void Enemy::IsSurrounded()
 {
-    if (Game::GetInstance()->GetGridControl()->TestPath(
+    if (Game::getInstance()->getGridControl()->testPath(
             Vec2(associated.gridPosition.x - 1, associated.gridPosition.y),
             false) != GridControl::WhatsThere::FREE &&
-        Game::GetInstance()->GetGridControl()->TestPath(
+        Game::getInstance()->getGridControl()->testPath(
             Vec2(associated.gridPosition.x + 1, associated.gridPosition.y),
             false) != GridControl::WhatsThere::FREE)
         movement_allowed = false;
 }
 
-void Enemy::update(float dt)
-{
-    if (!Game::GetInstance()->GetGridControl()->GetAlan().lock() ||
-        !associated.GetComponent<Interpol *>()->IsMovementDone())
+void Enemy::Update(float delta_time) {
+    if (!Game::getInstance()->getGridControl()->GetAlan().lock() ||
+        !associated.GetComponent<Interpol *>()->isMovementDone())
         return;
 
-    Game::GetInstance()->GetGridControl()->CheckEnemyAlanCollision(false);
+    Game::getInstance()->getGridControl()->CheckEnemyAlanCollision(false);
     if (associated.GetComponent<Interpol *>()->isHit) return;
 
-    Sprite *sprite = associated.GetComponent<Sprite *>();
-    Alan *alan = Game::GetInstance()
-                     ->GetGridControl()
+    Sprite *sprite =associated.GetComponent<Sprite *>();
+    Alan *alan = Game::getInstance()
+                     ->getGridControl()
                      ->GetAlan()
                      .lock()
                      ->GetComponent<Alan *>();
@@ -140,10 +139,10 @@ void Enemy::update(float dt)
     if (VerifyDeath(alan) || state == Enemy::State::DIE_S) {
         if (state != Enemy::State::DIE_S) {
             state = Enemy::State::DIE_S;
-            sprite->Open(EState[state], Enemy::Direction::LEFT);
+            sprite->Open(EState[state], Enemy::Direction::left);
         }
-        if (sprite->FrameTimePassed()) {
-            Game::GetInstance()->GetGridControl()->DeleteEnemy(&associated);
+        if (sprite->frameTimePassed()) {
+            Game::getInstance()->getGridControl()->DeleteEnemy(&associated);
             associated.RequestDelete();
         }
         return;
@@ -151,28 +150,28 @@ void Enemy::update(float dt)
 
     IsSurrounded();
 
-    if (movement_direction == Enemy::Direction::LEFT) {
-        if (Game::GetInstance()->GetGridControl()->TestPath(
+    if (movement_direction == Enemy::Direction::left) {
+        if (Game::getInstance()->getGridControl()->testPath(
                 Vec2(associated.gridPosition.x - 1, associated.gridPosition.y),
                 false) != GridControl::WhatsThere::FREE ||
-            Game::GetInstance()->GetGridControl()->TestPath(
+            Game::getInstance()->getGridControl()->testPath(
                 Vec2(associated.gridPosition.x - 1,
                      associated.gridPosition.y + 1),
                 false) != GridControl::WhatsThere::ROCK) {
             movement_allowed = false;
-            movement_direction = Enemy::Direction::RIGHT;
+            movement_direction = Enemy::Direction::right;
             steps = 0;
         }
     } else {
-        if (Game::GetInstance()->GetGridControl()->TestPath(
+        if (Game::getInstance()->getGridControl()->testPath(
                 Vec2(associated.gridPosition.x + 1, associated.gridPosition.y),
                 false) != GridControl::WhatsThere::FREE ||
-            Game::GetInstance()->GetGridControl()->TestPath(
+            Game::getInstance()->getGridControl()->testPath(
                 Vec2(associated.gridPosition.x + 1,
                      associated.gridPosition.y + 1),
                 false) != GridControl::WhatsThere::ROCK) {
             movement_allowed = false;
-            movement_direction = Enemy::Direction::LEFT;
+            movement_direction = Enemy::Direction::left;
             steps = 0;
         }
     }
@@ -183,7 +182,7 @@ void Enemy::update(float dt)
             sprite->Open(EState[state], movement_direction);
         }
         if (steps < range) {
-            if (movement_direction == Enemy::Direction::LEFT) {
+            if (movement_direction == Enemy::Direction::left) {
                 movement_allowed = false;
                 steps++;
                 associated.gridPosition.x--;
@@ -195,17 +194,17 @@ void Enemy::update(float dt)
             }
 
         } else {
-            if (movement_direction == Enemy::Direction::LEFT) {
-                movement_direction = Enemy::Direction::RIGHT;
+            if (movement_direction == Enemy::Direction::left) {
+                movement_direction = Enemy::Direction::right;
             } else {
-                movement_direction = Enemy::Direction::LEFT;
+                movement_direction = Enemy::Direction::left;
             }
             steps = 0;
         }
     } else {
         if (state != Enemy::State::IDLE_S) {
             state = Enemy::State::IDLE_S;
-            sprite->Open(EState[state], Enemy::Direction::LEFT);
+            sprite->Open(EState[state], Enemy::Direction::left);
         }
     }
 }

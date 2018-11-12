@@ -10,22 +10,22 @@ class HudTimer : public Component {
     explicit HudTimer(GameObject& associated);
     ~HudTimer() {}
 
-    void update(float dt);
+    void update(float delta_time);
 
     void rhythmUpdate() {}
-    void render(Common::Layer layer) const;
+    void render(Common::layer layer) const;
 
   private:
-    void SetMeterFrame() const;
-    int maxRise = 0;
+    void setMeterFrame() const;
+    int max_sise = 0;
     float speed = 150;
     std::vector<Vec2> risers = {};
     Sprite *bg, *meter, *fg;
-    Rect boxbg, boxmeter, boxfg;
-    Vec2 offset1;
-    Vec2 offset2;
-    int moveLenght;
-    int minM = 0, maxM = 0;
+    Rect box_bg, box_meter, box_fg;
+    Vec2 off_set1;
+    Vec2 off_set2;
+    int move_lenght;
+    int min_m = 0, max_m = 0;
 
     InputManager& input;
 };

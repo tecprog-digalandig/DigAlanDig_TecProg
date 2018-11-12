@@ -5,95 +5,95 @@
 #include "Resources.h"
 
 void Sprite::Open(const std::string &file) {
-    texture = Resources::GetImage(file);
+    texture = Resources::getImage(file);
 
     SDL_QueryTexture(texture.get(), nullptr, nullptr, &width, &height);
     width /= frameCount;
     frameTimeTotal = frameTime;
-    SetFrame(0);
+    setFrame(0);
     associated.box.size.Set(width, height);
     timeElapsed = 0;
 }
 
 void Sprite::Open(SpriteState sstate, int dir) {
-    texture = Resources::GetImage(sstate.file);
+    texture = Resources::getImage(sstate.file);
 
-    SDL_QueryTexture(texture.get(), nullptr, nullptr, &width, &height);
-    width /= sstate.totalFrameCount;
-    frameCount = sstate.frameCount;
-    initFrame = dir * sstate.frameCount;
+    SDL_QueryTexture(texture.get(), nullptr, nullptr, &width, &height); 
+    width /= sstate.total_frame_count; 
+    frame_count = sstate.frame_count; 
+    init_frame = dir * sstate.frame_count; 
 
-    SetFrame(initFrame);
+    setFrame(initFrame);
     frameTimeTotal = sstate.frameTime * sstate.frameCount;
     frameTime = sstate.frameTime;
     associated.box.size.Set(width, height);
     timeElapsed = 0;
 }
 
-void Sprite::SetScaleX(double scaleX, double scaleY) {
-    scale.x = scaleX ? scaleX : scale.x;
-    scale.y = scaleY ? scaleY : scale.y;
+void Sprite::set_scale_x(double scale_x, double scale_y) { 
+    scale.x = scale_x ? scale_x : scale.x; 
+    scale.y = scale_y ? scale_y : scale.y; 
 }
 
-void Sprite::SetFrame(int frame) {
+void Sprite::setFrame(int frame) {
     currentFrame = frame;
     Vec2 size(width, height);
-    Vec2 pos(width * (currentFrame), 0);
-    clipRect = Rect(pos, size);
+    Vec2 pos(width * (current_frame), 0); 
+    clip_rect = rect(pos, size); 
 }
 
-void Sprite::render(Common::Layer layer) const {
-    if (IsOpen()) {
+void Sprite::render(Common::Layer layer) const { 
+    if (is_open()) { 
         Vec2 offset;
-        if (associated.world_reference) offset = Camera::pos;
+        if (associated.world_reference) offset = Camera::pos; 
         Rect dst(associated.box.pos - offset, {(double)width, (double)height});
 
         if (scale.x != 1 || scale.y != 1) dst.Scale(scale);
 
         SDL_Rect dstRect = dst;
-        SDL_RenderCopyEx(Game::GetInstance()->GetRenderer(), texture.get(),
+        SDL_RenderCopyEx(Game::getInstance()->GetRenderer(), texture.get(),
                          &clipRect, &dstRect, associated.angleDeg, nullptr,
                          SDL_FLIP_NONE);
     }
 }
 
-void Sprite::update(float dt) {
-    timeElapsed += dt;
+void Sprite::update(float dt) { 
+    time_elapsed += dt; 
 
-    selfDestructCount.update(dt);
-    if (secondsToSelfDestruct > 0 &&
-        selfDestructCount.Get() > secondsToSelfDestruct) {
-        associated.RequestDelete();
+    self_destruct_count.update(dt); 
+    if (seconds_to_self_destruct > 0 && 
+        self_destruct_count.get() > seconds_to_self_destruct) { 
+        associated.request_delete(); 
         return;
     }
 
-    if (associated.GetComponent<Alan *>() != nullptr) {
-        AlanUpdate(dt);
+    if (associated.get_component<Alan *>() != nullptr) { 
+        alan_update(dt); 
         return;
     } else {
-        if (frameTime > 0 && ((currentFrame + 1) * frameTime <= timeElapsed)) {
-            int newFrame = floor(timeElapsed / frameTime);
-            SetFrame(newFrame % frameCount);
+        if (frame_time > 0 && ((current_frame + 1) * frame_time <= time_elapsed)) { 
+            int new_frame = floor(time_elapsed / frame_time); 
+            set_frame(new_frame % frame_count); 
         }
     }
 }
 
-void Sprite::AlanUpdate(float dt) {
-    if (frameTime > 0) {
-        if (timeElapsed - (frameTime * (currentFrame - initFrame)) >=
-            frameTime) {
-            if ((currentFrame - initFrame) < (frameCount - 1)) {
-                SetFrame(currentFrame + 1);
+void Sprite::alan_update(float dt) { 
+    if (frame_time > 0) { 
+        if (time_elapsed - (frame_time * (current_frame - init_frame)) >= 
+            frame_time) { 
+            if ((current_frame - init_frame) < (frame_count - 1)) { 
+                set_frame(current_frame + 1); 
 
             } else {
-                SetFrame(initFrame);
+                set_frame(init_frame); 
             }
         }
-    } else if (frameTime != -1) {
-        if (timeElapsed - (std::abs(frameTime) * (currentFrame - initFrame)) >=
-            std::abs(frameTime)) {
-            if ((currentFrame - initFrame) < (frameCount - 1))
-                SetFrame(currentFrame + 1);
+    } else if (frame_time != -1) { 
+        if (time_elapsed - (std::abs(frame_time) * (current_frame - init_frame)) >= 
+            std::abs(frame_time)) { 
+            if ((current_frame - init_frame) < (frame_count - 1)) 
+                set_frame(current_frame + 1); 
         }
     }
 }

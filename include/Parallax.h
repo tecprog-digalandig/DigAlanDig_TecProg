@@ -8,9 +8,9 @@ class ParallaxY : public Component {
     ParallaxY(GameObject& associated, float factor = 1)
         : Component(associated), factor(factor) {}
 
-    void update(float dt) { associated.box.pos.y = -Camera::pos.y * factor; }
+    void update(float delta_time) { associated.box.pos.y = -Camera::pos.y * factor; }
     void rhythmUpdate() {}
-    void render(Common::Layer layer) const {}
+    void render(Common::layer layer) const {}
 
   private:
     float factor;
@@ -24,9 +24,9 @@ class bgCircularY : public Component {
     }
 
     void Open(const std::string& file);
-    void update(float dt) {}
+    void update(float delta_time) {}
     void rhythmUpdate() {}
-    void render(Common::Layer layer) const;
+    void render(Common::layer layer) const;
 
   private:
     std::shared_ptr<SDL_Texture> texture = nullptr;
@@ -41,9 +41,9 @@ class bgCircularX : public Component {
     }
 
     void Open(const std::string& file);
-    void update(float dt) {}
+    void update(float delta_time) {}
     void rhythmUpdate() {}
-    void render(Common::Layer layer) const;
+    void render(Common::layer layer) const;
     int GetWidth() { return width; }
 
   private:
@@ -56,9 +56,9 @@ class ParallaxX : public Component {
     ParallaxX(GameObject& associated, float factor = 1)
         : Component(associated), factor(factor) {}
 
-    void update(float dt) { associated.box.pos.x -= dt * factor * 10; }
+    void update(float delta_time) { associated.box.pos.x -= delta_time * factor * 10; }
     void rhythmUpdate() {}
-    void render(Common::Layer layer) const {}
+    void render(Common::layer layer) const {}
 
   private:
     float factor;

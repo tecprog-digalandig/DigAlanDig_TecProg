@@ -3,7 +3,7 @@
 #include "Resources.h"
 
 void bgCircularY::Open(const std::string &file) {
-    texture = Resources::GetImage(file);
+    texture = Resources::getImage(file);
 
     SDL_QueryTexture(texture.get(), nullptr, nullptr, &width, &height);
     associated.box.size.Set(width, height);
@@ -22,14 +22,14 @@ void bgCircularY::render(Common::Layer layer) const {
                      (double)width, (double)height);
             SDL_Rect dstRect = dst;
             SDL_Rect clipRect = Rect(Vec2(0, 0), associated.box.size);
-            SDL_RenderCopy(Game::GetInstance()->GetRenderer(), texture.get(),
+            SDL_RenderCopy(Game::getInstance()->GetRenderer(), texture.get(),
                            &clipRect, &dstRect);
         }
     }
 }
 
 void bgCircularX::Open(const std::string &file) {
-    texture = Resources::GetImage(file);
+    texture = Resources::getImage(file);
 
     SDL_QueryTexture(texture.get(), nullptr, nullptr, &width, &height);
     associated.box.size.Set(width, height);
@@ -48,7 +48,7 @@ void bgCircularX::render(Common::Layer layer) const {
                      (double)width, (double)height);
             SDL_Rect dstRect = dst;
             SDL_Rect clipRect = Rect(Vec2(0, 0), associated.box.size);
-            SDL_RenderCopy(Game::GetInstance()->GetRenderer(), texture.get(),
+            SDL_RenderCopy(Game::getInstance()->GetRenderer(), texture.get(),
                            &clipRect, &dstRect);
         }
     }

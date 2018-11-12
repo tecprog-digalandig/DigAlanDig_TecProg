@@ -8,87 +8,87 @@
 
 class InputManager {
   public:
-    enum Action {
+    enum action {
         NONE,
-        DIG_DOWN,
-        DIG_LEFT,
-        DIG_RIGHT,
-        DIG_UP,
+        dig_down,
+        dig_left,
+        dig_right,
+        dig_up,
         ENTER,
         ESCAPE,
         FULLSCREEN,
         ACTION_MAX
     };
 
-    void update(float deltaRhythm);
+    void update(float delta_rhythm);
 
-    bool KeyDown(int key) const { return keyState[key]; }
-    bool KeyPress(int key) const {
-        return (frame == keyUpdate[key]) && keyState[key];
+    bool keyDown(int key) const { return key_state[key]; }
+    bool keyPress(int key) const {
+        return (frame == key_update[key]) && key_state[key];
     }
-    bool KeyRelease(int key) const {
-        return (frame == keyUpdate[key]) && !keyState[key];
-    }
-
-    bool MouseDown(int button) const { return fingerState[button]; }
-    bool MousePress(int button) const {
-        return (frame == fingerUpdate[button]) && fingerState[button];
-    }
-    bool MouseRelease(int button) const {
-        return (frame == fingerUpdate[button]) && !fingerState[button];
+    bool keyRelease(int key) const {
+        return (frame == key_update[key]) && !key_state[key];
     }
 
-    bool GamepadDown(int button) const { return gamepadState[button]; }
-    bool GamepadPress(int button) const {
-        return (frame == gamepadUpdate[button]) && gamepadState[button];
+    bool mouseDown(int button) const { return finger_state[button]; }
+    bool mousePress(int button) const {
+        return (frame == finger_update[button]) && finger_state[button];
     }
-    bool GamepadRelease(int button) const {
-        return (frame == gamepadUpdate[button]) && !gamepadState[button];
+    bool mouseRelease(int button) const {
+        return (frame == finger_update[button]) && !finger_state[button];
     }
 
-    bool ActionDown(Action button) const { return actionState[button]; }
-    bool ActionPress(Action button) const {
-        return (frame == actionUpdate[button]) && actionState[button];
+    bool gamepadDown(int button) const { return gamepad_state[button]; }
+    bool gamepadPress(int button) const {
+        return (frame == gamepad_update[button]) && gamepad_state[button];
     }
-    bool ActionRelease(Action button) const {
-        return (frame == actionUpdate[button]) && !actionState[button];
+    bool gamepadRelease(int button) const {
+        return (frame == gamepad_update[button]) && !gamepad_state[button];
+    }
+
+    bool actionDown(action button) const { return action_state[button]; }
+    bool actionPress(action button) const {
+        return (frame == action_update[button]) && action_state[button];
+    }
+    bool actionRelease(action button) const {
+        return (frame == action_update[button]) && !action_state[button];
     }
 
     int finger2action(const Vec2& v) const;
 
     enum mouseKey {
-        LEFT = SDL_BUTTON_LEFT,
+        left = SDL_BUTTON_LEFT,
         MIDDLE = SDL_BUTTON_MIDDLE,
-        RIGHT = SDL_BUTTON_RIGHT
+        right = SDL_BUTTON_RIGHT
     };
 
-    int GetMouseX() const { return mouseX; }
-    int GetMouseY() const { return mouseY; }
-    Vec2 GetMouse() const { return Vec2(mouseX, mouseY); }
-    int GetWorldMouseX() const { return mouseX + Camera::pos.x; }
-    int GetWorldMouseY() const { return mouseY + Camera::pos.y; }
-    Vec2 GetWorldMouse() const {
-        return Vec2(mouseX + Camera::pos.x, mouseY + Camera::pos.y);
+    int getMouseX() const { return mouse_x; }
+    int getMouseY() const { return mouse_y; }
+    Vec2 getMouse() const { return Vec2(mouse_x, mouse_y); }
+    int getWorldMouseX() const { return mouse_x + Camera::pos.x; }
+    int getWorldMouseY() const { return mouse_y + Camera::pos.y; }
+    Vec2 getWorldMouse() const {
+        return Vec2(mouse_x + Camera::pos.x, mouse_y + Camera::pos.y);
     }
 
-    bool QuitRequested() const { return quitRequested; }
+    bool quitRequested() const { return quit_requested; }
 
     // Meyes' singleton
-    static InputManager& GetInstance() {
+    static InputManager& getInstance() {
         static InputManager input;
         return input;
     }
 
-    float scaleFactor() const;
+    float scale_factor() const;
 
-    float GetDeltaRhythm() const { return deltaRhythm; }
+    float get_delta_rhythm() const { return delta_rhythm; }
 
-    void Move();
+    void move();
 
-    float Moved();
+    float moved();
 
     bool title = true;
-    bool shouldShow = true;
+    bool should_show = true;
 
   private:
     // Disallow compiler generated ctor, dtor and copy
@@ -97,36 +97,36 @@ class InputManager {
     InputManager& operator=(InputManager const&);
     ~InputManager() {}
 
-    bool AddController(int id);
-    void RemoveController(void);
-    SDL_GameController* gameController;
+    bool add_controller(int id);
+    void remove_controller(void);
+    SDL_GameController* game_controller;
 
-    bool gamepadState[SDL_CONTROLLER_BUTTON_MAX] = {0};
-    int gamepadUpdate[SDL_CONTROLLER_BUTTON_MAX] = {0};
+    bool gamepad_state[SDL_CONTROLLER_BUTTON_MAX] = {0};
+    int gamepad_update[SDL_CONTROLLER_BUTTON_MAX] = {0};
 
-    bool keyState[SDL_NUM_SCANCODES] = {0};
-    int keyUpdate[SDL_NUM_SCANCODES] = {0};
+    bool key_state[SDL_NUM_SCANCODES] = {0};
+    int key_update[SDL_NUM_SCANCODES] = {0};
 
-    bool fingerState[6] = {0};
-    int fingerUpdate[6] = {0};
+    bool finger_state[6] = {0};
+    int finger_update[6] = {0};
 
-    bool quitRequested = 0;
-    int updateCounter = 0;
+    bool quit_requested = 0;
+    int update_counter = 0;
 
-    int mouseX = 0;
-    int mouseY = 0;
+    int mouse_x = 0;
+    int mouse_y = 0;
 
-    void UpdateKey(int& update, bool& state, bool newValue) const;
+    void UpdateKey(int& Update, bool& state, bool newValue) const;
     int frame = 0;
 
-    float deltaRhythm = 0;
-    float keyAdjust = 0;
+    float delta_rhythm = 0;
+    float key_adjust = 0;
     float score = 10;
 
-    bool actionState[Action::ACTION_MAX] = {0};
-    int actionUpdate[Action::ACTION_MAX] = {0};
-    std::unordered_map<int, Action> gamepad2action;
-    std::unordered_map<int, Action> key2action;
+    bool action_state[action::ACTION_MAX] = {0};
+    int action_update[action::ACTION_MAX] = {0};
+    std::unordered_map<int, action> gamepad2action;
+    std::unordered_map<int, action> key2action;
 };
 
-#endif  // INPUTMANAGER_H
+#endif

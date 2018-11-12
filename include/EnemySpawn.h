@@ -12,21 +12,22 @@
 #include "TileMap.h"
 #include "Vec2.h"
 
-class EnemySpawn : public Component {
-  public:
-    EnemySpawn(GameObject &associated, TileMap *tileMap)
-        : Component(associated), tileMap(tileMap) {}
+class EnemySpawn : public Component
+{
+    public:
+        EnemySpawn(GameObject &associated, TileMap *tileMap)
+        : Component(associated), tile_map(tile_map) {}
 
-    ~EnemySpawn() {}
+        ~EnemySpawn() {}
 
-    void update(float dt);
+    void update(float delta_time);
     void rhythmUpdate() {}
-    void RhythmReset() {}
-    void render(Common::Layer layer) const {}
+    void rhythmReset() {}
+    void render(Common::layer layer) const {}
 
-  private:
-    TileMap *tileMap;
-    int currentY = 0;
+    private:
+        TileMap *tile_map;
+        int current_y = 0;
 };
 
-#endif  // ENEMYSPAWN_H
+#endif

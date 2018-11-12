@@ -14,11 +14,11 @@ class Component {
     virtual void update(float dt) = 0;
     virtual void rhythmUpdate() = 0;
     virtual void RhythmReset() {}
-    virtual void render(Common::Layer layer) const = 0;
+    virtual void render(Common::layer layer) const = 0;
     virtual void start() {}
 
   protected:
     GameObject& associated;
 };
 
-#endif  // COMPONENT_H
+#endif

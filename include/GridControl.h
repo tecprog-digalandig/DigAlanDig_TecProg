@@ -10,12 +10,12 @@
 
 class GridControl {
   public:
-    static GridControl *GetInstance();
+    static GridControl *getInstance();
 
     void SetAlan(std::weak_ptr<GameObject> alan) { this->alan = alan; }
     void SetTileMap(TileMap *tileMap) { this->tileMap = tileMap; }
 
-    int TestPath(Vec2 target, bool isAlan);
+    int testPath(Vec2 target, bool isAlan);
 
     std::weak_ptr<GameObject> GetAlan() { return alan; }
 
@@ -30,7 +30,7 @@ class GridControl {
 
     bool WillDestroyBlock() { return (blockLife == 3); }
 
-    int IsItem(Vec2 target) {
+    int isItem(Vec2 target) {
         return tileMap->At(target.x, target.y, TileMap::Layers::ITENS);
     }
 

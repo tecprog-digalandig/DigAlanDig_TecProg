@@ -5,66 +5,77 @@
 
 Interpol::Interpol(GameObject &associated) : Component(associated) {}
 
-void Interpol::update(float dt) {
-    Sprite *sprite = associated.GetComponent<Sprite *>();
+void Interpol::Update(float delta_time) {
+    Sprite *sprite =associated.GetComponent<Sprite *>();
 
-    speed.x = 10 * dt * Game::GetInstance()->GetCurrentState().GetGridSize() /
+    speed.x = 10 * delta_time * Game::getInstance()->getCurrentState().GetGridSize() /
               sprite->GetFrameCount();
-    speed.y = 10 * dt * Game::GetInstance()->GetCurrentState().GetGridSize() /
+    speed.y = 10 * delta_time * Game::getInstance()->getCurrentState().GetGridSize() /
               sprite->GetFrameCount();
 
-    Vec2 newPos;
+    Vec2 new_pos;
 
-    if (isHit) {
-        if (target.x > associated.gridPosition.x) {
-            newPos = {
+    if (is_hit)
+    {
+        if (target.x > associated.gridPosition.x)
+        {
+            new_pos = {
                 target.x *
-                        Game::GetInstance()->GetCurrentState().GetGridSize() -
-                    Game::GetInstance()->GetCurrentState().GetGridSize(),
+                        Game::getInstance()->getCurrentState().GetGridSize() -
+                    Game::getInstance()->getCurrentState().GetGridSize(),
                 associated.gridPosition.y *
-                        Game::GetInstance()->GetCurrentState().GetGridSize() -
-                    Game::GetInstance()->GetCurrentState().GetGridSize() / 2};
+                        Game::getInstance()->getCurrentState().GetGridSize() -
+                    Game::getInstance()->getCurrentState().GetGridSize() / 2};
 
         } else {
-            newPos = {
-                target.x * Game::GetInstance()->GetCurrentState().GetGridSize(),
+            new_pos = {
+                target.x * Game::getInstance()->getCurrentState().GetGridSize(),
                 associated.gridPosition.y *
-                        Game::GetInstance()->GetCurrentState().GetGridSize() -
-                    Game::GetInstance()->GetCurrentState().GetGridSize() / 2};
+                        Game::getInstance()->getCurrentState().GetGridSize() -
+                    Game::getInstance()->getCurrentState().GetGridSize() / 2};
         }
     } else
-        newPos = {associated.gridPosition.x *
-                          Game::GetInstance()->GetCurrentState().GetGridSize() -
-                      Game::GetInstance()->GetCurrentState().GetGridSize() / 2,
+        new_pos = {associated.gridPosition.x *
+                          Game::getInstance()->getCurrentState().GetGridSize() -
+                      Game::getInstance()->getCurrentState().GetGridSize() / 2,
                   associated.gridPosition.y *
-                          Game::GetInstance()->GetCurrentState().GetGridSize() -
-                      Game::GetInstance()->GetCurrentState().GetGridSize() / 2};
+                          Game::getInstance()->getCurrentState().GetGridSize() -
+                      Game::getInstance()->getCurrentState().GetGridSize() / 2};
 
-    if (associated.box.x != newPos.x) {
-        if (abs(newPos.x - associated.box.x) < speed.x) {
-            associated.box.x += (newPos.x - associated.box.x);
-        } else if (associated.box.x < newPos.x) {
+    if (associated.box.x != new_pos.x) {
+        if (abs(new_pos.x - associated.box.x) < speed.x) {
+            associated.box.x += (new_pos.x - associated.box.x);
+        } else if (associated.box.x < new_pos.x) {
             associated.box.x += speed.x;
-        } else {
+        }
+        else
+        {
             associated.box.x -= speed.x;
         }
 
-        if (movementDone) movementDone = !movementDone;
+        if (movement_done) { movement_done = !movement_done };
     }
 
-    if (associated.box.y != newPos.y) {
-        if (abs(newPos.y - associated.box.y) < speed.y) {
-            associated.box.y += (newPos.y - associated.box.y);
-        } else if (associated.box.y < newPos.y) {
+    if (associated.box.y != new_pos.y)
+    {
+        if (abs(new_pos.y - associated.box.y) < speed.y)
+        {
+            associated.box.y += (new_pos.y - associated.box.y);
+        }
+        else if (associated.box.y < new_pos.y)
+        {
             associated.box.y += speed.y;
-        } else {
+        }
+        else
+        {
             associated.box.y -= speed.y;
         }
-        if (movementDone) movementDone = !movementDone;
+        if (movement_done) { movement_done = !movement_done };
     }
 
-    if (associated.box.x == newPos.x && associated.box.y == newPos.y) {
-        if (isHit) isHit = !isHit;
-        if (!movementDone) movementDone = !movementDone;
+    if (associated.box.x == new_pos.x && associated.box.y == new_pos.y)
+    {
+        if (is_hit) { is_hit = !is_hit };
+        if (!movement_done) { movement_done = !movement_done };
     }
 }

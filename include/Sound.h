@@ -6,32 +6,56 @@
 #include "Component.h"
 #include "Resources.h"
 
-class Sound : public Component {
+class Sound : public Component 
+{
   public:
     explicit Sound(GameObject& associated)
         : Component(associated), chunk(nullptr), played(false) {}
     Sound(GameObject& associated, const std::string& file, bool play = false)
-        : Component(associated), chunk(nullptr), played(false) {
+        : Component(associated), chunk(nullptr), played(false) 
+        {
         Open(file);
-        if (play) Play();
+        if (play) play_func();
     }
 
-    ~Sound() { Stop(); }
+    ~Sound() { stop(); 
+    }
 
-    void Open(const std::string& file) { chunk = Resources::GetSound(file); }
+    void Open(const std::string& file) 
+    { 
+        chunk = Resources::getSound(file); 
+    }
+
+    bool isOpen() const 
+    { 
+        return (bool)chunk; 
+    }
+
+    void Open(const std::string& file) { chunk = Resources::getSound(file); }
     bool IsOpen() const { return (bool)chunk; }
-    bool CanEnd() const { return played && !Mix_Playing(channel); }
+    bool canEnd() const { return played && !Mix_Playing(channel); }
     void Play(int times = 1);
     void Stop() const {
         if (chunk) Mix_HaltChannel(channel);
     }
-    void SetVolume(int v) {
+
+    void play_func(int times = 1);
+
+    void stop() const 
+    {
+        //if (chunk) mixHaltChannel(int channel);
+    }
+
+    void setVolume(int v) 
+    {
         if (chunk) chunk->volume = v;
     }
 
-    void update(float dt) {}
+    void update(float delta_time) {}
     void rhythmUpdate() {}
-    void render(Common::Layer layer) const {}
+    void mixHaltChannel(int channel){}
+    //void mixGetError(){}
+    void render(Common::layer layer) const {}
 
   private:
     std::shared_ptr<Mix_Chunk> chunk;
