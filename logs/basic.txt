@@ -1,8 +1,0 @@
-[2018-11-12 21:34:14.114] [log] [info] background has been added to the menu
-[2018-11-12 21:34:14.273] [log] [info] moving space has been added to the menu
-[2018-11-12 21:34:14.303] [log] [info] first moving cloud has been added to the menu
-[2018-11-12 21:34:14.367] [log] [info] second moving cloud has been added to the menu
-[2018-11-12 21:34:14.397] [log] [info] third moving cloud has been added to the menu
-[2018-11-12 21:34:14.419] [log] [info] title has been added to the menu
-[2018-11-12 21:34:14.420] [log] [info] Press Space has been added to the menu
-[2018-11-12 21:34:14.425] [log] [info] spaceship has been added to the menu
