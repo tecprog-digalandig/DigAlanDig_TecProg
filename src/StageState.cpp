@@ -148,13 +148,8 @@ void StageState::loadAssets() {
     // Big-Alan
     GameObject *bigAlan = new GameObject(Common::Layer::HUD);
     objectArray.emplace_back(bigAlan);
-<<<<<<< HEAD
     bigAlan->addComponent(new Sprite(*bigAlan, "assets/img/mooda.png", 2, -1));
     bigAlan->addComponent(new BigAlan(*bigAlan));
-=======
-    bigAlan->AddComponent(new Sprite(*bigAlan, "assets/img/mooda.png", 2, -1));
-    bigAlan->AddComponent(new BigAlan(*bigAlan));
->>>>>>> 26ad0751d659fc099e9afdd63220ee4bd9fe09f9
     bigAlan->world_reference = false;
     bigAlan->box.pos = {0, Camera::screenSize.y - bigAlan->box.h};
 
@@ -204,19 +199,11 @@ void StageState::loadAssets() {
     counterPetro->addComponent(new HudCounter(
         *counterPetro, "assets/hud/item3.png", "assets/hud/petroleoi.png"));
 
-<<<<<<< HEAD
     GameObject *item_count = new GameObject(Common::Layer::HUD);
     objectArray.emplace_back(item_count);
     item_count->world_reference = false;
     item_count->addComponent(new AlanItemCount(*item_count));
     lilAlan->setItemCount(item_count);
-=======
-    GameObject *itemCount = new GameObject(Common::Layer::HUD);
-    objectArray.emplace_back(itemCount);
-    itemCount->world_reference = false;
-    itemCount->AddComponent(new AlanItemCount(*itemCount));
-    lilAlan->SetItemCount(itemCount);
->>>>>>> 26ad0751d659fc099e9afdd63220ee4bd9fe09f9
 
     // Music
     music.isOpen("assets/audio/marmota.ogg");
@@ -225,23 +212,14 @@ void StageState::loadAssets() {
     Mix_SetPostMix(no_effect, NULL);
 }
 
-<<<<<<< HEAD
 void StageState::Start() {
-=======
-void StageState::start() {
->>>>>>> 26ad0751d659fc099e9afdd63220ee4bd9fe09f9
     if (!started) loadAssets();
 
     start_array();
 }
 
-<<<<<<< HEAD
 void StageState::Update(float delta_time) {
     Camera::Update(delta_time);
-=======
-void StageState::update(float dt) {
-    Camera::update(dt);
->>>>>>> 26ad0751d659fc099e9afdd63220ee4bd9fe09f9
 
     if (beat) {
         beat = false;

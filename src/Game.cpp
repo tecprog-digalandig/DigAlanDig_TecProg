@@ -74,7 +74,6 @@ void Game::CalculateDeltaTime() {
     delta_rhythm = delta_rhythm_ms / (beat_time / 2.0);
 }
 
-<<<<<<< HEAD
 void Game::Run()
 {
     if (stored_state)
@@ -82,20 +81,12 @@ void Game::Run()
         stateStack.emplace(stored_state);
         stateStack.top()->Start();
         stored_state = nullptr;
-=======
-void Game::Run() {
-    if (storedState) {
-        stateStack.emplace(storedState);
-        stateStack.top()->start();
-        storedState = nullptr;
->>>>>>> 26ad0751d659fc099e9afdd63220ee4bd9fe09f9
     }
 
     int fpb = 0;
     while (!stateStack.empty())
     {
         CalculateDeltaTime();
-<<<<<<< HEAD
         input.Update(delta_rhythm);
 
         ++fpb;
@@ -109,28 +100,13 @@ void Game::Run() {
             }
             else
             {
-=======
-        input.update(deltaRhythm);
-
-        fpb++;
-        if (shouldRhythmUpdate) {
-            shouldRhythmUpdate = false;
-            if (!offBeat) {
-                stateStack.top()->rhythmUpdate();
-                Camera::rhythmUpdate();
-            } else
->>>>>>> 26ad0751d659fc099e9afdd63220ee4bd9fe09f9
                 stateStack.top()->RhythmReset();
                 std::cout << "." << off_beat << "." << fpb << std::endl;
                 fpb = 0;
             }
         }
 
-<<<<<<< HEAD
         stateStack.top()->Update(delta_time);
-=======
-        stateStack.top()->update(dt);
->>>>>>> 26ad0751d659fc099e9afdd63220ee4bd9fe09f9
         stateStack.top()->render();
         SDL_RenderPresent(renderer);
 
@@ -147,17 +123,10 @@ void Game::Run() {
         if (stored_state)
         {
             stateStack.top()->StopMusic();
-<<<<<<< HEAD
             stateStack.emplace(stored_state);
             stateStack.top()->Start();
             stored_state = nullptr;
             tick_counter = 0;
-=======
-            stateStack.emplace(storedState);
-            stateStack.top()->start();
-            storedState = nullptr;
-            tickCounter = 0;
->>>>>>> 26ad0751d659fc099e9afdd63220ee4bd9fe09f9
         }
         SDL_Delay(10);
         SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);

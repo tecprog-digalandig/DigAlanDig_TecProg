@@ -4,11 +4,7 @@
 
 HudMeter::HudMeter(GameObject& associated, const std::string& bg_file,
                    const std::string& meter_file)
-<<<<<<< HEAD
     : Component(associated)
-=======
-    : Component(associated) 
->>>>>>> 26ad0751d659fc099e9afdd63220ee4bd9fe09f9
 {
     bg = new Sprite(associated, bg_file);
     boxbg = associated.box;
@@ -33,15 +29,9 @@ void HudMeter::render(Common::Layer layer) const {
     bg->render(layer);
 
     associated.box += offset1;
-<<<<<<< HEAD
 
     float s = InputManager::getInstance().scaleFactor();
     for (int i = 0; i < 3; i++) {
-=======
-    float s = InputManager::GetInstance().scaleFactor();
-    for (int i = 0; i < 3; i++) 
-    {
->>>>>>> 26ad0751d659fc099e9afdd63220ee4bd9fe09f9
         setMeter(i);
         meter->SetScaleX(s);
         meter->render(layer);
@@ -52,19 +42,9 @@ void HudMeter::render(Common::Layer layer) const {
 void HudMeter::setMeter(int i) const {
     int tmp;
     if (isHeart)
-<<<<<<< HEAD
         tmp = alan.lock()->GetComponent<Alan*>()->getHP() - i * 2;
     else {
         if (!Game::getInstance()->combo)
-=======
-    {
-        tmp = alan.lock()->GetComponent<Alan*>()->GetHP() - i * 2;
-    }
-    else 
-    {
-        if (!Game::GetInstance()->combo)
-        {
->>>>>>> 26ad0751d659fc099e9afdd63220ee4bd9fe09f9
             tmp = 0;
         }
         else
@@ -72,11 +52,6 @@ void HudMeter::setMeter(int i) const {
             tmp =
                 (int)floor(Game::GetInstance()->combo / (5 * (i + 1))) - i + 1;
         }
-<<<<<<< HEAD
-
-=======
-        
->>>>>>> 26ad0751d659fc099e9afdd63220ee4bd9fe09f9
     }
 
     if (tmp >= 2)

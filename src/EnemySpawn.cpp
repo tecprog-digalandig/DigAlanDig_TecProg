@@ -3,7 +3,6 @@
 #include "Enemy.h"
 #include "Game.h"
 
-<<<<<<< HEAD
 void EnemySpawn::Update(float dt)
 {
     while ( current_y < ( (int)( ( (Camera::pos.y + Camera::screenSize.y) /
@@ -13,16 +12,6 @@ void EnemySpawn::Update(float dt)
         {
             if (int enemy = tileMap->At(x, current_y, TileMap::Layers::INIMIGOS) )
             {
-=======
-void EnemySpawn::update(float dt) {
-    while (currentY <
-           ((int)(((Camera::pos.y + Camera::screenSize.y) /
-                   Game::GetInstance()->GetCurrentState().GetGridSize()) +
-                  4))) {
-        for (int x = 0; x < tileMap->GetWidth(); x++) {
-            if (int enemy =
-                    tileMap->At(x, currentY, TileMap::Layers::INIMIGOS)) {
->>>>>>> 26ad0751d659fc099e9afdd63220ee4bd9fe09f9
                 GameObject* go = new GameObject();
                 go->box.x =
                     x * Game::getInstance()->getCurrentState().GetGridSize() -
