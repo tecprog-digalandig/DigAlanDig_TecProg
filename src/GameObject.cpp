@@ -7,6 +7,8 @@
 #include "GameObject.h"
 #include "Sound.h"
 #include <assert.h>
+#include "spdlog/spdlog.h"
+#include "spdlog/sinks/basic_file_sink.h"
 
 GameObject::~GameObject()
 {
@@ -18,58 +20,138 @@ GameObject::~GameObject()
 
 void GameObject::start()
 {
-    if (started)
+    try
     {
-        return;
-    }
-    else
-    {
-        //Nothing to do
-    }
-    for (auto c : components) c->start();
+        auto my_logger = spdlog::basic_logger_mt("basic_logger", "logs/log.txt");
 
-    started = true;
+        spd::set_level(spd::level::info); // Set global log level to info
+        console->debug("Error in GameObject::start");
+        console->set_level(spd::level::debug); // Set specific logger's log level
+        console->debug("Game Object successfully started");
+
+        if (started)
+        {
+            return;
+        }
+        else
+        {
+            //Nothing to do
+        }
+        for (auto c : components) c->start();
+
+        started = true;
+    }
+    catch(const spd::spdlog_ex &ex)
+    {
+        std::cout << "Log init failed: " << ex.what() << std::endl;
+        return 1;
+    }
+
 }
 
 bool GameObject::canEnd() const { return true; }
 
 void GameObject::update(float dt)
 {
-    static float sum;
-    assert(sum >= 0);
-    sum += dt;
-    for (Component* component : components) component->update(dt);
-    if (move)
+    try
     {
-        box.pos = tmp.pos + Vec2(0, 1) * sin(sum) * 30;
+        auto my_logger = spdlog::basic_logger_mt("basic_logger", "logs/log.txt");
+
+        spd::set_level(spd::level::info); // Set global log level to info
+        console->debug("Error in GameObject::update ");
+        console->set_level(spd::level::debug); // Set specific logger's log level
+        console->debug("GameObject successfully updated");
+
+        static float sum;
+        assert(sum >= 0);
+        sum += dt;
+        for (Component* component : components) component->update(dt);
+        if (move)
+        {
+            box.pos = tmp.pos + Vec2(0, 1) * sin(sum) * 30;
+        }
+        else
+        {
+            //Nothing to do
+        }
+
     }
-    else
+    catch(const spd::spdlog_ex &ex)
     {
-        //Nothing to do
+        std::cout << "Log init failed: " << ex.what() << std::endl;
+        return 1;
     }
 }
 
 void GameObject::rhythmUpdate()
 {
-    for (Component* component : components) component->rhythmUpdate();
+    try
+    {
+        auto my_logger = spdlog::basic_logger_mt("basic_logger", "logs/log.txt");
+
+        spd::set_level(spd::level::info); // Set global log level to info
+        console->debug("Error in GameObject::rhythmUpdate ");
+        console->set_level(spd::level::debug); // Set specific logger's log level
+        console->debug("GameObject rhythm successfully updated");
+
+        for (Component* component : components) component->rhythmUpdate();
+
+    }
+    catch(const spd::spdlog_ex &ex)
+    {
+        std::cout << "Log init failed: " << ex.what() << std::endl;
+        return 1;
+    }
 }
 
 void GameObject::rhythmReset()
 {
-    for (Component* component : components) component->rhythmReset();
+    try
+    {
+        auto my_logger = spdlog::basic_logger_mt("basic_logger", "logs/log.txt");
+
+        spd::set_level(spd::level::info); // Set global log level to info
+        console->debug("Error in GameObject::rhythmReset ");
+        console->set_level(spd::level::debug); // Set specific logger's log level
+        console->debug("GameObject rhythm successfully reseted");
+
+        for (Component* component : components) component->rhythmReset();
+
+    }
+    catch(const spd::spdlog_ex &ex)
+    {
+        std::cout << "Log init failed: " << ex.what() << std::endl;
+        return 1;
+    }
 }
 
 void GameObject::renderOrder(Common::Layer layer) const
 {
-    if (!(this->layer & layer))
+    try
     {
-        return;
+        auto my_logger = spdlog::basic_logger_mt("basic_logger", "logs/log.txt");
+
+        spd::set_level(spd::level::info); // Set global log level to info
+        console->debug("Error in GameObject::renderOrder");
+        console->set_level(spd::level::debug); // Set specific logger's log level
+        console->debug("GameObject::renderOrder accessed");
+
+        if (!(this->layer & layer))
+        {
+            return;
+        }
+        else
+        {
+            //Nothing to do
+        }
+        for (Component* component : components) component->render(layer);
+
     }
-    else
+    catch(const spd::spdlog_ex &ex)
     {
-        //Nothing to do
+        std::cout << "Log init failed: " << ex.what() << std::endl;
+        return 1;
     }
-    for (Component* component : components) component->render(layer);
 }
 
 /**
