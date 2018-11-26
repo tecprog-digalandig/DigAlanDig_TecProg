@@ -1,0 +1,64 @@
+[2018-11-12 16:17:55.384] [logs] [info] background has been added to the menu
+[2018-11-12 16:17:55.582] [logs] [info] moving space has been added to the menu
+[2018-11-12 16:17:55.618] [logs] [info] first moving cloud has been added to the menu
+[2018-11-12 16:17:55.697] [logs] [info] second moving cloud has been added to the menu
+[2018-11-12 16:17:55.735] [logs] [info] third moving cloud has been added to the menu
+[2018-11-12 16:17:55.761] [logs] [info] title has been added to the menu
+[2018-11-12 16:17:55.763] [logs] [info] Press Space has been added to the menu
+[2018-11-12 16:17:55.769] [logs] [info] spaceship has been added to the menu
+[2018-11-12 19:42:45.947] [log] [info] background has been added to the menu
+[2018-11-12 19:42:46.106] [log] [info] moving space has been added to the menu
+[2018-11-12 19:42:46.136] [log] [info] first moving cloud has been added to the menu
+[2018-11-12 19:42:46.201] [log] [info] second moving cloud has been added to the menu
+[2018-11-12 19:42:46.233] [log] [info] third moving cloud has been added to the menu
+[2018-11-12 19:42:46.255] [log] [info] title has been added to the menu
+[2018-11-12 19:42:46.256] [log] [info] Press Space has been added to the menu
+[2018-11-12 19:42:46.262] [log] [info] spaceship has been added to the menu
+[2018-11-12 19:54:30.146] [log] [info] background has been added to the menu
+[2018-11-12 19:54:30.305] [log] [info] moving space has been added to the menu
+[2018-11-12 19:54:30.335] [log] [info] first moving cloud has been added to the menu
+[2018-11-12 19:54:30.399] [log] [info] second moving cloud has been added to the menu
+[2018-11-12 19:54:30.429] [log] [info] third moving cloud has been added to the menu
+[2018-11-12 19:54:30.450] [log] [info] title has been added to the menu
+[2018-11-12 19:54:30.452] [log] [info] Press Space has been added to the menu
+[2018-11-12 19:54:30.456] [log] [info] spaceship has been added to the menu
+[2018-11-12 20:16:55.022] [log] [info] background has been added to the menu
+[2018-11-12 20:16:55.181] [log] [info] moving space has been added to the menu
+[2018-11-12 20:16:55.211] [log] [info] first moving cloud has been added to the menu
+[2018-11-12 20:16:55.275] [log] [info] second moving cloud has been added to the menu
+[2018-11-12 20:16:55.305] [log] [info] third moving cloud has been added to the menu
+[2018-11-12 20:16:55.326] [log] [info] title has been added to the menu
+[2018-11-12 20:16:55.327] [log] [info] Press Space has been added to the menu
+[2018-11-12 20:16:55.332] [log] [info] spaceship has been added to the menu
+[2018-11-12 20:19:41.140] [log] [info] background has been added to the menu
+[2018-11-12 20:19:41.299] [log] [info] moving space has been added to the menu
+[2018-11-12 20:19:41.328] [log] [info] first moving cloud has been added to the menu
+[2018-11-12 20:19:41.392] [log] [info] second moving cloud has been added to the menu
+[2018-11-12 20:19:41.423] [log] [info] third moving cloud has been added to the menu
+[2018-11-12 20:19:41.445] [log] [info] title has been added to the menu
+[2018-11-12 20:19:41.446] [log] [info] Press Space has been added to the menu
+[2018-11-12 20:19:41.451] [log] [info] spaceship has been added to the menu
+[2018-11-12 20:22:56.558] [log] [info] background has been added to the menu
+[2018-11-12 20:22:56.716] [log] [info] moving space has been added to the menu
+[2018-11-12 20:22:56.745] [log] [info] first moving cloud has been added to the menu
+[2018-11-12 20:22:56.809] [log] [info] second moving cloud has been added to the menu
+[2018-11-12 20:22:56.840] [log] [info] third moving cloud has been added to the menu
+[2018-11-12 20:22:56.861] [log] [info] title has been added to the menu
+[2018-11-12 20:22:56.862] [log] [info] Press Space has been added to the menu
+[2018-11-12 20:22:56.867] [log] [info] spaceship has been added to the menu
+[2018-11-12 20:25:49.204] [log] [info] background has been added to the menu
+[2018-11-12 20:25:49.361] [log] [info] moving space has been added to the menu
+[2018-11-12 20:25:49.390] [log] [info] first moving cloud has been added to the menu
+[2018-11-12 20:25:49.454] [log] [info] second moving cloud has been added to the menu
+[2018-11-12 20:25:49.485] [log] [info] third moving cloud has been added to the menu
+[2018-11-12 20:25:49.506] [log] [info] title has been added to the menu
+[2018-11-12 20:25:49.508] [log] [info] Press Space has been added to the menu
+[2018-11-12 20:25:49.513] [log] [info] spaceship has been added to the menu
+[2018-11-12 20:25:50.665] [log] [info] Mov -0.172
+[2018-11-12 20:25:51.101] [log] [info] Mov -0.296
+[2018-11-12 20:25:51.831] [log] [info] Mov 0.632
+[2018-11-12 20:25:52.326] [log] [info] Mov 0.6
+[2018-11-12 20:25:52.978] [log] [info] Mov -0.792
+[2018-11-12 20:25:53.515] [log] [info] Mov -0.712
+[2018-11-12 20:25:54.282] [log] [info] Mov 0.428
+[2018-11-12 20:25:54.412] [log] [info] Mov 0.944

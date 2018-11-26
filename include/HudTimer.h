@@ -10,10 +10,10 @@ class HudTimer : public Component {
     explicit HudTimer(GameObject& associated);
     ~HudTimer() {}
 
-    void Update(float dt);
+    void update(float dt);
 
-    void RhythmUpdate() {}
-    void Render(Common::Layer layer) const;
+    void rhythmUpdate() {}
+    void render(Common::Layer layer) const;
 
   private:
     void SetMeterFrame() const;

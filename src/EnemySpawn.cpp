@@ -3,7 +3,7 @@
 #include "Enemy.h"
 #include "Game.h"
 
-void EnemySpawn::Update(float dt) {
+void EnemySpawn::update(float dt) {
     while (currentY <
            ((int)(((Camera::pos.y + Camera::screenSize.y) /
                    Game::GetInstance()->GetCurrentState().GetGridSize()) +

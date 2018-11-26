@@ -63,7 +63,7 @@ float fixRange(float value, float fix) {
     return ret;
 }
 
-void InputManager::Update(float deltaRhythm) {
+void InputManager::update(float deltaRhythm) {
     frame++;
     quitRequested = false;
 

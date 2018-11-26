@@ -68,29 +68,29 @@ void Game::CalculateDeltaTime() {
 void Game::Run() {
     if (storedState) {
         stateStack.emplace(storedState);
-        stateStack.top()->Start();
+        stateStack.top()->start();
         storedState = nullptr;
     }
 
     int fpb = 0;
     while (!stateStack.empty()) {
         CalculateDeltaTime();
-        input.Update(deltaRhythm);
+        input.update(deltaRhythm);
 
         fpb++;
         if (shouldRhythmUpdate) {
             shouldRhythmUpdate = false;
             if (!offBeat) {
-                stateStack.top()->RhythmUpdate();
-                Camera::RhythmUpdate();
+                stateStack.top()->rhythmUpdate();
+                Camera::rhythmUpdate();
             } else
                 stateStack.top()->RhythmReset();
             std::cout << "." << offBeat << "." << fpb << std::endl;
             fpb = 0;
         }
 
-        stateStack.top()->Update(dt);
-        stateStack.top()->Render();
+        stateStack.top()->update(dt);
+        stateStack.top()->render();
         SDL_RenderPresent(renderer);
 
         if (stateStack.top()->PopRequested() ||
@@ -105,7 +105,7 @@ void Game::Run() {
         if (storedState) {
             stateStack.top()->StopMusic();
             stateStack.emplace(storedState);
-            stateStack.top()->Start();
+            stateStack.top()->start();
             storedState = nullptr;
             tickCounter = 0;
         }

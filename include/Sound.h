@@ -29,9 +29,9 @@ class Sound : public Component {
         if (chunk) chunk->volume = v;
     }
 
-    void Update(float dt) {}
-    void RhythmUpdate() {}
-    void Render(Common::Layer layer) const {}
+    void update(float dt) {}
+    void rhythmUpdate() {}
+    void render(Common::Layer layer) const {}
 
   private:
     std::shared_ptr<Mix_Chunk> chunk;
