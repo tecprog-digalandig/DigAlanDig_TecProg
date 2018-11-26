@@ -2,11 +2,10 @@
 #include "Alan.h"
 #include "InputManager.h"
 
-HudMeter::HudMeter(GameObject& associated, const std::string& bg_file,
-                   const std::string& meter_file)
-    : Component(associated) 
-{
-    bg = new Sprite(associated, bg_file);
+HudMeter::HudMeter(GameObject& associated, const string& bgFile,
+                   const string& meter_file)
+    : Component(associated) {
+    bg = new Sprite(associated, bgFile);
     boxbg = associated.box;
     meter = new Sprite(associated, meter_file, 3, 1e9);
     Rect meter_box = associated.box;

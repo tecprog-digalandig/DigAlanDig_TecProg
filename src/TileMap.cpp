@@ -6,11 +6,14 @@
 #include "Common.h"
 #include "Game.h"
 #include "Sprite.h"
+#include <assert.h>
+#include "spdlog/spdlog.h"
 
 using json = nlohmann::json;
 
 TileMap::TileMap(GameObject& associated, const string& file, bool infinity)
     : Component(associated), infinity(infinity) {
+    assert(file != "");      //T17    
     layerIndex["base"] = Layers::BASE;
     layerIndex["blocos"] = Layers::BLOCOS;
     layerIndex["itens"] = Layers::ITENS;
@@ -25,6 +28,7 @@ TileMap::TileMap(GameObject& associated, const string& file, bool infinity)
 TileMap::~TileMap() {}
 
 void TileMap::LoadList(const string& file) {
+    assert(file != "");      
     json jsonFile;
     Common::readJson(jsonFile, file);
     for (auto it = jsonFile["files"].begin(); it != jsonFile["files"].end(); ++it) {
@@ -37,6 +41,7 @@ void TileMap::LoadList(const string& file) {
 
 void TileMap::Load(const string& file) {
     json jsonFile;
+    assert(file != "");      
     Common::readJson(jsonFile, file);
 
     string tileSetFile = jsonFile.at("tilesets").at(0).at("source");
@@ -45,7 +50,8 @@ void TileMap::Load(const string& file) {
 
     width = jsonFile.at("width");
     height += (int)jsonFile.at("height");
-    cout << "height: " << height << endl;
+    spdlog::get("console")->info("Height: {}", height);
+       
     depth = jsonFile.at("layers").size();
 
     for (int i = 0; i < depth; i++) {
@@ -88,20 +94,38 @@ void TileMap::GetNextFile() {
 
 int TileMap::At(int x, int y, int z) {
     bool valid = (x >= 0) && (x < width) && (y >= 0) && (z >= 0) && (z < depth);
-    if (!valid) return 1;
-
-    while (infinity &&
-           ((y >= height) ||
-            ((Camera::pos.y + Camera::screenSize.y) / 100) >= height)) {
+    if (!valid) {
+        return 1;
+    }
+    else{ 
+        
+    }
+    
+    bool forward_position = isForwardPosition(y); 
+    
+    while (infinity && forward_position) {  
         Load(TileMapsFiles[currentFile]);
         GetNextFile();
+        forward_position = isForwardPosition(y); 
     }
 
     if (z == Layers::ITENS) {
         return tileSet->GetItemType(tileMat[z][y * width + x]);
     }
+    else{  
+  
+    }
+
     return tileMat[z][y * width + x];
 }
+
+bool TileMap::isForwardPosition(int position_alan){  //T22
+    bool alan_center_of_the_map = (position_alan >= height);
+    bool camera_center_of_the_map = ((Camera::pos.y + Camera::screenSize.y) / 100) >= height;
+    
+    bool forward_position = (alan_center_of_the_map || camera_center_of_the_map);
+    return forward_position;
+} 
 
 void TileMap::render(Common::Layer layer) const {
     if (layer == Common::Layer::DEFAULT)
@@ -128,5 +152,8 @@ void TileMap::GetDamageGround(int damage, Vec2 posDamage) {
         tileMat[groundLayer][(int)(posDamage.y * width + posDamage.x)] = 0;
         SpawnDust(posDamage);
     }
-    // tileSet->RenderTile(valPos - 1, posDamage.x, posDamage.y);
+    else {
+    
+    }
+
 }

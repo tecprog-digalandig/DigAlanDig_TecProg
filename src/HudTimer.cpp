@@ -1,5 +1,8 @@
 #include "HudTimer.h"
+#include "spdlog/spdlog.h"
 
+
+using namespace std;
 HudTimer::HudTimer(GameObject& associated)
     : Component(associated), input(InputManager::GetInstance()) {
     Vec2 center = associated.box.Center();
@@ -52,7 +55,7 @@ void HudTimer::SetMeterFrame() const {
 }
 
 void HudTimer::update(float dt) {
-    if (std::abs(input.GetDeltaRhythm()) < 0.5) {
+    if (abs(input.GetDeltaRhythm()) < 0.5) {
         meter->SetFrame(2);
         meter->SetScaleX(1.5);
     } else {
@@ -62,7 +65,7 @@ void HudTimer::update(float dt) {
 
     float mov = input.Moved();
     if (mov < 1.1) {
-        std::cout << "Mov" << mov << std::endl;
+        spdlog::get("console")->info("Move: {}", mov);
         Vec2 rise(boxmeter.pos + Vec2(moveLenght, 0) * -mov);
         risers.push_back(rise);
     }
@@ -71,7 +74,7 @@ void HudTimer::update(float dt) {
         rise.y -= dt * speed;
     }
 
-    risers.erase(std::remove_if(risers.begin(), risers.end(),
+    risers.erase(remove_if(risers.begin(), risers.end(),
                                 [](Vec2 v) { return v.y < 570; }),
                  risers.end());
 }
