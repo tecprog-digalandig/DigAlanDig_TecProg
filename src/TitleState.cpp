@@ -58,18 +58,7 @@ void TitleState::loadAssets()
     
     GameObject* initial_layout = new GameObject(Common::Layer::BG);  
     addBackgroud(initial_layout);
- 
-    // Add moving space to layout
-    initial_layout = new GameObject(Common::Layer::BG);
-    initial_layout->box.x = POSITION_X_SPACE;      
-    initial_layout->box.y = POSITION_Y_SPACE;      
-    initial_layout->world_reference = false;
-    objectArray.emplace_back(initial_layout);
-    initial_layout->AddComponent(new ParallaxX(*initial_layout, SPACE_VELOCITY));   
-    initial_layout->AddComponent(new bgCircularX(
-        *initial_layout, SPACE_SCREEN));
-    //my_logger->info("Moving space has been added to the menu");
-
+     
     // Add the first moving cloud to the layout
     initial_layout = new GameObject(Common::Layer::BG);
     initial_layout->box.x = POSITION_X_CLOUD;   
@@ -148,6 +137,19 @@ void TitleState::addBackgroud(GameObject* initial_layout){
     //my_logger->info("Background has been added to the menu");  
 }
 
+// Add moving space to layout
+void TitleState::addMovingSpace(GameObject* initial_layout){
+    initial_layout = new GameObject(Common::Layer::BG);
+    initial_layout->box.x = POSITION_X_SPACE;      
+    initial_layout->box.y = POSITION_Y_SPACE;      
+    initial_layout->world_reference = false;
+    objectArray.emplace_back(initial_layout);
+    initial_layout->AddComponent(new ParallaxX(*initial_layout, SPACE_VELOCITY));   
+    initial_layout->AddComponent(new bgCircularX(
+        *initial_layout, SPACE_SCREEN));
+    //my_logger->info("Moving space has been added to the menu");
+
+}
 
 void TitleState::start() {
     if (!started){
