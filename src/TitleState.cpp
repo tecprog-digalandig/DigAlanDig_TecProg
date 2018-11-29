@@ -77,7 +77,8 @@ void TitleState::addBackgroud(GameObject* initial_layout){
     objectArray.emplace_back(initial_layout);
     initial_layout->AddComponent(
     new Sprite(*initial_layout, MENU_SCREEN));  
-    //my_logger->info("Background has been added to the menu");  
+    spdlog::get("log")->info("Background has been added to the menu");
+    
 }
 
 // Add moving space to layout
@@ -90,7 +91,7 @@ void TitleState::addMovingSpace(GameObject* initial_layout){
     initial_layout->AddComponent(new ParallaxX(*initial_layout, SPACE_VELOCITY));   
     initial_layout->AddComponent(new bgCircularX(
         *initial_layout, SPACE_SCREEN));
-    //my_logger->info("Moving space has been added to the menu");
+    spdlog::get("log")->info("Moving space has been added to the menu");
 
 }
 
@@ -105,7 +106,8 @@ void TitleState::addFirstCloud(GameObject* initial_layout){
     initial_layout->AddComponent(new ParallaxX(*initial_layout));
     initial_layout->AddComponent(new bgCircularX(
         *initial_layout, CLOUD_1)); 
-    //my_logger->info("First moving cloud has been added to the menu");
+    spdlog::get("log")->info("First moving cloud has been added to the menu");
+
 }
 
 // Add the second moving cloud to the layout
@@ -118,7 +120,8 @@ void TitleState::addSecoundCloud(GameObject* initial_layout){
     objectArray.emplace_back(initial_layout);
     initial_layout->AddComponent(new ParallaxX(*initial_layout, CLOUD_2_VELOCITY)); 
     initial_layout->AddComponent(new bgCircularX(*initial_layout, CLOUD_2));    
-    //my_logger->info("Second moving cloud has been added to the menu");
+    spdlog::get("log")->info("Second moving cloud has been added to the menu");
+
 }
 
 // Add the third moving cloud to the layout
@@ -130,7 +133,8 @@ void TitleState::addThirdCloud(GameObject* initial_layout){
     objectArray.emplace_back(initial_layout);
     initial_layout->AddComponent(new ParallaxX(*initial_layout, CLOUD_3_VELOCITY)); 
     initial_layout->AddComponent(new bgCircularX(*initial_layout, CLOUD_3));      
-    //my_logger->info("Third moving cloud has been added to the menu"); 
+    spdlog::get("log")->info("Third moving cloud has been added to the menu");
+
 }
 
 // Add title to the layout
@@ -142,7 +146,8 @@ void TitleState::addTitleMenu(GameObject* initial_layout){
     initial_layout->world_reference = false;
     objectArray.emplace_back(initial_layout);
     initial_layout->AddComponent(sprite);
-    //my_logger->info("Title has been added to the menu");  
+    spdlog::get("log")->info("Title has been added to the menu");
+
 }
 
 
@@ -156,7 +161,8 @@ void TitleState::addPressSpace(GameObject* initial_layout){
     initial_layout->blink = true;
     objectArray.emplace_back(initial_layout);
     initial_layout->AddComponent(sprite);
-    //my_logger->info("Press Space has been added to the menu");
+    spdlog::get("log")->info("Press Space has been added to the menu");
+
 }
 
 // add spaceship to the layout
@@ -170,7 +176,8 @@ void TitleState::addSpaceshipMenu(GameObject* initial_layout){
     initial_layout->move = true;
     objectArray.emplace_back(initial_layout);
     initial_layout->AddComponent(sprite);
-    //my_logger->info("Spaceship has been added to the menu");
+    spdlog::get("log")->info("Spaceship has been added to the menu");
+
 }
 
 void TitleState::start() {
