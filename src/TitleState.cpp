@@ -60,39 +60,9 @@ void TitleState::loadAssets()
     addBackgroud(initial_layout);
     addMovingSpace(initial_layout);
     addFirstCloud(initial_layout); 
+    addTitleMenu(initial_layout);
+    addPressSpace(initial_layout);
     
-
-    // Add the third moving cloud to the layout
-    initial_layout = new GameObject(Common::Layer::BG);
-    initial_layout->box.x = POSITION_X_CLOUD_3; 
-    initial_layout->box.y = POSITION_Y_CLOUD_3; 
-    initial_layout->world_reference = false;
-    objectArray.emplace_back(initial_layout);
-    initial_layout->AddComponent(new ParallaxX(*initial_layout, CLOUD_3_VELOCITY)); 
-    initial_layout->AddComponent(new bgCircularX(*initial_layout, CLOUD_3));      
-    //my_logger->info("Third moving cloud has been added to the menu"); 
-
-    // Add title to the layout
-    initial_layout = new GameObject(Common::Layer::HUD);
-    Sprite* sprite = new Sprite(*initial_layout, TITLE_MENU);   
-    sprite->SetScaleX(SCALE_X_TITLE);   
-    initial_layout->box.SetCenter(POSITION_X_TITLE, POSITION_Y_TITLE);  
-    initial_layout->world_reference = false;
-    objectArray.emplace_back(initial_layout);
-    initial_layout->AddComponent(sprite);
-    //my_logger->info("Title has been added to the menu");  
-
-    // add image "Press Space" to the layout
-    initial_layout = new GameObject(Common::Layer::HUD);
-    sprite = new Sprite(*initial_layout, TITLE_PRESS_SPACE);    
-    sprite->SetScaleX(SCALE_X_PRESS_SPACE); 
-    initial_layout->box.SetCenter(POSITION_X_PRESS_SPACE, POSITION_Y_PRESS_SPACE);  
-    initial_layout->world_reference = false;
-    initial_layout->blink = true;
-    objectArray.emplace_back(initial_layout);
-    initial_layout->AddComponent(sprite);
-    //my_logger->info("Press Space has been added to the menu");
-
     // add spaceship to the layout
     initial_layout = new GameObject(Common::Layer::HUD);
     sprite = new Sprite(*initial_layout, SPACESHIP_MENU, 2, -1);    
@@ -147,9 +117,9 @@ void TitleState::addFirstCloud(GameObject* initial_layout){
     //my_logger->info("First moving cloud has been added to the menu");
 }
 
+// Add the second moving cloud to the layout
 void TitleState::addSecoundCloud(GameObject* initial_layout){
 
-    // Add the second moving cloud to the layout
     initial_layout = new GameObject(Common::Layer::BG);
     initial_layout->box.x = POSITION_X_CLOUD_2; 
     initial_layout->box.y = POSITION_Y_CLOUD_2; 
@@ -160,10 +130,44 @@ void TitleState::addSecoundCloud(GameObject* initial_layout){
     //my_logger->info("Second moving cloud has been added to the menu");
 }
 
-void TitleState::addSecoundCloud(GameObject* initial_layout){
-
-
+// Add the third moving cloud to the layout
+void TitleState::addThirdCloud(GameObject* initial_layout){
+    initial_layout = new GameObject(Common::Layer::BG);
+    initial_layout->box.x = POSITION_X_CLOUD_3; 
+    initial_layout->box.y = POSITION_Y_CLOUD_3; 
+    initial_layout->world_reference = false;
+    objectArray.emplace_back(initial_layout);
+    initial_layout->AddComponent(new ParallaxX(*initial_layout, CLOUD_3_VELOCITY)); 
+    initial_layout->AddComponent(new bgCircularX(*initial_layout, CLOUD_3));      
+    //my_logger->info("Third moving cloud has been added to the menu"); 
 }
+
+// Add title to the layout
+void TitleState::addTitleMenu(GameObject* initial_layout){
+    initial_layout = new GameObject(Common::Layer::HUD);
+    Sprite* sprite = new Sprite(*initial_layout, TITLE_MENU);   
+    sprite->SetScaleX(SCALE_X_TITLE);   
+    initial_layout->box.SetCenter(POSITION_X_TITLE, POSITION_Y_TITLE);  
+    initial_layout->world_reference = false;
+    objectArray.emplace_back(initial_layout);
+    initial_layout->AddComponent(sprite);
+    //my_logger->info("Title has been added to the menu");  
+}
+
+
+// add image "Press Space" to the layout
+void TitleState::addPressSpace(GameObject* initial_layout){
+    initial_layout = new GameObject(Common::Layer::HUD);
+    sprite = new Sprite(*initial_layout, TITLE_PRESS_SPACE);    
+    sprite->SetScaleX(SCALE_X_PRESS_SPACE); 
+    initial_layout->box.SetCenter(POSITION_X_PRESS_SPACE, POSITION_Y_PRESS_SPACE);  
+    initial_layout->world_reference = false;
+    initial_layout->blink = true;
+    objectArray.emplace_back(initial_layout);
+    initial_layout->AddComponent(sprite);
+    //my_logger->info("Press Space has been added to the menu");
+}
+
 void TitleState::start() {
     if (!started){
         loadAssets();
