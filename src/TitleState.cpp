@@ -60,20 +60,11 @@ void TitleState::loadAssets()
     addBackgroud(initial_layout);
     addMovingSpace(initial_layout);
     addFirstCloud(initial_layout); 
+    addSecoundCloud(initial_layout); 
+    addThirdCloud(initial_layout); 
     addTitleMenu(initial_layout);
     addPressSpace(initial_layout);
-    
-    // add spaceship to the layout
-    initial_layout = new GameObject(Common::Layer::HUD);
-    sprite = new Sprite(*initial_layout, SPACESHIP_MENU, 2, -1);    
-    sprite->SetScaleX(SCALE_X_SPACESHIP);   
-    initial_layout->box.SetCenter(POSITION_X_SPACESHIP, POSITION_Y_SPACESHIP);  
-    initial_layout->setRect(initial_layout->box);
-    initial_layout->world_reference = false;
-    initial_layout->move = true;
-    objectArray.emplace_back(initial_layout);
-    initial_layout->AddComponent(sprite);
-    //my_logger->info("Spaceship has been added to the menu");
+    addSpaceshipMenu(initial_layout);    
 
     Game::GetInstance()->StartBeatTime();
     music.Open(AUDIO_MENU); 
@@ -158,7 +149,7 @@ void TitleState::addTitleMenu(GameObject* initial_layout){
 // add image "Press Space" to the layout
 void TitleState::addPressSpace(GameObject* initial_layout){
     initial_layout = new GameObject(Common::Layer::HUD);
-    sprite = new Sprite(*initial_layout, TITLE_PRESS_SPACE);    
+    Sprite* sprite = new Sprite(*initial_layout, TITLE_PRESS_SPACE);    
     sprite->SetScaleX(SCALE_X_PRESS_SPACE); 
     initial_layout->box.SetCenter(POSITION_X_PRESS_SPACE, POSITION_Y_PRESS_SPACE);  
     initial_layout->world_reference = false;
@@ -166,6 +157,20 @@ void TitleState::addPressSpace(GameObject* initial_layout){
     objectArray.emplace_back(initial_layout);
     initial_layout->AddComponent(sprite);
     //my_logger->info("Press Space has been added to the menu");
+}
+
+// add spaceship to the layout
+void TitleState::addSpaceshipMenu(GameObject* initial_layout){
+    initial_layout = new GameObject(Common::Layer::HUD);
+    Sprite* sprite = new Sprite(*initial_layout, SPACESHIP_MENU, 2, -1);    
+    sprite->SetScaleX(SCALE_X_SPACESHIP);   
+    initial_layout->box.SetCenter(POSITION_X_SPACESHIP, POSITION_Y_SPACESHIP);  
+    initial_layout->setRect(initial_layout->box);
+    initial_layout->world_reference = false;
+    initial_layout->move = true;
+    objectArray.emplace_back(initial_layout);
+    initial_layout->AddComponent(sprite);
+    //my_logger->info("Spaceship has been added to the menu");
 }
 
 void TitleState::start() {
