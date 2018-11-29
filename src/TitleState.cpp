@@ -58,27 +58,9 @@ void TitleState::loadAssets()
     
     GameObject* initial_layout = new GameObject(Common::Layer::BG);  
     addBackgroud(initial_layout);
-     
-    // Add the first moving cloud to the layout
-    initial_layout = new GameObject(Common::Layer::BG);
-    initial_layout->box.x = POSITION_X_CLOUD;   
-    initial_layout->box.y = POSITION_Y_CLOUD;   
-    initial_layout->world_reference = false;
-    objectArray.emplace_back(initial_layout);
-    initial_layout->AddComponent(new ParallaxX(*initial_layout));
-    initial_layout->AddComponent(new bgCircularX(
-        *initial_layout, CLOUD_1)); 
-    //my_logger->info("First moving cloud has been added to the menu");
-
-    // Add the second moving cloud to the layout
-    initial_layout = new GameObject(Common::Layer::BG);
-    initial_layout->box.x = POSITION_X_CLOUD_2; 
-    initial_layout->box.y = POSITION_Y_CLOUD_2; 
-    initial_layout->world_reference = false;
-    objectArray.emplace_back(initial_layout);
-    initial_layout->AddComponent(new ParallaxX(*initial_layout, CLOUD_2_VELOCITY)); 
-    initial_layout->AddComponent(new bgCircularX(*initial_layout, CLOUD_2));    
-    //my_logger->info("Second moving cloud has been added to the menu");
+    addMovingSpace(initial_layout);
+    addFirstCloud(initial_layout); 
+    
 
     // Add the third moving cloud to the layout
     initial_layout = new GameObject(Common::Layer::BG);
@@ -151,6 +133,37 @@ void TitleState::addMovingSpace(GameObject* initial_layout){
 
 }
 
+// Add the first moving cloud to the layout
+void TitleState::addFirstCloud(GameObject* initial_layout){
+
+    initial_layout = new GameObject(Common::Layer::BG);
+    initial_layout->box.x = POSITION_X_CLOUD;   
+    initial_layout->box.y = POSITION_Y_CLOUD;   
+    initial_layout->world_reference = false;
+    objectArray.emplace_back(initial_layout);
+    initial_layout->AddComponent(new ParallaxX(*initial_layout));
+    initial_layout->AddComponent(new bgCircularX(
+        *initial_layout, CLOUD_1)); 
+    //my_logger->info("First moving cloud has been added to the menu");
+}
+
+void TitleState::addSecoundCloud(GameObject* initial_layout){
+
+    // Add the second moving cloud to the layout
+    initial_layout = new GameObject(Common::Layer::BG);
+    initial_layout->box.x = POSITION_X_CLOUD_2; 
+    initial_layout->box.y = POSITION_Y_CLOUD_2; 
+    initial_layout->world_reference = false;
+    objectArray.emplace_back(initial_layout);
+    initial_layout->AddComponent(new ParallaxX(*initial_layout, CLOUD_2_VELOCITY)); 
+    initial_layout->AddComponent(new bgCircularX(*initial_layout, CLOUD_2));    
+    //my_logger->info("Second moving cloud has been added to the menu");
+}
+
+void TitleState::addSecoundCloud(GameObject* initial_layout){
+
+
+}
 void TitleState::start() {
     if (!started){
         loadAssets();
