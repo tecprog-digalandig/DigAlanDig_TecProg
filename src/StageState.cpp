@@ -28,6 +28,7 @@ int StageState::count = 0;
 int StageState::timeRhythm = 0;
 bool StageState::beat = false;
 
+
 void StageState::noEffect(void *udata, Uint8 *stream, int len) {
     static constexpr float bitPBeat = 44100 * (120 / 60);
     static constexpr float halfBitPBeat = bitPBeat / 2;

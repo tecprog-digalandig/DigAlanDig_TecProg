@@ -15,8 +15,8 @@
 #include "TileMap.h"
 #include "Vec2.h"
 #include "spdlog/spdlog.h"
-#include "spdlog/sinks/stdout_color_sinks.h" //support for stdout logging
-#include "spdlog/sinks/basic_file_sink.h" // support for basic file logging
+#include "spdlog/sinks/stdout_color_sinks.h" //
+#include "spdlog/sinks/basic_file_sink.h" // 
 #define POSITION_X_SPACE 0
 #define POSITION_Y_SPACE 0
 #define SPACE_VELOCITY 2
@@ -53,17 +53,12 @@ TitleState::TitleState() {}
 void TitleState::loadAssets() 
 {   
         
-    auto my_logger = spdlog::basic_logger_mt("log", "logs/basic.txt"); //T29
-    auto console = spdlog::stdout_color_mt("console");  //T29
+    auto my_logger = spdlog::basic_logger_mt("log", "logs/basic.txt"); 
+    auto console = spdlog::stdout_color_mt("console");  
     
-    // Add background to layout
     GameObject* initial_layout = new GameObject(Common::Layer::BG);  
-    initial_layout->world_reference = false;    
-    objectArray.emplace_back(initial_layout);
-    initial_layout->AddComponent(
-        new Sprite(*initial_layout, MENU_SCREEN));  
-    my_logger->info("Background has been added to the menu");  //T29
-    
+    addBackgroud(initial_layout);
+ 
     // Add moving space to layout
     initial_layout = new GameObject(Common::Layer::BG);
     initial_layout->box.x = POSITION_X_SPACE;      
@@ -73,7 +68,7 @@ void TitleState::loadAssets()
     initial_layout->AddComponent(new ParallaxX(*initial_layout, SPACE_VELOCITY));   
     initial_layout->AddComponent(new bgCircularX(
         *initial_layout, SPACE_SCREEN));
-    my_logger->info("Moving space has been added to the menu");  //T29
+    //my_logger->info("Moving space has been added to the menu");
 
     // Add the first moving cloud to the layout
     initial_layout = new GameObject(Common::Layer::BG);
@@ -84,7 +79,7 @@ void TitleState::loadAssets()
     initial_layout->AddComponent(new ParallaxX(*initial_layout));
     initial_layout->AddComponent(new bgCircularX(
         *initial_layout, CLOUD_1)); 
-    my_logger->info("First moving cloud has been added to the menu");  //T29
+    //my_logger->info("First moving cloud has been added to the menu");
 
     // Add the second moving cloud to the layout
     initial_layout = new GameObject(Common::Layer::BG);
@@ -94,7 +89,7 @@ void TitleState::loadAssets()
     objectArray.emplace_back(initial_layout);
     initial_layout->AddComponent(new ParallaxX(*initial_layout, CLOUD_2_VELOCITY)); 
     initial_layout->AddComponent(new bgCircularX(*initial_layout, CLOUD_2));    
-    my_logger->info("Second moving cloud has been added to the menu");  //T29
+    //my_logger->info("Second moving cloud has been added to the menu");
 
     // Add the third moving cloud to the layout
     initial_layout = new GameObject(Common::Layer::BG);
@@ -104,7 +99,7 @@ void TitleState::loadAssets()
     objectArray.emplace_back(initial_layout);
     initial_layout->AddComponent(new ParallaxX(*initial_layout, CLOUD_3_VELOCITY)); 
     initial_layout->AddComponent(new bgCircularX(*initial_layout, CLOUD_3));      
-    my_logger->info("Third moving cloud has been added to the menu"); //T29
+    //my_logger->info("Third moving cloud has been added to the menu"); 
 
     // Add title to the layout
     initial_layout = new GameObject(Common::Layer::HUD);
@@ -114,7 +109,7 @@ void TitleState::loadAssets()
     initial_layout->world_reference = false;
     objectArray.emplace_back(initial_layout);
     initial_layout->AddComponent(sprite);
-    my_logger->info("Title has been added to the menu");  //T29
+    //my_logger->info("Title has been added to the menu");  
 
     // add image "Press Space" to the layout
     initial_layout = new GameObject(Common::Layer::HUD);
@@ -125,7 +120,7 @@ void TitleState::loadAssets()
     initial_layout->blink = true;
     objectArray.emplace_back(initial_layout);
     initial_layout->AddComponent(sprite);
-    my_logger->info("Press Space has been added to the menu");  //T29
+    //my_logger->info("Press Space has been added to the menu");
 
     // add spaceship to the layout
     initial_layout = new GameObject(Common::Layer::HUD);
@@ -137,11 +132,20 @@ void TitleState::loadAssets()
     initial_layout->move = true;
     objectArray.emplace_back(initial_layout);
     initial_layout->AddComponent(sprite);
-    my_logger->info("Spaceship has been added to the menu");  //T29
+    //my_logger->info("Spaceship has been added to the menu");
 
     Game::GetInstance()->StartBeatTime();
     music.Open(AUDIO_MENU); 
 
+}
+
+// Add background to layout    
+void TitleState::addBackgroud(GameObject* initial_layout){
+    initial_layout->world_reference = false;    
+    objectArray.emplace_back(initial_layout);
+    initial_layout->AddComponent(
+    new Sprite(*initial_layout, MENU_SCREEN));  
+    //my_logger->info("Background has been added to the menu");  
 }
 
 

@@ -35,7 +35,7 @@ TileSet::TileSet(const string& file)
         err_logger->error("Tileset mismatch"); //T32
         exit(EXIT_SUCCESS);
     }
-    else{  //T23
+    else{  
         // There's nothing to do
     }
 
@@ -58,7 +58,7 @@ void TileSet::RenderTile(unsigned index, float position_x, float position_y) con
         err_logger->error("Tile is out of range"); //T32
         exit(EXIT_SUCCESS);
     }
-    else{  //T23
+    else{  
         // There's nothing to do
     }
 

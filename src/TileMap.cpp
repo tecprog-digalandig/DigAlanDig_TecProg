@@ -8,6 +8,9 @@
 #include "Sprite.h"
 #include <assert.h>
 #include "spdlog/spdlog.h"
+#include "spdlog/spdlog.h"
+#include "spdlog/sinks/stdout_color_sinks.h" //support for stdout logging
+#include "spdlog/sinks/basic_file_sink.h" // support for basic file logging
 
 using json = nlohmann::json;
 
@@ -52,6 +55,7 @@ void TileMap::Load(const string& file) {
     height += (int)jsonFile.at("height");
 
     spdlog::get("console")->info("Height: {}", height);  //T29
+    spdlog::get("log")->info("Height: {}", height);  //T29
        
     depth = jsonFile.at("layers").size();
 
@@ -89,8 +93,11 @@ void TileMap::RenderLayer(int layer, int cameraX, int cameraY) const {
 }
 
 void TileMap::GetNextFile() {
+
     currentFile++;
     currentFile = rand() % TileMapsFiles.size();
+    spdlog::get("log")->info("Taking next map file");  //T29
+
 }
 
 int TileMap::At(int x, int y, int z) {
@@ -120,7 +127,7 @@ int TileMap::At(int x, int y, int z) {
     return tileMat[z][y * width + x];
 }
 
-bool TileMap::isForwardPosition(int position_alan){  //T22
+bool TileMap::isForwardPosition(int position_alan){  
     bool alan_center_of_the_map = (position_alan >= height);
     bool camera_center_of_the_map = ((Camera::pos.y + Camera::screenSize.y) / 100) >= height;
     

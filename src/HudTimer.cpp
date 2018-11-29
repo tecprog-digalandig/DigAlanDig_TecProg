@@ -28,11 +28,13 @@ HudTimer::HudTimer(GameObject& associated)
 void HudTimer::render(Common::Layer layer) const {
     associated.box = boxbg;
     bg->render(layer);
+    spdlog::get("log")->info("Render timer");  //T29
 
     associated.box = boxmeter;
     associated.box.x += moveLenght * -input.GetDeltaRhythm();
     SetMeterFrame();
     meter->render(layer);
+    spdlog::get("log")->info("Render raio");  //T29
 
     for (auto rise : risers) {
         associated.box.pos = rise;
@@ -42,6 +44,8 @@ void HudTimer::render(Common::Layer layer) const {
 
     associated.box = boxfg;
     fg->render(layer);
+    spdlog::get("log")->info("Render central timer");  //T29
+
 }
 
 void HudTimer::SetMeterFrame() const {
@@ -67,6 +71,7 @@ void HudTimer::update(float dt) {
     if (mov < 1.1) {
         
         spdlog::get("console")->info("Move: {}", mov);  //T29
+        spdlog::get("log")->info("Move: {}", mov);  //T29
 
         Vec2 rise(boxmeter.pos + Vec2(moveLenght, 0) * -mov);
         risers.push_back(rise);
