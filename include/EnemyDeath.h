@@ -1,3 +1,10 @@
+/**
+* @file EnemyDeath.h
+* @copyright 2018 Pedro H.
+* @brief Header file for the class EnemyDeath, contains the headers for all the
+* methods of the class.
+*/
+
 #ifndef ENEMYDEATH_H
 #define ENEMYDEATH_H
 #define INCLUDE_SDL
@@ -12,21 +19,20 @@
 #include "TileMap.h"
 #include "Vec2.h"
 
-class EnemyDeath : public Component {
-  public:
-    EnemyDeath(GameObject &associated)
-        : Component(associated) {}
+class EnemyDeath : public Component
+{
+    public:
+        EnemyDeath(GameObject &associated) : Component(associated) {}
 
-    ~EnemyDeath() {}
+        ~EnemyDeath() {}
 
-    void update(float dt);
-    void rhythmUpdate() {}
-    void RhythmReset() {}
-    void render(Common::Layer layer) const {}
+        void update(float dt);
+        void rhythmUpdate() {}
+        void rhythmReset() {}
+        void render(Common::Layer layer) const {}
 
-  private:
-    // Cada enemy tera sua própria morte, diferente do EnemySpawn que é um geral
-    std::weak_ptr<GameObject> enemy;
+    private:
+        std::weak_ptr <GameObject> enemy;//Each enemy will have their own death
 };
 
-#endif  // ENEMYDEATH_H
+#endif
