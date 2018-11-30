@@ -83,6 +83,7 @@ void GameObject::update(float dt)
     }
 }
 
+//Keeps the game flowing
 void GameObject::rhythmUpdate()
 {
     try
@@ -104,6 +105,7 @@ void GameObject::rhythmUpdate()
     }
 }
 
+//Reset the rate of the rhythm
 void GameObject::rhythmReset()
 {
     try
@@ -125,6 +127,7 @@ void GameObject::rhythmReset()
     }
 }
 
+//Sets the order that objects are rendered on the screen
 void GameObject::renderOrder(Common::Layer layer) const
 {
     try

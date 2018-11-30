@@ -348,6 +348,7 @@ void Game::toggleFullScreen()
     }
 }
 
+//when stored_state is true sets stateStack
 void storedStateIsTrue()
 {
     if (stored_state)
@@ -361,6 +362,7 @@ void storedStateIsTrue()
         //Nothing to do
     }
 }
+//RhythmUpdater of method run
 void runRhythmUpdate()
 {
     if (should_rhythm_update)
@@ -383,6 +385,7 @@ void runRhythmUpdate()
         //Nothing to do
     }
 }
+//checks requested state and sets stateStack
 void checkStateRequested()
 {
     if (stateStack.top()->PopRequested() ||
@@ -418,6 +421,7 @@ int setDeltaTime(int dt)
     }
     return dt;
 }
+//checks inputs from keyboard
 void checkInput()
 {
     if (input.KeyPress(SDL_SCANCODE_EQUALS))

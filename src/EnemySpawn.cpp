@@ -35,12 +35,15 @@ void EnemySpawn::update(float dt)
         console->debug("EnemySpawn::update accessed");
 
         assert(dt >= 0);
+        //While in certain position
         while ( current_y < ( static_cast<int>( ( (Camera::pos.y + Camera::screenSize.y) /
                 Game::getInstance()->getCurrentState().GetGridSize() ) + 4) ) )
         {
+            //for each x axis position
             for (int x = 0; x < tileMap->GetWidth(); x = x + 1)
             {
                 assert(x>=0);
+                //spawns enemy when player continue going down
                 if (int enemy = tileMap->At(x, current_y, TileMap::Layers::INIMIGOS) )
                 {
                     assert(current_y >= 0);

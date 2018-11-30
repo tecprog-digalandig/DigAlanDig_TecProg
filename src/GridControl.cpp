@@ -35,6 +35,7 @@ GridControl *GridControl::getInstance()
 */
 int GridControl::TestPath(Vec2 target, bool isAlan)
 {
+    //Empty spaces in the game
     if ((target.x >= tileMap->GetWidth() || target.x < 0) ||
         (target.y >= tileMap->GetHeight() || target.y < 0))
     {
