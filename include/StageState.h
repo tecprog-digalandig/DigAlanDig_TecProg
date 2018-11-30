@@ -17,6 +17,9 @@ class StageState : public State {
     void RhythmReset();
     void render() const;
     void start();
+    void createBackgroundStage(string image, float velocity, GameObject *backG);
+    void createTileMapStage();
+    void createAlanStage(GameObject *alanGO, Alan *lilAlan);
     void Pause() {}
     void Resume() {}
 

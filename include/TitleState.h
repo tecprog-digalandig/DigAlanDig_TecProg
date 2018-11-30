@@ -26,9 +26,9 @@ class TitleState : public State {
     void addFirstCloud(GameObject* initial_layout);
     void addSecoundCloud(GameObject* initial_layout);
     void addThirdCloud(GameObject* initial_layout);
-    void addTitleMenu(GameObject* initial_layout);
+    void addTitle(GameObject* initial_layout);
     void addPressSpace(GameObject* initial_layout);
-    void addSpaceshipMenu(GameObject* initial_layout);    
+    void addSpaceship(GameObject* initial_layout);    
 
 };
 

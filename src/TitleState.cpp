@@ -62,16 +62,16 @@ void TitleState::loadAssets()
     addFirstCloud(initial_layout); 
     addSecoundCloud(initial_layout); 
     addThirdCloud(initial_layout); 
-    addTitleMenu(initial_layout);
+    addTitle(initial_layout);
     addPressSpace(initial_layout);
-    addSpaceshipMenu(initial_layout);    
+    addSpaceship(initial_layout);    
 
     Game::GetInstance()->StartBeatTime();
     music.Open(AUDIO_MENU); 
 
 }
 
-// Add background to layout    
+// Add background to the initial layout    
 void TitleState::addBackgroud(GameObject* initial_layout){
     initial_layout->world_reference = false;    
     objectArray.emplace_back(initial_layout);
@@ -81,7 +81,7 @@ void TitleState::addBackgroud(GameObject* initial_layout){
     
 }
 
-// Add moving space to layout
+// Add moving space to the initial layout
 void TitleState::addMovingSpace(GameObject* initial_layout){
     initial_layout = new GameObject(Common::Layer::BG);
     initial_layout->box.x = POSITION_X_SPACE;      
@@ -95,7 +95,7 @@ void TitleState::addMovingSpace(GameObject* initial_layout){
 
 }
 
-// Add the first moving cloud to the layout
+// Add the first moving cloud to the initial layout
 void TitleState::addFirstCloud(GameObject* initial_layout){
 
     initial_layout = new GameObject(Common::Layer::BG);
@@ -110,7 +110,7 @@ void TitleState::addFirstCloud(GameObject* initial_layout){
 
 }
 
-// Add the second moving cloud to the layout
+// Add the second moving cloud to the initial layout
 void TitleState::addSecoundCloud(GameObject* initial_layout){
 
     initial_layout = new GameObject(Common::Layer::BG);
@@ -124,7 +124,7 @@ void TitleState::addSecoundCloud(GameObject* initial_layout){
 
 }
 
-// Add the third moving cloud to the layout
+// Add the third moving cloud to the initial layout
 void TitleState::addThirdCloud(GameObject* initial_layout){
     initial_layout = new GameObject(Common::Layer::BG);
     initial_layout->box.x = POSITION_X_CLOUD_3; 
@@ -137,8 +137,8 @@ void TitleState::addThirdCloud(GameObject* initial_layout){
 
 }
 
-// Add title to the layout
-void TitleState::addTitleMenu(GameObject* initial_layout){
+// Add title to the initial layout
+void TitleState::addTitle(GameObject* initial_layout){
     initial_layout = new GameObject(Common::Layer::HUD);
     Sprite* sprite = new Sprite(*initial_layout, TITLE_MENU);   
     sprite->SetScaleX(SCALE_X_TITLE);   
@@ -151,7 +151,7 @@ void TitleState::addTitleMenu(GameObject* initial_layout){
 }
 
 
-// add image "Press Space" to the layout
+// add image "Press Space" to the initial layout
 void TitleState::addPressSpace(GameObject* initial_layout){
     initial_layout = new GameObject(Common::Layer::HUD);
     Sprite* sprite = new Sprite(*initial_layout, TITLE_PRESS_SPACE);    
@@ -165,8 +165,8 @@ void TitleState::addPressSpace(GameObject* initial_layout){
 
 }
 
-// add spaceship to the layout
-void TitleState::addSpaceshipMenu(GameObject* initial_layout){
+// add spaceship to the initial layout
+void TitleState::addSpaceship(GameObject* initial_layout){
     initial_layout = new GameObject(Common::Layer::HUD);
     Sprite* sprite = new Sprite(*initial_layout, SPACESHIP_MENU, 2, -1);    
     sprite->SetScaleX(SCALE_X_SPACESHIP);   

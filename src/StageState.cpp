@@ -47,75 +47,21 @@ void StageState::loadAssets() {
 
     // BG
     GameObject *backG = new GameObject(Common::Layer::BG);
-    backG->world_reference = false;
-    objectArray.emplace_back(backG);
-    backG->AddComponent(new bgCircularY(*backG, "assets/img/bg1.png"));
-    backG->AddComponent(new ParallaxY(*backG, 0.1));
-    backG->box.pos = {212, 0};
+    createBackgroundStage("assets/img/bg1.png", 0.1, backG);
+    createBackgroundStage("assets/img/bg2.png", 0.3, backG);
+    createBackgroundStage("assets/img/bg3.png", 0.5, backG);
+    createBackgroundStage("assets/img/bg4.png", 0.7, backG);
+    createBackgroundStage("assets/img/bg5.png", 0.9, backG);
 
-    backG = new GameObject(Common::Layer::BG);
-    backG->world_reference = false;
-    objectArray.emplace_back(backG);
-    backG->AddComponent(new bgCircularY(*backG, "assets/img/bg2.png"));
-    backG->AddComponent(new ParallaxY(*backG, 0.3));
-    backG->box.pos = {212, 0};
-
-    backG = new GameObject(Common::Layer::BG);
-    backG->world_reference = false;
-    objectArray.emplace_back(backG);
-    backG->AddComponent(new bgCircularY(*backG, "assets/img/bg3.png"));
-    backG->AddComponent(new ParallaxY(*backG, 0.5));
-    backG->box.pos = {212, 0};
-
-    backG = new GameObject(Common::Layer::BG);
-    backG->world_reference = false;
-    objectArray.emplace_back(backG);
-    backG->AddComponent(new bgCircularY(*backG, "assets/img/bg4.png"));
-    backG->AddComponent(new ParallaxY(*backG, 0.7));
-    backG->box.pos = {212, 0};
-
-    backG = new GameObject();
-    backG->world_reference = false;
-    objectArray.emplace_back(backG);
-    backG->AddComponent(new bgCircularY(*backG, "assets/img/bg5.png"));
-    backG->AddComponent(new ParallaxY(*backG, 0.9));
-    backG->box.pos = {212, 0};
 
     // TileMap
-    GameObject *gm =
-        new GameObject(Common::Layer::DEFAULT | Common::Layer::LIGHT);
-    objectArray.emplace_back(gm);
-    tileMap = new TileMap(*gm, "assets/map/manager.json", true);
-    gm->AddComponent(tileMap);
-
-    Game::GetInstance()->GetGridControl()->SetTileMap(tileMap);
-
+    createTileMapStage();
+    
     // Alan
     GameObject *alanGO = new GameObject();
-    Vec2 gp(3, 0);
-    alanGO->box.x = (gp.x * GetGridSize()) - GetGridSize() / 2;
-    alanGO->box.y = (gp.y * GetGridSize()) - GetGridSize() / 2;
-    alanGO->gridPosition = gp;
-    objectArray.emplace_back(alanGO);
-
-    Game::GetInstance()->GetGridControl()->SetAlan(GetObjectPrt(alanGO));
-
-    alanGO->AddComponent(
-        new Sprite(*alanGO, "assets/img/alan/idle.png", 2, 0.2));
-    alanGO->AddComponent(new Sound(*alanGO));
-
     Alan *lilAlan = new Alan(*alanGO);
-    alanGO->AddComponent(lilAlan);
-
-    alanGO->AddComponent(new Interpol(*alanGO));
-    alanGO->AddComponent(new AlanAnimation(*alanGO));
-    alanGO->AddComponent(new AlanActionControl(*alanGO, GetGridSize()));
-
-    GameObject *alanL = new GameObject(Common::Layer::LIGHT);
-    objectArray.emplace_back(alanL);
-    alanL->AddComponent(new Light(*alanL, GetObjectPrt(alanGO)));
-
-    Camera::Follow(alanGO);
+    
+    createAlanStage(alanGO, lilAlan);    
 
     GameObject *esGO = new GameObject();
     esGO->AddComponent(new EnemySpawn(*esGO, tileMap));
@@ -210,6 +156,55 @@ void StageState::loadAssets() {
     halfBeatCounter = 0;
     Mix_SetPostMix(noEffect, NULL);
 }
+
+void StageState::createBackgroundStage(string image, float velocity, GameObject *backG) {
+    backG = new GameObject(Common::Layer::BG);
+    backG->world_reference = false;
+    objectArray.emplace_back(backG);
+    backG->AddComponent(new bgCircularY(*backG, image));
+    backG->AddComponent(new ParallaxY(*backG, velocity));
+    backG->box.pos = {212, 0};
+}    
+
+void StageState::createTileMapStage(){
+    GameObject *gm =
+        new GameObject(Common::Layer::DEFAULT | Common::Layer::LIGHT);
+    objectArray.emplace_back(gm);
+    tileMap = new TileMap(*gm, "assets/map/manager.json", true);
+    gm->AddComponent(tileMap);
+
+    Game::GetInstance()->GetGridControl()->SetTileMap(tileMap);
+
+}
+
+void StageState::createAlanStage(GameObject *alanGO, Alan *lilAlan){
+    Vec2 gp(3, 0);
+    alanGO->box.x = (gp.x * GetGridSize()) - GetGridSize() / 2;
+    alanGO->box.y = (gp.y * GetGridSize()) - GetGridSize() / 2;
+    alanGO->gridPosition = gp;
+    objectArray.emplace_back(alanGO);
+
+    Game::GetInstance()->GetGridControl()->SetAlan(GetObjectPrt(alanGO));
+
+    alanGO->AddComponent(
+        new Sprite(*alanGO, "assets/img/alan/idle.png", 2, 0.2));
+    alanGO->AddComponent(new Sound(*alanGO));
+    *lilAlan = new Alan(*alanGO);
+    alanGO->AddComponent(lilAlan);
+
+    alanGO->AddComponent(new Interpol(*alanGO));
+    alanGO->AddComponent(new AlanAnimation(*alanGO));
+    alanGO->AddComponent(new AlanActionControl(*alanGO, GetGridSize()));
+
+    GameObject *alanL = new GameObject(Common::Layer::LIGHT);
+    objectArray.emplace_back(alanL);
+    alanL->AddComponent(new Light(*alanL, GetObjectPrt(alanGO)));
+
+    Camera::Follow(alanGO);
+
+}
+
+
 
 void StageState::start() {
     if (!started) loadAssets();
