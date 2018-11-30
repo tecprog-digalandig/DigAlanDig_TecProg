@@ -48,81 +48,27 @@ void Game::run()
         console->set_level(spd::level::debug); // Set specific logger's log level
         console->debug("Game::run accessed");
 
-        if (stored_state)
-        {
-            stateStack.emplace(stored_state);
-            stateStack.top()->start();
-            stored_state = nullptr;
-        }
-        else
-        {
-            //Nothing to do
-        }
+        storedStateIsTrue();
 
         int fpb = 0;
         while (!stateStack.empty())
         {
             calculateDeltaTime();
+
             input.update(delta_rhythm);
 
             fpb = fbp + 1;
-            if (should_rhythm_update)
-            {
-                should_rhythm_update = false;
-                if (off_beat)
-                {
-                    stateStack.top()->rhythmReset();
-                    std::cout << "." << off_beat << "." << fpb << std::endl;
-                    fpb = 0;
-                }
-                else
-                {
-                    stateStack.top()->rhythmUpdate();
-                    Camera::rhythmUpdate();
-                }
-            }
-            else
-            {
-                //Nothing to do
-            }
+
+            runRhythmUpdate();
 
             stateStack.top()->update(dt);
             stateStack.top()->render();
             SDL_RenderPresent(renderer);
 
-            if (stateStack.top()->PopRequested() ||
-                stateStack.top()->QuitRequested())
-            {
-                Camera::Follow(nullptr);
-                Game::getInstance()->getGridControl()->ClearEnemyVector();
-                stateStack.pop();
-                Resources::ClearAll();
-                if
-                {
-                    (!stateStack.empty()) stateStack.top()->Resume();
-                }
-                else
-                {
-                    //Nothing to do
-                }
-            }
-            else
-            {
-                //Nothing to do
-            }
+            checkStateRequested();
 
-            if (stored_state)
-            {
-                stateStack.top()->StopMusic();
-                stateStack.emplace(stored_state);
-                stateStack.top()->start();
-                stored_state = nullptr;
-                tick_counter = 0;
-            }
-            else
-            {
-                //Nothing to do
-            }
+            storedStateIsTrue();
+
             SDL_Delay(10);
             SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
             SDL_RenderClear(renderer);
@@ -337,14 +283,7 @@ void Game::calculateDeltaTime()
         /**
         *Keeps delta time under 1000 ms,for smoothness in movement
         */
-        if (dt > 1000)
-        {
-            dt = 1000;
-        }
-        else
-        {
-            //Nothing to do
-        }
+        dt = setDeltaTime(dt);
 
         assert(dt<=1000);
 
@@ -352,25 +291,7 @@ void Game::calculateDeltaTime()
         dt /= 1000;
         frame_start = ticks_total;
 
-        if (input.KeyPress(SDL_SCANCODE_EQUALS))
-        {
-            adjust += 10;
-            std::cout << "Adjust = " << adjust << "ms\n";
-        }
-        else
-        {
-            //Nothing to do
-        }
-
-        if (input.KeyPress(SDL_SCANCODE_MINUS))
-        {
-            adjust -= 10;
-            std::cout << "Adjust = " << adjust << "ms\n";
-        }
-        else
-        {
-            //Nothing to do
-        }
+        checkInput();
 
         int fixed_ticks = tick_counter + adjust;
         int new_half_beat_time = fixed_ticks / half_beat_time;
@@ -424,5 +345,98 @@ void Game::toggleFullScreen()
     {
         std::cout << "Log init failed: " << ex.what() << std::endl;
         return 1;
+    }
+}
+
+void storedStateIsTrue()
+{
+    if (stored_state)
+    {
+        stateStack.emplace(stored_state);
+        stateStack.top()->start();
+        stored_state = nullptr;
+    }
+    else
+    {
+        //Nothing to do
+    }
+}
+void runRhythmUpdate()
+{
+    if (should_rhythm_update)
+    {
+        should_rhythm_update = false;
+        if (off_beat)
+        {
+            stateStack.top()->rhythmReset();
+            std::cout << "." << off_beat << "." << fpb << std::endl;
+            fpb = 0;
+        }
+        else
+        {
+            stateStack.top()->rhythmUpdate();
+            Camera::rhythmUpdate();
+        }
+    }
+    else
+    {
+        //Nothing to do
+    }
+}
+void checkStateRequested()
+{
+    if (stateStack.top()->PopRequested() ||
+        stateStack.top()->QuitRequested())
+    {
+        Camera::Follow(nullptr);
+        Game::getInstance()->getGridControl()->ClearEnemyVector();
+        stateStack.pop();
+        Resources::ClearAll();
+        if(!stateStack.empty())
+        {
+            stateStack.top()->Resume();
+        }
+        else
+        {
+            //Nothing to do
+        }
+    }
+    else
+    {
+        //Nothing to do
+    }
+}
+int setDeltaTime(int dt)
+{
+    if (dt > 1000)
+    {
+        dt = 1000;
+    }
+    else
+    {
+        //Nothing to do
+    }
+    return dt;
+}
+void checkInput()
+{
+    if (input.KeyPress(SDL_SCANCODE_EQUALS))
+    {
+        adjust += 10;
+        std::cout << "Adjust = " << adjust << "ms\n";
+    }
+    else
+    {
+        //Nothing to do
+    }
+
+    if (input.KeyPress(SDL_SCANCODE_MINUS))
+    {
+        adjust -= 10;
+        std::cout << "Adjust = " << adjust << "ms\n";
+    }
+    else
+    {
+        //Nothing to do
     }
 }

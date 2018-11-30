@@ -81,6 +81,11 @@ class Game
         //was to the rhythm, 0 = perfect, 1 = worst.
         */
         float delta_rhythm = 0;
+        void storedStateIsTrue();
+        void runRhythmUpdate();
+        void checkStateRequested();
+        int setDeltaTime(int dt);
+        void checkInput();
 };
 
 #endif

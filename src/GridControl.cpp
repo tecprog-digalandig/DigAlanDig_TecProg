@@ -116,6 +116,8 @@ bool GridControl::VerifyEnemy(Vec2 target)
     return false;
 }
 
+void checkIsAlan();
+
 /**
 * @brief Checks if Alan collide with an enemy and take damage.
 * @param [in] isAlan <parameter_description> bool variable
@@ -137,22 +139,7 @@ void GridControl::CheckEnemyAlanCollision(bool isAlan)
                 enemy->getComponent<Enemy *>()->GetMovementDirection() ==
                 Enemy::Direction::RIGHT))
             {
-                if (isAlan)
-                {
-                    alan.lock()
-                        ->getComponent<AlanActionControl *>()
-                        ->SetMovementDirection(
-                            AlanActionControl::Direction::NONE);
-                }
-                else
-                {
-                    enemy->getComponent<Enemy *>()->SetAsHit();
-                    enemy->getComponent<Interpol *>()->target =
-                    {enemy->gridPosition.x + 1, enemy->gridPosition.y};
-
-                    alan.lock()->getComponent<Alan *>()->TakeDamage();
-                }
-
+                checkIsAlan();
                 return;
             }
             else
@@ -166,20 +153,7 @@ void GridControl::CheckEnemyAlanCollision(bool isAlan)
                 enemy->getComponent<Enemy *>()->GetMovementDirection() ==
                 Enemy::Direction::LEFT))
             {
-                if (isAlan)
-                {
-                    alan.lock()->getComponent<AlanActionControl *>()->
-                    SetMovementDirection(AlanActionControl::Direction::NONE);
-                }
-                else
-                {
-                    enemy->getComponent<Enemy *>()->SetAsHit();
-                    enemy->getComponent<Interpol *>()->target =
-                    {enemy->gridPosition.x - 1, enemy->gridPosition.y};
-
-                    alan.lock()->getComponent<Alan *>()->TakeDamage();
-                }
-
+                checkIsAlan();
                 return;
             }
             else
@@ -187,5 +161,21 @@ void GridControl::CheckEnemyAlanCollision(bool isAlan)
                 //Nothing to do
             }
         }
+    }
+}
+void checkIsAlan()
+{
+    if (isAlan)
+    {
+        alan.lock()->getComponent<AlanActionControl *>()
+        ->SetMovementDirection(AlanActionControl::Direction::NONE);
+    }
+    else
+    {
+        enemy->getComponent<Enemy *>()->SetAsHit();
+        enemy->getComponent<Interpol *>()->target =
+        {enemy->gridPosition.x + 1, enemy->gridPosition.y};
+
+        alan.lock()->getComponent<Alan *>()->TakeDamage();
     }
 }
