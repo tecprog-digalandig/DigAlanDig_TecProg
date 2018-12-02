@@ -28,7 +28,8 @@ class TitleState : public State {
     void addThirdCloud(GameObject* initial_layout);
     void addTitle(GameObject* initial_layout);
     void addPressSpace(GameObject* initial_layout);
-    void addSpaceship(GameObject* initial_layout);    
+    void addSpaceship(GameObject* initial_layout); 
+    void positionComponentsMenu(GameObject *initial_layout, float position_x, float position_y);   
 
 };
 

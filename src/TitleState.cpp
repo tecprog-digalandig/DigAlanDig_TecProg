@@ -50,21 +50,20 @@
 
 TitleState::TitleState() {}
 
-void TitleState::loadAssets() 
-{   
+void TitleState::loadAssets() {   
         
     auto my_logger = spdlog::basic_logger_mt("log", "logs/basic.txt"); 
     auto console = spdlog::stdout_color_mt("console");  
     
     GameObject* initial_layout = new GameObject(Common::Layer::BG);  
-    addBackgroud(initial_layout);
-    addMovingSpace(initial_layout);
-    addFirstCloud(initial_layout); 
-    addSecoundCloud(initial_layout); 
-    addThirdCloud(initial_layout); 
-    addTitle(initial_layout);
-    addPressSpace(initial_layout);
-    addSpaceship(initial_layout);    
+    addBackgroud(initial_layout); //T36
+    addMovingSpace(initial_layout); //T36
+    addFirstCloud(initial_layout); //T36 
+    addSecoundCloud(initial_layout); //T36
+    addThirdCloud(initial_layout); //T36
+    addTitle(initial_layout); //T36
+    addPressSpace(initial_layout); //T36
+    addSpaceship(initial_layout); //T36   
 
     Game::GetInstance()->StartBeatTime();
     music.Open(AUDIO_MENU); 
@@ -72,7 +71,7 @@ void TitleState::loadAssets()
 }
 
 // Add background to the initial layout    
-void TitleState::addBackgroud(GameObject* initial_layout){
+void TitleState::addBackgroud(GameObject* initial_layout){ //T36
     initial_layout->world_reference = false;    
     objectArray.emplace_back(initial_layout);
     initial_layout->AddComponent(
@@ -82,12 +81,9 @@ void TitleState::addBackgroud(GameObject* initial_layout){
 }
 
 // Add moving space to the initial layout
-void TitleState::addMovingSpace(GameObject* initial_layout){
+void TitleState::addMovingSpace(GameObject* initial_layout){ //T36
     initial_layout = new GameObject(Common::Layer::BG);
-    initial_layout->box.x = POSITION_X_SPACE;      
-    initial_layout->box.y = POSITION_Y_SPACE;      
-    initial_layout->world_reference = false;
-    objectArray.emplace_back(initial_layout);
+    positionComponentsMenu(initial_layout, POSITION_X_SPACE, POSITION_Y_SPACE); //T36
     initial_layout->AddComponent(new ParallaxX(*initial_layout, SPACE_VELOCITY));   
     initial_layout->AddComponent(new bgCircularX(
         *initial_layout, SPACE_SCREEN));
@@ -96,13 +92,10 @@ void TitleState::addMovingSpace(GameObject* initial_layout){
 }
 
 // Add the first moving cloud to the initial layout
-void TitleState::addFirstCloud(GameObject* initial_layout){
+void TitleState::addFirstCloud(GameObject* initial_layout){ //T36
 
     initial_layout = new GameObject(Common::Layer::BG);
-    initial_layout->box.x = POSITION_X_CLOUD;   
-    initial_layout->box.y = POSITION_Y_CLOUD;   
-    initial_layout->world_reference = false;
-    objectArray.emplace_back(initial_layout);
+    positionComponentsMenu(initial_layout, POSITION_X_CLOUD, POSITION_y_CLOUD); //T36
     initial_layout->AddComponent(new ParallaxX(*initial_layout));
     initial_layout->AddComponent(new bgCircularX(
         *initial_layout, CLOUD_1)); 
@@ -111,13 +104,10 @@ void TitleState::addFirstCloud(GameObject* initial_layout){
 }
 
 // Add the second moving cloud to the initial layout
-void TitleState::addSecoundCloud(GameObject* initial_layout){
+void TitleState::addSecoundCloud(GameObject* initial_layout){ //T36
 
     initial_layout = new GameObject(Common::Layer::BG);
-    initial_layout->box.x = POSITION_X_CLOUD_2; 
-    initial_layout->box.y = POSITION_Y_CLOUD_2; 
-    initial_layout->world_reference = false;
-    objectArray.emplace_back(initial_layout);
+    positionComponentsMenu(initial_layout, POSITION_X_CLOUD_2, POSITION_y_CLOUD_2); //T36
     initial_layout->AddComponent(new ParallaxX(*initial_layout, CLOUD_2_VELOCITY)); 
     initial_layout->AddComponent(new bgCircularX(*initial_layout, CLOUD_2));    
     spdlog::get("log")->info("Second moving cloud has been added to the menu");
@@ -125,12 +115,9 @@ void TitleState::addSecoundCloud(GameObject* initial_layout){
 }
 
 // Add the third moving cloud to the initial layout
-void TitleState::addThirdCloud(GameObject* initial_layout){
+void TitleState::addThirdCloud(GameObject* initial_layout){ //T36
     initial_layout = new GameObject(Common::Layer::BG);
-    initial_layout->box.x = POSITION_X_CLOUD_3; 
-    initial_layout->box.y = POSITION_Y_CLOUD_3; 
-    initial_layout->world_reference = false;
-    objectArray.emplace_back(initial_layout);
+    positionComponentsMenu(initial_layout, POSITION_X_CLOUD_3, POSITION_y_CLOUD_3); //T36
     initial_layout->AddComponent(new ParallaxX(*initial_layout, CLOUD_3_VELOCITY)); 
     initial_layout->AddComponent(new bgCircularX(*initial_layout, CLOUD_3));      
     spdlog::get("log")->info("Third moving cloud has been added to the menu");
@@ -138,7 +125,7 @@ void TitleState::addThirdCloud(GameObject* initial_layout){
 }
 
 // Add title to the initial layout
-void TitleState::addTitle(GameObject* initial_layout){
+void TitleState::addTitle(GameObject* initial_layout){ //T36
     initial_layout = new GameObject(Common::Layer::HUD);
     Sprite* sprite = new Sprite(*initial_layout, TITLE_MENU);   
     sprite->SetScaleX(SCALE_X_TITLE);   
@@ -152,7 +139,7 @@ void TitleState::addTitle(GameObject* initial_layout){
 
 
 // add image "Press Space" to the initial layout
-void TitleState::addPressSpace(GameObject* initial_layout){
+void TitleState::addPressSpace(GameObject* initial_layout){ //T36
     initial_layout = new GameObject(Common::Layer::HUD);
     Sprite* sprite = new Sprite(*initial_layout, TITLE_PRESS_SPACE);    
     sprite->SetScaleX(SCALE_X_PRESS_SPACE); 
@@ -166,7 +153,7 @@ void TitleState::addPressSpace(GameObject* initial_layout){
 }
 
 // add spaceship to the initial layout
-void TitleState::addSpaceship(GameObject* initial_layout){
+void TitleState::addSpaceship(GameObject* initial_layout){ //T36
     initial_layout = new GameObject(Common::Layer::HUD);
     Sprite* sprite = new Sprite(*initial_layout, SPACESHIP_MENU, 2, -1);    
     sprite->SetScaleX(SCALE_X_SPACESHIP);   
@@ -178,6 +165,13 @@ void TitleState::addSpaceship(GameObject* initial_layout){
     initial_layout->AddComponent(sprite);
     spdlog::get("log")->info("Spaceship has been added to the menu");
 
+}
+
+void TitleState::positionComponentsMenu(GameObject *initial_layout, float position_x, float position_y){ //T36
+    initial_layout->box.x = position_x; 
+    initial_layout->box.y = position_y; 
+    initial_layout->world_reference = false;
+    objectArray.emplace_back(initial_layout);
 }
 
 void TitleState::start() {
