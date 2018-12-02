@@ -28,7 +28,8 @@ void AlanAnimation::PlaySound(Transition trans) {
         case Transition::HIT_T:
             s->Open("assets/audio/dor.wav");
             break;
-        default:
+        default: //T23
+            // There's nothing to do
             return;
     }
 
@@ -36,7 +37,7 @@ void AlanAnimation::PlaySound(Transition trans) {
     s->Play();
 }
 
-void AlanAnimation::Update(float dt) {
+void AlanAnimation::update(float dt) {
     if (currentState == State::DANCIN || currentState == State::DEAD) return;
 
     Sprite *sprite = associated.GetComponent<Sprite *>();

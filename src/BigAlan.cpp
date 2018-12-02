@@ -5,43 +5,37 @@
 #include "GridControl.h"
 
 
-void BigAlan::Update(float dt) {
+void BigAlan::update(float dt) 
+{
     int combo = Game::GetInstance()->combo;
-    int diffCombo = std::abs(combo - oldCombo);
-    oldCombo = combo;
-
+    int diff_combo = std::abs(combo - old_combo);
+    old_combo = combo;
     if(Game::GetInstance()->GetGridControl()->GetAlan().lock()->GetComponent<AlanAnimation *>()->GetCurrentState() == AlanAnimation::State::DEAD){
-        if(currentState != BAState::TRASH){
-            currentState = BAState::TRASH;
-            sprite->Open(state[currentState], 0);
+        if(current_state != BAState::TRASH){
+            current_state = BAState::TRASH;
+            sprite->Open(state[current_state], 0);
         }
         return;
     }
-    
-    BAState oldState = currentState;
-    switch (currentState) {
+    BAState old_state = current_state;
+    switch (current_state) {
         case BAState::STARTER:
         case BAState::GOOD:
             if (Game::GetInstance()->combo > 10)
-                currentState = BAState::GOOD;
-            else if (diffCombo > 5)
-                currentState = BAState::DECENT;
-            else if (diffCombo > 10)
-                currentState = BAState::TRASH;
-
+                current_state = BAState::GOOD;
+            else if (diff_combo > 5)
+                current_state = BAState::DECENT;
+            else if (diff_combo > 10)
+                current_state = BAState::TRASH;
             break;
-
         case BAState::DECENT:
-            if (Game::GetInstance()->combo > 2) currentState = BAState::STARTER;
+            if (Game::GetInstance()->combo > 2) current_state = BAState::STARTER;
             break;
-
         case BAState::TRASH:
-            if (Game::GetInstance()->combo > 3) currentState = BAState::STARTER;
+            if (Game::GetInstance()->combo > 3) current_state = BAState::STARTER;
             break;
-
         default:
-            currentState = BAState::STARTER;
+            current_state = BAState::STARTER;
     }
-
-    if (currentState != oldState) sprite->Open(state[currentState], 0);
+    if (current_state != old_state) sprite->Open(state[current_state], 0);
 }

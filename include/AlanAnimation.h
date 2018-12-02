@@ -50,10 +50,10 @@ class AlanAnimation : public Component {
 
     ~AlanAnimation();
 
-    void Update(float dt);
-    void RhythmUpdate() {}
-    void Render(Common::Layer layer) const {}
-    void Start() {
+    void update(float dt);
+    void rhythmUpdate() {}
+    void render(Common::Layer layer) const {}
+    void start() {
         currentState = State::IDLE;
         oldState = currentState;
         currentDirection = LEFT;

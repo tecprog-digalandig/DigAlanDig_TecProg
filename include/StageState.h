@@ -7,17 +7,47 @@
 #include "GameObject.h"
 #include "InputManager.h"
 #include "State.h"
+#include "Alan.h"
+#include "AlanActionControl.h"
+#include "AlanAnimation.h"
+#include "AlanItemCount.h"
+#include "BigAlan.h"
+#include "Camera.h"
+#include "EnemySpawn.h"
+#include "Game.h"
+#include "HudCounter.h"
+#include "HudMeter.h"
+#include "HudTimer.h"
+#include "Interpol.h"
+#include "Light.h"
+#include "MiniTileMap.h"
+#include "Parallax.h"
+#include "Sound.h"
+#include "Sprite.h"
+#include "Vec2.h"
+
 
 class StageState : public State {
   public:
     StageState();
-    void LoadAssets();
-    void Update(float dt);
-    void RhythmUpdate();
+    void loadAssets();
+    void update(float dt);
+    void rhythmUpdate();
     void RhythmReset();
-    void Render() const;
-    void Start();
+    void render() const;
+    void start();
+    void createBackgroundStage(string image, float velocity, GameObject *backG);
+    void positionComponent(GameObject *component, float positionX, float positionY);
     void Pause() {}
+    void createTimerHud();
+    void createMeterHeart(GameObject *alanGO);
+    void createMeterLight(GameObject *alanGO);
+    void createCounterMetal();
+    void createCounterCristal();
+    void createCounterPetro();
+    void createItemCount(Alan *lilAlan);
+    void createBigAlan();
+    void createMiniMap(GameObject *alanGO, TileMap *tileMap);
     void Resume() {}
 
   private:

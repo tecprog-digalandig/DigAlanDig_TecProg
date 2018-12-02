@@ -1,5 +1,8 @@
 #include "HudTimer.h"
+#include "spdlog/spdlog.h"
+#include "spdlog/sinks/stdout_color_sinks.h"
 
+using namespace std;
 HudTimer::HudTimer(GameObject& associated)
     : Component(associated), input(InputManager::GetInstance()) {
     Vec2 center = associated.box.Center();
@@ -22,23 +25,27 @@ HudTimer::HudTimer(GameObject& associated)
     maxM = boxmeter.x + moveLenght * 0.5;
 }
 
-void HudTimer::Render(Common::Layer layer) const {
+void HudTimer::render(Common::Layer layer) const {
     associated.box = boxbg;
-    bg->Render(layer);
+    bg->render(layer);
+    spdlog::get("log")->info("Render timer");  //T29
 
     associated.box = boxmeter;
     associated.box.x += moveLenght * -input.GetDeltaRhythm();
     SetMeterFrame();
-    meter->Render(layer);
+    meter->render(layer);
+    spdlog::get("log")->info("Render raio");  //T29
 
     for (auto rise : risers) {
         associated.box.pos = rise;
         SetMeterFrame();
-        meter->Render(layer);
+        meter->render(layer);
     }
 
     associated.box = boxfg;
-    fg->Render(layer);
+    fg->render(layer);
+    spdlog::get("log")->info("Render central timer");  //T29
+
 }
 
 void HudTimer::SetMeterFrame() const {
@@ -51,8 +58,8 @@ void HudTimer::SetMeterFrame() const {
     }
 }
 
-void HudTimer::Update(float dt) {
-    if (std::abs(input.GetDeltaRhythm()) < 0.5) {
+void HudTimer::update(float dt) {
+    if (abs(input.GetDeltaRhythm()) < 0.5) {
         meter->SetFrame(2);
         meter->SetScaleX(1.5);
     } else {
@@ -62,7 +69,10 @@ void HudTimer::Update(float dt) {
 
     float mov = input.Moved();
     if (mov < 1.1) {
-        std::cout << "Mov" << mov << std::endl;
+        
+        spdlog::get("console")->info("Move: {}", mov);  //T29
+        spdlog::get("log")->info("Move: {}", mov);  //T29
+
         Vec2 rise(boxmeter.pos + Vec2(moveLenght, 0) * -mov);
         risers.push_back(rise);
     }
@@ -71,7 +81,7 @@ void HudTimer::Update(float dt) {
         rise.y -= dt * speed;
     }
 
-    risers.erase(std::remove_if(risers.begin(), risers.end(),
+    risers.erase(remove_if(risers.begin(), risers.end(),
                                 [](Vec2 v) { return v.y < 570; }),
                  risers.end());
 }

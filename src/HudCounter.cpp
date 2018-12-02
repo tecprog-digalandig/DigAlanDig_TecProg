@@ -19,12 +19,12 @@ HudCounter::~HudCounter() {
     delete counter;
 }
 
-void HudCounter::Render(Common::Layer layer) const {
+void HudCounter::render(Common::Layer layer) const {
     associated.box = boxbg;
-    bg->Render(layer);
+    bg->render(layer);
 
     associated.box += offset1;
 
     counter->SetScaleX(2.3 - InputManager::GetInstance().scaleFactor());
-    counter->Render(layer);
+    counter->render(layer);
 }
